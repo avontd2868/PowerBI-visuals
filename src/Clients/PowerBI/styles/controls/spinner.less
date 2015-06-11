@@ -1,0 +1,339 @@
+﻿/*
+ *  Power BI Visualizations
+ *
+ *  Copyright (c) Microsoft Corporation
+ *  All rights reserved. 
+ *  MIT License
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the ""Software""), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *   
+ *  The above copyright notice and this permission notice shall be included in 
+ *  all copies or substantial portions of the Software.
+ *   
+ *  THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ */
+
+/* 
+ * Color styles MUST be set through the color palette in colors.less. This
+ * will allow us to easily change the palette and get a consistent look. DO NOT
+ * hard-code colors directly inside classes.
+ *
+ * To get integrated VS support for LESS install the Visual Studio Web Essentials.
+ */
+
+@import "../colorPalette.less";
+
+.powerbi-spinner {
+    .spinner {
+        width: 100%;
+        height: 30px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        text-align: center;
+        font-size: 20px;
+        color: @themeSecondaryColor;
+    }
+
+    .dots {
+        -webkit-animation: slidedelay 4s infinite;
+        -moz-animation: slidedelay 4s infinite;
+        animation: slidedelay 4s infinite;
+        white-space: nowrap;
+        font-size: 16px;
+    }
+
+    .spinner span:not(last-of-type) {
+        -webkit-animation: spinner 4s infinite;
+        -moz-animation: spinner 4s infinite;
+        animation: spinner 4s infinite;
+    }
+
+    @-webkit-keyframes spinner {
+        0% {
+            letter-spacing: 3em;
+        }
+
+        45% {
+            letter-spacing: 0;
+        }
+
+        55% {
+            letter-spacing: 0;
+        }
+
+        100% {
+            letter-spacing: 3em;
+        }
+    }
+
+    @-moz-keyframes spinner {
+        0% {
+            letter-spacing: 3em;
+        }
+
+        45% {
+            letter-spacing: 0;
+        }
+
+        55% {
+            letter-spacing: 0;
+        }
+
+        100% {
+            letter-spacing: 3em;
+        }
+    }
+
+    @keyframes spinner {
+        0% {
+            letter-spacing: 3em;
+        }
+
+        45% {
+            letter-spacing: 0;
+        }
+
+        55% {
+            letter-spacing: 0;
+        }
+
+        100% {
+            letter-spacing: 3em;
+        }
+    }
+
+    @-webkit-keyframes slidedelay {
+        0% {
+            margin-left: -100%;
+        }
+
+        50% {
+            margin-left: 0%;
+        }
+
+        100% {
+            margin-left: 100%;
+        }
+    }
+
+    @-moz-keyframes slidedelay {
+        0% {
+            margin-left: -100%;
+        }
+
+        50% {
+            margin-left: 0%;
+        }
+
+        100% {
+            margin-left: 100%;
+        }
+    }
+
+    @keyframes slidedelay {
+        0% {
+            margin-left: -100%;
+        }
+
+        50% {
+            margin-left: 0%;
+        }
+
+        100% {
+            margin-left: 100%;
+        }
+    }
+
+    @-moz-keyframes spin {
+        100% {
+            -moz-transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    .circleSpinner {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        -moz-transform: scale(.5);
+        -webkit-transform: scale(.5);
+        transform: scale(.5);
+
+        .circle {
+            position: absolute;
+            background-color: @whiteColor;
+            height: 7px;
+            width: 7px;
+            -moz-border-radius: 4px;
+            -moz-animation: fadeCircle .96s linear infinite;
+            -webkit-border-radius: 4px;
+            -webkit-animation: fadeCircle .96s linear infinite;
+            border-radius: 4px;
+            animation: fadeCircle .96s linear infinite;
+        }
+
+        .first {
+            left: 0;
+            top: 16px;
+            -moz-animation-delay: 0.36s;
+            -webkit-animation-delay: 0.36s;
+            animation-delay: 0.36s;
+        }
+
+        .second {
+            left: 5px;
+            top: 5px;
+            -moz-animation-delay: 0.48s;
+            -webkit-animation-delay: 0.48s;
+            animation-delay: 0.48s;
+        }
+
+        .third {
+            left: 16px;
+            top: 0;
+            -moz-animation-delay: 0.6s;
+            -webkit-animation-delay: 0.6s;
+            animation-delay: 0.6s;
+        }
+
+        .fourth {
+            right: 5px;
+            top: 5px;
+            -moz-animation-delay: 0.72s;
+            -webkit-animation-delay: 0.72s;
+            animation-delay: 0.72s;
+        }
+
+        .fifth {
+            right: 0;
+            top: 16px;
+            -moz-animation-delay: 0.84s;
+            -webkit-animation-delay: 0.84s;
+            animation-delay: 0.84s;
+        }
+
+        .sixth {
+            right: 5px;
+            bottom: 5px;
+            -moz-animation-delay: 0.96s;
+            -webkit-animation-delay: 0.96s;
+            animation-delay: 0.96s;
+        }
+
+        .seventh {
+            left: 16px;
+            bottom: 0;
+            -moz-animation-delay: 1.08s;
+            -webkit-animation-delay: 1.08s;
+            animation-delay: 1.08s;
+        }
+
+        .eighth {
+            left: 5px;
+            bottom: 5px;
+            -moz-animation-delay: 1.2s;
+            -webkit-animation-delay: 1.2s;
+            animation-delay: 1.2s;
+        }
+    }
+
+    @-moz-keyframes fadeCircle {
+        0% {
+            background-color: @neutralPrimaryColor;
+        }
+
+        100% {
+            background-color: @whiteColor;
+        }
+    }
+
+    @-webkit-keyframes fadeCircle {
+        0% {
+            background-color: @neutralPrimaryColor;
+        }
+
+        100% {
+            background-color: @whiteColor;
+        }
+    }
+
+    @keyframes fadeCircle {
+        0% {
+            background-color: @neutralPrimaryColor;
+        }
+
+        100% {
+            background-color: @whiteColor;
+        }
+    }
+}
+
+// deprecated spinners
+
+.busySpinner {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+.waitingSpinner {
+    content: '';
+    background: url('../../images/spinner.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    display: block;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+.waitingSpinnerContainer(){
+    top: 50%;
+    left: 50%;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+.waitingSpinner.horizontal {
+    left: 50%;
+    margin-left: -16px;
+}
+
+.waitingSpinner.vertical {
+    top: 50%;
+    margin-top: -16px;
+}
+
+.waitingSpinner.container {
+    .waitingSpinnerContainer();
+}

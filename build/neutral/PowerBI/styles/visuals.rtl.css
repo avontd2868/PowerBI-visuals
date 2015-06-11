@@ -1,0 +1,1143 @@
+/*
+ *  Power BI Visualizations
+ *
+ *  Copyright (c) Microsoft Corporation
+ *  All rights reserved. 
+ *  MIT License
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the ""Software""), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *   
+ *  The above copyright notice and this permission notice shall be included in 
+ *  all copies or substantial portions of the Software.
+ *   
+ *  THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ */
+/*
+LESS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: @icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
+*/
+/*
+The provided classes are intended to be used with the array-like variables
+
+.icon-home {
+  .sprite-width(@icon-home);
+}
+.icon-email {
+  .sprite(@icon-email);
+}
+*/
+/*
+The %60.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+/* 
+    POWER BI V2 "Bumblebee" COLOR PALLETE
+    Please use only the colors declared here  - this file is to be kept in sync with the palette defined by the design team
+    If you need a color that is not here, talk to your designer and get it added to the main palette and then add it here
+
+    - Use #HEX codes - if you need to get alpha use fadeout(color, percentage)
+    - Colors should be reusable, and not duplicated.
+*/
+/* THEME COLORS */
+/* NEUTRAL COLORS */
+/* ACCENT COLORS */
+/* APPLICATION CHROME COLORS */
+/*dark chrome*/
+/*light chrome*/
+/*@primaryChromeColor: @whiteColor;
+@secondaryChromeColor: @whiteColor;
+@tertiaryChromeColor: @whiteColor;*/
+/* 
+    DEPRECATED COLORS: Please refrain from adding one time use colors to the section below.
+    These will be all be removed. New colors must be provided by design and be in the design OneNote palette
+*/
+/* PowerView specific colors */
+/* Visual colors */
+/*
+ *  Power BI Visualizations
+ *
+ *  Copyright (c) Microsoft Corporation
+ *  All rights reserved. 
+ *  MIT License
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the ""Software""), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *   
+ *  The above copyright notice and this permission notice shall be included in 
+ *  all copies or substantial portions of the Software.
+ *   
+ *  THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ */
+/*
+ *  Power BI Visualizations
+ *
+ *  Copyright (c) Microsoft Corporation
+ *  All rights reserved. 
+ *  MIT License
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the ""Software""), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *   
+ *  The above copyright notice and this permission notice shall be included in 
+ *  all copies or substantial portions of the Software.
+ *   
+ *  THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *  THE SOFTWARE.
+ */
+body {
+  -webkit-font-smoothing: antialiased;
+}
+.secondaryFont {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+.secondaryBoldFont {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+.lightFont {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+.semilightFont {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+.regularFont {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+.semiboldFont {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+.boldFontFamily {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+/* 
+ * Color styles MUST be set through the color palette in colors.less. This
+ * will allow us to easily change the palette and get a consistent look. DO NOT
+ * hard-code colors directly inside classes.
+ *
+ * To get integrated VS support for LESS install the Visual Studio Web Essentials.
+ */
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.trimmedTextWithEllipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.skittlesNormal {
+  opacity: 0;
+  border: 1px solid #a6a6a6;
+  color: #333333;
+  background-color: #ffffff;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  -moz-transition: opacity 0.2s ease-in;
+  -o-transition: opacity 0.2s ease-in;
+  -webkit-transition: opacity 0.2s ease-in;
+  transition: opacity 0.2s ease-in;
+  -webkit-transition-delay: 0s;
+  /* Safari */
+  transition-delay: 0s;
+}
+.skittlesHovered {
+  background-color: #f4f4f4;
+}
+.skittlesPressed {
+  border-color: #777777;
+  background-color: #eaeaea;
+}
+.skittlesIconNormal {
+  vertical-align: middle;
+  text-align: center;
+  color: #a6a6a6;
+}
+.skittlesIconHovered {
+  color: #777777;
+}
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s linear, right 0.5s linear, transform 0.5s;
+  -webkit-transition: opacity 0.5s linear, right 0.5s linear, transform 0.5s;
+}
+.hidden {
+  visibility: hidden;
+  /* Fully hide the element*/
+  opacity: 0;
+  transition: visibility 0s 0.5s, width 0s 0.5s, height 0s 0.5s, opacity 0.5s linear, right 0.5s linear, transform 0.5s;
+  -webkit-transition: visibility 0s 0.5s, width 0s 0.5s, height 0s 0.5s, opacity 0.5s linear, right 0.5s linear, transform 0.5s;
+}
+.hiddenNoTransition {
+  visibility: hidden;
+  opacity: 0;
+}
+.expAppBarMenu {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  content: '';
+}
+.expAppBar {
+  position: absolute;
+  right: 10px;
+  content: '';
+}
+.slicerContainer label.slicerCheckbox input {
+  display: none;
+}
+.slicerContainer label.slicerCheckbox span::before {
+  content: '';
+  display: inline-block;
+  cursor: pointer;
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -17px -84px;
+  width: 13px;
+  height: 13px;
+  opacity: 0.5;
+  margin-left: 5px;
+}
+.slicerContainer label.slicerCheckbox:hover span::before {
+  opacity: 1;
+}
+.slicerContainer label.slicerCheckbox input:checked + span::before {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: 0px -84px;
+  width: 13px;
+  height: 13px;
+  opacity: 1;
+}
+.slicerContainer .slicerHeader {
+  border-bottom-color: #eaeaea;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  padding-bottom: 3px;
+  box-sizing: border-box;
+}
+.slicerContainer .headerText {
+  color: #333333;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.slicerContainer .slicerItemContainer {
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+.slicerContainer .slicerText {
+  font-size: 14px;
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow-x: hidden;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.slicerContainer .clear {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -34px -84px;
+  width: 13px;
+  height: 12px;
+  margin: 4px 2px;
+  float: left;
+  cursor: pointer;
+}
+.visual svg .showLinesOnAxis path {
+  display: none;
+}
+.visual svg .showLinesOnAxis .tick line {
+  stroke: #e9e9e9;
+  stroke-width: 1px;
+  padding-right: 10px;
+}
+.visual svg .hideLinesOnAxis .tick line {
+  display: none;
+}
+.visual svg .hideLinesOnAxis path {
+  stroke-width: 1px;
+}
+.visual svg .hideLinesOnAxis .domain {
+  display: none;
+}
+/* Animated Text (and card) Styles */
+.animatedNumber .mainText,
+.card .mainText {
+  fill: #333333;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+}
+/* Column chart styles */
+.columnChart .column {
+  fill: #28ace2;
+}
+.columnChart .column:hover {
+  fill: #239fd1;
+}
+.columnChart .axisGraphicsContext {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 11px;
+}
+.columnChart .axisGraphicsContext text {
+  fill: #777777;
+}
+.columnChart .axisGraphicsContext .axis path,
+.columnChart .axisGraphicsContext .axis line {
+  fill: none;
+  stroke: #777777;
+  shape-rendering: crispEdges;
+}
+.columnChart .interactive-hover-line {
+  stroke: #666666;
+  stroke-width: 3px;
+  opacity: 1;
+}
+.columnChart .drag-handle {
+  fill: #666666;
+  opacity: 1;
+}
+.dataDotChart .dataDotChartMainGraphicsContext {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 11px;
+}
+.dataDotChart .dataDotChartMainGraphicsContext .dot {
+  fill: #28ace2;
+}
+.dataDotChart .dataDotChartMainGraphicsContext .dot:hover {
+  fill: #239fd1;
+}
+.dataDotChart .dataDotChartMainGraphicsContext .dot.null-value {
+  display: none;
+}
+.dataDotChart .dataDotChartMainGraphicsContext .label {
+  fill: white;
+  text-anchor: middle;
+}
+.dataDotChart .dataDotChartMainGraphicsContext .label.null-value {
+  display: none;
+}
+.dataDotChart .dataDotChartMainGraphicsContext .label.overflowed {
+  display: none;
+}
+.dataDotChart .axisGraphicsContext {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 11px;
+}
+.dataDotChart .axisGraphicsContext text {
+  fill: #777777;
+}
+.dataDotChart .axisGraphicsContext .axis path,
+.dataDotChart .axisGraphicsContext .axis line {
+  fill: none;
+  stroke: #777777;
+  shape-rendering: crispEdges;
+}
+.waterfallChart .column {
+  fill: #28ace2;
+}
+.waterfallChart .column:hover {
+  fill: #239fd1;
+}
+.waterfallChart .axisGraphicsContext {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 11px;
+}
+.waterfallChart .axisGraphicsContext text {
+  fill: #777777;
+}
+.waterfallChart .axisGraphicsContext .axis path,
+.waterfallChart .axisGraphicsContext .axis line {
+  fill: none;
+  stroke: #777777;
+  shape-rendering: crispEdges;
+}
+.waterfallChart .waterfall-connector {
+  stroke: #a6a6a6;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+.lineChart .mainGraphicsContext path {
+  fill: none;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+.lineChart .mainGraphicsContext .catBackground path {
+  stroke-width: 6px;
+  stroke: white;
+}
+.lineChart .mainGraphicsContext .interactivity-line {
+  stroke: #ffffff;
+  stroke-opacity: 0;
+  stroke-width: 10px;
+}
+.lineChart .hover-line {
+  stroke: #e9e9e9;
+  fill: #eb5e5e;
+}
+.lineChart .hover-line .interactive {
+  stroke: #666666;
+  stroke-width: 3px;
+  opacity: 1;
+}
+.lineChart .drag-handle {
+  fill: #666666;
+  opacity: 1;
+}
+.lineChart .axisGraphicsContext {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 11px;
+}
+.lineChart .axisGraphicsContext text {
+  fill: #777777;
+}
+.lineChart .axisGraphicsContext .axis path,
+.lineChart .axisGraphicsContext .axis line {
+  fill: none;
+  stroke: #777777;
+  shape-rendering: crispEdges;
+}
+.lineChart .axisGraphicsContext .line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+.funnelChart .axis path,
+.funnelChart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.funnelChart .axis .data-labels {
+  font-size: 12px;
+}
+.funnelChart .axis .tick line {
+  display: none;
+}
+.funnelChart .axis .domain {
+  display: none;
+}
+.donutChart {
+  overflow: visible !important;
+}
+.donutChart path.slice {
+  stroke-width: 1px;
+  stroke: white;
+}
+.donutChart path.slice-highlight {
+  stroke-width: 1px;
+  stroke: white;
+}
+.donutChart .labels text {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 11px;
+  fill: #777777;
+}
+.donutChart polyline {
+  stroke: #777777;
+  stroke-width: 1px;
+  fill: rgba(0, 0, 0, 0);
+}
+.donutChart .donutLegendArrow {
+  fill: #666666;
+}
+.donutLegend .legend-item .category {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #666666;
+}
+.donutLegend .legend-item .percentage {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  /* No need for color, as it would be overriden afterwards */
+}
+.donutLegend .legend-item .value {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #666666;
+}
+.scatterChart .mainGraphicsContext path {
+  fill: none;
+  stroke-width: 3px;
+}
+.scatterChart .mainGraphicsContext .notSelected {
+  opacity: 0.6;
+}
+.scatterChart .mainGraphicsContext .selected {
+  opacity: 1;
+}
+.scatterChart .crosshair .horizontal {
+  stroke: #666666;
+  stroke-width: 3px;
+  opacity: 0.6;
+}
+.scatterChart .crosshair .vertical {
+  stroke: #666666;
+  stroke-width: 3px;
+  opacity: 0.6;
+}
+.scatterChart .axisGraphicsContext {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 11px;
+}
+.scatterChart .axisGraphicsContext text {
+  fill: #777777;
+}
+.scatterChart .axisGraphicsContext .axis path,
+.scatterChart .axisGraphicsContext .axis line {
+  fill: none;
+  stroke: #777777;
+  shape-rendering: crispEdges;
+}
+.tableContainer {
+  overflow: auto;
+  /* table */
+}
+.tableContainer .table {
+  width: 100%;
+  color: #333333;
+  text-align: right;
+}
+.tableContainer .table th {
+  color: #777777;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* We cannot use the border-spacing on the table style for spacing since the UX spec wants unbroken row separator lines */
+  padding: 0px 0px 0px 12px;
+}
+.tableContainer .table th:last-child {
+  padding: 0px;
+}
+.tableContainer .table tr {
+  height: 20px;
+  color: #333;
+  font-size: 11px;
+  font-weight: normal;
+}
+.tableContainer .table td {
+  border-top: 1px solid #c8c8c8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* We cannot use the border-spacing on the table style for spacing since the UX spec wants unbroken row separator lines */
+  padding: 0px 0px 0px 12px;
+}
+.tableContainer .table td:last-child {
+  padding: 0px;
+}
+.tableContainer .table .numeric {
+  text-align: left;
+}
+.tableContainer .table .total {
+  font-weight: bold;
+}
+.tableContainer.scrollbarPad .table th:last-child {
+  padding: 0px 0px 0px 20px;
+}
+.tableContainer.scrollbarPad .table td:last-child {
+  padding: 0px 0px 0px 20px;
+}
+.tablixContainer {
+  overflow: auto;
+}
+.tablixContainer .bi-tablix {
+  position: relative;
+  text-align: right;
+  -webkit-font-feature-settings: "tnum";
+  -moz-font-feature-settings: "tnum";
+  -ms-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+}
+.tablixContainer .bi-tablix .unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.tablixContainer .bi-tablix table {
+  border-collapse: collapse;
+  line-height: normal;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #666666;
+  font-size: 14px;
+  font-weight: normal;
+}
+.tablixContainer .bi-tablix tr {
+  line-height: normal;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+}
+.tablixContainer .bi-tablix td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tablixContainer .bi-tablix .bi-table-column-header {
+  border-bottom-width: 1pt;
+  border-bottom-style: solid;
+  border-bottom-color: #CCCCCC;
+  font-size: 16px;
+  /* Having a right padding of 5px is crucial to make sure that we do not fire click events on the table column
+               header (and trigger sorting) when resizing a column.  The allowed offset from the parent td's right border
+               to trigger resizing is 4px (see TablixResizer.resizeHandleSize) and thus less than the 5px padding.
+            */
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-tablix .bi-table-cell-numeric {
+  text-align: left;
+  padding: 0px 10px 0px 0px;
+}
+.tablixContainer .bi-tablix .bi-table-row {
+  border-bottom-width: 1pt;
+  border-bottom-style: solid;
+  border-bottom-color: #E8E8E8;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 14px;
+  padding: 0px 10px 0px 0px;
+}
+.tablixContainer .bi-tablix .bi-table-last-row {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 14px;
+  padding: 0px 10px 0px 0px;
+}
+.tablixContainer .bi-tablix .bi-table-footer {
+  border-top-width: 1pt;
+  border-top-style: solid;
+  border-top-color: #CCCCCC;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 14px;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-tablix .bi-tablix-header {
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-tablix .bi-tablix-row-header-leaf {
+  border-left-width: 1px;
+  border-left-color: #CCCCCC;
+  border-left-style: solid;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-tablix .bi-tablix-row-header-static-leaf {
+  border-left-width: 1px;
+  border-left-color: #CCCCCC;
+  border-left-style: solid;
+  padding: 0px 0px 0px 0px;
+}
+.tablixContainer .bi-tablix .bi-tablix-column-header-leaf {
+  border-bottom-width: 1px;
+  border-bottom-color: #CCCCCC;
+  border-bottom-style: solid;
+  /* Having a right padding of 5px is crucial to make sure that we do not fire click events on the tablix column
+               header (and trigger sorting) when resizing a column.  The allowed offset from the parent td's right border
+               to trigger resizing is 4px (see TablixResizer.resizeHandleSize) and thus less than the 5px padding.
+            */
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-tablix .bi-matrix-body-cell {
+  text-align: left;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 14px;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-tablix .total {
+  font-weight: bold;
+}
+.tablixContainer .bi-tablix .scroll-bar-div {
+  background: #F1F1F1;
+  position: relative;
+  user-select: none;
+}
+.tablixContainer .bi-tablix .scroll-bar-part-arrow {
+  background: #F1F1F1;
+  position: absolute;
+  text-align: center;
+  user-select: none;
+}
+.tablixContainer .bi-tablix .scroll-bar-part-arrow:hover {
+  background-color: #cecece;
+}
+.tablixContainer .bi-tablix .scroll-bar-part-bar {
+  background: #cecece;
+  position: absolute;
+  text-align: center;
+  user-select: none;
+}
+.tablixContainer .bi-tablix .scroll-bar-part-bar:hover {
+  background: #c0c0c0;
+}
+.tablixContainer .bi-dashboard-tablix {
+  position: relative;
+  text-align: right;
+  -webkit-font-feature-settings: "tnum";
+  -moz-font-feature-settings: "tnum";
+  -ms-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+}
+.tablixContainer .bi-dashboard-tablix .unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.tablixContainer .bi-dashboard-tablix table {
+  border-collapse: collapse;
+  line-height: normal;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #666666;
+  font-size: 11px;
+  font-weight: normal;
+}
+.tablixContainer .bi-dashboard-tablix tr {
+  line-height: normal;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+}
+.tablixContainer .bi-dashboard-tablix td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tablixContainer .bi-dashboard-tablix .bi-table-column-header {
+  border-bottom-width: 1pt;
+  border-bottom-style: solid;
+  border-bottom-color: #CCCCCC;
+  font-size: 11px;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-table-cell-numeric {
+  text-align: left;
+  padding: 0px 10px 0px 0px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-table-row {
+  border-bottom-width: 1pt;
+  border-bottom-style: solid;
+  border-bottom-color: #E8E8E8;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 11px;
+  padding: 0px 10px 0px 0px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-table-last-row {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 11px;
+  padding: 0px 10px 0px 0px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-table-footer {
+  border-top-width: 1pt;
+  border-top-style: solid;
+  border-top-color: #CCCCCC;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 11px;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-tablix-header {
+  padding: 0px 0px 0px 0px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-tablix-row-header-leaf {
+  border-left-width: 1px;
+  border-left-color: #CCCCCC;
+  border-left-style: solid;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-tablix-row-header-static-leaf {
+  border-left-width: 1px;
+  border-left-color: #CCCCCC;
+  border-left-style: solid;
+  padding: 0px 0px 0px 0px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-tablix-column-header-leaf {
+  border-bottom-width: 1px;
+  border-bottom-color: #CCCCCC;
+  border-bottom-style: solid;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-dashboard-tablix .bi-matrix-body-cell {
+  text-align: left;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  color: #333333;
+  font-size: 11px;
+  padding: 0px 10px 0px 5px;
+}
+.tablixContainer .bi-dashboard-tablix .total {
+  font-weight: bold;
+}
+.callout {
+  /*temp styles, waiting on behaviour spec*/
+  height: 15px;
+  top: -49px;
+  color: #777777;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.callout .label {
+  font-weight: bold;
+}
+.callout .labelValue {
+  font-weight: normal;
+}
+.triangle-border {
+  position: absolute;
+  padding: 10px;
+  margin: 1em 0 3em;
+  border: 1px solid #a5ddeb;
+  color: #333;
+  background: #ffffff;
+  /* css3 */
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.triangle-border:before {
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  /* value = - border-top-width - border-bottom-width */
+  border-width: 11px 11px 0;
+  border-style: solid;
+  border-color: #a5ddeb transparent;
+  /* reduce the damage in FF3.0 */
+  display: block;
+  width: 0;
+}
+/* creates the smaller  triangle */
+.triangle-border:after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  /* value = - border-top-width - border-bottom-width */
+  border-width: 9px 9px 0;
+  border-style: solid;
+  border-color: #ffffff transparent;
+  /* reduce the damage in FF3.0 */
+  display: block;
+  width: 0;
+}
+.visual .mapControl {
+  position: relative;
+}
+.visual .mapShapes {
+  stroke-linejoin: round;
+}
+.visual .textbox {
+  color: #000000;
+  line-height: 1;
+}
+.visual .imageBackground {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.visual .treemap .shapes {
+  stroke: white;
+}
+.visual .treemap .shapes .rootNode {
+  fill: none;
+}
+.visual .treemap .shapes .parentGroup {
+  stroke-width: 1.5px;
+  stroke-opacity: 0.8;
+}
+.visual .treemap .shapes .nodeGroup {
+  stroke-width: 1px;
+  stroke-opacity: 0.2;
+  fill: none;
+}
+.visual .treemap .labels {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  fill: #ffffff;
+}
+.visual .treemap .labels .majorLabel {
+  font-size: 12px;
+}
+.visual .treemap .labels .minorLabel {
+  font-size: 10px;
+}
+.interactive-legend {
+  white-space: nowrap;
+  text-align: right;
+  overflow: hidden;
+}
+.interactive-legend .title {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 16px;
+  color: #666666;
+}
+.interactive-legend .item {
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  font-size: 12px;
+  color: #666666;
+  padding-left: 22px;
+  padding-bottom: 0px;
+  padding-top: 3px;
+}
+.interactive-legend .icon {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  margin-right: auto;
+}
+.tooltip-container {
+  position: absolute;
+  font-size: 11px;
+  background-color: #333333;
+  pointer-events: none;
+}
+.tooltip-container .tooltip-content-container {
+  padding: 12px;
+  max-width: 390px;
+}
+.tooltip-container .tooltip-row {
+  display: table-row;
+  line-height: 16px;
+}
+.tooltip-container div.tooltip-title-cell {
+  display: table-cell;
+  word-wrap: break-word;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  text-transform: uppercase;
+  max-width: 130px;
+  padding-left: 12px;
+  color: #a6a6a6;
+}
+.tooltip-container div.tooltip-value-cell {
+  display: table-cell;
+  word-wrap: break-word;
+  max-width: 260px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+.tooltip-container .arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.tooltip-container .arrow.top {
+  top: 7px;
+}
+.tooltip-container .arrow.bottom {
+  bottom: 7px;
+}
+.tooltip-container .arrow.left {
+  right: -7px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid #333333;
+}
+.tooltip-container .arrow.right {
+  left: -7px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid #333333;
+}
+.data-labels {
+  font-size: 12px;
+  text-anchor: middle;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  /* Enables tooltip when hovering on data label inside visual */
+  pointer-events: none;
+}
+.richtextbox {
+  color: #333333;
+}
+.richtextbox .ql-container {
+  padding: 0px;
+}
+.richtextbox .ql-editor {
+  padding: 10px;
+}
+div.ql-toolbar {
+  padding: 4px;
+  background: #333333;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow-x: hidden;
+  font-size: 14px;
+  /*
+    select::-ms-expand {
+        display: none;
+    }
+    */
+}
+div.ql-toolbar .ql-format-group {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px 2px;
+}
+div.ql-toolbar select.ql-picker {
+  margin: 3px;
+  padding: 3px;
+  background: #444444;
+  border: 1px solid #000000;
+}
+div.ql-toolbar select.ql-font {
+  width: 122px;
+}
+div.ql-toolbar label {
+  margin: 3px;
+}
+div.ql-toolbar .ql-format-button {
+  margin: 3px;
+  display: inline-block;
+  vertical-align: middle;
+}
+div.ql-toolbar .ql-format-button:hover {
+  background: #f2c811;
+  color: #333333;
+}
+div.ql-toolbar .ql-format-button.ql-active {
+  background: #f2c811;
+  color: #333333;
+}
+div.ql-toolbar .ql-format-button[data-value="right"] {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: 0px 0px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button[data-value="right"].ql-active {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: 0px -56px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button[data-value="left"] {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -84px 0px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button[data-value="left"].ql-active {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -56px -56px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button[data-value="center"] {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -28px -28px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button[data-value="center"].ql-active {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: 0px -28px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button.ql-bold {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -28px -56px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button.ql-bold.ql-active {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -28px 0px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button.ql-italic {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -56px -28px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button.ql-italic.ql-active {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -56px 0px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button.ql-underline {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -84px -56px;
+  width: 24px;
+  height: 24px;
+}
+div.ql-toolbar .ql-format-button.ql-underline.ql-active {
+  background-image: url(../images/visuals.sprites.png);
+  background-position: -84px -28px;
+  width: 24px;
+  height: 24px;
+}
+.multiRowCard .card .title {
+  font-size: 28px;
+  font-family: 'Tahoma,Verdana,Geneva,sans-serif';
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.clearCatcher {
+  fill-opacity: 0;
+}

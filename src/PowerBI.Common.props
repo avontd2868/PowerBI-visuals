@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    
+    <!-- Below properties must be removed one by one for Visuals OSS work -->
+  <PropertyGroup>
+    <!-- PowerBI properties -->
+    <POWERBI>$(MSBuildThisFileDirectory)\..\</POWERBI>
+    <POWERBI_SRC>$(POWERBI)\Src</POWERBI_SRC>
+    <POWERBI_CLIENT>$(POWERBI_SRC)\Clients</POWERBI_CLIENT>
+    <POWERBI_TOOLS>$(POWERBI)\Tools</POWERBI_TOOLS>
+
+    <PowerBIAdditionalDropRootPath>$(ClientTargetDir)\neutral\InfoNav</PowerBIAdditionalDropRootPath>
+    <PowerBIAdditionalScriptsDropPath>$(PowerBIAdditionalDropRootPath)\scripts</PowerBIAdditionalScriptsDropPath>
+    <PowerBIAdditionalCssDropPath>$(PowerBIAdditionalDropRootPath)\styles</PowerBIAdditionalCssDropPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PowerBIClientBuildTargets>$(POWERBI_SRC)\PowerBI.Client.Build.Targets</PowerBIClientBuildTargets>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!$(VisualsStandaloneBuild)">
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\tools\snk\SQL2003SNKEY.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);TRACE;</DefineConstants>
+  </PropertyGroup>
+
+</Project>

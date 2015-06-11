@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Power BI visualization playground</title>
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="visuals.min.css" />
+</head>
+<body>
+    <div class="topBar">
+        <div style="float:left;">
+             <div>
+                <span>Select a visual:</span>
+                <select id="visualTypes"></select>
+            </div>
+        </div>
+    </div>  
+    
+    <div id="container">
+        <div id="itemContainer"></div>
+    </div>
+
+    <script type="text/javascript" src="powerbi-visuals.all.min.js"></script>
+
+    <script type="text/javascript" src="sampleData.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            powerbi.visuals.Playground.initialize();
+        });
+    </script>
+</body>
+</html>

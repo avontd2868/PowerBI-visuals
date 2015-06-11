@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\PowerBIClient.props" />
+  <Import Project="..\..\PowerBI.Binplace.props" />
+  <PropertyGroup>
+    <AssemblyName>Data</AssemblyName>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{4C880710-6735-4C2D-88CA-F24384229AF9}</ProjectGuid>
+    <ProjectTypeGuids>{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>powerbi.data</RootNamespace>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TypeScriptSourceRoot>/ts/data/</TypeScriptSourceRoot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+	<Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup Condition="!$(VisualsStandaloneBuild)">
+    <TypeScriptCompile Include="Build\_references.ts" />
+    <TypeScriptCompile Include="ModernCop.ts" />
+  </ItemGroup>  
+  <ItemGroup>    
+    <TypeScriptCompile Include="semanticQuery\sqExprVisitor.ts" />
+    <TypeScriptCompile Include="services\dataServiceClientErrors.ts" />
+    <TypeScriptCompile Include="services\serialization\dataViewTransformActionSerializer.ts" />
+    <TypeScriptCompile Include="typedefs\typedefs.ts" />
+    <TypeScriptCompile Include="types\alignment.ts" />
+    <TypeScriptCompile Include="types\axisStyle.ts" />
+    <TypeScriptCompile Include="types\axisType.ts" />
+    <TypeScriptCompile Include="types\enumMember.ts" />
+    <TypeScriptCompile Include="types\fill.ts" />
+    <TypeScriptCompile Include="types\fillRule.ts" />
+    <TypeScriptCompile Include="types\filter.ts" />
+    <TypeScriptCompile Include="types\labelPosition.ts" />
+    <TypeScriptCompile Include="types\legendPosition.ts" />
+    <TypeScriptCompile Include="types\structuralType.ts" />
+    <TypeScriptCompile Include="types\valueType.ts" />
+    <TypeScriptCompile Include="contracts\conceptualSchema.ts" />
+    <TypeScriptCompile Include="contracts\dataShapeBinding.ts" />
+    <TypeScriptCompile Include="contracts\federatedConceptualSchema.ts" />
+    <TypeScriptCompile Include="contracts\schemaChange.ts" />
+    <TypeScriptCompile Include="contracts\selector.ts" />
+    <TypeScriptCompile Include="contracts\serviceError.ts" />
+    <TypeScriptCompile Include="contracts\query.ts" />
+    <TypeScriptCompile Include="contracts\queryProjection.ts" />
+    <TypeScriptCompile Include="contracts\visualData.ts" />
+    <TypeScriptCompile Include="dataView\colorAllocator.ts" />
+    <TypeScriptCompile Include="dataView\compiledDataViewMapping.ts" />
+    <TypeScriptCompile Include="dataView\dataViewMappingCompiler.ts" />
+    <TypeScriptCompile Include="dataView\dataViewObjectDefinition.ts" />
+    <TypeScriptCompile Include="dataView\dataViewObjectDescriptor.ts" />
+    <TypeScriptCompile Include="dataView\dataViewObjectEvaluationUtils.ts" />
+    <TypeScriptCompile Include="dataView\dataViewObjectEvaluator.ts" />
+    <TypeScriptCompile Include="dataView\dataViewObject.ts" />
+    <TypeScriptCompile Include="dataView\dataViewPivotCategorical.ts" />
+    <TypeScriptCompile Include="dataView\dataViewPivotMatrix.ts" />
+    <TypeScriptCompile Include="dataView\dataViewSelfCrossJoin.ts" />
+    <TypeScriptCompile Include="displayNameGetter.ts" />
+    <TypeScriptCompile Include="iDataProvider.ts" />
+    <TypeScriptCompile Include="iFormattingService.ts" />
+    <TypeScriptCompile Include="dataProviderFactory.ts" />
+    <TypeScriptCompile Include="dataView\dataView.ts" />
+    <TypeScriptCompile Include="dataView\dataViewAnalysis.ts" />
+    <TypeScriptCompile Include="dataView\dataViewMapping.ts" />
+    <TypeScriptCompile Include="dataView\dataViewScopeIdentity.ts" />
+    <TypeScriptCompile Include="dataView\dataViewScopeWildcard.ts" />
+    <TypeScriptCompile Include="dataView\dataViewTransform.ts" />
+    <TypeScriptCompile Include="dataView\rules\ruleEvaluation.ts" />
+    <TypeScriptCompile Include="dataView\rules\colorRuleEvaluation.ts" />
+    <TypeScriptCompile Include="dataView\rules\filterRuleEvaluation.ts" />
+    <TypeScriptCompile Include="dsr\compiledDataViewMerger.ts" />
+    <TypeScriptCompile Include="dsr\dataShapeResult.ts" />
+    <TypeScriptCompile Include="dsr\dataShapeUtility.ts" />
+    <TypeScriptCompile Include="dsr\dsrClientError.ts" />
+    <TypeScriptCompile Include="dsr\dsrDataProvider.ts" />
+    <TypeScriptCompile Include="dsr\dsrLimitsWarning.ts" />
+    <TypeScriptCompile Include="dsr\dsrReader.ts" />
+    <TypeScriptCompile Include="dsr\executeSemanticQueryBatcher.ts" />
+    <TypeScriptCompile Include="dsr\executeSemanticQueryProxy.ts" />
+    <TypeScriptCompile Include="dsr\queryBindingDescriptor.ts" />
+    <TypeScriptCompile Include="dsr\queryBindingDescriptorVisitor.ts" />
+    <TypeScriptCompile Include="dsr\queryCacheHandler.ts" />
+    <TypeScriptCompile Include="dsr\queryDescription.ts" />
+    <TypeScriptCompile Include="dsr\queryGenerator.ts" />
+    <TypeScriptCompile Include="segmentation\dataViewMerger.ts" />
+    <TypeScriptCompile Include="semanticQuery\exprPatterns\filterScopeIdsCollector.ts" />
+    <TypeScriptCompile Include="semanticQuery\exprPatterns\scopeIdentityKeyExtractor.ts" />
+    <TypeScriptCompile Include="semanticQuery\exprPatterns\sqFieldDef.ts" />
+    <TypeScriptCompile Include="semanticQuery\primitiveValueEncoding.ts" />
+    <TypeScriptCompile Include="semanticQuery\semanticQueryVersions.ts" />
+    <TypeScriptCompile Include="semanticQuery\sqExprRewriter.ts" />
+    <TypeScriptCompile Include="semanticQuery\schemaChangeRewriter.ts" />
+    <TypeScriptCompile Include="semanticQuery\sqExpr.ts" />
+    <TypeScriptCompile Include="semanticQuery\sqExprUtils.ts" />
+    <TypeScriptCompile Include="semanticQuery\semanticQueryRewriter.ts" />
+    <TypeScriptCompile Include="semanticQuery\semanticQuery.ts" />
+    <TypeScriptCompile Include="semanticQuery\semanticQueryBuilder.ts" />
+    <TypeScriptCompile Include="services\dataProxy.ts" />
+    <TypeScriptCompile Include="services\formattingService.ts" />
+    <TypeScriptCompile Include="services\serialization\dataViewObjectSerializer.ts" />
+    <TypeScriptCompile Include="services\serialization\semanticQuerySerializer.ts" />
+    <TypeScriptCompile Include="services\serialization\sqExprShortSerializer.ts" />
+    <TypeScriptCompile Include="types\yAxisPosition.ts" />
+  </ItemGroup>
+  <ItemGroup Condition="!$(VisualsStandaloneBuild)">
+    <TypeScriptCompile Include="bingNews\bingNewsDataProvider.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Placeholder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gruntfile.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JsCommon\JsCommon.csproj">
+      <Project>{D0C3D73A-A034-4458-8FBD-F48E3A23DB9C}</Project>
+      <Name>JsCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(PowerBIClientBuildTargets)" />
+  <ItemGroup Condition="!$(VisualsStandaloneBuild)">
+    <PowerBIDropItem Include="obj\Data.js" />
+    <PowerBIDropItem Include="obj\Data.min.js" />
+  </ItemGroup>
+  <Target Name="RecreatePowerBIDrop" AfterTargets="Build" Inputs="@(PowerBIDropItem)" Outputs="@(PowerBIDropItem->'$(PowerBIAdditionalScriptsDropPath)\%(Filename)%(Extension)')">
+    <Copy SourceFiles="@(PowerBIDropItem)" DestinationFolder="$(PowerBIAdditionalScriptsDropPath)" />
+  </Target>
+</Project>
