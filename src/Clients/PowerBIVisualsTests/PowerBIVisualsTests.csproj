@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\InfoNavClient.props" />
+  <Import Project="$(INFONAV_SRC)\InfoNav.Client.Build.Targets" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{378A4333-7D33-446D-8608-8D1CCB171326}</ProjectGuid>
+    <ProjectTypeGuids>{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>powerbivisualstests</RootNamespace>
+    <TypeScriptBinaryDropPath>$(InfonavScriptsDropPath)\Test</TypeScriptBinaryDropPath>
+    <TypeScriptLintingEnabled>false</TypeScriptLintingEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JsCommon\JsCommon.csproj">
+      <Project>{D0C3D73A-A034-4458-8FBD-F48E3A23DB9C}</Project>
+      <Name>JsCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\data\data.csproj">
+      <Project>{4C880710-6735-4C2D-88CA-F24384229AF9}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Visuals\Visuals.csproj">
+      <Project>{1885F132-67E8-4CBB-BE4C-6E02507C43BB}</Project>
+      <Name>Visuals</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="helpers.ts" />
+    <TypeScriptCompile Include="mocks.ts" />
+    <TypeScriptCompile Include="tableDataViewHelper.ts" />
+    <TypeScriptCompile Include="tablixHelper.ts" />
+    <TypeScriptCompile Include="typedefs\defaultStringsForVisuals.ts" />
+    <TypeScriptCompile Include="typedefs\localizationLoader.ts" />
+    <TypeScriptCompile Include="typedefs\localizationService.ts" />
+    <TypeScriptCompile Include="typedefs\visualStyles.ts" />
+    <TypeScriptCompile Include="utils\colorUtility.ts" />
+    <TypeScriptCompile Include="typedefs\typedefs.ts" />
+    <TypeScriptCompile Include="visuals\common\axisHelperTests.ts" />
+    <TypeScriptCompile Include="visuals\common\converterHelperTests.ts" />
+    <TypeScriptCompile Include="visuals\common\dataLabelUtilsTests.ts" />
+    <TypeScriptCompile Include="visuals\common\dataRoleHelperTests.ts" />
+    <TypeScriptCompile Include="visuals\common\listViewTests.ts" />
+    <TypeScriptCompile Include="visuals\common\pluginTests.ts" />
+    <TypeScriptCompile Include="visuals\common\selectionIdTests.ts" />
+    <TypeScriptCompile Include="visuals\common\shapesTests.ts" />
+    <TypeScriptCompile Include="visuals\common\svgUtilTests.ts" />
+    <TypeScriptCompile Include="visuals\common\urlHelperTests.ts" />
+    <TypeScriptCompile Include="visuals\formatting\dataLabelManagerTests.ts" />
+    <TypeScriptCompile Include="visuals\formatting\valueFormatterTests.ts" />
+    <TypeScriptCompile Include="visuals\animatedNumberTests.ts" />
+    <TypeScriptCompile Include="visuals\animatedTextTests.ts" />
+    <TypeScriptCompile Include="visuals\bingNewsTests.ts" />
+    <TypeScriptCompile Include="visuals\cardTests.ts" />
+    <TypeScriptCompile Include="visuals\columnChartTests.ts" />
+    <TypeScriptCompile Include="visuals\comboChartTests.ts" />
+    <TypeScriptCompile Include="visuals\dataColorPaletteTests.ts" />
+    <TypeScriptCompile Include="visuals\dataDotChartTests.ts" />
+    <TypeScriptCompile Include="visuals\donutChartTests.ts" />
+    <TypeScriptCompile Include="visuals\funnelChartTests.ts" />
+    <TypeScriptCompile Include="visuals\gaugeTests.ts" />
+    <TypeScriptCompile Include="visuals\geocodingManagerTests.ts" />
+    <TypeScriptCompile Include="visuals\imageVisualTests.ts" />
+    <TypeScriptCompile Include="visuals\legendTests.ts" />
+    <TypeScriptCompile Include="visuals\lineChartTests.ts" />
+    <TypeScriptCompile Include="visuals\mapTests.ts" />
+    <TypeScriptCompile Include="visuals\matrixTests.ts" />
+    <TypeScriptCompile Include="visuals\multiRowCardTests.ts" />
+    <TypeScriptCompile Include="visuals\partitionMapTests.ts" />
+    <TypeScriptCompile Include="visuals\richTextboxTests.ts" />
+    <TypeScriptCompile Include="visuals\scatterChartTests.ts" />
+    <TypeScriptCompile Include="visuals\services\colorAllocatorFactoryTests.ts" />
+    <TypeScriptCompile Include="visuals\services\geocodingCacheTests.ts" />
+    <TypeScriptCompile Include="visuals\services\interactivityServiceTests.ts" />
+    <TypeScriptCompile Include="visuals\slicerTests.ts" />
+    <TypeScriptCompile Include="visuals\tableNewTests.ts" />
+    <TypeScriptCompile Include="visuals\tableTests.ts" />
+    <TypeScriptCompile Include="visuals\textboxTests.ts" />
+    <TypeScriptCompile Include="visuals\tooltipTests.ts" />
+    <TypeScriptCompile Include="visuals\treemapTests.ts" />
+    <TypeScriptCompile Include="visuals\visualFactoryTests.ts" />
+    <TypeScriptCompile Include="visuals\waterfallChartTests.ts" />
+    <TypeScriptCompile Include="visuals\webChartTests.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="chutzpah.json" />
+    <Content Include="chutzpah.vsobuild.json" />
+    <Content Include="chutzpah_compile.bat" />
+    <Content Include="chutzpah_filelist.txt" />
+    <Content Include="chutzpah_references.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gruntfile.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Placeholder.cs">
+      <Link>Placeholder.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Target Name="PrepareCopyPowerBIStaticFiles" AfterTargets="Build" BeforeTargets="CopyPowerBIStaticFiles">
+    <ItemGroup>
+      <PowerBIStaticFiles Include="..\Data\obj\Data.js" />
+      <PowerBIStaticFiles Include="..\data\obj\data.min.js" />
+      <PowerBIStaticFiles Include="..\jscommon\obj\utility.js" />
+      <PowerBIStaticFiles Include="..\jscommon\obj\utility.min.js" />
+      <PowerBIStaticFiles Include="..\Visuals\obj\visuals.js" />
+      <PowerBIStaticFiles Include="..\Visuals\obj\visuals.min.js" />
+    </ItemGroup>
+  </Target>
+  <!-- Copy files for running tests within VS -->
+  <Target Name="CopyPowerBIStaticFiles" Inputs="@(PowerBIStaticFiles)" Outputs="@(PowerBIStaticFiles->'$(ProjectDir)%(RecursiveDir)%(Filename)%(Extension)')" AfterTargets="PrepareCopyPowerBIStaticFiles" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <Copy SourceFiles="@(PowerBIStaticFiles)" DestinationFiles="@(PowerBIStaticFiles->'$(ProjectDir)%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(PowerBIClientSrcFiles)" DestinationFiles="@(PowerBIClientSrcFiles->'$(ProjectDir)ts\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  <!-- Copy files for running tests outside VS context -->
+  <Target Name="CopyPowerBIStaticFilesToTestBuild" Inputs="@(PowerBIStaticFiles)" Outputs="@(PowerBIStaticFiles->'$(TypeScriptBinaryDropPath)\%(RecursiveDir)%(Filename)%(Extension)')" AfterTargets="PrepareCopyPowerBIStaticFiles">
+    <Copy SourceFiles="@(PowerBIStaticFiles)" DestinationFiles="@(PowerBIStaticFiles->'$(TypeScriptBinaryDropPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  <Target Name="CopyChutzpahTfsJson" Outputs="$(TypeScriptBinaryDropPath)\chutzpah.json" AfterTargets="CopyPowerBIStaticFilesToTestBuild">
+    <Copy SourceFiles="chutzpah.vsobuild.json" DestinationFiles="$(TypeScriptBinaryDropPath)\chutzpah.json" />
+  </Target>
+</Project>

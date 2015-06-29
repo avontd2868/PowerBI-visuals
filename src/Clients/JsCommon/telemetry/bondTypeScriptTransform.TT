@@ -1,0 +1,820 @@
+﻿<#@ template language="C#" debug="true" inherits="XidlGenerator" hostSpecific="true" #>
+<#@ output extension=".ts" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text" #>
+<#@ Assembly name="Microsoft.Bond.Rules.dll" #>
+<#@ import namespace="Microsoft.AdCenter.Cyprus.XIDL"#>
+<#@ parameter name="ProjectType" Processor="ParameterProcessor" type="System.String" required="false" BaseClassProp="true"#>
+<#@ parameter name="ProjectName" Processor="ParameterProcessor" type="System.String" required="true" BaseClassProp="true"#>
+/* tslint:disable */
+<#
+base.AddRules(
+    new TypeScript(ProjectName)
+);
+
+base.Generate();
+#>
+<#+
+public class TypeScript
+    : Microsoft.AdCenter.Cyprus.XIDL.XidlDataRule
+{
+    public TypeScript(string projectName)
+    {
+        OutputFileName = String.Format("{0}.ts", projectName);
+        
+        AddRules(new TypeScript_Namespace());
+    }
+
+    public override void FileBegin(CyprusData o)
+    {
+        StandardFileHeader header = new StandardFileHeader();
+        header.OutputHeader(Options, OutputFileName);
+        Utils.InitAllTypes(o.AllParserTypes());
+    }
+
+    public override void FileEnd(TypeBase o)
+    {
+    }
+}
+#>
+<#+
+internal class TypeScript_Namespace
+        : XidlNamespaceRule
+{
+    public TypeScript_Namespace()
+    {
+        AddRules(new TypeScript_Enum());
+        AddRules(new TypeScript_Class_Constructor());
+    }
+
+    public override void NamespaceBegin(Namespace o)
+    {
+        if (o.ParentNamespace == null)
+        {
+#>
+
+module <#= o.Name #>.telemetry {
+	var g = jsCommon.Utility.generateGuid;
+	
+<#+ 
+        }
+        else
+        {
+#>
+export module <#= o.Name #>.telemetry {
+	var g = jsCommon.Utility.generateGuid;
+	
+<#+ 
+        }
+
+        PushIndent();
+    }
+
+    public override void NamespaceEnd(Namespace o)
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+#>
+<#+
+
+internal class TypeScript_Class_Constructor
+	: XidlStructRule
+{
+	public override void StructBegin(StructDef o)
+	{
+		StringBuilder paramString = new StringBuilder();
+		StructDef current = o;
+		
+		string baseInterface = null;
+		if (o.HasBase)
+		{
+			baseInterface = "I" + ClassBeginUtils.ConstructClassName(Utils.FindBaseDef(current));
+		}
+		
+		string description = "";
+		if (string.IsNullOrEmpty(ClassBeginUtils.GetValueOfAttributeOnWithNameWithoutRecursion("Description", o)))
+		{
+			throw new Exception(ClassBeginUtils.ConstructClassName(o) + " needs a [Description(\"\")] tag.");
+		}
+		else
+		{
+			description = ClassBeginUtils.GetValueOfAttributeOnWithNameWithoutRecursion("Description", o).Replace("\"", "");
+		}
+		
+		string category = ClassBeginUtils.GetValueOfAttributeWithName("Category", o).Replace("\"", "");
+
+		//Note: below attributes are only used in Mobile Power BI, see TFS#4515021 for more details
+		string classAttributeValue = ClassBeginUtils.GetValueOfAttributeWithName("Class", o).Replace("\"", "");
+
+		string idAttributeValue = ClassBeginUtils.GetValueOfAttributeWithName("Id", o).Replace("\"", "");
+
+		string levelAttributeValue = ClassBeginUtils.GetValueOfAttributeWithName("Level", o).Replace("\"", "");
+
+		string [] mobileCategoryValues = ClassBeginUtils
+			.GetValueOfAttributeWithName("MobileCategory", o)
+			.Replace("\"", "")
+			.Replace(" ", "")
+			.Split(new char[] {';', ','}, StringSplitOptions.RemoveEmptyEntries);
+		
+
+		if(baseInterface != null) {
+#>
+export interface I<#= ClassBeginUtils.ConstructClassName(o) #> extends <#=baseInterface #> {
+<#+
+		}
+		else {
+#>
+export interface I<#= ClassBeginUtils.ConstructClassName(o) #> {
+<#+		
+		}
+
+		foreach (FieldBase field in o.Items)
+		{
+			// Handle enums differently
+			if (field is EnumField)
+			{
+#>
+	<#=Utils.GetFieldName(o, field)#>: <#=field.GetFieldType(new CustomIdlTypeMapping()).Replace("powerbi.", "powerbi.telemetry.")#>;
+<#+
+			}
+			else 
+			{
+#>
+	<#=Utils.GetFieldName(o, field)#>: <#=field.GetFieldType(new CustomIdlTypeMapping())#>;
+<#+
+			}
+		}
+#>
+}
+<#+
+		current = o;
+		StringBuilder parameters = new StringBuilder();
+		bool first = true;
+		while (current != null) 
+		{
+			foreach (FieldBase field in current.Items)
+			{
+				if (first)
+				{
+					first = false;
+				}
+				else
+				{
+					parameters.Append(", ");
+				}
+
+				string fieldName = Utils.GetFieldName(current, field);
+				parameters.Append(fieldName);
+				parameters.Append(": ");
+			
+				string fieldType = field.GetFieldType(new CustomIdlTypeMapping());
+
+				if (field is EnumField)
+				{
+					parameters.Append(fieldType.Replace("powerbi.", "powerbi.telemetry."));
+				}
+				else 
+				{
+					parameters.Append(fieldType);
+				}
+
+				BoolField boolField = field as BoolField;
+
+				if(boolField != null && boolField.IsDefaultSpecified())
+				{
+					parameters.AppendFormat(" = {0}", boolField.DefaultAsString);
+				}
+			}
+			
+			if (current.HasBase)
+			{
+				current = Utils.FindBaseDef(current);
+			}
+			else
+			{
+				current = null;
+			}
+		}
+#>
+
+/**
+* <#=description #>
+<#+
+		current = o;
+		while (current != null) 
+		{
+			foreach (FieldBase field in current.Items)
+			{
+				string paramDescription = ClassBeginUtils.GetValueOfFieldAttributeWithName("Description", field).Replace("\"", "");
+#>
+* @param <#=Utils.GetFieldName(current, field)#> <#=paramDescription#> 
+<#+
+			}			
+
+			if (current.HasBase)
+			{
+				current = Utils.FindBaseDef(current);
+			}
+			else
+			{
+				current = null;
+			}
+		}
+#>
+*/
+
+export declare var <#= ClassBeginUtils.ConstructClassName(o, true) + "Loggers"#>: number;
+
+export var <#= ClassBeginUtils.ConstructClassName(o, true) #> = function (<#=parameters.ToString() #>): ITelemetryEventI<I<#= ClassBeginUtils.ConstructClassName(o) #>>  {
+	var info = {
+<#+
+		current = o;
+		while (current != null) 
+		{
+			foreach (FieldBase field in current.Items)
+			{
+#>
+		<#=Utils.GetFieldName(current, field)#>: <#=Utils.GetFieldName(current, field)#>,
+<#+
+			}			
+
+			if (current.HasBase)
+			{
+				current = Utils.FindBaseDef(current);
+			}
+			else
+			{
+				current = null;
+			}
+		}
+#>
+	};
+
+	var event: ITelemetryEventI<I<#= ClassBeginUtils.ConstructClassName(o) #>> = {
+		name: '<#= ClassBeginUtils.ConstructStructName(o) #>',
+<#+
+		if (!string.IsNullOrEmpty(category))
+		{
+#>
+		category: TelemetryCategory.<#=category#>,
+<#+
+		}
+
+		if (!string.IsNullOrEmpty(classAttributeValue))
+		{
+#>
+		className: '<#=classAttributeValue#>',
+<#+
+		}
+
+		if (!string.IsNullOrEmpty(idAttributeValue))
+		{
+#>
+		eventTypeId: <#=idAttributeValue#>,
+<#+
+		}
+
+		if (!string.IsNullOrEmpty(levelAttributeValue))
+		{
+#>
+		level: '<#=levelAttributeValue#>',
+<#+
+		}
+
+		if (mobileCategoryValues != null && mobileCategoryValues.Length > 0)
+		{
+#>
+		mobileCategory: <#=ClassBeginUtils.ConvertMobileCategoryValuesIntoBitMask(mobileCategoryValues)#>,
+<#+
+		}
+#>
+		time: Date.now(),
+		id: g(),
+		getFormattedInfoObject: function() {
+			return {
+<#+
+		current = o;
+		while (current != null) 
+		{
+			foreach (FieldBase field in current.Items)
+			{
+				string formattedValue;
+				if (field is EnumField) 
+				{
+					formattedValue = string.Format("{0}[info.{1}]", field.GetFieldType(new CustomIdlTypeMapping()).Replace("powerbi.", "powerbi.telemetry."), Utils.GetFieldName(current, field));
+				}
+				else
+				{
+					formattedValue = string.Format("info.{0}", Utils.GetFieldName(current, field));
+				}
+#>
+				<#=Utils.GetFieldName(current, field)#>: <#=formattedValue#>,
+<#+
+			}			
+
+			if (current.HasBase)
+			{
+				current = Utils.FindBaseDef(current);
+			}
+			else
+			{
+				current = null;
+			}
+		}
+#>
+			};
+		},
+		info: info
+	};
+
+	if (typeof <#= o.GetFullNamespaceBond() #>.telemetry.<#= ClassBeginUtils.ConstructClassName(o, true) + "Loggers" #> !== 'undefined') {
+		event.loggers = <#= o.GetFullNamespaceBond() #>.telemetry.<#= ClassBeginUtils.ConstructClassName(o, true) + "Loggers" #>;
+	}
+
+	return event;
+}
+
+<#+
+	}
+}
+
+public class ClassBeginUtils
+{
+        public static string ConstructStructName(StructDef structDef)
+        {
+            string templateArgs = string.Empty;
+            if (structDef.TypeParams != null)
+            {
+                foreach (string templType in structDef.TypeParams)
+                {
+                    if (templateArgs.Length != 0)
+                    {
+                        templateArgs += ", ";
+                    }
+                    templateArgs += templType;
+                }
+                templateArgs = "<" + templateArgs + ">";
+            }
+            return structDef.Name + templateArgs;
+        }
+
+	public static string ConstructClassName(StructDef structDef) 
+	{
+	    return ClassBeginUtils.ConstructClassName(structDef, false);
+	}
+
+	public static string ConstructClassName(StructDef structDef, bool excludePowerBINamespace) 
+	{
+		string structName = ClassBeginUtils.ConstructStructName(structDef);
+
+		if(excludePowerBINamespace)
+		{
+			int pos = structName.IndexOf("PBI.");
+			if (pos == 0)
+				structName = structName.Substring(4);
+		}
+		return structName.Replace(".", "");
+	}
+	
+	public static string GetValueOfAttributeOnWithNameWithoutRecursion(string name, StructDef o) 
+	{
+		for (int i = 0; i < o.UserAttributes.Count; i++)
+		{
+			CustomAttribute attr = o.UserAttributes[i];
+			if (attr.Name == name)
+			{
+				return attr.Value;
+			}
+		}
+
+		return "";
+	}
+	
+	public static string GetValueOfAttributeWithName(string name, StructDef o) 
+	{
+		CustomAttribute attribute = null;
+		StructDef current = o; 
+		while (attribute == null && current != null) 
+		{
+			for (int i = 0; i < current.UserAttributes.Count && attribute == null; i++)
+			{
+				CustomAttribute attr = current.UserAttributes[i];
+				if (attr.Name == name)
+				{
+					attribute = attr;
+				}
+			}
+			
+			if (current.HasBase)
+			{
+				current = Utils.FindBaseDef(current);
+			}
+			else
+			{
+				current = null;
+			}
+		}
+
+		if (attribute != null)
+		{
+			return attribute.Value;
+		}
+		else
+		{
+			return "";
+		}
+	}
+	
+	public static string GetValueOfFieldAttributeWithName(string name, FieldBase o) 
+	{
+		if (o.UserAttributes == null)
+			return "";
+
+		for (int i = 0; i < o.UserAttributes.Count; i++)
+		{
+			CustomAttribute attribute = o.UserAttributes[i];
+			if (attribute.Name == name)
+			{
+				return attribute.Value;
+			}
+		}
+		
+		return "";
+	}
+
+	private enum MobileCategory
+	{
+		Trace		= 1 << 0,
+		Duration	= 1 << 1,
+		Diagnostic	= 1 << 2,
+		Usage		= 1 << 3
+	}
+
+	public static int ConvertMobileCategoryValuesIntoBitMask(string[] mobileCategoryValues)
+	{
+		int mobileCategoryBitMaskValue = 0;
+		for(int i = 0; i < mobileCategoryValues.Length; i++)
+		{
+			if(Enum.IsDefined(typeof(MobileCategory), mobileCategoryValues[i]))
+			{
+				MobileCategory parsedMobileCategory = (MobileCategory) Enum.Parse(typeof(MobileCategory), mobileCategoryValues[i]);
+				mobileCategoryBitMaskValue |= (int) parsedMobileCategory;	
+			}
+			else
+			{
+				throw new Exception( "[MobileCategory(\"\")] was set with illegal value '" + mobileCategoryValues[i] +
+					"' legal values are: " + string.Join(",", Enum.GetNames(typeof(MobileCategory))));
+			}
+		}
+
+		return mobileCategoryBitMaskValue;
+	}
+}
+#>
+<#+
+    public class CustomIdlTypeMapping
+        : TypeNameMapping
+    {
+        public CustomIdlTypeMapping()
+        {
+            BoolType = "boolean";
+            Int8Type = "number";
+            Int16Type = "number";
+            Int32Type = "number";
+            Int64Type = "number";
+            UInt8Type = "number";
+            UInt16Type = "number";
+            UInt32Type = "number";
+            UInt64Type = "number";
+            FloatType = "number";
+            DoubleType = "number";
+            DateTimeType = "Date";
+            TimeSpanType = "number";
+            GuidType = "string";
+            EnumType = null;
+            StringType = "string";
+            String16Type = "string";
+            MetaType = "bond_meta::{0}";
+            ListType = "vector<{0}>";
+            LinkedListType = "list<{0}>";
+            SetType = "set<{0}>";
+            MapType = "map<{0}, {1}>";
+            NullableType = "nullable<{0}>";
+            NullableStructType = "nullable<{0}>";
+            BlobType = "blob";
+            BondedType = "bonded<{0}>";
+            MaybeType = "{0}";
+            GlobalScopePrefix = "";
+            NamespaceSeparator = ".";
+        }
+    }
+
+#>
+<#+
+internal class TypeScript_Enum
+    : XidlEnumRule
+{
+    public override void EnumBegin(EnumDef o)
+    {
+#>
+export enum <#= o.Name #> 
+{
+<#+
+    }
+
+    public override void Visit(EnumDefEnumValue o)
+    {
+        if (!String.IsNullOrEmpty(o.Value))
+        {
+#>
+    <#= o.Name #> = <#= Convert.ToInt32(o.Value) #>,
+<#+
+        }
+        else
+        {
+#>
+    <#= o.Name #>,
+<#+
+        }
+    }
+
+    public override void EnumEnd(EnumDef o)
+    {
+#>
+}
+
+<#+
+    }
+}
+#>
+<#+
+internal class Utils
+{
+    static Utils()
+    {
+        m_bondTypeConstMap = new System.Collections.Generic.Dictionary<Type, string>();
+        m_bondTypeConstMap[typeof(String8Field)] = BondTypeConstNamespace + "BT_STRING";
+        m_bondTypeConstMap[typeof(String16Field)] = BondTypeConstNamespace + "BT_WSTRING";
+        m_bondTypeConstMap[typeof(BoolField)] = BondTypeConstNamespace + "BT_BOOL";
+        m_bondTypeConstMap[typeof(UInt8Field)] = BondTypeConstNamespace + "BT_UINT8";
+        m_bondTypeConstMap[typeof(UInt16Field)] = BondTypeConstNamespace + "BT_UINT16";
+        m_bondTypeConstMap[typeof(UInt32Field)] = BondTypeConstNamespace + "BT_UINT32";
+        m_bondTypeConstMap[typeof(UInt64Field)] = BondTypeConstNamespace + "BT_UINT64";
+        m_bondTypeConstMap[typeof(Int8Field)] = BondTypeConstNamespace + "BT_INT8";
+        m_bondTypeConstMap[typeof(Int16Field)] = BondTypeConstNamespace + "BT_INT16";
+        m_bondTypeConstMap[typeof(Int32Field)] = BondTypeConstNamespace + "BT_INT32";
+        m_bondTypeConstMap[typeof(Int64Field)] = BondTypeConstNamespace + "BT_INT64";
+        m_bondTypeConstMap[typeof(FloatField)] = BondTypeConstNamespace + "BT_FLOAT";
+        m_bondTypeConstMap[typeof(DoubleField)] = BondTypeConstNamespace + "BT_DOUBLE";
+        m_bondTypeConstMap[typeof(ListField)] = BondTypeConstNamespace + "BT_LIST";
+        m_bondTypeConstMap[typeof(LinkedListField)] = BondTypeConstNamespace + "BT_LIST";
+        m_bondTypeConstMap[typeof(SetField)] = BondTypeConstNamespace + "BT_SET";
+        m_bondTypeConstMap[typeof(MapField)] = BondTypeConstNamespace + "BT_MAP";
+        m_bondTypeConstMap[typeof(RefStructField)] = BondTypeConstNamespace + "BT_STRUCT";
+        m_bondTypeConstMap[typeof(NullableField)] = BondTypeConstNamespace + "BT_LIST";
+        m_bondTypeConstMap[typeof(EnumField)] = BondTypeConstNamespace + "BT_INT32";
+        m_bondTypeConstMap[typeof(BlobField)] = BondTypeConstNamespace + "BT_LIST";
+        m_bondTypeConstMap[typeof(BondedField)] = BondTypeConstNamespace + "BT_STRUCT";
+        
+        //TODO: support more field types.
+    }
+    
+    public static string ListAttributesAsComment(IEnumerable<CustomAttribute> attributes)
+    {
+        if (attributes == null)
+        {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        foreach (CustomAttribute attr in attributes)
+        {
+            sb.AppendLine(string.Format("// [{0}({1})]", attr.Name, attr.Value));
+        }
+        return sb.ToString().TrimEnd();
+    }
+    
+    public static string GetBondTypeConst(FieldBase field)
+    {
+        Type type = field.GetType();
+        if (m_bondTypeConstMap.ContainsKey(type))
+        {
+            return m_bondTypeConstMap[type];
+        }
+        else
+        {
+            return BondTypeConstNamespace + "BT_UNAVAILABLE";
+        }
+    }
+
+    /// Basically, same as structDef.Name, but is template-aware,
+    /// so adds template params to the name.
+    public static string ConstructClassName(StructDef structDef)
+    {
+        string templateArgs = string.Empty;
+        if (structDef.TypeParams != null)
+        {
+            foreach (string templType in structDef.TypeParams)
+            {
+                if (templateArgs.Length != 0)
+                {
+                    templateArgs += ", ";
+                }
+                templateArgs += templType;
+            }
+            templateArgs = "<" + templateArgs + ">";
+        }
+        return structDef.Name + templateArgs;
+    }
+
+    public static string ModifierToIdl(FieldBase field)
+    {
+        switch(field.Modifier)
+        {
+            case FieldModifier.Optional:
+                if (field is MetaField)
+                {
+                    return "required_optional";
+                }
+                else
+                {
+                    return "optional";
+                }
+
+            case FieldModifier.Required:
+                return "required_field";
+
+            case FieldModifier.RequiredOptional:
+                return "required_optional";
+        }
+        throw new Exception("Unknown value for FieldModifier: "+field.Modifier);
+    }
+
+    public static string GetUniqueVariableName()
+    {
+        return string.Format("i{0}", m_uid++);
+    }
+
+    public static string GetDefaultValueString(FieldBase field)
+    {
+        string defaultString = "";
+        if (field is ListField || field is LinkedListField || field is BlobField)
+        {
+            defaultString = "[]";
+        }
+        else if (field is SetField || field is MapField ||
+                 field is RefStructField || field is BondedField
+                )
+        {
+            defaultString = string.Format("new {0}()", field.GetFieldType());
+        }
+        else if (field is Int64Field || field is UInt64Field)
+        {
+            defaultString = string.Format("new {0}(\"{1}\")", field.GetFieldType(), field.DefaultAsString);
+        }
+        else if (field is EnumField)
+        {
+            EnumField o = (EnumField)field;
+            if (!o.IsNothing && !string.IsNullOrEmpty(o.Default))
+            {
+                defaultString = string.Format(
+                    "{0}.{1}",
+                    o.GetFieldType(),
+                    o.Default
+                    );
+            }
+        }
+        else if (!string.IsNullOrEmpty(field.DefaultAsString))
+        {
+            defaultString = field.DefaultAsString;
+
+            if (defaultString.StartsWith("L\""))
+            {
+                defaultString = defaultString.Substring(1);
+            }
+        }
+
+        // typescript will default all uninit value to undefined, so here init
+        // for non-null type.
+        if (string.IsNullOrEmpty(defaultString))
+        {
+            if (field is String8Field || field is String16Field)
+            {
+                defaultString = "\"\"";
+            }
+        }
+
+        return defaultString;
+    }
+
+    public static void InitAllTypes(Dictionary<string, TypeBase> allTypes)
+    {
+        AllTypes = allTypes;
+    }
+
+    /// Same as field.Name but resolve the conflict with base properties
+    public static string GetFieldName(StructDef structDef, FieldBase field)
+    {
+        string name = field.Name;
+        int conflict = ConflictingBaseProperties(structDef, name);
+        if (conflict != 0)
+        {
+            return String.Format("{0}{1}", name, conflict);
+        }
+        else
+        {
+            return name;
+        }
+    }
+
+    private static int ConflictingBaseProperties(StructDef structDef, string propName)
+    {
+        if (structDef.HasBase)
+        {
+            StructDef baseDef = FindBaseDef(structDef);
+
+            return ConflictingClassProperties(baseDef, propName)
+                 + ConflictingBaseProperties(baseDef, propName);
+        }
+        return 0;
+    }
+
+    private static int ConflictingClassProperties(StructDef structDef, string propName)
+    {
+        foreach (FieldBase field in structDef.Items)
+        {
+            if (field.Name.Equals(propName))
+            {
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    public static StructDef FindBaseDef(StructDef structDef)
+    {
+        if (structDef.HasBase)
+        {
+            string qualifiedName = structDef.BaseType.GetFullNamespaceBond() + "." + structDef.BaseType.Type;
+            return AllTypes[qualifiedName] as StructDef;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    private const string BondTypeConstNamespace = "Microsoft.Bond.BondDataType.";
+    private static Dictionary<string, TypeBase> AllTypes;
+    private static System.Collections.Generic.Dictionary<Type, string> m_bondTypeConstMap;
+    private static int m_uid = 0;
+}
+#>
+
+<#+ 
+public class StandardFileHeader
+	: SubTemplate
+{
+	
+public void OutputHeader(CodeGenOptions options, string fileName)
+{
+    string toolName = options.ToolName;
+    string toolVer = string.Format("{0}.{1}.{2}", options.ToolVersion.Major, options.ToolVersion.Minor, options.ToolVersion.Build);
+    string toolInfoStr = string.Empty;
+    if (options.ToolInfo != string.Empty)
+    {
+        toolInfoStr = ", Build="+options.ToolInfo;
+    }
+#>
+//-----------------------------------------------------------------------
+// <copyright company="Microsoft Corporation">
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>  
+//-----------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+// 
+//     Tool     : <#= toolName #>, Version=<#= toolVer #><#=toolInfoStr#>
+//     Template : <#= Path.GetFileName(options.CurrentTemplate) #>
+//     File     : <#= fileName #>
+//
+//     Changes to this file may cause incorrect behavior and will be lost when
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+<#+
+}
+}
+#>

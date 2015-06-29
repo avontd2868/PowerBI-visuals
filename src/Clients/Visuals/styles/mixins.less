@@ -1,0 +1,49 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../../PowerBI/styles/colorPalette.less";
+@import "../../PowerBI/styles/fonts.less";
+
+.visualTitle() {
+    font-family: @semiboldFontFamily;
+    font-size: 14px;
+    color: @neutralPrimaryColor;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 20px;
+    line-height: 16px;
+}
+
+.visualSubtitle() {
+    font-family: @regularSecondaryFontFamily;
+    font-size: 12px;
+    color: @neutralTertiaryColor;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 20px;
+}
+
+.visualCompositeTile(){
+    font-family: @regularFontFamily;
+    overflow: hidden;
+    background-color: @whiteColor;
+}
+
+.visualDisplayTextSubDisplayText() {
+    color: @neutralPrimaryColor;
+    line-height: 1.3em;
+    max-height: 2.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.visualSubDisplayTextDefaultSubtitle(){
+    text-transform: uppercase;
+    color: @neutralTertiaryColor;
+}

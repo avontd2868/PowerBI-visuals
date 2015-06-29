@@ -1,0 +1,100 @@
+﻿namespace powerbi
+
+[Description("Base Event class")]
+struct BaseEvent 
+{
+	[Description("Id of the parent event")]
+	1:   string parentId;
+
+	[Description("True - action failed.")]
+	2:   bool isError = false;
+}
+
+[Description("Trace event")]
+[Category("Trace")]
+struct Trace
+{
+	[Description("Trace type; please see TraceType for possible values.")]
+	1: int32 type;
+
+	[Description("Trace message")]
+	2: string message;
+}
+
+[Description("Event is fired when an unexpected error is encountered. This event isn't fired when an action fails and is handled by the parent code.")]
+[Category("CriticalError")]
+struct Error
+{
+	[Description("Error exception message.")]
+	0:	string	message;
+}
+
+[Description("Event is fired when an unexpected error is encountered. Event properties include the exception stack trace.")]
+struct ErrorWithStackTrace: Error 
+{
+    [Description("Stack trace")]
+    1: string	stack;
+}
+
+[Description("Event is fired when an unexpected error is encountered. Event properties include the source URL, line and column number.")]
+struct ErrorWithStackTraceAndSourceDetails: ErrorWithStackTrace 
+{
+	[Description("Source URL")]
+    1: string	source;
+
+	[Description("Line number")]
+    2: int32	lineNumber;
+
+	[Description("Column number")]
+    3: int32	columnNumber;
+}
+
+[Description("Telemetry event used when logging top level customer actions.")]
+[Category("CustomerAction")]
+struct CustomerAction : BaseEvent {}
+
+[Description("Telemetry event used when logging child events.")]
+[Category("Verbose")]
+struct Verbose : BaseEvent {}
+
+[Description("Event is fired when the PBI Dashboard is first loaded, and subsequently every time the session timeout is reset.")]
+[Scenarios("Navigate to PBI")]
+struct PBI.Dashboard.RootSession : CustomerAction {}
+
+[Description("Fired when the user clicks to sign up on an invitation.")]
+struct PBI.WFE.InvitationSignUp: CustomerAction {}
+
+[Description("Fired when there is an error.")]
+struct PBI.WFE.Error: CustomerAction 
+{
+	[Description("Error code")]
+    1:    string errorCode;
+
+	[Description("Error type")]
+	2:    string errorType;
+}
+
+[Description("Event fired when an error dialog is shown to the user.")]
+struct PBI.Dashboard.ErrorDialog: Error 
+{
+	[Description("Root Activity Id")]
+	1: string	raid;
+
+	[Description("Client Activity Id")]
+    2: string	caid;
+
+	[Description("Error Type")]
+    3: string	errorType;
+}
+
+[Description("Mobile user arrived at landing page and chose to continue to website")]
+struct PBI.MobileLanding.ContinuedToWeb: CustomerAction {}
+
+[Description("Mobile user arrived at landing page and chose to download the mobile application")]
+struct PBI.MobileLanding.DownloadApp: CustomerAction {}
+
+[Description("Event fired for uncaught exception in Angular expressions.")]
+struct PBI.Dashboard.UnhandledAngularException: ErrorWithStackTrace {}
+
+[Description("Event fired for global unhandled exceptions.")]
+struct PBI.Dashboard.UnhandledException: ErrorWithStackTraceAndSourceDetails {}

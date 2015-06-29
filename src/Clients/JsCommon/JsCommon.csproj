@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\InfoNavClient.props" />
+  <Import Project="..\..\InfoNav.Binplace.PowerBI.props" />
+  <PropertyGroup>
+    <AssemblyName>Utility</AssemblyName>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{D0C3D73A-A034-4458-8FBD-F48E3A23DB9C}</ProjectGuid>
+    <ProjectTypeGuids>{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>utility</RootNamespace>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TypeScriptSourceRoot>/ts/jscommon/</TypeScriptSourceRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Build -->
+    <TypeScriptCompile Include="Build\_references.ts" />
+    <!-- Source files -->
+    <TypeScriptCompile Include="clientError.ts" />
+    <TypeScriptCompile Include="ModernCop.ts" />
+    <TypeScriptCompile Include="typedefs\typedefs.ts" />
+    <TypeScriptCompile Include="arrayExtensions.ts" />
+    <TypeScriptCompile Include="Controls\DomFactory.ts" />
+    <TypeScriptCompile Include="Controls\ModalDialog\ModalDialog.ts" />
+    <TypeScriptCompile Include="Controls\ModalDialog\ModalDialogAction.ts" />
+    <TypeScriptCompile Include="color.ts" />
+    <TypeScriptCompile Include="CssConstants.ts" />
+    <TypeScriptCompile Include="DOMConstants.ts" />
+    <TypeScriptCompile Include="debug.ts" />
+    <TypeScriptCompile Include="RejectablePromise.ts" />
+    <TypeScriptCompile Include="Date.ts" />
+    <TypeScriptCompile Include="Double.ts" />
+    <TypeScriptCompile Include="DragDrop.ts" />
+    <TypeScriptCompile Include="Errors.ts" />
+    <TypeScriptCompile Include="Formatting.ts" />
+    <TypeScriptCompile Include="IStringResourceProvider.ts" />
+    <TypeScriptCompile Include="JQueryExtensions.ts" />
+    <TypeScriptCompile Include="Lazy.ts" />
+    <TypeScriptCompile Include="Path.ts" />
+    <TypeScriptCompile Include="promise.ts" />
+    <TypeScriptCompile Include="Prototype.ts" />
+    <TypeScriptCompile Include="QueryStringUtil.ts" />
+    <TypeScriptCompile Include="ScriptErrorInfo.ts" />
+    <TypeScriptCompile Include="StringBuilder.ts" />
+    <TypeScriptCompile Include="Strings.ts" />
+    <TypeScriptCompile Include="Formatting.ts" />
+    <TypeScriptCompile Include="rejectablePromiseCache.ts" />
+    <TypeScriptCompile Include="services\requires.ts" />
+    <TypeScriptCompile Include="services\dependencies.ts" />
+    <TypeScriptCompile Include="services\geoTaggingAnalyzerService.ts" />
+    <TypeScriptCompile Include="services\iHttpService.ts" />
+    <TypeScriptCompile Include="services\jqueryPromiseFactory.ts" />
+    <TypeScriptCompile Include="services\localStorageService.ts" />
+    <TypeScriptCompile Include="services\textMeasurementService.ts" />
+    <TypeScriptCompile Include="unionExtensions.ts" />
+    <TypeScriptCompile Include="Utility\InfoNavUtility.ts" />
+    <TypeScriptCompile Include="Utility\DeferredBatch.ts" />
+    <TypeScriptCompile Include="Utility\ThrottleUtility.ts" />
+    <TypeScriptCompile Include="Utility\TimerPromiseFactory.ts" />
+    <TypeScriptCompile Include="Utility\Utility.ts" />
+    <TypeScriptCompile Include="Utility\StandaloneUtility.ts" />
+    <TypeScriptCompile Include="Utility\XmlUtility.ts" />
+    <TypeScriptCompile Include="telemetry\commonTelemetryEvents.ts" />
+    <TypeScriptCompile Include="telemetry\telemetryConstants.ts" />
+    <TypeScriptCompile Include="telemetry\telemetryInterfaces.ts" />
+    <TypeScriptCompile Include="telemetry\telemetryService.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\appInsightsV2Service.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\autoEndingWrapper.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\etwPerfLoggerService.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\idleTimer.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\localyticsService.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\loggerServiceWrapper.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\telemetryHelpers.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\telemetryHostService.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\loggerServiceRule.ts" />
+    <TypeScriptCompile Include="telemetry\powerbi\userInfo.ts" />
+    <TypeScriptCompile Include="tracing\traceItem.ts" />
+    <TypeScriptCompile Include="tracing\trace.ts" />
+    <TypeScriptCompile Include="tracing\traceType.ts" />
+    <TypeScriptCompile Include="typedefs\buildConstants.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gruntfile.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <BondInput Include="telemetry\commonTelemetryEvents.bond" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Placeholder.cs" />
+  </ItemGroup>
+  <Import Project="$(INFONAV_SRC)\InfoNav.Client.Build.Targets" />
+  <ItemGroup>
+    <InfoNavDropItem Include="obj\Utility.js" />
+    <InfoNavDropItem Include="obj\Utility.min.js" />
+  </ItemGroup>
+  <Target Name="RecreateInfonavDrop" AfterTargets="Build" Inputs="@(InfoNavDropItem)" Outputs="@(InfoNavDropItem->'$(InfonavScriptsDropPath)\%(Filename)%(Extension)')">
+    <Copy SourceFiles="@(InfoNavDropItem)" DestinationFolder="$(InfonavScriptsDropPath)" />
+  </Target>
+</Project>

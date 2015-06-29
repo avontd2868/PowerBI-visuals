@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\InfoNavClient.props" />
+  <Import Project="..\..\InfoNav.Binplace.PowerBI.props" />
+  <PropertyGroup>
+    <AssemblyName>visuals</AssemblyName>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{1885F132-67E8-4CBB-BE4C-6E02507C43BB}</ProjectGuid>
+    <ProjectTypeGuids>{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>powerbi.visuals</RootNamespace>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TypeScriptSourceRoot>/ts/visuals/</TypeScriptSourceRoot>
+    <PowerBIOutputFolder>$(TypeScriptBinaryDropPath)\..\</PowerBIOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="typedefs\typedefs.ts" />
+    <!-- Visualization styles -->
+    <LessCompile Include="styles\visuals.less" />
+    <Content Include="images\**\*.*" />
+    <Content Include="styles\mixins.less" Condition="'$(BuildingInsideVisualStudio)' == 'true'" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Build -->
+    <TypeScriptCompile Include="Build\_references.ts" />
+    <!-- Source files -->
+    <TypeScriptCompile Include="ModernCop.ts" />
+    <TypeScriptCompile Include="animators\animatorCommon.ts" />
+    <TypeScriptCompile Include="animators\columnChartAnimator.ts" />
+    <TypeScriptCompile Include="animators\donutChartAnimator.ts" />
+    <TypeScriptCompile Include="animators\funnelChartAnimator.ts" />
+    <TypeScriptCompile Include="animators\treemapAnimator.ts" />
+    <TypeScriptCompile Include="behaviours\columnChartBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\dataDotChartBehavior.ts" />
+    <TypeScriptCompile Include="behaviours\donutChartBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\funnelBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\lineChartBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\mapBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\scatterChartBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\slicerBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\legendBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\treemapBehaviors.ts" />
+    <TypeScriptCompile Include="behaviours\waterfallChartBehavior.ts" />
+    <TypeScriptCompile Include="contracts\contracts.ts" />
+    <TypeScriptCompile Include="common\axisHelper.ts" />
+    <TypeScriptCompile Include="common\cartesianHelper.ts" />
+    <TypeScriptCompile Include="common\colorHelper.ts" />
+    <TypeScriptCompile Include="common\columnChartUtil.ts" />
+    <TypeScriptCompile Include="common\converterHelper.ts" />
+    <TypeScriptCompile Include="common\dataLabelUtils.ts" />
+    <TypeScriptCompile Include="common\dataRoleHelper.ts" />
+    <TypeScriptCompile Include="common\interactionFactory.ts" />
+    <TypeScriptCompile Include="common\listView.ts" />
+    <TypeScriptCompile Include="common\selectionId.ts" />
+    <TypeScriptCompile Include="common\shapes.ts" />
+    <TypeScriptCompile Include="common\svgUtil.ts" />
+    <TypeScriptCompile Include="common\textUtil.ts" />
+    <TypeScriptCompile Include="common\urlHelper.ts" />
+    <TypeScriptCompile Include="common\gradientHelper.ts" />
+    <TypeScriptCompile Include="common\visualBackgroundHelper.ts" />
+    <TypeScriptCompile Include="formatting\dataLabelManager.ts" />
+    <TypeScriptCompile Include="formatting\dateTimeSequence.ts" />
+    <TypeScriptCompile Include="formatting\displayUnitSystem.ts" />
+    <TypeScriptCompile Include="formatting\numericSequence.ts" />
+    <TypeScriptCompile Include="formatting\numericSequenceRange.ts" />
+    <TypeScriptCompile Include="formatting\valueFormatter.ts" />
+    <TypeScriptCompile Include="services\colorAllocatorFactory.ts" />
+    <TypeScriptCompile Include="services\interactivityService.ts" />
+    <TypeScriptCompile Include="services\geocodingCache.ts" />
+    <TypeScriptCompile Include="services\visualPluginService.ts" />
+    <TypeScriptCompile Include="controls\scrollbar\scrollbar.ts" />
+    <TypeScriptCompile Include="controls\tablix\internal\tablixGridPresenter.ts" />
+    <TypeScriptCompile Include="controls\tablix\internal\tablixRealizationManager.ts" />
+    <TypeScriptCompile Include="controls\tablix\internal\tablixGrid.ts" />
+    <TypeScriptCompile Include="controls\tablix\internal\tablixLayoutManager.ts" />
+    <TypeScriptCompile Include="controls\tablix\internal\tablixUtils.ts" />
+    <TypeScriptCompile Include="controls\tablix\iTablixHierarchyNavigator.ts" />
+    <TypeScriptCompile Include="controls\tablix\iTablixBinder.ts" />
+    <TypeScriptCompile Include="controls\tablix\iTablixLayoutManager.ts" />
+    <TypeScriptCompile Include="controls\tablix\tablixControl.ts" />
+    <TypeScriptCompile Include="controls\tablix\tablixDimension.ts" />
+    <TypeScriptCompile Include="controls\tablix\tablixTouchDelegate.ts" />
+    <TypeScriptCompile Include="controls\tablix\touchRegionAbstraction.ts" />
+    <TypeScriptCompile Include="animatedText.ts" />
+    <TypeScriptCompile Include="animatedNumber.ts" />
+    <TypeScriptCompile Include="bingNews.ts" />
+    <TypeScriptCompile Include="cartesianChart.ts" />
+    <TypeScriptCompile Include="columnChart.capabilities.ts" />
+    <TypeScriptCompile Include="columnChart.ts" />
+    <TypeScriptCompile Include="columnChartClustered.ts" />
+    <TypeScriptCompile Include="columnChartStacked.ts" />
+    <TypeScriptCompile Include="comboChart.ts" />
+    <TypeScriptCompile Include="dataColorPalette.ts" />
+    <TypeScriptCompile Include="dataDotChart.ts" />
+    <TypeScriptCompile Include="donutChart.capabilities.ts" />
+    <TypeScriptCompile Include="donutChart.ts" />
+    <TypeScriptCompile Include="filledMap.capabilities.ts" />
+    <TypeScriptCompile Include="funnelChart.capabilities.ts" />
+    <TypeScriptCompile Include="funnelChart.ts" />
+    <TypeScriptCompile Include="gauge.ts" />
+    <TypeScriptCompile Include="imageVisual.ts" />
+    <TypeScriptCompile Include="iVisual.ts" />
+    <TypeScriptCompile Include="iVisualStyle.ts" />
+    <TypeScriptCompile Include="iVisualSettings.ts" />
+    <TypeScriptCompile Include="lineChart.capabilities.ts" />
+    <TypeScriptCompile Include="lineChart.ts" />
+    <TypeScriptCompile Include="GeocodingManager.ts" />
+    <TypeScriptCompile Include="legend.ts" />
+    <TypeScriptCompile Include="map.capabilities.ts" />
+    <TypeScriptCompile Include="map.ts" />
+    <TypeScriptCompile Include="multiRowCard.ts" />
+    <TypeScriptCompile Include="partitionMap.ts" />
+    <TypeScriptCompile Include="richTextbox.ts" />
+    <TypeScriptCompile Include="scatterChart.capabilities.ts" />
+    <TypeScriptCompile Include="scatterChart.ts" />
+    <TypeScriptCompile Include="slicer.capabilities.ts" />
+    <TypeScriptCompile Include="slicer.ts" />
+    <TypeScriptCompile Include="sunburstChart.ts" />
+    <TypeScriptCompile Include="table.ts" />
+    <TypeScriptCompile Include="tableNew.ts" />
+    <TypeScriptCompile Include="matrix.ts" />
+    <TypeScriptCompile Include="textbox.ts" />
+    <TypeScriptCompile Include="treemap.capabilities.ts" />
+    <TypeScriptCompile Include="treemap.ts" />
+    <TypeScriptCompile Include="card.ts" />
+    <TypeScriptCompile Include="warnings\noMapLocationWarning.ts" />
+    <TypeScriptCompile Include="waterfallChart.capabilities.ts" />
+    <TypeScriptCompile Include="waterfallChart.ts" />
+    <TypeScriptCompile Include="webChart.ts" />
+    <TypeScriptCompile Include="plugins.ts" />
+    <TypeScriptCompile Include="tooltip.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Images Include="images\**\*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Placeholder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gruntfile.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JsCommon\JsCommon.csproj">
+      <Project>{D0C3D73A-A034-4458-8FBD-F48E3A23DB9C}</Project>
+      <Name>JsCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\data\data.csproj">
+      <Project>{4C880710-6735-4C2D-88CA-F24384229AF9}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Target Name="CopyVisualImages" AfterTargets="CopyFilesToOutputDirectory" Inputs="@(Images)" Outputs="@(Images->'$(PowerBIOutputFolder)\images\%(RecursiveDir)%(Filename)%(Extension)')">
+    <Copy SourceFiles="@(Images)" DestinationFiles="@(Images->'$(PowerBIOutputFolder)\images\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+  <Import Project="$(INFONAV_SRC)\InfoNav.Client.Build.Targets" />
+  <ItemGroup>
+    <InfoNavDropItem Include="obj\visuals.js" />
+    <InfoNavDropItem Include="obj\visuals.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <Target Name="RecreateInfonavDrop" AfterTargets="Build" Inputs="@(InfoNavDropItem)" Outputs="@(InfoNavDropItem->'$(InfonavScriptsDropPath)\%(Filename)%(Extension)')">
+    <Copy SourceFiles="@(InfoNavDropItem)" DestinationFolder="$(InfonavScriptsDropPath)" />
+  </Target>
+</Project>

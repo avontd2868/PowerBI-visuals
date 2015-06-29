@@ -1,0 +1,13 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BondCompiler>$(INFONAV_SRC)\Clients\JsCommon\telemetry\bond\bondc.exe</BondCompiler>
+    <BondTypeScriptTransform>$(INFONAV_SRC)\Clients\JsCommon\telemetry\bondTypeScriptTransform.TT</BondTypeScriptTransform>
+    <BondXmlTransform>$(INFONAV_SRC)\Clients\JsCommon\telemetry\bondXmlTransform.TT</BondXmlTransform>
+  </PropertyGroup>
+  <Target Name="BuildBondTsFiles" BeforeTargets="BeforeBuild" Inputs="@(BondInput);$(BondTypeScriptTransform);@(BondReferences)" Outputs="@(BondInput->'%(RootDir)\%(Directory)%(FileName).ts')" Condition="'@(BondInput)' != ''">
+    <Exec Command="$(BondCompiler) /T:$(BondTypeScriptTransform) /O:@(BondInput->'%(RootDir)\%(Directory)') @(BondInput->'%(RootDir)\%(Directory)\%(Filename)%(Extension)')" WorkingDirectory="@(BondInput->'%(RootDir)%(Directory)')" />
+  </Target>
+  <Target Name="BuildBondXmlFiles" BeforeTargets="BeforeBuild" Inputs="@(BondInput);$(BondXmlTransform);@(BondReferences)" Outputs="@(BondInput->'$(INFONAV_SRC)\DataDictionary\$(AssemblyName)%(FileName)\%(FileName).xml')" Condition="'@(BondInput)' != ''">
+    <Exec Command="$(BondCompiler) /T:$(BondXmlTransform) /O:@(BondInput->'$(INFONAV_SRC)\DataDictionary\$(AssemblyName)%(FileName)') @(BondInput->'%(RootDir)\%(Directory)%(Filename)%(Extension)')" WorkingDirectory="@(BondInput->'%(RootDir)%(Directory)')"  />
+  </Target>
+</Project>

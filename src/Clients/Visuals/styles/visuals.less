@@ -1,0 +1,1023 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+@import "sprites.less";
+@import "../../PowerBI/styles/colorPalette.less";
+@import "../../PowerBI/styles/fonts.less";
+@import "../../PowerBI/styles/mixins.less";
+@import "mixins.less";
+@import "../../PowerBI/styles/controls/spinner.less";
+
+.slicerContainer {
+    label.slicerCheckbox {
+        input {
+            display: none;
+        }
+
+        span::before {
+            content: '';
+            display: inline-block;
+            cursor: pointer;
+            .sprite(@slicer-checkbox);
+            opacity: 0.5;
+            margin-right: 8px;
+        }
+
+        &:hover span::before {
+            opacity: 1;
+        }
+
+        input:checked + span::before {
+            .sprite(@slicer-checkbox-selected);
+            opacity: 1;
+        }
+     }
+    .slicerHeader {
+        border-bottom-color: @neutralLightColor;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;      
+    }
+    .headerText {
+        color: @neutralPrimaryColor;
+        font-size: 14px;
+        text-overflow: ellipsis;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .slicerText {
+        font-size: 14px;
+        text-overflow: ellipsis;
+        display: inline-block;
+        overflow-x: hidden;
+        white-space: nowrap;
+    }
+    .clear {
+        .sprite(@slicer-reset);
+        // The total margin is referred in the .ts file. Any changes to these values should also be updated in the ts file
+        margin: 13px 5px 0px;
+        float: right;      
+    } 
+}
+
+.visual-title{
+    .visualDisplayTextSubDisplayText();
+    .visualTitle();
+}
+
+.visual-subTitle{
+    .visualDisplayTextSubDisplayText();
+    .visualSubDisplayTextDefaultSubtitle();
+    font-size: 11px;
+    font-family:@semiboldFontFamily;
+}
+
+.visual-tile{
+    .visualCompositeTile();
+}
+
+.visual-spinner{
+    .waitingSpinner;
+    .waitingSpinnerContainer();
+    transition: opacity 0.25s;
+}
+
+.visual svg {
+    .showLinesOnAxis {
+        path {
+            display: none;
+        }
+
+        .tick {
+            line {
+                stroke: @chartAxisGridLineColor;
+                stroke-width: 1px;
+                padding-left: 10px;
+            }
+        }
+    }
+
+    .hideLinesOnAxis {
+        .tick {
+            line {
+                display: none;
+            }
+        }
+
+        path {
+            stroke-width: 1px;
+        }
+
+        .domain {
+            display: none;
+        }
+    }
+}
+
+/* Animated Text (and card) Styles */
+.animatedNumber .mainText, .card .mainText {
+    fill: @neutralPrimaryColor;
+    font-family: @lightFontFamily;
+}
+
+/* Column chart styles */
+.columnChart {
+    .column {
+        fill: @chartTemplateColor;
+    }
+
+    .column:hover {
+        fill: @chartTemplateColorDarker;
+    }
+
+    .axisGraphicsContext {
+        font-family: @regularFontFamily;
+        font-size: 11px;
+
+        text {
+            fill: @neutralSecondaryAltColor;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: @neutralSecondaryAltColor;
+            shape-rendering: crispEdges;
+        }
+    }
+
+    .interactive-hover-line {
+        stroke: @interactiveHoverLineColor;
+        stroke-width: 3px;
+        opacity: 1;
+    }
+
+    .drag-handle {
+        fill: #666666;
+        opacity: 1;
+    }
+}
+
+.dataDotChart {
+
+    .dataDotChartMainGraphicsContext {
+        font-family: @regularFontFamily;
+        font-size: 11px;
+
+        .dot {
+            fill: @chartTemplateColor;
+        }
+
+        .dot:hover {
+            fill: @chartTemplateColorDarker;
+        }
+       
+        .dot.null-value {
+            display: none;
+        }
+
+        .label {
+            fill: white;
+            text-anchor: middle;
+        }
+
+        .label.null-value {
+            display: none;
+        }
+
+        .label.overflowed {
+            display: none;
+        }
+    }
+
+    .axisGraphicsContext {
+        font-family: @regularFontFamily;
+        font-size: 11px;
+
+        text {
+            fill: @neutralSecondaryAltColor;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: @neutralSecondaryAltColor;
+            shape-rendering: crispEdges;
+        }
+    }   
+}
+
+.waterfallChart {
+    .column {
+        fill: @chartTemplateColor;
+    }
+
+    .column:hover {
+        fill: @chartTemplateColorDarker;
+    }
+
+    .axisGraphicsContext {
+        font-family: @regularFontFamily;
+        font-size: 11px;
+
+        text {
+            fill: @neutralSecondaryAltColor;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: @neutralSecondaryAltColor;
+            shape-rendering: crispEdges;
+        }
+    }
+
+    .waterfall-connector {
+        stroke: @chartConnectorColor;
+        stroke-width: 1px;
+        shape-rendering: crispEdges;
+    }
+}
+
+.lineChart {
+    .mainGraphicsContext {
+        path {
+            fill: none;
+            stroke-width: 3px;
+            stroke-linecap: round;
+        }
+
+        .catBackground path {
+            stroke-width: 6px;
+            stroke: white;
+        }
+    }
+
+    .hover-line {
+        stroke: @chartAxisGridLineColor;
+        fill: rgba(235, 94, 94, 1.0);
+
+        .interactive {
+            stroke: @interactiveHoverLineColor;
+            stroke-width: 3px;
+            opacity: 1;
+        }
+    }
+
+    .drag-handle {
+        fill: #666666;
+        opacity: 1;
+    }
+
+    .axisGraphicsContext {
+        font-family: @regularFontFamily;
+        font-size: 11px;
+
+        text {
+            fill: @neutralSecondaryAltColor;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: @neutralSecondaryAltColor;
+            shape-rendering: crispEdges;
+        }
+
+        .line {
+            fill: none;
+            stroke: steelblue;
+            stroke-width: 2px;
+        }
+    }
+}
+
+.funnelChart {
+    .axis {
+        path, line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .data-labels {
+            font-size: 12px;
+        }
+
+        .tick line {
+            display: none;
+        }
+
+        .domain {
+            display: none;
+        }
+    }
+}
+
+.donutChart {
+    overflow: visible !important;
+
+    path.slice {
+        stroke-width: 1px;
+        stroke: white;
+    }
+
+    path.slice-highlight {
+        stroke-width: 1px;
+        stroke: white;
+    }
+
+    .labels {
+        text {
+            font-family: @regularFontFamily;
+            font-size: 11px;
+            fill: @neutralSecondaryAltColor;
+        }
+    }
+
+    polyline {
+        stroke: @neutralSecondaryAltColor;
+        stroke-width: 1px;
+        fill: rgba(0, 0, 0, 0.00);
+    }
+
+    .donutLegendArrow {
+        fill: #666666;
+    }
+}
+
+.donutLegend {
+    .legend-item {
+        .category {
+            font-family: @regularFontFamily;
+            color: @neutralSecondaryColor;
+        }
+
+        .percentage {
+            font-family: @lightFontFamily;
+            /* No need for color, as it would be overriden afterwards */
+        }
+
+        .value {
+            font-family: @regularFontFamily;
+            color: @neutralSecondaryColor;
+        }
+    }
+}
+
+.scatterChart {
+    .mainGraphicsContext {
+        path {
+            fill: none;
+            stroke-width: 3px;
+        }
+
+        .notSelected {
+            opacity: 0.6;
+        }
+
+        .selected {
+            opacity: 1;
+        }
+    }
+
+    .crosshair {
+        .horizontal {
+            stroke: @neutralSecondaryColor;
+            stroke-width: 3px;
+            opacity: 0.6;
+        }
+
+        .vertical {
+            stroke: @neutralSecondaryColor;
+            stroke-width: 3px;
+            opacity: 0.6;
+        }
+    }
+
+    .axisGraphicsContext {
+        font-family: @regularFontFamily;
+        font-size: 11px;
+
+        text {
+            fill: @neutralSecondaryAltColor;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: @neutralSecondaryAltColor;
+            shape-rendering: crispEdges;
+        }
+    }
+}
+
+.sunburstChart {
+    path {
+        stroke: white;
+        stroke-width: 1px;
+    }
+
+    .percentageLabel {
+        text-anchor: middle;
+        font-size: 36px;
+    }
+
+    .breadcrumbLabel {
+        text-anchor: middle;
+        font-size: 15px;
+    }
+}
+
+.partitionMap {
+    font-size: 13px;
+
+    .partition {
+        stroke: white;
+        stroke-width: 2px;
+    }
+
+    .label {
+        fill: white;
+    }
+}
+
+/* WebChart */
+.webChart {
+    .webChartAxis {
+        fill: none;
+        stroke: #ddd;
+        stroke-width: 1px;
+    }
+
+    .firstInstance {
+        fill: rgba(235, 94, 94, 0.25);
+        stroke: rgba(235, 94, 94, 1.0);
+        stroke-width: 2px;
+        /*stroke-dasharray: 5,5;*/
+    }
+
+    .secondInstance {
+        fill: rgba(131, 209, 52, 0.25);
+        stroke: rgba(131, 209, 52, 1.0);
+        stroke-width: 2px;
+        /*stroke-dasharray: 5,5;*/
+    }
+
+    .webChartTitleLabel {
+        font-size: 14px;
+        font-family: @semiboldFontFamily;
+    }
+
+    .webChartValueLabel {
+        font-size: 14px;
+    }
+}
+
+.tableContainer {
+    overflow: auto;
+    /* table */
+    .table {
+        width: 100%;
+        color: @neutralPrimaryColor;
+        text-align: left;
+
+        th {
+            color: @neutralSecondaryAltColor;
+            overflow: hidden;
+            text-align: left;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            /* We cannot use the border-spacing on the table style for spacing since the UX spec wants unbroken row separator lines */
+            padding: 0px 12px 0px 0px;
+        }
+
+        th:last-child {
+            padding: 0px;
+        }
+
+        tr {
+            height: 20px;
+            color: #333;
+            font-size: 11px;
+            font-weight: normal;
+        }
+
+        td {
+            border-top: 1px solid @neutralTertiaryAltColor;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            /* We cannot use the border-spacing on the table style for spacing since the UX spec wants unbroken row separator lines */
+            padding: 0px 12px 0px 0px;
+        }
+
+        td:last-child {
+            padding: 0px;
+        }
+
+        .numeric {
+            text-align: right;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+    }
+
+    &.scrollbarPad .table th:last-child {
+        padding: 0px 20px 0px 0px;
+    }
+
+    &.scrollbarPad .table td:last-child {
+        padding: 0px 20px 0px 0px;
+    }
+}
+
+.tablixContainer {
+    overflow: auto;
+
+    .bi-tablix {
+        position: relative;
+        text-align: left;
+        -webkit-font-feature-settings: "tnum";
+        -moz-font-feature-settings: "tnum";
+        -ms-font-feature-settings: "tnum"; 
+        font-feature-settings: "tnum";
+
+        .unselectable {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+
+        table {
+            border-collapse: collapse;
+            line-height: normal;
+            padding: 0px;
+            border: 0px;
+            margin: 0px;
+            font-family: @semiboldFontFamily;
+            color: @neutralSecondaryColor;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        tr {
+            line-height: normal;
+            padding: 0px;
+            border: 0px;
+            margin: 0px;
+        }
+
+        td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .bi-table-column-header {
+            border-bottom-width: 1pt;
+            border-bottom-style: solid;
+            border-bottom-color: #CCCCCC;
+            font-family: @regularSecondaryFontFamily;
+            font-size: 16px;
+            /* Having a right padding of 5px is crucial to make sure that we do not fire click events on the table column
+               header (and trigger sorting) when resizing a column.  The allowed offset from the parent td's right border
+               to trigger resizing is 4px (see TablixResizer.resizeHandleSize) and thus less than the 5px padding.
+            */
+            padding: 0px 5px 0px 10px;
+        }
+
+        .bi-table-cell-numeric {
+            text-align: right;
+            padding: 0px 0px 0px 10px;
+        }
+
+        .bi-table-row {
+            border-bottom-width: 1pt;
+            border-bottom-style: solid;
+            border-bottom-color: #E8E8E8;
+            font-family: @semiboldFontFamily;
+            color: @neutralPrimaryColor;
+            font-size: 14px;
+            padding: 0px 0px 0px 10px;
+        }
+
+        .bi-table-last-row {
+            font-family: @semiboldFontFamily;
+            color: @neutralPrimaryColor;
+            font-size: 14px;
+            padding: 0px 0px 0px 10px;
+        }
+
+        .bi-table-footer {
+            border-top-width: 1pt;
+            border-top-style: solid;
+            border-top-color: #CCCCCC;
+            font-family: @boldFontFamily;
+            color: @neutralPrimaryColor;
+            font-size: 14px;
+            padding: 0px 5px 0px 10px;
+        }
+
+        .bi-tablix-header {
+            padding: 0px 5px 0px 10px;
+        }
+
+        .bi-tablix-row-header-leaf {
+            border-right-width: 1px;
+            border-right-color: #CCCCCC;
+            border-right-style: solid;
+            padding: 0px 5px 0px 10px;
+        }
+
+        .bi-tablix-column-header-leaf {
+            border-bottom-width: 1px;
+            border-bottom-color: #CCCCCC;
+            border-bottom-style: solid;
+            /* Having a right padding of 5px is crucial to make sure that we do not fire click events on the tablix column
+               header (and trigger sorting) when resizing a column.  The allowed offset from the parent td's right border
+               to trigger resizing is 4px (see TablixResizer.resizeHandleSize) and thus less than the 5px padding.
+            */
+            padding: 0px 5px 0px 10px;
+        }
+
+        .bi-matrix-body-cell {
+            text-align: right;
+            font-family: @semiboldFontFamily;
+            color: @neutralPrimaryColor;
+            font-size: 14px;
+            padding: 0px 5px 0px 10px;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        .scroll-bar-div {
+            background: #F1F1F1;
+            position: relative;
+            user-select: none;
+        }
+
+        .scroll-bar-part-arrow {
+            background: #F1F1F1;
+            position: absolute;
+            text-align: center;
+            user-select: none;
+        }
+
+        .scroll-bar-part-arrow:hover {
+            background-color: #cecece;
+        }
+
+        .scroll-bar-part-bar {
+            background: #cecece;
+            position: absolute;
+            text-align: center;
+            user-select: none;
+        }
+
+        .scroll-bar-part-bar:hover {
+            background: #c0c0c0;
+        }
+    }
+}
+
+.callout {
+    /*temp styles, waiting on behaviour spec*/
+    height: 15px;
+    top: -49px;
+    color: @neutralSecondaryAltColor;
+    font-weight: bold;
+    white-space: nowrap;
+
+    .label {
+        font-weight: bold;
+    }
+
+    .labelValue {
+        font-weight: normal;
+    }
+}
+
+.triangle-border {
+    position: absolute;
+    padding: 10px;
+    margin: 1em 0 3em;
+    border: 1px solid rgb(165, 221, 235);
+    color: #333;
+    background: rgba(255,255,255,1);
+    /* css3 */
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.triangle-border:before {
+    content: "";
+    position: absolute;
+    bottom: -11px; /* value = - border-top-width - border-bottom-width */
+    border-width: 11px 11px 0;
+    border-style: solid;
+    border-color: rgb(165, 221, 235) transparent;
+    /* reduce the damage in FF3.0 */
+    display: block;
+    width: 0;
+}
+
+/* creates the smaller  triangle */
+.triangle-border:after {
+    content: "";
+    position: absolute;
+    bottom: -9px; /* value = - border-top-width - border-bottom-width */
+    border-width: 9px 9px 0;
+    border-style: solid;
+    border-color: rgba(255,255,255,1) transparent;
+    /* reduce the damage in FF3.0 */
+    display: block;
+    width: 0;
+}
+
+/* bing News */
+.bingNews {
+    pointer-events: all !important;
+
+    .newsList {
+        padding: 0px;
+        margin: 0px;
+
+        li {
+            list-style-type: none;
+            list-style-position: inside;
+            border-top: 1px solid @neutralTertiaryAltColor;
+            font-family: @lightFontFamily;
+        }
+
+        li:last-child {
+            border-bottom: 1px solid @neutralTertiaryAltColor;
+        }
+    }
+
+    .headline {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 19px;
+        height: 19px;
+        overflow: hidden;
+        margin-top: 7px;
+    }
+
+    .snippet {
+        line-height: 11px;
+        overflow: hidden;
+        height: 22px;
+        margin-bottom: 7px;
+    }
+
+    .source {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 19px;
+        height: 21px;
+    }
+
+    a {
+        text-decoration: none;
+        display: block;
+    }
+
+    a:hover {
+        background-color: #ddd;
+    }
+}
+
+.visual {
+    .mapControl {
+        position: relative;
+    }
+
+    .mapShapes {
+        stroke-linejoin: round;
+    }
+
+    .textbox {
+        color: @blackColor;
+        line-height: 1;
+    }
+
+    .imageBackground {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        background-size: contain;
+        background-position: left top;
+        background-repeat: no-repeat;
+    }
+
+    .treemap {
+        .shapes {
+            stroke: white;
+
+            .rootNode {
+                fill: none;
+            }
+
+            .parentGroup {
+                stroke-width: 1.5px;
+                stroke-opacity: 0.8;
+            }
+
+            .nodeGroup {
+                stroke-width: 1px;
+                stroke-opacity: 0.2;
+                fill: none;
+            }
+        }
+
+        .labels {
+            font-family: @regularFontFamily;
+            fill: @whiteColor;
+
+            .majorLabel {
+                font-size: 12px;
+            }
+
+            .minorLabel {
+                font-size: 10px;
+            }
+        }
+    }
+}
+
+.interactive-legend {
+    white-space: nowrap;
+    text-align: left;
+    overflow: hidden;
+
+    .title {
+        font-family: @lightFontFamily;
+        font-size: 16px;
+        color: #666666;
+    }
+
+    .item {
+        font-family: @lightFontFamily;
+        font-size: 12px;
+        color: #666666;
+        padding-right: 22px;
+        padding-bottom: 0px;
+        padding-top: 3px;
+    }
+
+    .icon {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: middle;
+        margin-left: auto;
+    }
+}
+
+.tooltip-container {
+    position: absolute;
+    font-size: 11px;
+    background-color: @neutralPrimaryColor;
+    pointer-events: none;
+
+    .tooltip-content-container {
+        padding: 12px;
+        max-width: 390px;
+    }
+
+    .tooltip-row {
+        display: table-row;
+        line-height: 16px;
+    }
+
+    .tooltip-title-cell, tooltip-value-cell {
+        display: table-cell;
+        word-wrap: break-word;
+    }
+
+    div.tooltip-title-cell {
+        font-family: @regularSecondaryFontFamily;
+        text-transform: uppercase;
+        max-width: 130px;
+        padding-right: 12px;
+        color: @neutralTertiaryColor;
+    }
+
+    div.tooltip-value-cell {
+        max-width: 260px;
+        font-weight: bold;
+        color: @whiteColor;
+        letter-spacing: 1px;
+    }
+
+    .arrow{
+        position: absolute;
+        width: 0; 
+	    height: 0; 
+
+        &.top {
+            top: 7px;
+        }
+        &.bottom {
+            bottom: 7px;
+        }
+        &.left {
+            left: -7px;
+            border-top: 7px solid transparent;
+	        border-bottom: 7px solid transparent; 
+	        border-right: 7px solid @neutralPrimaryColor; 
+        }
+        &.right {
+            right: -7px;
+	        border-top: 7px solid transparent;
+	        border-bottom: 7px solid transparent;
+	        border-left: 7px solid @neutralPrimaryColor;
+        }
+    }
+}
+
+.data-labels{
+    font-size: 12px;
+    font-weight: bold;
+    text-anchor: middle;
+    font-family: @regularFontFamily;
+    /* Enables tooltip when hovering on data label inside visual */
+    pointer-events: none;
+}
+
+.richtextbox {
+    color: @neutralPrimaryColor;
+
+    .ql-container {
+        padding: 0px;
+    }
+
+    .ql-editor {
+        padding: 10px;
+    }
+}
+
+div.ql-toolbar {
+    padding: 6px;
+    background: @neutralPrimaryColor;
+    color: @whiteColor;
+    white-space: nowrap;
+    overflow-x: hidden;
+
+    // TODO: fix SELECT dropdown arrow in IE
+    /*
+    select::-ms-expand {
+        display: none;
+    }
+    */
+
+    select.ql-picker {
+        margin: 3px;
+        padding: 3px;
+        background: @neutralPrimaryColorAlt;
+        border: 1px solid @blackColor;
+    }
+
+    select.ql-font {
+        width: 122px;
+    }
+
+    label {
+        margin: 3px;
+    }
+
+    .ql-format-button {
+        margin: 3px;
+        padding: 3px;
+    }
+
+    .ql-format-button:hover {
+        background: @themePrimaryColor;
+        color: @neutralPrimaryColor;
+    }
+
+    .ql-format-button.ql-active {
+        background: @themePrimaryColor;
+        color: @neutralPrimaryColor;
+    }
+}
+
+.multiRowCard {
+    .card {
+        .title {
+            font-size: 28px;
+            font-family: @semiboldFontFamily;   
+            white-space: nowrap;    
+            text-overflow: ellipsis;   
+            overflow: hidden;  
+        }        
+    }
+}

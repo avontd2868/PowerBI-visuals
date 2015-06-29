@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Power BI Visualization Runner</title>
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="visuals.css" />
+</head>
+<body>
+    <div class="topBar">
+        <div style="float:left;">
+             <div>
+                <span>Select a visual:</span>
+                <select id="visualTypes"></select>
+            </div>
+        </div>
+    </div>  
+    
+    <div id="container">
+        <div id="itemContainer" class="chartSize3x3" style="position: relative; top: 20px; left: 0; border: 1px solid grey;"></div>
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.3/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/globalize/0.1.1/cultures/globalize.cultures.js"></script>
+
+    <script src="pako.js"></script>
+    <script src="moment.js"></script>
+
+    <script>
+        var isEmbedded = false;
+    </script>
+
+    <script type="text/javascript" src="utility.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="visuals.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+
+    <script type="text/javascript">
+        var runner = new powerbi.visuals.runner.VisualsRunner();
+        runner.startup();
+    </script>
+</body>
+</html>
