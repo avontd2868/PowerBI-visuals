@@ -1,0 +1,74 @@
+﻿<!--
+***********************************************************************************************
+Microsoft.TypeScript.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your web deploy projects from the command-line or the IDE.
+
+This file defines the steps in the standard build process for TypeScript files.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project DefaultTargets="TypeScriptCompile" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <TypeScriptPath>$(INFONAV_TOOLS)\TypeScript</TypeScriptPath>
+  </PropertyGroup>
+
+  <UsingTask TaskName="TypeScript.Tasks.VsTsc" AssemblyFile="$(TypeScriptPath)\TypeScript.tasks.dll" />
+
+  <PropertyGroup Condition="'$(TypeScriptBuildConfigurations)' == ''">
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptRemoveComments)' == 'true'">$(TypeScriptBuildConfigurations) --removeComments</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptNoImplicitAny)' == 'true'">$(TypeScriptBuildConfigurations) --noImplicitAny</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptGeneratesDeclarations)' == 'true'">$(TypeScriptBuildConfigurations) --declaration</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptModuleKind)' != '' and '$(TypeScriptModuleKind)' != 'none'">$(TypeScriptBuildConfigurations) --module $(TypeScriptModuleKind)</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations>$(TypeScriptBuildConfigurations) --out &quot;$(OutputPath)$(AssemblyName).js&quot;</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptOutDir)' != ''">$(TypeScriptBuildConfigurations) --outDir &quot;$(TypeScriptOutDir)&quot;</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptSourceMap)' == 'true'">$(TypeScriptBuildConfigurations) --sourcemap</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptTarget)' != ''">$(TypeScriptBuildConfigurations) --target $(TypeScriptTarget)</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptNoResolve)' == 'true'">$(TypeScriptBuildConfigurations) --noResolve</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptAdditionalFlags)' != ''">$(TypeScriptBuildConfigurations) $(TypeScriptAdditionalFlags)</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptMapRoot)' != '' And '$(TypeScriptSourceMap)' == 'true'">$(TypeScriptBuildConfigurations) --mapRoot &quot;$(TypeScriptMapRoot)&quot;</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptSourceRoot)' != '' And '$(TypeScriptSourceMap)' == 'true'">$(TypeScriptBuildConfigurations) --sourceRoot &quot;$(TypeScriptSourceRoot)&quot;</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptSourceRoot)' == '' And '$(TypeScriptSourceMap)' == 'true'">$(TypeScriptBuildConfigurations) --sourceRoot &quot;/&quot;</TypeScriptBuildConfigurations>
+    <TypeScriptBuildConfigurations Condition="'$(TypeScriptCodePage)' != ''">$(TypeScriptBuildConfigurations) --codepage $(TypeScriptCodePage)</TypeScriptBuildConfigurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TypeScriptArgsFile>$(OutputPath)__typeScriptArgs.txt</TypeScriptArgsFile>
+    <TypeScriptToolsVersion Condition="'$(TypeScriptToolsVersion)'==''">1.0</TypeScriptToolsVersion>
+    
+    <TypeScriptExec Condition="'$(TypeScriptUseLegacyCompiler)'==''">$(TypeScriptPath)\node $(TypeScriptPath)\tsc.js</TypeScriptExec>
+    <TypeScriptExec Condition="'$(TypeScriptUseLegacyCompiler)'=='true'">$(TypeScriptPath)\node $(TypeScriptPath)\tsc-legacy.js</TypeScriptExec>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TypeScriptDebugOutputFile>$(OutputPath)$(AssemblyName).js</TypeScriptDebugOutputFile>
+    <TypeScriptMinifiedOutputFile>$(OutputPath)$(AssemblyName).min.js</TypeScriptMinifiedOutputFile>
+    <TypeScriptSourceMapFile>$(OutputPath)$(AssemblyName).js.map</TypeScriptSourceMapFile>
+    <TypeScriptNonMinifiedRetailOutputFile>$(OutputPath)$(AssemblyName).nonmin.js</TypeScriptNonMinifiedRetailOutputFile>
+    <TypeScriptMinifiedSourceMapFile>$(OutputPath)$(AssemblyName).min.js.map</TypeScriptMinifiedSourceMapFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TypeScriptCompileTargetOutputs Include="$(TypeScriptDebugOutputFile)" />
+    <TypeScriptCompileTargetOutputs Include="$(TypeScriptSourceMapFile)" Condition="'$(TypeScriptSourceMap)' == 'true'" />
+  </ItemGroup>
+
+  <Target Name="TypeScriptCompile" AfterTargets="TypeScriptLint" Inputs="@(TypeScriptCompile)" Outputs="@(TypeScriptCompileTargetOutputs)">
+    <Delete Files="$(TypeScriptArgsFile)" />
+    <WriteLinesToFile File="$(TypeScriptArgsFile)" Lines="@(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
+    <Exec ContinueOnError="ErrorAndStop" Command="$(TypeScriptExec) $(TypeScriptBuildConfigurations) %40$(TypeScriptArgsFile)">
+        <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Delete Files="$(TypeScriptArgsFile)" />
+    <OnError ExecuteTargets="ErrorHandler" />
+  </Target>
+  <Target Name="ErrorHandler">
+    <Delete Files="$(TypeScriptDebugOutputFile);$(TypeScriptSourceMapFile)" /> 
+    <Message Text="Typescript Build Failed" />
+  </Target>
+</Project>
+
