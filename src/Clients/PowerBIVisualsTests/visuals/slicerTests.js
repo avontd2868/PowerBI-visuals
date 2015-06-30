@@ -40,7 +40,7 @@ var powerbitests;
             columns: [
                 { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
                 { name: 'Price', isMeasure: true }
-            ]
+            ],
         };
         var dataViewCategorical = {
             categories: [{
@@ -57,7 +57,7 @@ var powerbitests;
             values: DataViewTransform.createValueColumns([{
                 source: dataViewMetadata.columns[1],
                 values: [20, 10, 30, 15, 12]
-            }])
+            }]),
         };
         var dataView = {
             metadata: dataViewMetadata,
@@ -78,21 +78,26 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                settings: settings
+                settings: settings,
             });
         }
         it('Slicer DOM Validation', function (done) {
+            spyOn(powerbi.visuals.valueFormatter, 'format').and.callThrough();
             v.onDataChanged({ dataViews: [dataView] });
             setTimeout(function () {
                 expect($('.slicerContainer')).toBeInDOM();
                 expect($('.slicerContainer .headerText')).toBeInDOM();
-                expect($('.slicerContainer .footer .clear')).toBeInDOM();
-                expect($('.slicerContainer .footer .clear').first().text()).toBe('Clear');
+                expect($('.slicerContainer .slicerHeader .clear')).toBeInDOM();
                 expect($('.slicerContainer .slicerBody')).toBeInDOM();
                 expect($('.slicerContainer .slicerBody .row .slicerText')).toBeInDOM();
                 expect($('.slicerText').length).toBe(5);
                 expect($('.slicerText').first().text()).toBe('Apple');
                 expect($('.slicerText').last().text()).toBe('Banana');
+                expect(powerbi.visuals.valueFormatter.format).toHaveBeenCalledWith('Apple', undefined);
+                expect(powerbi.visuals.valueFormatter.format).toHaveBeenCalledWith('Orange', undefined);
+                expect(powerbi.visuals.valueFormatter.format).toHaveBeenCalledWith('Kiwi', undefined);
+                expect(powerbi.visuals.valueFormatter.format).toHaveBeenCalledWith('Grapes', undefined);
+                expect(powerbi.visuals.valueFormatter.format).toHaveBeenCalledWith('Banana', undefined);
                 // Subsequent update
                 var dataView2 = {
                     metadata: dataViewMetadata,
@@ -109,14 +114,14 @@ var powerbitests;
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
                             values: [40, 25, 22]
-                        }])
+                        }]),
                     }
                 };
                 v.onDataChanged({ dataViews: [dataView2] });
                 setTimeout(function () {
                     expect($('.slicerContainer')).toBeInDOM();
                     expect($('.slicerContainer .headerText')).toBeInDOM();
-                    expect($('.slicerContainer .footer .clear')).toBeInDOM();
+                    expect($('.slicerContainer .slicerHeader .clear')).toBeInDOM();
                     expect($('.slicerContainer .slicerBody')).toBeInDOM();
                     expect($('.slicerContainer .slicerBody .row .slicerText')).toBeInDOM();
                     expect($('.slicerText').length).toBe(3);
@@ -176,7 +181,7 @@ var powerbitests;
                         selected: false
                     }
                 ];
-                expect(slicerData).toEqual({ categorySourceName: 'Fruit', slicerDataPoints: dataPoints });
+                expect(slicerData).toEqual({ categorySourceName: 'Fruit', formatString: undefined, slicerDataPoints: dataPoints });
                 done();
             }, DefaultWaitForRender);
         });
@@ -194,9 +199,9 @@ var powerbitests;
             };
             v.onResizing(viewport, 100);
             setTimeout(function () {
-                expect($('.slicerContainer .slicerBody').first().css('height')).toBe('113px');
+                expect($('.slicerContainer .slicerBody').first().css('height')).toBe('148px');
                 expect($('.slicerContainer .slicerBody').first().css('width')).toBe('300px');
-                expect($('.slicerContainer .headerText').first().css('width')).toBe('288px');
+                expect($('.slicerContainer .headerText').first().css('width')).toBe('271px');
                 // Next Resize
                 var viewport2 = {
                     height: 150,
@@ -204,9 +209,9 @@ var powerbitests;
                 };
                 v.onResizing(viewport2, 100);
                 setTimeout(function () {
-                    expect($('.slicerContainer .slicerBody').first().css('height')).toBe('63px');
+                    expect($('.slicerContainer .slicerBody').first().css('height')).toBe('98px');
                     expect($('.slicerContainer .slicerBody').first().css('width')).toBe('150px');
-                    expect($('.slicerContainer .headerText').first().css('width')).toBe('138px');
+                    expect($('.slicerContainer .headerText').first().css('width')).toBe('121px');
                     done();
                 }, DefaultWaitForRender);
             }, DefaultWaitForRender);
@@ -219,7 +224,7 @@ var powerbitests;
             columns: [
                 { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
                 { name: 'Price', isMeasure: true }
-            ]
+            ],
         };
         var dataViewCategorical = {
             categories: [{
@@ -236,7 +241,7 @@ var powerbitests;
             values: DataViewTransform.createValueColumns([{
                 source: dataViewMetadata.columns[1],
                 values: [20, 10, 30, 15, 12]
-            }])
+            }]),
         };
         var interactiveDataViewOptions = {
             dataViews: [{
@@ -432,7 +437,7 @@ var powerbitests;
                     { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
                     { name: 'Price', isMeasure: true }
                 ],
-                segment: {}
+                segment: {},
             };
             var interactiveDataViewOptions = {
                 dataViews: [{ metadata: metadata, categorical: dataViewCategorical }]
@@ -449,7 +454,7 @@ var powerbitests;
                     { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
                     { name: 'Price', isMeasure: true }
                 ],
-                segment: {}
+                segment: {},
             };
             var interactiveDataViewOptions = {
                 dataViews: [{ metadata: metadata, categorical: dataViewCategorical }]

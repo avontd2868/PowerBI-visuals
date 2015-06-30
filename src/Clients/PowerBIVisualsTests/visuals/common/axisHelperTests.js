@@ -64,10 +64,10 @@ var powerbitests;
         };
         var formatStringProp = {
             objectName: 'general',
-            propertyName: 'formatString'
+            propertyName: 'formatString',
         };
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         // TODO: add a getValueFn mock to provide to createAxis so we can test tickValue generation
         it('create ordinal scale', function () {

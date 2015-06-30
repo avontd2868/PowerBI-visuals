@@ -34,14 +34,14 @@ var powerbitests;
     });
     describe('Gauge DOM tests', function () {
         var v, element;
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var dataViewMetadata = {
             columns: [
                 {
                     name: 'col1',
                     roles: { 'Y': true },
                     isMeasure: true,
-                    objects: { general: { formatString: '$0' } }
+                    objects: { general: { formatString: '$0' } },
                 },
                 {
                     name: 'col2',
@@ -60,7 +60,7 @@ var powerbitests;
                 }
             ],
             groups: [],
-            measures: [0]
+            measures: [0],
         };
         beforeEach(function () {
             powerbitests.helpers.suppressDebugAssertFailure();
@@ -87,19 +87,19 @@ var powerbitests;
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadata.columns[0],
-                                values: [10]
+                                values: [10],
                             },
                             {
                                 source: dataViewMetadata.columns[1],
-                                values: [0]
+                                values: [0],
                             },
                             {
                                 source: dataViewMetadata.columns[2],
-                                values: [300]
+                                values: [300],
                             },
                             {
                                 source: dataViewMetadata.columns[3],
-                                values: [0]
+                                values: [0],
                             }
                         ])
                     }
@@ -125,19 +125,19 @@ var powerbitests;
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadata.columns[0],
-                                values: [10]
+                                values: [10],
                             },
                             {
                                 source: dataViewMetadata.columns[1],
-                                values: [0]
+                                values: [0],
                             },
                             {
                                 source: dataViewMetadata.columns[2],
-                                values: [300]
+                                values: [300],
                             },
                             {
                                 source: dataViewMetadata.columns[3],
-                                values: [300]
+                                values: [300],
                             }
                         ])
                     }
@@ -163,19 +163,19 @@ var powerbitests;
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadata.columns[0],
-                                values: [10]
+                                values: [10],
                             },
                             {
                                 source: dataViewMetadata.columns[1],
-                                values: [0]
+                                values: [0],
                             },
                             {
                                 source: dataViewMetadata.columns[2],
-                                values: [300]
+                                values: [300],
                             },
                             {
                                 source: dataViewMetadata.columns[3],
-                                values: [200]
+                                values: [200],
                             }
                         ])
                     }
@@ -206,7 +206,7 @@ var powerbitests;
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadata.columns[0],
-                                values: [-25]
+                                values: [-25],
                             }
                         ])
                     }
@@ -237,19 +237,19 @@ var powerbitests;
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadata.columns[0],
-                                values: [10]
+                                values: [10],
                             },
                             {
                                 source: dataViewMetadata.columns[1],
-                                values: [0]
+                                values: [0],
                             },
                             {
                                 source: dataViewMetadata.columns[2],
-                                values: [500]
+                                values: [500],
                             },
                             {
                                 source: dataViewMetadata.columns[3],
-                                values: [200]
+                                values: [200],
                             }
                         ])
                     }
@@ -265,14 +265,14 @@ var powerbitests;
                 },
                 labelText: {
                     color: {
-                        value: '#008000'
+                        value: '#008000',
                     },
                     fontSize: '11px'
                 },
                 colorPalette: {
-                    dataColors: dataColors
+                    dataColors: dataColors,
                 },
-                isHighContrast: false
+                isHighContrast: false,
             });
             setTimeout(function () {
                 var labels = $('.labelText');
@@ -284,7 +284,7 @@ var powerbitests;
     });
     describe("Gauge Data Tests", function () {
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         var dataViewMetadata = {
             columns: [
@@ -292,7 +292,7 @@ var powerbitests;
                     name: 'col1',
                     roles: { 'Y': true },
                     isMeasure: true,
-                    objects: { general: { formatString: '$0' } }
+                    objects: { general: { formatString: '$0' } },
                 },
                 {
                     name: 'col2',
@@ -311,7 +311,7 @@ var powerbitests;
                 }
             ],
             groups: [],
-            measures: [0]
+            measures: [0],
         };
         var dataViewMetadataNumbers = {
             columns: [
@@ -319,7 +319,7 @@ var powerbitests;
                     name: 'col1',
                     roles: { 'Y': true },
                     isMeasure: true,
-                    objects: { general: { formatString: '0.00' } }
+                    objects: { general: { formatString: '0.00' } },
                 },
                 {
                     name: 'col2',
@@ -338,7 +338,7 @@ var powerbitests;
                 }
             ],
             groups: [],
-            measures: [0]
+            measures: [0],
         };
         it('Gauge registered capabilities', function () {
             expect(powerbi.visuals.visualPluginFactory.create().getPlugin('gauge').capabilities).toBe(GaugeVisual.capabilities);
@@ -354,19 +354,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [500]
+                            values: [500],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [0]
+                            values: [0],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [300]
+                            values: [300],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200]
+                            values: [200],
                         }
                     ])
                 }
@@ -381,19 +381,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [-3]
+                            values: [-3],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [0]
+                            values: [0],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [300]
+                            values: [300],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200]
+                            values: [200],
                         }
                     ])
                 }
@@ -408,19 +408,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [200]
+                            values: [200],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [100]
+                            values: [100],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [300]
+                            values: [300],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200]
+                            values: [200],
                         }
                     ])
                 }
@@ -435,19 +435,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [null]
+                            values: [null],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [null]
+                            values: [null],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [null]
+                            values: [null],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [null]
+                            values: [null],
                         }
                     ])
                 }
@@ -457,7 +457,7 @@ var powerbitests;
             expect(data.targetSettings).toEqual({
                 min: 0,
                 max: 0,
-                target: 0
+                target: 0,
             });
         });
         it('Gauge_tooltip_work', function () {
@@ -468,19 +468,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [10]
+                            values: [10],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [0]
+                            values: [0],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [500]
+                            values: [500],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200]
+                            values: [200],
                         }
                     ])
                 }
@@ -496,7 +496,7 @@ var powerbitests;
                     max: 500,
                     target: 200
                 },
-                tooltipInfo: [{ displayName: "col1", value: "$10" }]
+                tooltipInfo: [{ displayName: "col1", value: "$10" }],
             };
             expect(data).toEqual(expectedValues);
         });
@@ -508,19 +508,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [null]
+                            values: [null],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [null]
+                            values: [null],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [null]
+                            values: [null],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [null]
+                            values: [null],
                         }
                     ])
                 }
@@ -544,19 +544,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [200]
+                            values: [200],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [100]
+                            values: [100],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [300]
+                            values: [300],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200]
+                            values: [200],
                         }
                     ])
                 }
@@ -570,7 +570,7 @@ var powerbitests;
                     name: 'col1',
                     roles: { Y: true },
                     isMeasure: true,
-                    objects: { general: { formatString: '$0' } }
+                    objects: { general: { formatString: '$0' } },
                 },
                 targetSettings: { min: 100, max: 300, target: 200 },
                 tooltipInfo: [{ displayName: 'col1', value: '$200' }]
@@ -579,7 +579,7 @@ var powerbitests;
         });
         describe("Gauge Rendering Tests", function () {
             var v, element;
-            var hostServices = powerbi.explore.services.createVisualHostServices();
+            var hostServices = powerbitests.mocks.createVisualHostServices();
             var dataViews = [{
                 metadata: dataViewMetadata,
                 single: { value: 10 },
@@ -587,19 +587,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [10]
+                            values: [10],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [0]
+                            values: [0],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [300]
+                            values: [300],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200]
+                            values: [200],
                         }
                     ])
                 }
@@ -611,19 +611,19 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadataNumbers.columns[0],
-                            values: [5.5]
+                            values: [5.5],
                         },
                         {
                             source: dataViewMetadataNumbers.columns[1],
-                            values: [0]
+                            values: [0],
                         },
                         {
                             source: dataViewMetadataNumbers.columns[2],
-                            values: [10]
+                            values: [10],
                         },
                         {
                             source: dataViewMetadataNumbers.columns[3],
-                            values: [6.5]
+                            values: [6.5],
                         }
                     ])
                 }
@@ -759,7 +759,7 @@ var powerbitests;
                     bottom: 20,
                     left: 45,
                     right: 45
-                }
+                },
             };
             var viewPortProperty = gauge.getGaugeVisualProperties();
             expect(viewPortProperty.margin).toEqual(expectedViewPortProperty.margin);
@@ -773,7 +773,7 @@ var powerbitests;
                     bottom: 20,
                     left: 45,
                     right: 45
-                }
+                },
             };
             var viewPortProperty = gauge.getGaugeVisualProperties();
             expect(viewPortProperty.margin).toEqual(expectedViewPortProperty.margin);
@@ -787,7 +787,7 @@ var powerbitests;
                     bottom: 20,
                     left: 45,
                     right: 45
-                }
+                },
             };
             var viewPortProperty = gauge.getGaugeVisualProperties();
             expect(viewPortProperty.margin).toEqual(expectedViewPortProperty.margin);
@@ -801,7 +801,7 @@ var powerbitests;
                     bottom: marginsOnSmallViewPort,
                     left: marginsOnSmallViewPort,
                     right: marginsOnSmallViewPort
-                }
+                },
             };
             var viewPortProperty = gauge.getGaugeVisualProperties();
             expect(viewPortProperty.margin).toEqual(expectedViewPortProperty.margin);
@@ -852,7 +852,7 @@ var powerbitests;
     function testMargins(domSizeString, isMobile) {
         var element;
         var v;
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         if (isMobile) {
             v = powerbi.visuals.visualPluginFactory.createMobile().getPlugin('gauge').create();
         }
@@ -874,7 +874,7 @@ var powerbitests;
     }
     function testSideNumbers(domSizeString, isMobile) {
         var v, element;
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var dataViewMetadata = {
             columns: [
                 {
@@ -900,7 +900,7 @@ var powerbitests;
                 }
             ],
             groups: [],
-            measures: [0]
+            measures: [0],
         };
         powerbi.common.localize = powerbi.common.createLocalizationService();
         element = powerbitests.helpers.testDom(domSizeString, domSizeString);
@@ -927,7 +927,7 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [-25]
+                            values: [-25],
                         }
                     ])
                 }

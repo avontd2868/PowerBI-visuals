@@ -11,8 +11,7 @@ var powerbitests;
     var SemanticType = powerbi.data.SemanticType;
     var EventType = powerbitests.helpers.ClickEventType;
     var SelectionId = powerbi.visuals.SelectionId;
-    var VisualHostServices = powerbi.explore.services.VisualHostServices;
-    var DefaultRenderTime = 300;
+    var DefaultRenderTime = 10;
     describe("FunnelChart", function () {
         it('FunnelChart registered capabilities', function () {
             expect(powerbi.visuals.visualPluginFactory.create().getPlugin('funnel').capabilities).toBe(powerbi.visuals.funnelChartCapabilities);
@@ -31,8 +30,10 @@ var powerbitests;
         });
     });
     describe("FunnelChart Dataview Validation", function () {
+        var colors;
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
+            colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
         });
         var dataViewMetadata = {
             columns: [
@@ -40,7 +41,8 @@ var powerbitests;
                 { name: 'col2', isMeasure: true },
             ]
         };
-        it('Check converter with multi-catagories', function () {
+        var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'p' });
+        it('Check explicit color is applied', function () {
             var categoryIdentities = [
                 powerbitests.mocks.dataViewScopeIdentity("John Domo"),
                 powerbitests.mocks.dataViewScopeIdentity("Delta Force"),
@@ -53,6 +55,7 @@ var powerbitests;
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
                         identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                         objects: [
                             { dataPoint: { fill: { solid: { color: "#FF0000" } } } },
                             { dataPoint: { fill: { solid: { color: "#00FF00" } } } },
@@ -61,60 +64,117 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100, 200, 700]
+                        values: [100, 200, 700],
+                    }])
+                }
+            };
+            var actualData = FunnelChart.converter(dataView, colors);
+            expect(actualData.slices[0].color).toBe("#FF0000");
+            expect(actualData.slices[0].labelFill).toBe("#FF0000");
+            expect(actualData.slices[1].color).toBe("#00FF00");
+            expect(actualData.slices[1].labelFill).toBe("#00FF00");
+            expect(actualData.slices[2].color).toBe("#0000FF");
+            expect(actualData.slices[2].labelFill).toBe("#0000FF");
+        });
+        it('Check default color is applied', function () {
+            var categoryIdentities = [
+                powerbitests.mocks.dataViewScopeIdentity("John Domo"),
+                powerbitests.mocks.dataViewScopeIdentity("Delta Force"),
+                powerbitests.mocks.dataViewScopeIdentity("Jean Tablau"),
+            ];
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [{
+                        source: dataViewMetadata.columns[0],
+                        values: ['John Domo', 'Delta Force', 'Jean Tablau'],
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
+                    }],
+                    values: DataViewTransform.createValueColumns([{
+                        source: dataViewMetadata.columns[1],
+                        values: [100, 200, 700],
                     }])
                 }
             };
             var defaultDataPointColor = "#00FF00";
-            var actualData = FunnelChart.converter(dataView, defaultDataPointColor, defaultDataPointColor);
+            var actualData = FunnelChart.converter(dataView, colors, defaultDataPointColor);
+            actualData.slices.forEach(function (slice) {
+                expect(slice.color).toEqual(defaultDataPointColor);
+                expect(slice.labelFill).toEqual(defaultDataPointColor);
+            });
+        });
+        it('Check converter with category and single measure', function () {
+            var categoryIdentities = [
+                powerbitests.mocks.dataViewScopeIdentity("a"),
+                powerbitests.mocks.dataViewScopeIdentity("b"),
+                powerbitests.mocks.dataViewScopeIdentity("c"),
+            ];
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [{
+                        source: dataViewMetadata.columns[0],
+                        values: ['a', 'b', 'c'],
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
+                    }],
+                    values: DataViewTransform.createValueColumns([{
+                        source: dataViewMetadata.columns[1],
+                        values: [100, 200, 700],
+                    }])
+                }
+            };
+            var actualData = FunnelChart.converter(dataView, colors);
             var selectionIds = [
                 SelectionId.createWithIdAndMeasure(categoryIdentities[0], 'col2'),
                 SelectionId.createWithIdAndMeasure(categoryIdentities[1], 'col2'),
                 SelectionId.createWithIdAndMeasure(categoryIdentities[2], 'col2')
             ];
+            var sliceColor = colors.getColor(0).value;
             var expectedData = {
                 slices: [
                     {
                         value: 100,
-                        label: 'John Domo',
+                        label: 'a',
                         identity: selectionIds[0],
                         key: selectionIds[0].getKey(),
                         selected: false,
                         categoryOrMeasureIndex: 0,
-                        tooltipInfo: [{ displayName: "col1", value: "John Domo" }, { displayName: "col2", value: "100" }],
-                        color: "#FF0000",
-                        labelFill: "#FF0000",
+                        tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col2", value: "100" }],
+                        color: sliceColor,
+                        labelFill: sliceColor,
                         showLabel: true
                     },
                     {
                         value: 200,
-                        label: 'Delta Force',
+                        label: 'b',
                         identity: selectionIds[1],
                         key: selectionIds[1].getKey(),
                         selected: false,
                         categoryOrMeasureIndex: 1,
-                        tooltipInfo: [{ displayName: "col1", value: "Delta Force" }, { displayName: "col2", value: "200" }],
-                        color: "#00FF00",
-                        labelFill: "#00FF00",
+                        tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col2", value: "200" }],
+                        color: sliceColor,
+                        labelFill: sliceColor,
                         showLabel: true
                     },
                     {
                         value: 700,
-                        label: 'Jean Tablau',
+                        label: 'c',
                         identity: selectionIds[2],
                         key: selectionIds[2].getKey(),
                         selected: false,
                         categoryOrMeasureIndex: 2,
-                        tooltipInfo: [{ displayName: "col1", value: "Jean Tablau" }, { displayName: "col2", value: "700" }],
-                        color: "#0000FF",
-                        labelFill: "#0000FF",
+                        tooltipInfo: [{ displayName: "col1", value: "c" }, { displayName: "col2", value: "700" }],
+                        color: sliceColor,
+                        labelFill: sliceColor,
                         showLabel: true
                     }
                 ],
                 valuesMetadata: [{ name: 'col2', isMeasure: true }],
                 hasHighlights: false,
                 highlightsOverflow: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(defaultDataPointColor)
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(),
             };
             expect(actualData).toEqual(expectedData);
         });
@@ -140,12 +200,12 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
                         values: [100, 200, 700],
-                        highlights: [0, 140, 420]
+                        highlights: [0, 140, 420],
                     }])
                 }
             };
             var defaultDataPointColor = "#00FF00";
-            var actualData = FunnelChart.converter(dataView, defaultDataPointColor, defaultDataPointColor);
+            var actualData = FunnelChart.converter(dataView, colors, defaultDataPointColor);
             //first tooltip is regular because highlighted value is 0
             expect(actualData.slices[0].tooltipInfo).toEqual([{ displayName: "col1", value: "John Domo" }, { displayName: "col2", value: "100" }]);
             expect(actualData.slices[1].tooltipInfo).toEqual([{ displayName: "col1", value: "John Domo" }, { displayName: "col2", value: "100" }]);
@@ -155,180 +215,173 @@ var powerbitests;
             expect(actualData.slices[4].tooltipInfo).toEqual([{ displayName: "col1", value: "Jean Tablau" }, { displayName: "col2", value: "700" }, { displayName: powerbi.visuals.ToolTipComponent.localizationOptions.highlightedValueDisplayName, value: "420" }]);
             expect(actualData.slices[5].tooltipInfo).toEqual([{ displayName: "col1", value: "Jean Tablau" }, { displayName: "col2", value: "700" }, { displayName: powerbi.visuals.ToolTipComponent.localizationOptions.highlightedValueDisplayName, value: "420" }]);
         });
-    });
-    it('Check converter with multi-category and multi-measures', function () {
-        var categoryIdentities = [
-            powerbitests.mocks.dataViewScopeIdentity("John Domo"),
-            powerbitests.mocks.dataViewScopeIdentity("Bugs Bunny"),
-        ];
-        var dataViewMetadata = {
-            columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
-                { name: 'col3', isMeasure: true }
-            ]
-        };
-        var dataView = {
-            metadata: dataViewMetadata,
-            categorical: {
-                categories: [{
-                    source: dataViewMetadata.columns[0],
-                    values: ['John Domo', 'Bugs Bunny'],
-                    identity: categoryIdentities,
-                    objects: [
-                        { dataPoint: { fill: { solid: { color: "#FF0000" } } } },
-                        { dataPoint: { fill: { solid: { color: "#00FF00" } } } }
-                    ]
-                }],
-                values: DataViewTransform.createValueColumns([{
-                    source: dataViewMetadata.columns[1],
-                    values: [100, 200],
-                    subtotal: 300
-                }, {
-                    source: dataViewMetadata.columns[2],
-                    values: [300, 500],
-                    subtotal: 800
-                },])
-            }
-        };
-        var defaultDataPointColor = "#00FF00";
-        var actualData = FunnelChart.converter(dataView, defaultDataPointColor, defaultDataPointColor);
-        var selectionIds = [
-            SelectionId.createWithIdAndMeasure(categoryIdentities[0], 'col2'),
-            SelectionId.createWithIdAndMeasure(categoryIdentities[1], 'col2'),
-        ];
-        var expectedData = {
-            slices: [
-                {
-                    value: 400,
-                    label: 'John Domo',
-                    identity: selectionIds[0],
-                    selected: false,
-                    categoryOrMeasureIndex: 0,
-                    key: selectionIds[0].getKey(),
-                    tooltipInfo: [{ displayName: "col1", value: "John Domo" }, { displayName: "col2", value: "400" }],
-                    color: "#FF0000",
-                    labelFill: "#FF0000",
-                    showLabel: true
-                },
-                {
-                    value: 700,
-                    label: 'Bugs Bunny',
-                    identity: selectionIds[1],
-                    selected: false,
-                    categoryOrMeasureIndex: 1,
-                    key: selectionIds[1].getKey(),
-                    tooltipInfo: [{ displayName: "col1", value: "Bugs Bunny" }, { displayName: "col2", value: "700" }],
-                    color: "#00FF00",
-                    labelFill: "#00FF00",
-                    showLabel: true
-                }
-            ],
-            valuesMetadata: [{ name: 'col2', isMeasure: true }, { name: 'col3', isMeasure: true }],
-            hasHighlights: false,
-            highlightsOverflow: false,
-            dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(defaultDataPointColor)
-        };
-        expect(actualData).toEqual(expectedData);
-    });
-    it('Check converter with single category but multi-measures', function () {
-        var dataViewMetadata = {
-            columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
-                { name: 'col3', isMeasure: true }
-            ]
-        };
-        var dataView = {
-            metadata: dataViewMetadata,
-            categorical: {
-                categories: [{
-                    source: dataViewMetadata.columns[0],
-                    values: ['John Domo']
-                }],
-                values: DataViewTransform.createValueColumns([{
-                    source: dataViewMetadata.columns[1],
-                    values: [100],
-                    subtotal: 100
-                }, {
-                    source: dataViewMetadata.columns[2],
-                    values: [300],
-                    subtotal: 300
-                },])
-            }
-        };
-        var defaultDataPointColor = "#00FF00";
-        var actualData = FunnelChart.converter(dataView, defaultDataPointColor, defaultDataPointColor);
-        var selectionIds = [
-            SelectionId.createWithMeasure("col2"),
-            SelectionId.createWithMeasure("col3")
-        ];
-        var expectedData = {
-            slices: [
-                {
-                    value: 100,
-                    label: 'col2',
-                    identity: selectionIds[0],
-                    key: selectionIds[0].getKey(),
-                    selected: false,
-                    categoryOrMeasureIndex: 0,
-                    tooltipInfo: [{ displayName: "col1", value: "col2" }, { displayName: "col2", value: "100" }],
-                    color: '#00FF00',
-                    labelFill: '#00FF00',
-                    showLabel: true
-                },
-                {
-                    value: 300,
-                    label: 'col3',
-                    identity: selectionIds[1],
-                    key: selectionIds[1].getKey(),
-                    selected: false,
-                    categoryOrMeasureIndex: 1,
-                    tooltipInfo: [{ displayName: "col1", value: "col3" }, { displayName: "col2", value: "300" }],
-                    color: '#00FF00',
-                    labelFill: '#00FF00',
-                    showLabel: true
-                }
-            ],
-            valuesMetadata: [dataViewMetadata.columns[1], dataViewMetadata.columns[2]],
-            hasHighlights: false,
-            highlightsOverflow: false,
-            dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(defaultDataPointColor)
-        };
-        expect(actualData).toEqual(expectedData);
-    });
-    it('non-categorical multi-measure tooltip values test', function () {
-        var dataViewMetadata = {
-            columns: [
-                { name: 'a', isMeasure: true },
-                { name: 'b', isMeasure: true },
-                { name: 'c', isMeasure: true }
-            ]
-        };
-        var dataView = {
-            metadata: dataViewMetadata,
-            categorical: {
-                values: DataViewTransform.createValueColumns([
-                    {
+        it('Check converter with multi-category and multi-measures', function () {
+            var categoryIdentities = [
+                powerbitests.mocks.dataViewScopeIdentity("a"),
+                powerbitests.mocks.dataViewScopeIdentity("b"),
+            ];
+            var dataViewMetadata = {
+                columns: [
+                    { name: 'col1' },
+                    { name: 'col2', isMeasure: true },
+                    { name: 'col3', isMeasure: true }
+                ]
+            };
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [{
                         source: dataViewMetadata.columns[0],
-                        values: [1]
-                    },
-                    {
+                        values: ['a', 'b'],
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
+                    }],
+                    values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [2]
+                        values: [100, 200],
+                        subtotal: 300,
+                    }, {
+                        source: dataViewMetadata.columns[2],
+                        values: [300, 500],
+                        subtotal: 800,
+                    },])
+                }
+            };
+            var actualData = FunnelChart.converter(dataView, colors);
+            var selectionIds = [
+                SelectionId.createWithIdAndMeasure(categoryIdentities[0], 'col2'),
+                SelectionId.createWithIdAndMeasure(categoryIdentities[1], 'col2'),
+            ];
+            var sliceColor = colors.getColor(0).value;
+            var expectedData = {
+                slices: [
+                    {
+                        value: 400,
+                        label: 'a',
+                        identity: selectionIds[0],
+                        selected: false,
+                        categoryOrMeasureIndex: 0,
+                        key: selectionIds[0].getKey(),
+                        tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col2", value: "400" }],
+                        color: sliceColor,
+                        labelFill: sliceColor,
+                        showLabel: true
                     },
                     {
-                        source: dataViewMetadata.columns[2],
-                        values: [3]
+                        value: 700,
+                        label: 'b',
+                        identity: selectionIds[1],
+                        selected: false,
+                        categoryOrMeasureIndex: 1,
+                        key: selectionIds[1].getKey(),
+                        tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col2", value: "700" }],
+                        color: sliceColor,
+                        labelFill: sliceColor,
+                        showLabel: true
                     }
-                ])
-            }
-        };
-        var defaultDataPointColor = "#00FF00";
-        var actualData = FunnelChart.converter(dataView, defaultDataPointColor, defaultDataPointColor);
-        expect(actualData.slices[0].tooltipInfo).toEqual([{ displayName: 'a', value: '1' }]);
-        expect(actualData.slices[1].tooltipInfo).toEqual([{ displayName: 'b', value: '2' }]);
-        expect(actualData.slices[2].tooltipInfo).toEqual([{ displayName: 'c', value: '3' }]);
+                ],
+                valuesMetadata: [{ name: 'col2', isMeasure: true }, { name: 'col3', isMeasure: true }],
+                hasHighlights: false,
+                highlightsOverflow: false,
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(),
+            };
+            expect(actualData).toEqual(expectedData);
+        });
+        it('Check converter with no category and multi-measures', function () {
+            var dataViewMetadata = {
+                columns: [
+                    { name: 'col1' },
+                    { name: 'col2', isMeasure: true },
+                    { name: 'col3', isMeasure: true }
+                ]
+            };
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [],
+                    values: DataViewTransform.createValueColumns([{
+                        source: dataViewMetadata.columns[1],
+                        values: [100, 200, 300],
+                        subtotal: 600,
+                    }, {
+                        source: dataViewMetadata.columns[2],
+                        values: [300, 200, 100],
+                        subtotal: 600,
+                    },])
+                }
+            };
+            var actualData = FunnelChart.converter(dataView, colors);
+            var selectionIds = [
+                SelectionId.createWithMeasure("col2"),
+                SelectionId.createWithMeasure("col3")
+            ];
+            var sliceColor = colors.getColor(0).value;
+            var expectedData = {
+                slices: [
+                    {
+                        value: 600,
+                        label: 'col2',
+                        identity: selectionIds[0],
+                        key: selectionIds[0].getKey(),
+                        selected: false,
+                        categoryOrMeasureIndex: 0,
+                        tooltipInfo: [{ displayName: "col2", value: "600" }],
+                        color: sliceColor,
+                        labelFill: sliceColor,
+                        showLabel: true,
+                    },
+                    {
+                        value: 600,
+                        label: 'col3',
+                        identity: selectionIds[1],
+                        key: selectionIds[1].getKey(),
+                        selected: false,
+                        categoryOrMeasureIndex: 1,
+                        tooltipInfo: [{ displayName: "col2", value: "600" }],
+                        color: sliceColor,
+                        labelFill: sliceColor,
+                        showLabel: true,
+                    }
+                ],
+                valuesMetadata: [dataViewMetadata.columns[1], dataViewMetadata.columns[2]],
+                hasHighlights: false,
+                highlightsOverflow: false,
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(),
+            };
+            expect(actualData).toEqual(expectedData);
+        });
+        it('non-categorical multi-measure tooltip values test', function () {
+            var dataViewMetadata = {
+                columns: [
+                    { name: 'a', isMeasure: true },
+                    { name: 'b', isMeasure: true },
+                    { name: 'c', isMeasure: true }
+                ]
+            };
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    values: DataViewTransform.createValueColumns([
+                        {
+                            source: dataViewMetadata.columns[0],
+                            values: [1]
+                        },
+                        {
+                            source: dataViewMetadata.columns[1],
+                            values: [2]
+                        },
+                        {
+                            source: dataViewMetadata.columns[2],
+                            values: [3]
+                        }
+                    ])
+                }
+            };
+            var actualData = FunnelChart.converter(dataView, colors);
+            expect(actualData.slices[0].tooltipInfo).toEqual([{ displayName: 'a', value: '1' }]);
+            expect(actualData.slices[1].tooltipInfo).toEqual([{ displayName: 'b', value: '2' }]);
+            expect(actualData.slices[2].tooltipInfo).toEqual([{ displayName: 'c', value: '3' }]);
+        });
     });
     describe("FunnelChart Interactivity", function () {
         var v, element;
@@ -342,6 +395,7 @@ var powerbitests;
                 { name: null, groupName: '201503', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(1 /* Number */) }
             ]
         };
+        var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'Squad' });
         var DefaultOpacity = "" + FunnelChart.DefaultBarOpacity;
         var DimmedOpacity = "" + FunnelChart.DimmedBarOpacity;
         var interactiveDataViewOptions = {
@@ -354,23 +408,24 @@ var powerbitests;
                         identity: [
                             powerbitests.mocks.dataViewScopeIdentity('a'),
                             powerbitests.mocks.dataViewScopeIdentity('b'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadataCategorySeriesColumns.columns[2],
                             values: [110, 120],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201501')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201501'),
                         },
                         {
                             source: dataViewMetadataCategorySeriesColumns.columns[3],
                             values: [210, 220],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201502')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201502'),
                         },
                         {
                             source: dataViewMetadataCategorySeriesColumns.columns[4],
                             values: [310, 320],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201503')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201503'),
                         }
                     ])
                 }
@@ -433,7 +488,7 @@ var powerbitests;
                         {
                             data: [
                                 interactiveDataViewOptions.dataViews[0].categorical.categories[0].identity[0],
-                            ]
+                            ],
                         },
                         {
                             data: [
@@ -494,13 +549,14 @@ var powerbitests;
     });
     describe("FunnelChart DOM Validation", function () {
         var v, element;
-        var translate = 94.5078125;
+        var translate = 62;
         var dataViewMetadata = {
             columns: [
                 { name: 'col1' },
                 { name: 'col2', isMeasure: true, objects: { general: { formatString: '$0' } } },
             ]
         };
+        var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
         // because of different representations of the color (rgb, hex), "going through" the browser and getting its adjusted color value
         function adjustColor(colorToAdjust) {
             var dummy = $('<div/>');
@@ -534,11 +590,12 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100, 200, 700]
+                        values: [100, 200, 700],
                     }])
                 }
             };
@@ -563,7 +620,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -596,7 +654,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -629,7 +688,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -645,7 +705,7 @@ var powerbitests;
                 done();
             }, DefaultRenderTime);
         });
-        it('Ensure Labels that do not fit in the bar are shown outside and are black ', function (done) {
+        it('Ensure Labels that do not fit in the bar are shown outside and are the bar fill color', function (done) {
             var categoryIdentities = [
                 powerbitests.mocks.dataViewScopeIdentity("John Domo"),
                 powerbitests.mocks.dataViewScopeIdentity("Delta Force"),
@@ -659,7 +719,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadataWithLabelsObject.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadataWithLabelsObject.columns[1],
@@ -670,22 +731,24 @@ var powerbitests;
             };
             v.onDataChanged({ dataViews: [dataView] });
             setTimeout(function () {
+                // The funnel bars are rotated 90 degrees, so for the bars, "y" and "height" correspond
+                // to what we would think of as the position and size along the x-axis.
+                // The funnel data labels are not rotated, so for the labels we need to use "x" and "width".
                 var labels = $('.funnelChart .innerTextGroup text');
-                var firstBarWidth = +$('.funnelChart').find('rect').first().attr('height');
-                var firstBarX = +$('.funnelChart').find('rect').first().attr('x');
-                var lastBarWidth = +$('.funnelChart').find('rect').last().attr('height');
-                var lastBarX = +$('.funnelChart').find('rect').last().attr('x');
-                var firstBar = firstBarWidth + firstBarX - translate;
-                var lastBar = lastBarWidth + lastBarX - translate;
+                var firstBarHeight = +$('.funnelChart').find('rect').first().attr('height');
+                var firstBarY = +$('.funnelChart').find('rect').first().attr('y');
+                var lastBarHeight = +$('.funnelChart').find('rect').last().attr('height');
+                var lastBarY = +$('.funnelChart').find('rect').last().attr('y');
                 expect(labels.length).toBe(3);
                 expect($(labels[0]).attr('x')).toEqual($(labels[1]).attr('x'));
                 expect($(labels[1]).attr('x')).not.toEqual($(labels[2]).attr('x'));
+                // Check that the first label is inside and white
                 expect(adjustColor($(labels[0]).css('fill'))).toEqual(adjustColor('#FFFFFF'));
-                expect(adjustColor($(labels[2]).css('fill'))).toEqual(adjustColor('#000000'));
-                expect($(labels[2]).attr('x')).toBeGreaterThan(lastBar); // Check that the last label is outside
-                //Check that the firts label is inside
-                expect($(labels[0]).attr('x')).toBeGreaterThan(firstBarX);
-                expect($(labels[0]).attr('x')).toBeLessThan(firstBar);
+                expect($(labels[0]).attr('x')).toBeGreaterThan(firstBarY + translate);
+                expect($(labels[0]).attr('x')).toBeLessThan(firstBarY + firstBarHeight + translate);
+                // Check that the last label is outside and equal to fill color
+                expect(adjustColor($(labels[2]).css('fill'))).toEqual(adjustColor($('.funnelChart').find('rect').eq(2).css('fill')));
+                expect($(labels[2]).attr('x')).toBeGreaterThan(lastBarY + lastBarHeight + translate);
                 done();
             }, DefaultRenderTime);
         });
@@ -703,7 +766,8 @@ var powerbitests;
                             powerbitests.mocks.dataViewScopeIdentity('Mickey Mouse'),
                             powerbitests.mocks.dataViewScopeIdentity('Donald Duck'),
                             powerbitests.mocks.dataViewScopeIdentity('VRM Jones'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -726,7 +790,6 @@ var powerbitests;
                 }, DefaultRenderTime);
             }, DefaultRenderTime);
         });
-        //Validate default labels, and validate that first bar is too long and the label is inside and white 
         it('Default labels validation', function (done) {
             var metadataWithDisplayUnits = $.extend(true, {}, dataViewMetadata);
             metadataWithDisplayUnits.objects = { labels: { labelDisplayUnits: 1000 } };
@@ -742,7 +805,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -753,28 +817,31 @@ var powerbitests;
             };
             v.onDataChanged({ dataViews: [dataView] });
             setTimeout(function () {
+                // The funnel bars are rotated 90 degrees, so for the bars, "y" and "height" correspond
+                // to what we would think of as the position and size along the x-axis.
+                // The funnel data labels are not rotated, so for the labels we need to use "x" and "width".
                 var labels = $('.funnelChart .innerTextGroup text');
-                var firstBarX = +$('.funnelChart').find('rect').first().attr('x');
-                var firstBarWidth = +$('.funnelChart').find('rect').first().attr('height');
-                var firstBarTranslated = firstBarX - translate;
-                var firstBar = firstBarTranslated + firstBarWidth;
-                var lastBarWidth = +$('.funnelChart').find('rect').last().attr('height');
-                var lastBarX = +$('.funnelChart').find('rect').last().attr('x');
-                var lastBar = lastBarWidth + lastBarX - translate;
+                var firstBarY = +$('.funnelChart').find('rect').first().attr('y');
+                var firstBarHeight = +$('.funnelChart').find('rect').first().attr('height');
+                var lastBarY = +$('.funnelChart').find('rect').last().attr('y');
+                var lastBarHeight = +$('.funnelChart').find('rect').last().attr('height');
                 expect(labels.length).toBe(3);
-                expect(adjustColor($(labels[0]).css('fill'))).toEqual(adjustColor($('.funnelChart').find('rect').first().css('fill')));
+                expect(adjustColor($(labels[0]).css('fill'))).toEqual(adjustColor('#FFFFFF'));
                 expect(adjustColor($(labels[2]).css('fill'))).toEqual(adjustColor($('.funnelChart').find('rect').last().css('fill')));
                 expect($(labels[0]).css('fill-opacity')).toEqual('1');
                 expect($(labels[1]).css('fill-opacity')).toEqual('1');
                 expect($(labels[2]).css('fill-opacity')).toEqual('1');
                 expect($(labels.first().css('font-size')).selector).toBe(fontSize);
                 expect($(labels[0]).text()).toEqual('$0.56K');
-                expect($(labels[2]).attr('x')).toBeGreaterThan(lastBar); // Check that the last label is outside
-                expect($(labels[0]).attr('x')).toBeGreaterThan(firstBar); // Check that the last label is outside
+                // Check that the first label is inside
+                expect($(labels[0]).attr('x')).toBeGreaterThan(firstBarY + translate);
+                expect($(labels[0]).attr('x')).toBeLessThan(firstBarY + firstBarHeight + translate);
+                // Check that the last label is outside
+                expect($(labels[2]).attr('x')).toBeGreaterThan(lastBarY + lastBarHeight);
                 done();
             }, DefaultRenderTime);
         });
-        it('Validate that first bar is too long and the label is inside and white ', function (done) {
+        it('Validate label colors and positioning', function (done) {
             var categoryIdentities = [
                 powerbitests.mocks.dataViewScopeIdentity("John Domo"),
                 powerbitests.mocks.dataViewScopeIdentity("Delta Force"),
@@ -786,29 +853,35 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [1555, 2000, 20],
+                        values: [2000, 1555, 20],
                         subtotal: 3575
                     }])
                 }
             };
             v.onDataChanged({ dataViews: [dataView] });
             setTimeout(function () {
+                // The funnel bars are rotated 90 degrees, so for the bars, "y" and "height" correspond
+                // to what we would think of as the position and size along the x-axis.
+                // The funnel data labels are not rotated, so for the labels we need to use "x" and "width".
                 var labels = $('.funnelChart .innerTextGroup text');
-                var firstBarX = +$('.funnelChart').find('rect').first().attr('x');
-                var firstBarWidth = +$('.funnelChart').find('rect').first().attr('height');
-                var firstBarTranslated = firstBarX - translate;
-                var firstBar = firstBarTranslated + firstBarWidth;
-                //Display unit will be displayed only when displayUnit object has value, and not by default
-                expect($(labels[0]).text()).toEqual('$1555');
-                //the first bar is too long then label need to be inside and white
+                var firstBarY = +$('.funnelChart').find('rect').first().attr('y');
+                var firstBarHeight = +$('.funnelChart').find('rect').first().attr('height');
+                // The first label should be white and should be inside the bar.
+                expect($(labels[0]).text()).toEqual('$2000');
                 expect(adjustColor($(labels[0]).css('fill'))).toEqual(adjustColor('#FFFFFF'));
-                //Check that the labels position is inside
-                expect($(labels[0]).attr('x')).toBeGreaterThan(firstBarTranslated);
-                expect($(labels[0]).attr('x')).toBeLessThan(firstBar);
+                expect($(labels[0]).attr('x')).toBeGreaterThan(firstBarY + translate);
+                expect($(labels[0]).attr('x')).toBeLessThan(firstBarY + firstBarHeight + translate);
+                // The third label should be the same as the fill color and should be outside the bar.
+                var thirdBarY = +$('.funnelChart').find('rect').eq(2).attr('y');
+                var thirdBarHeight = +$('.funnelChart').find('rect').eq(2).attr('height');
+                expect($(labels[2]).text()).toEqual('$20');
+                expect(adjustColor($(labels[2]).css('fill'))).toEqual(adjustColor($('.funnelChart').find('rect').eq(2).css('fill')));
+                expect($(labels[2]).attr('x')).toBeGreaterThan(thirdBarY + thirdBarHeight + translate);
                 done();
             }, DefaultRenderTime);
         });
@@ -826,7 +899,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadataWithLabelsObject.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadataWithLabelsObject.columns[1],
@@ -862,7 +936,7 @@ var powerbitests;
             var dataViewMetadataWithLabelsObject = powerbi.Prototype.inherit(dataViewMetadata);
             dataViewMetadataWithLabelsObject.objects = {
                 labels: {
-                    color: { solid: { color: '#CC0099' } }
+                    color: { solid: { color: '#CC0099' } },
                 }
             };
             var dataView = {
@@ -871,7 +945,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadataWithLabelsObject.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadataWithLabelsObject.columns[1],
@@ -904,7 +979,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadataWithLabelsObject.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadataWithLabelsObject.columns[1],
@@ -932,7 +1008,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -947,7 +1024,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -963,7 +1041,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -980,7 +1059,7 @@ var powerbitests;
             setTimeout(function () {
                 var labels = $('.funnelChart .innerTextGroup text');
                 expect(labels.length).toBe(3);
-                expect(adjustColor($(labels[0]).css('fill'))).toEqual(adjustColor($('.funnelChart').find('rect').first().css('fill')));
+                expect(adjustColor($(labels[0]).css('fill'))).toEqual(adjustColor('#FFFFFF'));
                 expect($(labels[0]).text()).toEqual('$100');
                 expect($(labels[1]).text()).toEqual('$200');
                 expect($(labels[2]).text()).toEqual('$700');
@@ -1003,7 +1082,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadataWithLabelsObject.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadataWithLabelsObject.columns[1],
@@ -1036,7 +1116,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadataWithLabelsObject.columns[0],
                         values: ['John Domo', 'Delta Force', 'Mr Bing'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadataWithLabelsObject.columns[1],
@@ -1063,18 +1144,19 @@ var powerbitests;
                 { name: 'col3' }
             ]
         };
+        var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.createMinerva({
                 heatMap: false,
-                newTable: false
+                newTable: false,
             }).getPlugin('funnel').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -1095,7 +1177,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -1110,7 +1193,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -1126,7 +1210,8 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -1167,15 +1252,16 @@ var powerbitests;
                 }
             ]
         };
+        var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             visual = powerbi.visuals.visualPluginFactory.create().getPlugin('funnel').create();
             visual.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -1191,7 +1277,8 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadata.columns[0],
-                            values: ['a', 'b', 'c']
+                            values: ['a', 'b', 'c'],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -1215,6 +1302,7 @@ var powerbitests;
             expect(points[2].properties['fill']).toBeDefined();
         });
         it('enumerateObjectInstances - Gradient color', function () {
+            var dataColors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
             var dataViewGradientMetadata = {
                 columns: [
                     { name: 'col1' },
@@ -1252,7 +1340,7 @@ var powerbitests;
                 dataViews: [dataView]
             };
             var defaultDataPointColor = "#00FF00";
-            var actualData = FunnelChart.converter(dataView, defaultDataPointColor, defaultDataPointColor);
+            var actualData = FunnelChart.converter(dataView, dataColors, defaultDataPointColor);
             expect(actualData.slices[0].color).toBe(colors[0]);
             expect(actualData.slices[1].color).toBe(colors[1]);
             expect(actualData.slices[2].color).toBe(colors[2]);

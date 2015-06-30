@@ -8,9 +8,9 @@ var powerbitests;
     var ScatterChart = powerbi.visuals.ScatterChart;
     var ArrayExtensions = jsCommon.ArrayExtensions;
     var DataShapeUtility = powerbi.data.dsr.DataShapeUtility;
+    var DataViewPivotCategorical = powerbi.data.DataViewPivotCategorical;
     var DataViewTransform = powerbi.data.DataViewTransform;
     var SemanticType = powerbi.data.SemanticType;
-    var VisualHostServices = powerbi.explore.services.VisualHostServices;
     var AxisType = powerbi.axisType;
     var DefaultWaitForRender = 100;
     var axisLabelVisibleMinHeight = powerbi.visuals.visualPluginFactory.MobileVisualPluginService.MinHeightAxesVisible;
@@ -46,7 +46,7 @@ var powerbitests;
                 columns: [
                     { name: 'Year' },
                     { name: 'Value', isMeasure: true }
-                ]
+                ],
             };
             var dataView = {
                 metadata: dataViewMetadata,
@@ -58,7 +58,7 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([{
                         source: measureColumn,
                         values: []
-                    }])
+                    }]),
                 }
             };
             expect(powerbi.DataViewAnalysis.supports(dataView, powerbi.visuals.scatterChartCapabilities.dataViewMappings[0], true)).toBe(false);
@@ -68,7 +68,7 @@ var powerbitests;
                 columns: [
                     { name: 'Year' },
                     { name: 'Value', isMeasure: true }
-                ]
+                ],
             };
             var dataView = {
                 metadata: dataViewMetadata,
@@ -80,7 +80,7 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([{
                         source: measureColumn,
                         values: [200]
-                    }])
+                    }]),
                 }
             };
             expect(powerbi.DataViewAnalysis.supports(dataView, powerbi.visuals.scatterChartCapabilities.dataViewMappings[0], true)).toBe(false);
@@ -100,26 +100,26 @@ var powerbitests;
             columns: [
                 { name: 'col1', type: DataShapeUtility.describeDataType(2048 /* String */) },
                 { name: 'col2', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) }
-            ]
+            ],
         };
         beforeEach(function () {
             if (interactiveChart)
                 powerbitests.helpers.suppressDebugAssertFailure();
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('scatterChart').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: interactiveChart }
+                interactivity: { isInteractiveLegend: interactiveChart },
             });
         });
         it('scatter chart single measure dom validation', function (done) {
@@ -168,7 +168,7 @@ var powerbitests;
                         categories: [{
                             source: metadata.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -202,7 +202,7 @@ var powerbitests;
                 ]
             };
             v.onDataChanged({
-                dataViews: [DataViewTransform.pivot({
+                dataViews: [DataViewPivotCategorical.apply({
                     metadata: metadata,
                     categorical: {
                         categories: [{
@@ -234,10 +234,11 @@ var powerbitests;
             var itemsNumber = interactiveChart ? 3 : 2;
             setTimeout(function () {
                 expect($('.scatterChart .mainGraphicsContext .dot').length).toBe(2);
+                var length = $(legendClassSelector + (interactiveChart ? ' .item' : 'Text')).length;
                 expect($(legendClassSelector).length).toBe(1);
-                expect($(legendClassSelector + ' .item').length).toBe(itemsNumber);
+                expect(length).toBe(itemsNumber);
                 if (!interactiveChart)
-                    expect($('.legend .title').text()).toBe('col1');
+                    expect($('.legendTitle').text()).toBe('col1');
                 done();
             }, DefaultWaitForRender);
         });
@@ -264,7 +265,7 @@ var powerbitests;
                         categories: [{
                             source: metadata.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -308,7 +309,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadata.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
@@ -342,7 +343,7 @@ var powerbitests;
                         categories: [{
                             source: metadata.columns[0],
                             values: ['a'],
-                            identity: [powerbitests.mocks.dataViewScopeIdentity('a')]
+                            identity: [powerbitests.mocks.dataViewScopeIdentity('a')],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -371,7 +372,7 @@ var powerbitests;
                 expect($('.scatterChart .mainGraphicsContext .dot').length).toBe(1);
                 var r = (interactiveChart ? 45 : 51.5).toString();
                 expect($('.scatterChart .mainGraphicsContext .dot')[0].getAttribute('r')).toBe(r);
-                expect($('.legend').length).toBe(0);
+                expect($('.legendItem').length).toBe(0);
                 done();
             }, DefaultWaitForRender);
         });
@@ -412,7 +413,7 @@ var powerbitests;
                 var r = (interactiveChart ? 45 : 51.5).toString(); // interactive legend is bigger
                 expect($('.scatterChart .mainGraphicsContext .dot')[0].getAttribute('r')).toBe(r);
                 expect($('.scatterChart .mainGraphicsContext .dot').find('title').first().text()).toBe('');
-                expect($('.legend').length).toBe(0);
+                expect($('.legendItem').length).toBe(0);
                 done();
             }, DefaultWaitForRender);
         });
@@ -459,7 +460,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadata.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
@@ -510,7 +511,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -552,7 +553,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -586,7 +587,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -634,7 +635,7 @@ var powerbitests;
                         categories: [{
                             source: metadata.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -678,7 +679,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -720,7 +721,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -779,7 +780,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -841,7 +842,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -911,16 +912,16 @@ var powerbitests;
                     type: DataShapeUtility.describeDataType(4 /* DateTime */),
                     format: 'd'
                 }
-            ]
+            ],
         };
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
         var dataViewMetadataWithLabelsOnObject = powerbi.Prototype.inherit(dataViewMetadata);
         dataViewMetadataWithLabelsOnObject.objects = { categoryLabels: { show: true } };
         var dataViewMetadataWithLabelsOffObject = powerbi.Prototype.inherit(dataViewMetadata);
         dataViewMetadataWithLabelsOffObject.objects = { categoryLabels: { show: false } };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('scatterChart').create();
             v.init({
@@ -932,7 +933,7 @@ var powerbitests;
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: interactiveChart }
+                interactivity: { isInteractiveLegend: interactiveChart },
             });
         });
         it('scatter chart show labels validation', function (done) {
@@ -1121,7 +1122,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadataWithLabelsOnObject.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]
@@ -1139,7 +1140,7 @@ var powerbitests;
                             }],
                             values: DataViewTransform.createValueColumns([{
                                 source: dataViewMetadataWithLabelsOnObject.columns[1],
-                                values: [400, 500, 300, 200]
+                                values: [400, 500, 300, 200],
                             }])
                         }
                     }]
@@ -1214,7 +1215,7 @@ var powerbitests;
             var v = powerbi.visuals.visualPluginFactory.create().getPlugin('scatterChart').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -1244,7 +1245,7 @@ var powerbitests;
                         categories: [{
                             source: metadata.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -1444,7 +1445,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -1575,7 +1576,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -1642,7 +1643,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -1655,7 +1656,7 @@ var powerbitests;
                         },
                         {
                             source: metadata.columns[3],
-                            values: [310, 320, 330, 340, 350]
+                            values: [310, 320, 330, 340, 350],
                         }
                     ])
                 }
@@ -1696,7 +1697,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef1,
-                                Select: 0
+                                Select: 0,
                             }]
                         }]
                     },
@@ -1704,7 +1705,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef2,
-                                Select: 3
+                                Select: 3,
                             }]
                         }]
                     }
@@ -1746,7 +1747,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef1,
-                                Select: 0
+                                Select: 0,
                             }]
                         }]
                     },
@@ -1754,7 +1755,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef2,
-                                Select: 3
+                                Select: 3,
                             }]
                         }]
                     }
@@ -1793,7 +1794,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef1,
-                                Select: 0
+                                Select: 0,
                             }]
                         }]
                     },
@@ -1801,7 +1802,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef2,
-                                Select: 4
+                                Select: 4,
                             }]
                         }]
                     },
@@ -1871,7 +1872,7 @@ var powerbitests;
                         { displayName: 'col4', queryName: '$s4', roles: { 'X': true } },
                     ]
                 },
-                colorAllocatorFactory: powerbi.visuals.createColorAllocatorFactory()
+                colorAllocatorFactory: powerbi.visuals.createColorAllocatorFactory(),
             })[0];
             expect(pivotedDataView).not.toBe(dataView);
             var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
@@ -1907,7 +1908,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -1958,7 +1959,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2006,7 +2007,7 @@ var powerbitests;
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
                         identity: categoryIdentities,
-                        objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE1' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE2' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE3' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE4' } } } }]
+                        objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE1' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE2' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE3' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE4' } } } }],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2055,7 +2056,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2139,7 +2140,7 @@ var powerbitests;
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
                         identity: categoryIdentities,
-                        objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE1' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE2' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE3' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE4' } } } }]
+                        objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE1' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE2' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE3' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE4' } } } }],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2181,7 +2182,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a', 'b', 'c', 'd', 'e'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2217,7 +2218,7 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['a'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2315,7 +2316,7 @@ var powerbitests;
             ]
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
@@ -2350,7 +2351,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -2375,7 +2376,7 @@ var powerbitests;
                 var mockEvent = {
                     abc: 'def',
                     stopPropagation: function () {
-                    }
+                    },
                 };
                 spyOn(hostServices, 'onSelect').and.callThrough();
                 trigger(mockEvent);
@@ -2412,7 +2413,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -2438,7 +2439,7 @@ var powerbitests;
                 var mockEvent = {
                     abc: 'def',
                     stopPropagation: function () {
-                    }
+                    },
                 };
                 spyOn(hostServices, 'onSelect').and.callThrough();
                 trigger1(mockEvent);
@@ -2497,7 +2498,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -2525,7 +2526,7 @@ var powerbitests;
                     abc: 'def',
                     ctrlKey: true,
                     stopPropagation: function () {
-                    }
+                    },
                 };
                 spyOn(hostServices, 'onSelect').and.callThrough();
                 trigger1(mockEvent);
@@ -2567,7 +2568,7 @@ var powerbitests;
                 expect(hostServices.onSelect).toHaveBeenCalledWith({
                     data: [
                         {
-                            data: [categoryIdentities[3]]
+                            data: [categoryIdentities[3]],
                         },
                         {
                             data: [categoryIdentities[1]]
@@ -2623,7 +2624,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -2650,13 +2651,13 @@ var powerbitests;
                 var singleEvent = {
                     abc: 'def',
                     stopPropagation: function () {
-                    }
+                    },
                 };
                 var multiEvent = {
                     abc: 'def',
                     ctrlKey: true,
                     stopPropagation: function () {
-                    }
+                    },
                 };
                 spyOn(hostServices, 'onSelect').and.callThrough();
                 trigger1(singleEvent);
@@ -2769,7 +2770,7 @@ var powerbitests;
                 var mockEvent = {
                     abc: 'def',
                     stopPropagation: function () {
-                    }
+                    },
                 };
                 spyOn(hostServices, 'onSelect').and.callThrough();
                 trigger(mockEvent);
@@ -2839,7 +2840,7 @@ var powerbitests;
                 var mockEvent = {
                     abc: 'def',
                     stopPropagation: function () {
-                    }
+                    },
                 };
                 spyOn(hostServices, 'onSelect').and.callThrough();
                 trigger(mockEvent);
@@ -2895,14 +2896,14 @@ var powerbitests;
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('scatterChart').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: true }
+                interactivity: { isInteractiveLegend: true },
             });
             v.onDataChanged({
                 dataViews: [{
@@ -2911,7 +2912,7 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
                             values: ['a', 'b', 'c', 'd', 'e'],
-                            identity: identities
+                            identity: identities,
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -3072,16 +3073,16 @@ var powerbitests;
         it('scatter chart legends existance dom validation with viewport height greater than legendVisibleMinHeight non-interactive', function (done) {
             testAxisAndLegendExistance(legendVisibleGreaterThanMinHeightString, "500", false, false);
             setTimeout(function () {
-                expect($('.legend .label').length).toBe(5);
-                expect($('.legend .item').length).toBe(5);
+                expect($('.legendText').length).toBe(5);
+                expect($('.legendItem').length).toBe(5);
                 done();
             }, DefaultWaitForRender);
         });
         it('scatter chart legends existance dom validation with viewport height smaller than legendVisibleMinHeight non-interactive', function (done) {
             testAxisAndLegendExistance(legendVisibleSmallerThanMinHeightString, "500", false, false);
             setTimeout(function () {
-                expect($('.legend .label').length).toBe(5);
-                expect($('.legend .item').length).toBe(5);
+                expect($('.legendText').length).toBe(5);
+                expect($('.legendItem').length).toBe(5);
                 done();
             }, DefaultWaitForRender);
         });
@@ -3096,8 +3097,8 @@ var powerbitests;
         it('scatter chart legends existance dom validation with viewport height greater than legendVisibleMinHeight non-interactive mobile', function (done) {
             testAxisAndLegendExistance(legendVisibleGreaterThanMinHeightString, "500", false, true);
             setTimeout(function () {
-                expect($('.legend .label').length).toBe(5);
-                expect($('.legend .item').length).toBe(5);
+                expect($('.legendText').length).toBe(5);
+                expect($('.legendItem').length).toBe(5);
                 done();
             }, DefaultWaitForRender);
         });
@@ -3113,14 +3114,14 @@ var powerbitests;
             ]
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('scatterChart').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -3136,7 +3137,7 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
-                            values: ['a', 'b', 'c', 'd', 'e']
+                            values: ['a', 'b', 'c', 'd', 'e'],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -3173,7 +3174,7 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
-                            values: ['a', 'b', 'c', 'd', 'e']
+                            values: ['a', 'b', 'c', 'd', 'e'],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -3218,7 +3219,7 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
-                            values: [1, 2, 3, 4, 5]
+                            values: [1, 2, 3, 4, 5],
                         }]
                     }
                 }]
@@ -3245,7 +3246,7 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadataFourColumn.columns[0],
-                            values: [1, 2, 3, 4, 5]
+                            values: [1, 2, 3, 4, 5],
                         }]
                     }
                 }]
@@ -3267,14 +3268,14 @@ var powerbitests;
         }
         v.init({
             element: element,
-            host: powerbi.explore.services.createVisualHostServices(),
+            host: powerbitests.mocks.createVisualHostServices(),
             style: powerbi.common.services.visualStyles.create(),
             viewport: {
                 height: element.height(),
                 width: element.width()
             },
             animation: { transitionImmediate: true },
-            interactivity: { isInteractiveLegend: isInteractive }
+            interactivity: { isInteractiveLegend: isInteractive },
         });
         var metadata = {
             columns: [

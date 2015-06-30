@@ -16,7 +16,7 @@ var powerbitests;
         tileUnitHeight: 170,
         tileSmallLandscapeRowSpan: 1,
         tileSmallLandscapeColSpan: 1,
-        tileMediumLandscapeRowSpan: 0
+        tileMediumLandscapeRowSpan: 0,
     };
     TileLayoutConstants.tileMediumLandscapeRowSpan = TileLayoutConstants.tileSmallLandscapeRowSpan * 2;
     TileLayoutConstants.tileMediumLandscapeColSpan = TileLayoutConstants.tileSmallLandscapeColSpan * 2;
@@ -45,7 +45,7 @@ var powerbitests;
             var smallTileWidth = calculateSmallTileWidth();
             var viewPort = {
                 height: 100,
-                width: smallTileWidth
+                width: smallTileWidth,
             };
             expect(Table.getTableColumnSizePolicy(viewPort)).toBe(1 /* FixedColumns4 */);
             // Medium Tile - 5 columns
@@ -73,7 +73,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
-                ]
+                ],
             };
             var data = {
                 metadata: dataViewMetadata,
@@ -112,7 +112,7 @@ var powerbitests;
                         [123456.789],
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             renderTable({
                 data: data,
@@ -136,7 +136,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
-                ]
+                ],
             };
             var data = {
                 metadata: dataViewMetadata,
@@ -145,7 +145,7 @@ var powerbitests;
                         [123456.789]
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             renderTable({
                 data: data,
@@ -155,7 +155,7 @@ var powerbitests;
                         args[_i - 0] = arguments[_i];
                     }
                     return formatCalls.push(args);
-                }
+                },
             });
             setTimeout(function () {
                 expect(formatCalls).toEqual([
@@ -167,11 +167,11 @@ var powerbitests;
         it('table totals with first column non-measure', function (done) {
             var viewport = {
                 height: 40,
-                width: calculateSmallTileWidth()
+                width: calculateSmallTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([0 /* Text */, 2 /* NumericMeasure */], true, undefined, powerbitests.tableDataViewHelper.dataViewObjectsTotals(true)),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var footer = element.find('tfoot');
@@ -191,11 +191,11 @@ var powerbitests;
         it('table totals not enabled with first column non-measure', function (done) {
             var viewport = {
                 height: 40,
-                width: calculateSmallTileWidth()
+                width: calculateSmallTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([0 /* Text */, 2 /* NumericMeasure */], true),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var footer = element.find('tfoot');
@@ -206,11 +206,11 @@ var powerbitests;
         it('table totals with first column measure', function (done) {
             var viewport = {
                 height: 40,
-                width: calculateSmallTileWidth()
+                width: calculateSmallTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([2 /* NumericMeasure */, 0 /* Text */], true, undefined, powerbitests.tableDataViewHelper.dataViewObjectsTotals(true)),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var footer = element.find('tfoot');
@@ -231,11 +231,11 @@ var powerbitests;
         it('table grand totals (all measures)', function (done) {
             var viewport = {
                 height: 40,
-                width: calculateSmallTileWidth()
+                width: calculateSmallTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([2 /* NumericMeasure */, 2 /* NumericMeasure */], false),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 // Should have no footer as there are no totals
@@ -247,11 +247,11 @@ var powerbitests;
         it('table no measures', function (done) {
             var viewport = {
                 height: 40,
-                width: calculateSmallTileWidth()
+                width: calculateSmallTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([0 /* Text */, 0 /* Text */], false),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 // Should have no footer as there are no totals
@@ -278,11 +278,11 @@ var powerbitests;
             var width = calculateNonTileWidth();
             var viewport = {
                 height: 10,
-                width: width
+                width: width,
             };
             var v = renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([2, 0, 2, 0, 2, 0, 2, 0, 2, 0], true, 20, powerbitests.tableDataViewHelper.dataViewObjectsTotals(true)),
-                viewport: viewport
+                viewport: viewport,
             });
             v.onResizing({ height: 1000, width: width }, 0);
             setTimeout(function () {
@@ -528,11 +528,11 @@ var powerbitests;
         it('table auto scrolling layout - verify headers', function (done) {
             var viewport = {
                 height: 15,
-                width: calculateNonTileWidth()
+                width: calculateNonTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumns(15),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var tableBody = $('.dataTables_scrollBody table');
@@ -547,11 +547,11 @@ var powerbitests;
         it('table auto scrolling layout - verify footers', function (done) {
             var viewport = {
                 height: 10,
-                width: calculateNonTileWidth()
+                width: calculateNonTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([2, 0, 2, 0, 2, 0, 2, 0, 2, 0], true, undefined, powerbitests.tableDataViewHelper.dataViewObjectsTotals(true)),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var tableFoot = $('.dataTables_scrollFoot table');
@@ -567,11 +567,11 @@ var powerbitests;
         it('table auto scrolling layout - verify scrolling', function (done) {
             var viewport = {
                 height: 15,
-                width: calculateNonTileWidth()
+                width: calculateNonTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumns(30),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var tableHead = $('.table');
@@ -584,11 +584,11 @@ var powerbitests;
         it('table auto scrolling layout - verify fixed header/footer tables', function (done) {
             var viewport = {
                 height: 15,
-                width: calculateNonTileWidth()
+                width: calculateNonTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumns(15, undefined, powerbitests.tableDataViewHelper.dataViewObjectsTotals(true)),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 // Expect that we have three tables set up, each for header/footer/body
@@ -604,11 +604,11 @@ var powerbitests;
         it('table auto scrolling layout - verify column widths are the same', function (done) {
             var viewport = {
                 height: 15,
-                width: calculateNonTileWidth()
+                width: calculateNonTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([2, 0, 2, 0, 2, 0, 2, 0, 2, 0], true, undefined, powerbitests.tableDataViewHelper.dataViewObjectsTotals(true)),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var tableBodyThs = $('.dataTables_scrollBody table').find('th');
@@ -622,11 +622,11 @@ var powerbitests;
         it('table body height with totals - verify body height is calculated based on header and footer heights', function (done) {
             var viewport = {
                 height: 50,
-                width: calculateNonTileWidth()
+                width: calculateNonTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([0 /* Text */, 2 /* NumericMeasure */], true, undefined, powerbitests.tableDataViewHelper.dataViewObjectsTotals(true)),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var dataTableScrollHeight = $('.dataTables_scroll').height();
@@ -641,11 +641,11 @@ var powerbitests;
         it('table body height without the totals - verify body height is calculated based on header height', function (done) {
             var viewport = {
                 height: 50,
-                width: calculateNonTileWidth()
+                width: calculateNonTileWidth(),
             };
             renderTable({
                 data: powerbitests.tableDataViewHelper.getDataWithColumnsOfType([0 /* Text */, 2 /* NumericMeasure */], true, undefined, powerbitests.tableDataViewHelper.dataViewObjectsTotals(false)),
-                viewport: viewport
+                viewport: viewport,
             });
             setTimeout(function () {
                 var dataTableScrollHeight = $('.dataTables_scroll').height();
@@ -660,7 +660,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'date', type: ValueType.fromDescriptor({ time: true }) }
-                ]
+                ],
             };
             var data = {
                 metadata: dataViewMetadata,
@@ -671,10 +671,10 @@ var powerbitests;
                         [new Date('8/4/1999 12:00:00 PM')]
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             renderTable({
-                data: data
+                data: data,
             });
             setTimeout(function () {
                 var element = $('.dataTables_scrollHead table').find('th');
@@ -700,7 +700,7 @@ var powerbitests;
             element.css(CssConstants.maxWidthProperty, viewport.width);
             element.css(CssConstants.positionProperty, CssConstants.absoluteValue);
             var hostService = {
-                getLocalizedString: function (stringId) { return totalTextLabel; }
+                getLocalizedString: function (stringId) { return totalTextLabel; },
             };
             if (options.formatCallback)
                 spyOn(powerbi.visuals.valueFormatter, 'formatRaw').and.callFake(options.formatCallback);
@@ -727,7 +727,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
-                ]
+                ],
             };
             var data = {
                 metadata: dataViewMetadata,
@@ -736,7 +736,7 @@ var powerbitests;
                         [123456.789]
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             return data;
         }

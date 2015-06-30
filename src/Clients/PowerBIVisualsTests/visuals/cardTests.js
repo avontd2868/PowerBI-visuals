@@ -59,7 +59,7 @@ var powerbitests;
         var dataViewMetadata = {
             columns: [
                 { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
-            ]
+            ],
         };
         var data = {
             metadata: dataViewMetadata,
@@ -74,7 +74,7 @@ var powerbitests;
         var dataViewMetadata = {
             columns: [{ name: 'col1', isMeasure: true, objects: { 'general': { formatString: '#0' } } }],
             groups: [],
-            measures: [0]
+            measures: [0],
         };
         var cardStyles = Card.DefaultStyle.card;
         beforeEach(function () {
@@ -97,7 +97,7 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                settings: settings
+                settings: settings,
             });
         }
         it('Card_getAdjustedFontHeight with seed font size fitting in available width but equal/larger than MaxFontSize', function () {
@@ -229,7 +229,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'date', type: powerbi.ValueType.fromDescriptor({ dateTime: true }), isMeasure: true }
-                ]
+                ],
             };
             v.init({
                 element: element,
@@ -238,7 +238,7 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             v.onDataChanged({
                 dataViews: [{
@@ -260,7 +260,7 @@ var powerbitests;
         var dataViewMetadata = {
             columns: [{ name: 'col1', isMeasure: true, format: '#0' }],
             groups: [],
-            measures: [0]
+            measures: [0],
         };
         var labelStyles = Card.DefaultStyle.label;
         var valueStyles = Card.DefaultStyle.value;
@@ -271,7 +271,7 @@ var powerbitests;
             element = powerbitests.helpers.testDom('200', '300');
             v = powerbi.visuals.visualPluginFactory.createMinerva({
                 heatMap: false,
-                newTable: false
+                newTable: false,
             }).getPlugin('card').create();
             var settings;
             if (displayUnitSystemType) {
@@ -287,7 +287,7 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                settings: settings
+                settings: settings,
             });
         }
         it('Card on Canvas DOM validation', function (done) {
@@ -335,7 +335,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'date', type: powerbi.ValueType.fromDescriptor({ dateTime: true }), isMeasure: true }
-                ]
+                ],
             };
             v.onDataChanged({
                 dataViews: [{
@@ -355,7 +355,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'price', type: powerbi.ValueType.fromDescriptor({ numeric: true }), isMeasure: true, objects: { 'general': { formatString: '$0' } } }
-                ]
+                ],
             };
             v.onDataChanged({
                 dataViews: [{

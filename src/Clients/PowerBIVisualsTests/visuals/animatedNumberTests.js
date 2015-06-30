@@ -6,7 +6,6 @@
 var powerbitests;
 (function (powerbitests) {
     var AnimatedNumber = powerbi.visuals.AnimatedNumber;
-    var VisualHostServices = powerbi.explore.services.VisualHostServices;
     describe("AnimatedNumber", function () {
         it('AnimatedNumber registered capabilities', function () {
             expect(powerbi.visuals.visualPluginFactory.create().getPlugin('animatedNumber').capabilities).toBe(AnimatedNumber.capabilities);
@@ -18,13 +17,13 @@ var powerbitests;
     describe("AnimatedNumber DOM tests", function () {
         var v, element;
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('200', '300');
             v = new AnimatedNumber();
         });
         it('AnimatedText onDataChanged sets text (no settings)', function () {
             var dataViewMetadata = {
-                columns: [{ name: 'col1', isMeasure: true }]
+                columns: [{ name: 'col1', isMeasure: true }],
             };
             var dataView = {
                 metadata: dataViewMetadata,
@@ -32,14 +31,14 @@ var powerbitests;
             };
             var initOptions = {
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
-                    width: element.width()
+                    width: element.width(),
                 },
                 animation: {
-                    transitionImmediate: true
+                    transitionImmediate: true,
                 }
             };
             v.init(initOptions);

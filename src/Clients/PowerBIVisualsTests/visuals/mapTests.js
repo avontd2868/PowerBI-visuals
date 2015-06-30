@@ -9,6 +9,7 @@ var powerbitests;
     var Map = powerbi.visuals.Map;
     var DataLabelUtils = powerbi.visuals.dataLabelUtils;
     var ValueType = powerbi.ValueType;
+    var SQExprShortSerializer = powerbi.data.SQExprShortSerializer;
     var DefaultWaitForRender = DefaultWaitForRender || 10;
     describe("Map", function () {
         var element;
@@ -16,9 +17,10 @@ var powerbitests;
         var mockGeotaggingAnalyzerService;
         beforeEach(function () {
             var localizationService = powerbi.common.createLocalizationService();
-            powerbi.explore.services.VisualHostServices.initialize(localizationService);
+            powerbitests.mocks.setLocale(localizationService);
             powerbi.common.localize = localizationService;
             mockGeotaggingAnalyzerService = powerbi.createGeoTaggingAnalyzerService(function (stringId) { return localizationService.get(stringId); });
+            element = powerbitests.helpers.testDom('800', '500');
         });
         it('Map registered capabilities', function () {
             expect(powerbi.visuals.visualPluginFactory.create().getPlugin('map').capabilities).toBe(powerbi.visuals.mapCapabilities);
@@ -33,11 +35,12 @@ var powerbitests;
             expect(powerbi.visuals.mapCapabilities.suppressDefaultTitle).toBeUndefined();
         });
         it('Capabilities DataRole preferredTypes', function () {
+            //Map's Category, X and Y fieldWells have preferences for geographic locations, longitude and latitude respectively
             expect(powerbi.visuals.mapCapabilities.dataRoles.map(function (r) { return !!r.preferredTypes; })).toEqual([
                 true,
                 false,
-                false,
-                false,
+                true,
+                true,
                 false,
                 false,
             ]);
@@ -50,7 +53,13 @@ var powerbitests;
                 ValueType.fromExtendedType(powerbi.ExtendedType.Place),
                 ValueType.fromExtendedType(powerbi.ExtendedType.PostalCode_Text),
                 ValueType.fromExtendedType(powerbi.ExtendedType.Region),
-                ValueType.fromExtendedType(powerbi.ExtendedType.StateOrProvince),
+                ValueType.fromExtendedType(powerbi.ExtendedType.StateOrProvince)
+            ]);
+            expect(powerbi.visuals.mapCapabilities.dataRoles[2].preferredTypes.map(ValueType.fromDescriptor)).toEqual([
+                ValueType.fromPrimitiveTypeAndCategory(3 /* Double */, "Longitude")
+            ]);
+            expect(powerbi.visuals.mapCapabilities.dataRoles[3].preferredTypes.map(ValueType.fromDescriptor)).toEqual([
+                ValueType.fromPrimitiveTypeAndCategory(3 /* Double */, "Latitude")
             ]);
         });
         it('FormatString property should match calculated', function () {
@@ -141,10 +150,10 @@ var powerbitests;
                     index: 0,
                     fill: "#112233",
                     stroke: "#223344",
-                    seriesId: powerbitests.mocks.dataViewScopeIdentity("Sales")
+                    seriesId: powerbitests.mocks.dataViewScopeIdentity("Sales"),
                 }],
                 latitude: null,
-                longitude: null
+                longitude: null,
             };
             var radius = 3;
             // No seriesInfo means the result is null
@@ -211,7 +220,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef1,
-                                Select: 0
+                                Select: 0,
                             }]
                         }]
                     },
@@ -219,7 +228,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef2,
-                                Select: 3
+                                Select: 3,
                             }]
                         }]
                     }
@@ -230,7 +239,8 @@ var powerbitests;
             var latIndex = -1;
             var longIndex = -1;
             var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
-            var result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, latIndex, longIndex, colors);
+            var categoryColumnRef = dataView.categorical.values.identityFields;
+            var result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, longIndex, latIndex, colors, undefined, undefined, categoryColumnRef);
             expect(result.sizeValuesForGroup.length).toBe(2);
             expect(result.sizeValuesForGroup[0].value).toBe(150);
             expect(result.sizeValuesForGroup[0].index).toBe(0);
@@ -243,6 +253,148 @@ var powerbitests;
             expect(result.sizeValuesForGroup[1].fill).not.toBe(result.sizeValuesForGroup[0].fill);
             expect(result.latitude).toBe(null);
             expect(result.longitude).toBe(null);
+        });
+        it('Map.calculateSeriesLegend colors from palette with dynamic series', function () {
+            var dataViewMetadata = {
+                columns: [
+                    { name: 'col1' },
+                    { name: 'col2' },
+                    { name: 'col3', isMeasure: true, groupName: 'a' },
+                    { name: 'col3', isMeasure: true, groupName: 'b' },
+                ]
+            };
+            var col3Ref = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col3' });
+            var seriesIdentities = [
+                powerbitests.mocks.dataViewScopeIdentityWithEquality(col3Ref, 'a'),
+                powerbitests.mocks.dataViewScopeIdentityWithEquality(col3Ref, 'b'),
+            ];
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [{
+                        source: dataViewMetadata.columns[0],
+                        values: ['Montana', 'California', 'Arizona'],
+                    }],
+                    values: DataViewTransform.createValueColumns([{
+                        source: dataViewMetadata.columns[2],
+                        values: [-100, 200, 700],
+                        identity: seriesIdentities[0],
+                    }, {
+                        source: dataViewMetadata.columns[3],
+                        values: [200, 400, 500],
+                        identity: seriesIdentities[1],
+                    }], [col3Ref])
+                }
+            };
+            var groupIndex = 0;
+            var sizeIndex = 0;
+            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var series1Color = colors.getColorByScale(SQExprShortSerializer.serialize(col3Ref), 'a');
+            var series2Color = colors.getColorByScale(SQExprShortSerializer.serialize(col3Ref), 'b');
+            var result = Map.calculateSeriesLegend(dataView.categorical.values.grouped(), groupIndex, sizeIndex, colors, undefined, [col3Ref]);
+            expect(result.length).toBe(2);
+            expect(result[0].color).toBe(series1Color.value);
+            expect(result[1].color).toBe(series2Color.value);
+        });
+        it('Map.calculateSeriesLegend colors from palette with static series', function () {
+            var dataViewMetadata = {
+                columns: [
+                    { name: 'col1' },
+                    { name: 'col2', isMeasure: true },
+                    { name: 'col3', isMeasure: true },
+                ]
+            };
+            var col1Ref = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
+            var seriesIdentities = [
+                powerbitests.mocks.dataViewScopeIdentity('col2'),
+                powerbitests.mocks.dataViewScopeIdentity('col3'),
+            ];
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [{
+                        source: dataViewMetadata.columns[0],
+                        values: ['Montana', 'California', 'Arizona'],
+                        identityFields: [col1Ref],
+                    }],
+                    values: DataViewTransform.createValueColumns([{
+                        source: dataViewMetadata.columns[1],
+                        values: [-100, 200, 700],
+                        identity: seriesIdentities[0],
+                    }, {
+                        source: dataViewMetadata.columns[2],
+                        values: [200, 400, 500],
+                        identity: seriesIdentities[1],
+                    }])
+                }
+            };
+            var groupIndex = 0;
+            var sizeIndex = 0;
+            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var series1Color = colors.getColorByScale(SQExprShortSerializer.serialize(col1Ref), 'col2').value;
+            var series2Color = colors.getColorByScale(SQExprShortSerializer.serialize(col1Ref), 'col3').value;
+            var result = Map.calculateSeriesLegend(dataView.categorical.values.grouped(), groupIndex, sizeIndex, colors, undefined, [col1Ref]);
+            expect(result.length).toBe(2);
+            expect(result[0].color).toBe(series1Color);
+            expect(result[1].color).toBe(series2Color);
+        });
+        it('Map.calculateSeriesInfo same field category & series', function () {
+            var dataViewMetadata = {
+                columns: [
+                    { name: 'col1', roles: { 'Category': true, 'Series': true } },
+                    { name: 'col2', isMeasure: true },
+                    { name: 'lat', isMeasure: true },
+                    { name: 'long', isMeasure: true },
+                ]
+            };
+            var dataView = powerbi.data.DataViewSelfCrossJoin.apply({
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [{
+                        source: dataViewMetadata.columns[0],
+                        values: ['Montana', 'California', 'Arizona'],
+                        identity: [powerbitests.mocks.dataViewScopeIdentity('M'), powerbitests.mocks.dataViewScopeIdentity('C'), powerbitests.mocks.dataViewScopeIdentity('A')]
+                    }],
+                    values: DataViewTransform.createValueColumns([
+                        {
+                            source: dataViewMetadata.columns[1],
+                            values: [-100, 200, 700],
+                        },
+                        {
+                            source: dataViewMetadata.columns[2],
+                            values: [49, 54, 101],
+                        },
+                        {
+                            source: dataViewMetadata.columns[3],
+                            values: [0, 40, 20],
+                        }
+                    ])
+                }
+            });
+            var groupedValues = dataView.categorical.values.grouped();
+            var sizeIndex = 0;
+            var latIndex = 1;
+            var longIndex = 2;
+            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var result0 = Map.calculateSeriesInfo(groupedValues, 0, sizeIndex, longIndex, latIndex, colors);
+            expect(result0.sizeValuesForGroup.length).toBe(1);
+            expect(result0.sizeValuesForGroup[0].value).toBe(-100);
+            expect(result0.sizeValuesForGroup[0].index).toBe(0);
+            expect(result0.sizeValuesForGroup[0].fill).not.toBeNull();
+            expect(result0.sizeValuesForGroup[0].stroke).not.toBeNull();
+            expect(result0.latitude).toBe(49);
+            expect(result0.longitude).toBe(0);
+            var result1 = Map.calculateSeriesInfo(groupedValues, 1, sizeIndex, longIndex, latIndex, colors);
+            expect(result1.sizeValuesForGroup.length).toBe(1);
+            expect(result1.latitude).toBe(54);
+            expect(result1.longitude).toBe(40);
+            var result2 = Map.calculateSeriesInfo(groupedValues, 2, sizeIndex, longIndex, latIndex, colors);
+            expect(result2.sizeValuesForGroup.length).toBe(1);
+            expect(result2.latitude).toBe(101);
+            expect(result2.longitude).toBe(20);
+            expect(result0.sizeValuesForGroup[0].fill).not.toBe(result1.sizeValuesForGroup[0].fill);
+            expect(result1.sizeValuesForGroup[0].fill).not.toBe(result2.sizeValuesForGroup[0].fill);
+            expect(result0.sizeValuesForGroup[0].fill).not.toBe(result2.sizeValuesForGroup[0].fill);
         });
         it('Map.calculateSeriesLegend', function () {
             var dataViewMetadata = {
@@ -303,8 +455,7 @@ var powerbitests;
             var hexDefaultColorRed = "#FF0000";
             var result = Map.calculateSeriesLegend(dataView.categorical.values.grouped(), groupIndex, sizeIndex, colors, hexDefaultColorRed);
             expect(result.length).toBe(1);
-            var redRgba = "rgb(255,0,0)";
-            expect(result[0].color).toBe(redRgba);
+            expect(result[0].color).toBe(hexDefaultColorRed);
         });
         it('Map.calculateSeriesLegend multi-series', function () {
             var dsrResult = { "DataShapes": [{ "Id": "DS0", "SecondaryHierarchy": [{ "Id": "DM1", "Instances": [{ "Calculations": [{ "Id": "G1", "Value": "'Canada'" }] }, { "Calculations": [{ "Id": "G1", "Value": "'United States'" }] }] }], "PrimaryHierarchy": [{ "Id": "DM0", "Instances": [{ "Calculations": [{ "Id": "G0", "Value": "2012L" }], "Intersections": [{ "Id": "I0", "Calculations": [{ "Id": "M0", "Value": "150D" }, { "Id": "M1", "Value": "30L" }] }, { "Id": "I0", "Calculations": [{ "Id": "M0", "Value": "100D" }, { "Id": "M1", "Value": "300L" }] }] }, { "Calculations": [{ "Id": "G0", "Value": "2011L" }], "Intersections": [{ "Id": "I0", "Calculations": [{ "Id": "M0", "Value": "177D" }, { "Id": "M1", "Value": "25L" }] }, { "Id": "I0", "Calculations": [{ "Id": "M0", "Value": "149D" }, { "Id": "M1", "Value": "250L" }] }] }, { "Calculations": [{ "Id": "G0", "Value": "2010L" }], "Intersections": [{ "Id": "I0", "Calculations": [{ "Id": "M0", "Value": "157D" }, { "Id": "M1", "Value": "28L" }] }, { "Id": "I0", "Calculations": [{ "Id": "M0", "Value": "144D" }, { "Id": "M1", "Value": "280L" }] }] }] }], "IsComplete": true }] };
@@ -322,7 +473,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef1,
-                                Select: 0
+                                Select: 0,
                             }]
                         }]
                     },
@@ -330,7 +481,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef2,
-                                Select: 3
+                                Select: 3,
                             }]
                         }]
                     }
@@ -358,7 +509,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef1,
-                                Select: 0
+                                Select: 0,
                             }]
                         }]
                     },
@@ -366,7 +517,7 @@ var powerbitests;
                         Groupings: [{
                             Keys: [{
                                 Source: propertyRef2,
-                                Select: 3
+                                Select: 3,
                             }]
                         }]
                     }
@@ -446,7 +597,6 @@ var powerbitests;
             expect(result).toBe("StateOrProvince");
         });
         it('Map Geocode With Size', function () {
-            element = powerbitests.helpers.testDom('800', '500');
             /* Disable due to way tests run in GCI
             v = powerbi.visuals.VisualFactory.getPlugin('map').create();
             v.init({
@@ -653,7 +803,7 @@ var powerbitests;
             var longIndex = -1;
             var categoryValue = dataView.categorical.categories[0].values[0];
             var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
-            var seriesInfo = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, latIndex, longIndex, colors);
+            var seriesInfo = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, longIndex, latIndex, colors);
             var value = seriesInfo.sizeValuesForGroup[0].value;
             var tooltipInfo = powerbi.visuals.TooltipBuilder.createTooltipInfo(powerbi.visuals.mapProps.general.formatString, dataView.categorical.categories, categoryValue, dataView.categorical.values, value, null, 0);
             var tooltipInfoTestData = [{ displayName: "col1", value: "Montana" }, { displayName: "col2", value: "-100" }];
@@ -676,7 +826,7 @@ var powerbitests;
                             Groupings: [{
                                 Keys: [{
                                     Source: propertyRef1,
-                                    Select: 0
+                                    Select: 0,
                                 }]
                             }]
                         },
@@ -684,7 +834,7 @@ var powerbitests;
                             Groupings: [{
                                 Keys: [{
                                     Source: propertyRef2,
-                                    Select: 3
+                                    Select: 3,
                                 }]
                             }]
                         }
@@ -708,7 +858,7 @@ var powerbitests;
             var longIndex = -1;
             var categoryValue = dataView.categorical.categories[0].values[0];
             var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
-            var seriesInfo = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, latIndex, longIndex, colors);
+            var seriesInfo = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, longIndex, latIndex, colors);
             var value = seriesInfo.sizeValuesForGroup[0].value;
             var tooltipInfo = powerbi.visuals.TooltipBuilder.createTooltipInfo(powerbi.visuals.mapProps.general.formatString, dataView.categorical.categories, categoryValue, dataView.categorical.values, value, null, 0);
             var tooltipInfoTestData = [{ displayName: '', value: '2012' }, { displayName: '', value: 'Canada' }, { displayName: '', value: '150.00' }];
@@ -722,7 +872,7 @@ var powerbitests;
                 precision: 2,
                 labelColor: "#000000",
                 overrideDefaultColor: false,
-                formatterOptions: null
+                formatterOptions: null,
             };
             var mockBubbleData = [{
                 x: 50,
@@ -734,7 +884,7 @@ var powerbitests;
                 selected: true,
                 identity: null,
                 labeltext: "Test Label",
-                showLabel: true
+                showLabel: true,
             }];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
             var mockBubbleGraphicsContext = d3.select('body').append('svg').style("position", "absolute").append("g").classed("mapBubbles", true);
@@ -761,7 +911,7 @@ var powerbitests;
                 precision: 2,
                 labelColor: "#000000",
                 overrideDefaultColor: false,
-                formatterOptions: null
+                formatterOptions: null,
             };
             var mockSliceData = [{
                 x: 50,
@@ -774,7 +924,7 @@ var powerbitests;
                 identity: null,
                 labeltext: 'Test Label',
                 showLabel: true,
-                value: 0
+                value: 0,
             }];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
             var mockBubbleGraphicsContext = d3.select('body').append('svg').style("position", "absolute").append("g").classed("mapBubbles", true);
@@ -801,7 +951,7 @@ var powerbitests;
                 precision: 2,
                 labelColor: "#000000",
                 overrideDefaultColor: false,
-                formatterOptions: null
+                formatterOptions: null,
             };
             var mockBubbleData = [{
                 x: 50,
@@ -813,7 +963,7 @@ var powerbitests;
                 selected: true,
                 identity: null,
                 labeltext: "Test Label",
-                showLabel: false
+                showLabel: false,
             }];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
             var mockBubbleGraphicsContext = d3.select('body').append('svg').style("position", "absolute").append("g").classed("mapBubbles1", true);
@@ -835,7 +985,7 @@ var powerbitests;
                 precision: 2,
                 labelColor: "#000000",
                 overrideDefaultColor: false,
-                formatterOptions: null
+                formatterOptions: null,
             };
             var mockSliceData = [{
                 x: 50,
@@ -848,7 +998,7 @@ var powerbitests;
                 identity: null,
                 labeltext: "Test Label",
                 showLabel: false,
-                value: 0
+                value: 0,
             }];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
             var mockBubbleGraphicsContext = d3.select('body').append('svg').style("position", "absolute").append("g").classed("mapSlice1", true);
@@ -874,7 +1024,7 @@ var powerbitests;
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['Montana', 'California', 'Arizona']
-                    }]
+                    }],
                 }
             };
             var groupIndex = 0;
@@ -893,26 +1043,29 @@ var powerbitests;
         it('Map shows warning with no Location set', function () {
             var dataView = {
                 metadata: {
-                    columns: [{ name: 'NotLocation', roles: { 'NotCategory': true } }]
+                    columns: [{ name: 'NotLocation', roles: { 'NotCategory': true, }, }],
                 }
             };
             var options = {
-                dataViews: [dataView,]
+                dataViews: [dataView,],
             };
             var warningSpy = jasmine.createSpy('warning');
             var construction = {
-                filledMap: true
+                filledMap: true,
             };
             var host = powerbitests.mocks.createVisualHostServices();
             host.setWarnings = warningSpy;
             var option = {
                 host: host,
-                element: null,
-                animation: null,
-                interactivity: { isInteractiveLegend: false, dragDataPoint: null, selection: null },
+                element: element,
+                animation: { transitionImmediate: true },
+                interactivity: { isInteractiveLegend: false, dragDataPoint: null, selection: null, },
                 settings: null,
-                style: { colorPalette: { dataColors: null, background: null, foreground: null }, isHighContrast: true, labelText: null, subTitleText: null, maxMarginFactor: null, titleText: null },
-                viewport: null
+                style: { colorPalette: { dataColors: null, background: null, foreground: null, }, isHighContrast: true, labelText: null, subTitleText: null, maxMarginFactor: null, titleText: null, },
+                viewport: {
+                    height: element.height(),
+                    width: element.width(),
+                },
             };
             var map = new Map(construction);
             map.init(option);
@@ -923,26 +1076,29 @@ var powerbitests;
         it('Map shows warning with no columns set', function () {
             var dataView = {
                 metadata: {
-                    columns: []
+                    columns: [],
                 }
             };
             var options = {
-                dataViews: [dataView,]
+                dataViews: [dataView,],
             };
             var warningSpy = jasmine.createSpy('warning');
             var construction = {
-                filledMap: true
+                filledMap: true,
             };
             var host = powerbitests.mocks.createVisualHostServices();
             host.setWarnings = warningSpy;
             var option = {
                 host: host,
-                element: null,
-                animation: null,
-                interactivity: { isInteractiveLegend: false, dragDataPoint: null, selection: null },
+                element: element,
+                animation: { transitionImmediate: true },
+                interactivity: { isInteractiveLegend: false, dragDataPoint: null, selection: null, },
                 settings: null,
-                style: { colorPalette: { dataColors: null, background: null, foreground: null }, isHighContrast: true, labelText: null, subTitleText: null, maxMarginFactor: null, titleText: null },
-                viewport: null
+                style: { colorPalette: { dataColors: null, background: null, foreground: null, }, isHighContrast: true, labelText: null, subTitleText: null, maxMarginFactor: null, titleText: null, },
+                viewport: {
+                    height: element.height(),
+                    width: element.width(),
+                },
             };
             var map = new Map(construction);
             map.init(option);
@@ -953,26 +1109,29 @@ var powerbitests;
         it('Map does not show warning with location set', function () {
             var dataView = {
                 metadata: {
-                    columns: [{ name: 'Location', roles: { 'Category': true } }]
+                    columns: [{ name: 'Location', roles: { 'Category': true, }, }],
                 }
             };
             var options = {
-                dataViews: [dataView,]
+                dataViews: [dataView,],
             };
             var warningSpy = jasmine.createSpy('warning');
             var construction = {
-                filledMap: true
+                filledMap: true,
             };
             var host = powerbitests.mocks.createVisualHostServices();
             host.setWarnings = warningSpy;
             var option = {
                 host: host,
-                element: null,
-                animation: null,
-                interactivity: { isInteractiveLegend: false, dragDataPoint: null, selection: null },
+                element: element,
+                animation: { transitionImmediate: true },
+                interactivity: { isInteractiveLegend: false, dragDataPoint: null, selection: null, },
                 settings: null,
-                style: { colorPalette: { dataColors: null, background: null, foreground: null }, isHighContrast: true, labelText: null, subTitleText: null, maxMarginFactor: null, titleText: null },
-                viewport: null
+                style: { colorPalette: { dataColors: null, background: null, foreground: null, }, isHighContrast: true, labelText: null, subTitleText: null, maxMarginFactor: null, titleText: null, },
+                viewport: {
+                    height: element.height(),
+                    width: element.width(),
+                },
             };
             var map = new Map(construction);
             map.init(option);
@@ -1018,7 +1177,7 @@ var powerbitests;
         it('Map legend is hidden:no objects', function () {
             var dataView = {
                 metadata: {
-                    columns: []
+                    columns: [],
                 }
             };
             expect(Map.isLegendHidden(dataView)).toBe(false);
@@ -1059,7 +1218,7 @@ var powerbitests;
                 getOrientation: function () { return 0 /* Top */; },
                 isVisible: function () { return true; },
                 reset: function () {
-                }
+                },
             };
             var objects = Map.enumerateLegend(dataView, legend, "");
             expect(objects.length).toBe(1);
@@ -1089,11 +1248,11 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [-100, 200, 700]
+                            values: [-100, 200, 700],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [75, 50, 0]
+                            values: [75, 50, 0],
                         }
                     ])
                 }
@@ -1106,9 +1265,9 @@ var powerbitests;
                 { dataPoint: { fill: { solid: { color: "#d9f2fb" } } } },
                 { dataPoint: { fill: { solid: { color: "#b1eab7" } } } }
             ];
-            var result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), 0, sizeIndex, latIndex, longIndex, colors, null, objectDefinitions);
+            var result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), 0, sizeIndex, longIndex, latIndex, colors, null, objectDefinitions);
             expect(result.sizeValuesForGroup[0].fill).toBe('rgba(217,242,251,0.6)');
-            result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), 1, sizeIndex, latIndex, longIndex, colors, null, objectDefinitions);
+            result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), 1, sizeIndex, longIndex, latIndex, colors, null, objectDefinitions);
             expect(result.sizeValuesForGroup[0].fill).toBe('rgba(177,234,183,0.6)');
         });
     });

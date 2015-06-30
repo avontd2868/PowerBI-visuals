@@ -31,11 +31,11 @@ var powerbitests;
                     format: 'd'
                 }
             ],
-            objects: { labels: { show: true } }
+            objects: { labels: { show: true } },
         };
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '150');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
             v.init({
@@ -46,7 +46,7 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                animation: { transitionImmediate: true }
+                animation: { transitionImmediate: true },
             });
         });
         it('Show labels validation', function (done) {
@@ -121,11 +121,11 @@ var powerbitests;
                     format: 'd'
                 }
             ],
-            objects: { categoryLabels: { show: true } }
+            objects: { categoryLabels: { show: true } },
         };
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('250', '200');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('scatterChart').create();
             v.init({
@@ -136,7 +136,7 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                animation: { transitionImmediate: true }
+                animation: { transitionImmediate: true },
             });
         });
         it('Show labels validation', function (done) {
@@ -150,7 +150,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [110, 120, 130, 140]
+                            values: [110, 120, 130, 140],
                         }])
                     }
                 }]
@@ -173,7 +173,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [110, 120, 130, 140, 150]
+                            values: [110, 120, 130, 140, 150],
                         }])
                     }
                 }]
@@ -194,7 +194,7 @@ var powerbitests;
             precision: 2,
             labelColor: "#000000",
             overrideDefaultColor: false,
-            formatterOptions: {}
+            formatterOptions: {},
         };
         var mockViewPort = {
             height: 150,
@@ -202,7 +202,7 @@ var powerbitests;
         };
         beforeEach(function () {
             var localizationService = powerbi.common.createLocalizationService();
-            powerbi.explore.services.VisualHostServices.initialize(localizationService);
+            powerbitests.mocks.setLocale(localizationService);
             powerbi.common.localize = localizationService;
             mockGeotaggingAnalyzerService = powerbi.createGeoTaggingAnalyzerService(function (stringId) { return localizationService.get(stringId); });
         });
@@ -222,7 +222,7 @@ var powerbitests;
                     selected: true,
                     identity: null,
                     labeltext: "Label 1",
-                    showLabel: true
+                    showLabel: true,
                 },
                 {
                     x: 50,
@@ -234,7 +234,7 @@ var powerbitests;
                     selected: true,
                     identity: null,
                     labeltext: "Label 2",
-                    showLabel: true
+                    showLabel: true,
                 }
             ];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
@@ -255,7 +255,7 @@ var powerbitests;
                     selected: true,
                     identity: null,
                     labeltext: "Label 1",
-                    showLabel: true
+                    showLabel: true,
                 },
                 {
                     x: 50,
@@ -267,7 +267,7 @@ var powerbitests;
                     selected: true,
                     identity: null,
                     labeltext: "Label 2",
-                    showLabel: true
+                    showLabel: true,
                 }
             ];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
@@ -289,7 +289,7 @@ var powerbitests;
                     identity: null,
                     labeltext: "Label 1",
                     showLabel: true,
-                    value: 20
+                    value: 20,
                 },
                 {
                     x: 50,
@@ -302,7 +302,7 @@ var powerbitests;
                     identity: null,
                     labeltext: "Label 2",
                     showLabel: true,
-                    value: 20
+                    value: 20,
                 }
             ];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
@@ -324,7 +324,7 @@ var powerbitests;
                     identity: null,
                     labeltext: "Label 1",
                     showLabel: true,
-                    value: 20
+                    value: 20,
                 },
                 {
                     x: 50,
@@ -337,7 +337,7 @@ var powerbitests;
                     identity: null,
                     labeltext: "Label 2",
                     showLabel: true,
-                    value: 20
+                    value: 20,
                 }
             ];
             var mockLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
@@ -367,16 +367,16 @@ var powerbitests;
         ];
         function metadata(columns) {
             var metadata = {
-                columns: columns
+                columns: columns,
             };
             metadata.objects = {
                 labels: { show: true, color: { solid: { color: '#FF0000' } } }
             };
             return metadata;
         }
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             if (collide)
                 element = powerbitests.helpers.testDom('100', '75');
             else
@@ -390,7 +390,7 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                animation: { transitionImmediate: true }
+                animation: { transitionImmediate: true },
             });
         });
         it('Data Label Visibility Validation', function (done) {
@@ -478,29 +478,29 @@ var powerbitests;
         var dataView = {
             categories: [{
                 source: categoryColumn,
-                values: categories
+                values: categories,
             }],
             values: DataViewTransform.createValueColumns([{
                 source: measureColumn,
-                values: values
-            }])
+                values: values,
+            }]),
         };
         var metadata = {
-            columns: [categoryColumn, measureColumn]
+            columns: [categoryColumn, measureColumn],
         };
         var data = {
             categorical: dataView,
-            metadata: metadata
+            metadata: metadata,
         };
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('waterfallChart').create();
         });
         it('Show labels validation', function (done) {
             element = powerbitests.helpers.testDom('500', '500');
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -510,7 +510,7 @@ var powerbitests;
             });
             data.metadata.objects = {
                 labels: {
-                    show: true
+                    show: true,
                 }
             };
             var dataChangedOptions = {
@@ -527,7 +527,7 @@ var powerbitests;
             element = powerbitests.helpers.testDom('100', '100');
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -537,7 +537,7 @@ var powerbitests;
             });
             data.metadata.objects = {
                 labels: {
-                    show: true
+                    show: true,
                 }
             };
             var dataChangedOptions = {
@@ -552,7 +552,7 @@ var powerbitests;
     });
     describe("dataLabelUtils tests", function () {
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         it('display units formatting values : Auto', function () {
             var value = 20000;

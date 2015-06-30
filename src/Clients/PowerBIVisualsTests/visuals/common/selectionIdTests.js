@@ -104,6 +104,10 @@ var powerbitests;
             var selectionId = SelectionId.createWithIds(categoryA, seriesa);
             expect(selectionId.getKey()).toEqual(JSON.stringify({ selector: Selector.getKey({ data: [categoryA, seriesa] }), highlight: false }));
         });
+        it('SelectionId createWithIds: with duplicates', function () {
+            var selectionId = SelectionId.createWithIds(categoryA, categoryA);
+            expect(selectionId.getKey()).toEqual(JSON.stringify({ selector: Selector.getKey({ data: [categoryA] }), highlight: false }));
+        });
         it('SelectionId createWithIdsAndMeasure', function () {
             var selectionId = SelectionId.createWithIdsAndMeasure(categoryA, seriesa, measure1);
             expect(selectionId.getKey()).toEqual(JSON.stringify({ selector: Selector.getKey({ data: [categoryA, seriesa], metadata: measure1 }), highlight: false }));
@@ -113,6 +117,10 @@ var powerbitests;
             expect(selectionId.getKey()).toEqual(JSON.stringify({ selector: Selector.getKey({ data: [categoryA], metadata: measure1 }), highlight: false }));
             selectionId = SelectionId.createWithIdsAndMeasure(categoryA, seriesa, undefined);
             expect(selectionId.getKey()).toEqual(JSON.stringify({ selector: Selector.getKey({ data: [categoryA, seriesa] }), highlight: false }));
+        });
+        it('SelectionId createWithIdsAndMeasure: with duplicates', function () {
+            var selectionId = SelectionId.createWithIdsAndMeasure(categoryA, categoryA, measure1);
+            expect(selectionId.getKey()).toEqual(JSON.stringify({ selector: Selector.getKey({ data: [categoryA], metadata: measure1 }), highlight: false }));
         });
         it('SelectionId createWithHighlight', function () {
             var selectionId = SelectionId.createWithIdsAndMeasure(categoryA, seriesa, measure1);

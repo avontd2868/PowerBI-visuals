@@ -9,7 +9,7 @@ var powerbitests;
     describe('Rich Textbox', function () {
         var viewport = {
             height: 500,
-            width: 500
+            width: 500,
         };
         var style = powerbi.common.services.visualStyles.create();
         describe('capabilities', function () {
@@ -80,7 +80,7 @@ var powerbitests;
                     element: $element,
                     host: host,
                     viewport: viewport,
-                    style: style
+                    style: style,
                 };
                 getViewModeSpy = spyOn(host, 'getViewMode');
                 setToolbarSpy = spyOn(host, 'setToolbar');
@@ -134,6 +134,34 @@ var powerbitests;
                         expect($paragraph2Spans.length).toBe(1);
                         var $urlRun = $paragraph2Spans.eq(0);
                         expect(getUrl($urlRun)).toEqual('http://www.powerbi.com');
+                    });
+                    describe('theme font', function () {
+                        it('"Heading" should render correctly', function () {
+                            var paragraphsWithHeading = [
+                                {
+                                    textRuns: [
+                                        { value: 'Some text', textStyle: { fontFamily: 'Heading' } },
+                                    ]
+                                }
+                            ];
+                            textbox.onDataChanged({ dataViews: buildParagraphsDataView(paragraphsWithHeading) });
+                            var $divs = getViewModeParagraphDivs($element);
+                            var $span = $divs.children('span').eq(0);
+                            expect(getFont($span)).toEqual('wf_segoe-ui_light');
+                        });
+                        it('"Body" should render correctly', function () {
+                            var paragraphsWithBody = [
+                                {
+                                    textRuns: [
+                                        { value: 'Some text', textStyle: { fontFamily: 'Body' } },
+                                    ]
+                                }
+                            ];
+                            textbox.onDataChanged({ dataViews: buildParagraphsDataView(paragraphsWithBody) });
+                            var $divs = getViewModeParagraphDivs($element);
+                            var $span = $divs.children('span').eq(0);
+                            expect(getFont($span)).toEqual('wf_segoe-ui_normal');
+                        });
                     });
                 });
             });

@@ -8,7 +8,7 @@ var powerbitests;
     var AnimatedText = powerbi.visuals.AnimatedText;
     describe("AnimatedText", function () {
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         it('AnimatedText_getSeedFontHeight does not exceed style maximum', function () {
             var animatedText = new AnimatedText('animatedText');
@@ -70,14 +70,14 @@ var powerbitests;
         var v, element;
         var defaultTimeout = 500;
         beforeEach(function (done) {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('200', '300');
             v = new AnimatedText('animatedText');
             v.currentViewport = {
                 height: element.height(),
                 width: element.width()
             };
-            v.hostServices = powerbi.explore.services.createVisualHostServices();
+            v.hostServices = powerbitests.mocks.createVisualHostServices();
             v.svg = d3.select(element.get(0)).append('svg');
             v.graphicsContext = v.svg.append('g');
             v.style = powerbi.common.services.visualStyles.create();

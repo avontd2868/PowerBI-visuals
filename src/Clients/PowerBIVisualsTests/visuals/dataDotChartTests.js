@@ -75,7 +75,7 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: []
+                        values: [],
                     }])
                 }
             };
@@ -99,7 +99,7 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100, 200, 300]
+                        values: [100, 200, 300],
                     }])
                 }
             };
@@ -125,7 +125,7 @@ var powerbitests;
                     categories: [],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100]
+                        values: [100],
                     }])
                 }
             };
@@ -151,7 +151,7 @@ var powerbitests;
                     categories: [],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100]
+                        values: [100],
                     }])
                 }
             };
@@ -180,13 +180,13 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100, 200, 300]
+                        values: [100, 200, 300],
                     }, {
                         source: dataViewMetadata.columns[1],
-                        values: [101, 201, 301]
+                        values: [101, 201, 301],
                     }, {
                         source: dataViewMetadata.columns[1],
-                        values: [102, 202, 302]
+                        values: [102, 202, 302],
                     }])
                 }
             };
@@ -216,7 +216,7 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100, 200, 300]
+                        values: [100, 200, 300],
                     }])
                 }
             };
@@ -246,7 +246,7 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100, 200, 300]
+                        values: [100, 200, 300],
                     }])
                 }
             };
@@ -282,7 +282,7 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100, 200, 300]
+                        values: [100, 200, 300],
                     }])
                 }
             };
@@ -303,7 +303,7 @@ var powerbitests;
                     categories: [],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
-                        values: [100]
+                        values: [100],
                     }])
                 }
             };
@@ -319,7 +319,7 @@ var powerbitests;
         });
     });
     describe("DataDotChart render to DOM", function () {
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var v, element;
         var DefaultWaitForRender = 100;
         var dataViewMetadata = {
@@ -342,7 +342,7 @@ var powerbitests;
             ]
         };
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('dataDotChart').create();
             v.init({
@@ -371,7 +371,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]
@@ -396,7 +396,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]
@@ -440,7 +440,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]
@@ -480,7 +480,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [999, 888, 777, 666, 555, 444, 333, 222, 111, 999, 888, 777, 666, 555, 444, 333, 222, 111, 999, 888, 777, 666, 555, 444, 333, 222]
+                            values: [999, 888, 777, 666, 555, 444, 333, 222, 111, 999, 888, 777, 666, 555, 444, 333, 222, 111, 999, 888, 777, 666, 555, 444, 333, 222],
                         }])
                     }
                 }]
@@ -508,7 +508,7 @@ var powerbitests;
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
                             values: [500000, 495000, 490000, 480000, 500000],
-                            highlights: [100000, 195000, null, 180000, 9000]
+                            highlights: [100000, 195000, null, 180000, 9000],
                         }])
                     }
                 }]
@@ -561,7 +561,7 @@ var powerbitests;
             ]
         };
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('dataDotChart').create();
             v.init({
@@ -590,7 +590,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]
@@ -626,7 +626,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]
@@ -666,7 +666,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]
@@ -697,7 +697,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
-                            values: [500000, 495000, 490000, 480000, 500000]
+                            values: [500000, 495000, 490000, 480000, 500000],
                         }])
                     }
                 }]

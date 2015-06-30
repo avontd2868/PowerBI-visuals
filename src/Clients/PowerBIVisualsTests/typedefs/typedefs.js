@@ -10,5 +10,3 @@
 ///<reference path="../../JSCommon/obj/Utility.d.ts"/>
 ///<reference path="../../Data/obj/Data.d.ts"/>
 ///<reference path="../../Visuals/obj/Visuals.d.ts"/>
-///<reference path="../../Explore/obj/Explore.d.ts"/>
-///<reference path="../../ExploreUI/obj/ExploreUI.d.ts"/> 

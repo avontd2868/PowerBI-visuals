@@ -44,7 +44,7 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             };
             var textbox = new Textbox();
             textbox.init(options);
@@ -76,7 +76,7 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             };
             var textbox = new Textbox();
             textbox.init(options);
@@ -100,7 +100,7 @@ var powerbitests;
                     textRuns: [{
                         value: "Text",
                         textStyle: {
-                            fontFamily: "Arial"
+                            fontFamily: "Arial",
                         }
                     }]
                 }]
@@ -113,7 +113,7 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             };
             var textbox = new Textbox();
             textbox.init(options);
@@ -124,7 +124,7 @@ var powerbitests;
             return {
                 metadata: {
                     columns: [],
-                    objects: { general: content }
+                    objects: { general: content },
                 }
             };
         }

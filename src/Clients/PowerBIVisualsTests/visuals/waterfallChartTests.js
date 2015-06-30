@@ -10,18 +10,17 @@ var powerbitests;
     var SemanticType = powerbi.data.SemanticType;
     var DataViewTransform = powerbi.data.DataViewTransform;
     var SVGUtil = powerbi.visuals.SVGUtil;
-    var VisualHostServices = powerbi.explore.services.VisualHostServices;
     var DefaultWaitForRender = 10;
     describe('WaterfallChart', function () {
         var localizationService = powerbi.common.createLocalizationService();
         powerbi.common.localize = localizationService;
-        VisualHostServices.initialize(localizationService);
+        powerbitests.mocks.setLocale(localizationService);
         var viewport = {
             height: 500,
-            width: 500
+            width: 500,
         };
         var cartesianHost = {
-            updateLegend: function (data) { return dummyDrawLegend(data, viewport); }
+            updateLegend: function (data) { return dummyDrawLegend(data, viewport); },
         };
         var svg = d3.select($('<svg/>').get(0));
         var style = powerbi.common.services.visualStyles.create();
@@ -34,7 +33,7 @@ var powerbitests;
             //animation:,
             //interactivity:,
             svg: svg,
-            cartesianHost: cartesianHost
+            cartesianHost: cartesianHost,
         };
         var categoryColumn = { name: 'year', type: DataShapeUtility.describeDataType(2048 /* String */) };
         var measureColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer), objects: { general: { formatString: '$0' } } };
@@ -70,18 +69,24 @@ var powerbitests;
             var dataView = {
                 categories: [{
                     source: categoryColumn,
-                    values: categories
+                    values: categories,
                 }],
                 values: DataViewTransform.createValueColumns([{
                     source: measureColumn,
-                    values: values
+                    values: values,
                 }])
             };
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
             var sentimentColors = {
-                increaseFill: null,
-                decreaseFill: null,
-                totalFill: null
+                increaseFill: {
+                    solid: { color: "#FF0000" }
+                },
+                decreaseFill: {
+                    solid: { color: "#00FF00" }
+                },
+                totalFill: {
+                    solid: { color: "#0000FF" }
+                },
             };
             var data = WaterfallChart.converter(dataView, colors, initOptions.host, dataLabelSettings, sentimentColors, null);
             it('legend should have 3 items', function () {
@@ -123,12 +128,12 @@ var powerbitests;
             var dataView = {
                 categories: [{
                     source: categoryColumn,
-                    values: categories
+                    values: categories,
                 }],
                 values: DataViewTransform.createValueColumns([{
                     source: measureColumn,
-                    values: values
-                }])
+                    values: values,
+                }]),
             };
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
             var sentimentColors = colors.getSentimentColors();
@@ -139,17 +144,12 @@ var powerbitests;
             };
             var data = {
                 categorical: dataView,
-                metadata: metadata
+                metadata: metadata,
             };
             var chart;
             beforeEach(function () {
                 chart = new WaterfallChart({ isScrollable: false });
                 chart.init(initOptions);
-            });
-            it('should call data converter', function () {
-                var spy = spyOn(WaterfallChart, 'converter').and.callThrough();
-                chart.setData([data]);
-                expect(spy).toHaveBeenCalledWith(dataView, colors, initOptions.host, dataLabelSettings, undefined, null);
             });
             it('sentiment colors should be set from data object', function () {
                 data.metadata.objects = {
@@ -177,26 +177,26 @@ var powerbitests;
             var dataView = {
                 categories: [{
                     source: categoryColumn,
-                    values: categories
+                    values: categories,
                 }],
                 values: DataViewTransform.createValueColumns([{
                     source: measureColumn,
-                    values: values
-                }])
+                    values: values,
+                }]),
             };
             var metadata = {
                 columns: [categoryColumn, measureColumn]
             };
             var data = {
                 categorical: dataView,
-                metadata: metadata
+                metadata: metadata,
             };
             beforeEach(function () {
                 element = powerbitests.helpers.testDom('150', '50');
                 v = powerbi.visuals.visualPluginFactory.createMinerva({
                     heatMap: false,
                     newTable: false,
-                    scrollableVisuals: true
+                    scrollableVisuals: true,
                 }).getPlugin('waterfallChart').create();
                 v.init({
                     element: element,
@@ -207,7 +207,7 @@ var powerbitests;
                         width: element.width()
                     },
                     svg: svg,
-                    cartesianHost: cartesianHost
+                    cartesianHost: cartesianHost,
                 });
                 v.onDataChanged({
                     dataViews: [data]
@@ -222,7 +222,7 @@ var powerbitests;
                     var brushTransform = SVGUtil.parseTranslateTransform($('.brush').first().attr('transform'));
                     expect(xTranslate).toBeGreaterThan(element.width());
                     expect(brushTransform.x).toBe('19');
-                    expect(brushTransform.y).toBe('94');
+                    expect(brushTransform.y).toBe('116');
                     expect(parseInt($('.brush .extent')[0].attributes.getNamedItem('width').value, 0)).toBeGreaterThan(1);
                     expect($('.brush .extent')[0].attributes.getNamedItem('x').value).toBe('0');
                     done();
@@ -259,27 +259,27 @@ var powerbitests;
             var dataView = {
                 categories: [{
                     source: categoryColumn,
-                    values: categories
+                    values: categories,
                 }],
                 values: DataViewTransform.createValueColumns([{
                     source: measureColumn,
-                    values: values
-                }])
+                    values: values,
+                }]),
             };
             var metadata = {
-                columns: [categoryColumn, measureColumn]
+                columns: [categoryColumn, measureColumn],
             };
             var data = {
                 categorical: dataView,
-                metadata: metadata
+                metadata: metadata,
             };
             beforeEach(function () {
-                VisualHostServices.initialize(powerbi.common.createLocalizationService());
+                powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
                 element = powerbitests.helpers.testDom('500', '500');
                 v = powerbi.visuals.visualPluginFactory.create().getPlugin('waterfallChart').create();
                 v.init({
                     element: element,
-                    host: powerbi.explore.services.createVisualHostServices(),
+                    host: powerbitests.mocks.createVisualHostServices(),
                     style: powerbi.common.services.visualStyles.create(),
                     viewport: {
                         height: element.height(),
@@ -291,7 +291,7 @@ var powerbitests;
             it('verify labels in DOM', function (done) {
                 data.metadata.objects = {
                     labels: {
-                        show: true
+                        show: true,
                     }
                 };
                 var dataChangedOptions = {
@@ -312,7 +312,7 @@ var powerbitests;
             it('labels should be visible', function (done) {
                 data.metadata.objects = {
                     labels: {
-                        show: true
+                        show: true,
                     }
                 };
                 var dataChangedOptions = {
@@ -328,7 +328,7 @@ var powerbitests;
             it('labels should be hidden', function (done) {
                 data.metadata.objects = {
                     labels: {
-                        show: false
+                        show: false,
                     }
                 };
                 var dataChangedOptions = {
@@ -396,7 +396,7 @@ var powerbitests;
             it('label color should be same as rect color', function (done) {
                 data.metadata.objects = {
                     labels: {
-                        show: true
+                        show: true,
                     }
                 };
                 var dataChangedOptions = {
@@ -423,27 +423,27 @@ var powerbitests;
             var dataView = {
                 categories: [{
                     source: categoryColumn,
-                    values: categories
+                    values: categories,
                 }],
                 values: DataViewTransform.createValueColumns([{
                     source: measureColumn,
-                    values: values
-                }])
+                    values: values,
+                }]),
             };
             var metadata = {
-                columns: [categoryColumn, measureColumn]
+                columns: [categoryColumn, measureColumn],
             };
             var data = {
                 categorical: dataView,
-                metadata: metadata
+                metadata: metadata,
             };
             beforeEach(function () {
-                VisualHostServices.initialize(powerbi.common.createLocalizationService());
+                powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
                 element = powerbitests.helpers.testDom('500', '500');
                 v = powerbi.visuals.visualPluginFactory.create().getPlugin('waterfallChart').create();
                 v.init({
                     element: element,
-                    host: powerbi.explore.services.createVisualHostServices(),
+                    host: powerbitests.mocks.createVisualHostServices(),
                     style: powerbi.common.services.visualStyles.create(),
                     viewport: {
                         height: element.height(),
@@ -452,38 +452,47 @@ var powerbitests;
                     animation: { transitionImmediate: true }
                 });
             });
-            it('enumerateObjectInstances should include labels', function (done) {
+            it('enumerateObjectInstances should include labels with empty data', function () {
+                v.onDataChanged({ dataViews: [] });
+                verifyLabels();
+            });
+            it('enumerateObjectInstances should include labels', function () {
                 var dataChangedOptions = {
                     dataViews: [data]
                 };
                 v.onDataChanged(dataChangedOptions);
-                setTimeout(function () {
-                    var points = v.enumerateObjectInstances({ objectName: 'labels' });
-                    var defaultLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-                    expect(points.length).toBe(1);
-                    expect(points[0].properties).toBeDefined();
-                    var properties = points[0].properties;
-                    expect(properties['color']).toBe(defaultLabelSettings.labelColor);
-                    expect(properties['show']).toBe(false);
-                    expect(properties['labelPrecision']).toBe(defaultLabelSettings.precision);
-                    expect(properties['labelDisplayUnits']).toBe(defaultLabelSettings.displayUnits);
-                    done();
-                }, DefaultWaitForRender);
+                verifyLabels();
             });
-            it('enumerateObjectInstances should include sentiment colors', function (done) {
+            it('enumerateObjectInstances should include sentiment colors with empty data', function () {
+                v.onDataChanged({ dataViews: [] });
+                verifyColors();
+            });
+            it('enumerateObjectInstances should include sentiment colors', function () {
                 var dataChangedOptions = {
                     dataViews: [data]
                 };
                 v.onDataChanged(dataChangedOptions);
-                setTimeout(function () {
-                    var points = v.enumerateObjectInstances({ objectName: 'sentimentColors' });
-                    expect(points.length).toBe(1);
-                    expect(points[0].properties['increaseFill']).toBeDefined();
-                    expect(points[0].properties['decreaseFill']).toBeDefined();
-                    expect(points[0].properties['totalFill']).toBeDefined();
-                    done();
-                }, DefaultWaitForRender);
+                verifyColors();
             });
+            function verifyColors() {
+                var points = v.enumerateObjectInstances({ objectName: 'sentimentColors' });
+                expect(points.length).toBe(1);
+                expect(points[0].properties['increaseFill']).toBeDefined();
+                expect(points[0].properties['decreaseFill']).toBeDefined();
+                expect(points[0].properties['totalFill']).toBeDefined();
+            }
+            ;
+            function verifyLabels() {
+                var points = v.enumerateObjectInstances({ objectName: 'labels' });
+                var defaultLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
+                expect(points.length).toBe(1);
+                expect(points[0].properties).toBeDefined();
+                var properties = points[0].properties;
+                expect(properties['color']).toBe(defaultLabelSettings.labelColor);
+                expect(properties['show']).toBe(false);
+                expect(properties['labelPrecision']).toBe(defaultLabelSettings.precision);
+                expect(properties['labelDisplayUnits']).toBe(defaultLabelSettings.displayUnits);
+            }
         });
         // TODO: add DOM tests when the visual matches the spec.
     });

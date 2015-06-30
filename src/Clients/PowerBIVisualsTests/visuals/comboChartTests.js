@@ -9,7 +9,7 @@ var powerbitests;
     var DataShapeUtility = powerbi.data.dsr.DataShapeUtility;
     var ComboChart = powerbi.visuals.ComboChart;
     var SemanticType = powerbi.data.SemanticType;
-    var ColorConvertor = powerbi.explore.util.ColorUtility.convertFromRGBorHexToHex;
+    var ColorConvertor = powerbitests.utils.ColorUtility.convertFromRGBorHexToHex;
     var AxisType = powerbi.axisType;
     var DefaultWaitForRender = 100;
     describe("ComboChart", function () {
@@ -41,7 +41,7 @@ var powerbitests;
                     { name: 'col3', isMeasure: true, type: DataShapeUtility.describeDataType(1 /* Number */) },
                     { name: 'col4', isMeasure: true, type: DataShapeUtility.describeDataType(1 /* Number */) },
                 ],
-                properties: properties
+                properties: properties,
             };
         }
         ;
@@ -53,7 +53,7 @@ var powerbitests;
                     { name: 'col3', isMeasure: true, type: DataShapeUtility.describeDataType(1 /* Number */) },
                     { name: 'col4', isMeasure: true, type: DataShapeUtility.describeDataType(1 /* Number */) },
                 ],
-                objects: objects
+                objects: objects,
             };
         }
         ;
@@ -268,7 +268,7 @@ var powerbitests;
         beforeEach(function (done) {
             var localizationService = powerbi.common.createLocalizationService();
             powerbi.common.localize = localizationService;
-            powerbi.explore.services.VisualHostServices.initialize(localizationService);
+            powerbitests.mocks.setLocale(localizationService);
             element = powerbitests.helpers.testDom('400', '400');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('comboChart').create();
             done();
@@ -419,12 +419,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var objects = {
                 general: {
                     visualType1: 'ColumnStacked',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 }
             };
             v.onDataChanged({ dataViews: [dataView(objects), dataViewInAnotherDomain(objects)] });
@@ -451,12 +451,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var objects = {
                 general: {
                     visualType1: 'ColumnStacked',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 }
             };
             v.onDataChanged({ dataViews: [dataView(objects), dataView(objects)] });
@@ -484,12 +484,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var objects = {
                 general: {
                     visualType1: 'ColumnClustered',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 }
             };
             v.onDataChanged({ dataViews: [dataView(objects), dataViewInAnotherDomain(objects)] });
@@ -516,12 +516,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var objects = {
                 general: {
                     visualType1: 'Column',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 }
             };
             v.onDataChanged({ dataViews: [dataView(objects), dataView(objects)] });
@@ -549,12 +549,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var objects = {
                 general: {
                     visualType1: 'Column',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 }
             };
             v.onDataChanged({ dataViews: [dataView(objects), dataView(objects)] });
@@ -575,7 +575,7 @@ var powerbitests;
             element = powerbitests.helpers.testDom('100', '100');
             v = powerbi.visuals.visualPluginFactory.createMinerva({
                 heatMap: false,
-                newTable: false
+                newTable: false,
             }).getPlugin('lineClusteredColumnComboChart').create();
             v.init({
                 element: element,
@@ -584,12 +584,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var objects = {
                 general: {
                     visualType1: 'ColumnClustered',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 }
             };
             v.onDataChanged({ dataViews: [dataViewWithManyCategories(objects), dataViewWithManyCategories(objects)] });
@@ -611,12 +611,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var objects = {
                 general: {
                     visualType1: 'ColumnClustered',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 }
             };
             var dataView1 = dataView(objects);
@@ -641,13 +641,13 @@ var powerbitests;
                 expect(columnCharts).toBe(1);
                 expect(yAxis).toBe(2);
                 expect(legend).toBe(1);
-                expect($($('.legend span.item span')[0]).css('background-color')).toBe("rgb(255, 0, 0)");
-                expect($($('.legend span.item span')[2]).css('background-color')).toBe("rgb(255, 0, 0)");
+                expect($($('.legendIcon')[0]).css('fill')).toBe("#ff0000");
+                expect($($('.legendIcon')[2]).css('fill')).toBe("#ff0000");
                 done();
             }, DefaultWaitForRender);
         });
         //Data Labels
-        it('Ensure data lables are on both charts with default color', function (done) {
+        it('Ensure data labels are on both charts with default color', function (done) {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
@@ -801,7 +801,7 @@ var powerbitests;
             var objects = {
                 general: {
                     visualType1: 'Column',
-                    visualType2: 'Line'
+                    visualType2: 'Line',
                 },
                 categoryAxis: {
                     displayName: 'scalar',

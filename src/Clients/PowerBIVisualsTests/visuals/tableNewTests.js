@@ -104,7 +104,7 @@ var powerbitests;
     };
     var tableTwoGroups1MeasureNulls = {
         metadata: {
-            columns: [groupSource1, groupSource2, measureSource1]
+            columns: [groupSource1, groupSource2, measureSource1],
         },
         table: {
             columns: [groupSource1, groupSource2, measureSource1],
@@ -164,7 +164,7 @@ var powerbitests;
     var tableWebUrl = {
         metadata: {
             columns: [groupSourceWebUrl],
-            objects: tableNoTotals
+            objects: tableNoTotals,
         },
         table: {
             columns: [groupSourceWebUrl],
@@ -712,7 +712,7 @@ var powerbitests;
     describe('Table DOM validation', function () {
         var v, element, NoMarginClass = 'bi-tablix-cellNoMarginStyle', ColumnHeaderClassName = 'bi-table-column-header', RowClassName = 'bi-table-row', LastRowClassName = 'bi-table-last-row', FooterClassName = 'bi-table-footer', NumericCellClassName = ' bi-table-cell-numeric', EmptyHeaderCell = '\xa0';
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             groupSource1.index = 0;
             groupSource2.index = 1;
             groupSource3.index = 2;
@@ -1146,11 +1146,11 @@ var powerbitests;
                 selects: [
                     {
                         displayName: groupSource1.name,
-                        type: powerbi.ValueType.fromDescriptor({ text: true })
+                        type: powerbi.ValueType.fromDescriptor({ text: true }),
                     },
                     {
                         displayName: groupSource2.name,
-                        type: powerbi.ValueType.fromDescriptor({ text: true })
+                        type: powerbi.ValueType.fromDescriptor({ text: true }),
                     }
                 ],
                 projectionOrdering: {

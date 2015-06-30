@@ -35,7 +35,7 @@ var powerbitests;
             var featureSwitches = {
                 newTable: true,
                 heatMap: true,
-                scrollableVisuals: true
+                scrollableVisuals: true,
             };
             var visualPluginService = powerbi.visuals.visualPluginFactory.createMinerva(featureSwitches);
             var sortCallback = options.onCustomSortCallback ? options.onCustomSortCallback : function (args) {
@@ -80,7 +80,7 @@ var powerbitests;
             var renderTablixPromise = renderNewTablix(element, {
                 visualType: visualType,
                 data: data,
-                onCustomSortCallback: sortCallback
+                onCustomSortCallback: sortCallback,
             });
             renderTablixPromise.then(function () {
                 var tableBody = $('.tablixContainer > div.bi-tablix > div:nth-child(1) > table.unselectable > tbody');

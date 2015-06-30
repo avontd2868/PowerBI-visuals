@@ -6,8 +6,9 @@
 var powerbitests;
 (function (powerbitests) {
     var AxisType = powerbi.axisType;
-    var ColorUtility = powerbi.explore.util.ColorUtility;
+    var ColorUtility = powerbitests.utils.ColorUtility;
     var DataShapeUtility = powerbi.data.dsr.DataShapeUtility;
+    var DataViewPivotCategorical = powerbi.data.DataViewPivotCategorical;
     var DataViewTransform = powerbi.data.DataViewTransform;
     var LineChart = powerbi.visuals.LineChart;
     var PrimitiveType = powerbi.PrimitiveType;
@@ -15,18 +16,17 @@ var powerbitests;
     var SelectionId = powerbi.visuals.SelectionId;
     var SemanticType = powerbi.data.SemanticType;
     var ValueType = powerbi.ValueType;
-    var VisualHostServices = powerbi.explore.services.VisualHostServices;
-    var DefaultWaitForRender = 100;
+    var DefaultWaitForRender = 10;
     describe("LineChart Dataview Validation", function () {
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         var blankCategoryValue = '(Blank)';
         var dataViewMetadata = {
             columns: [
                 {
                     name: 'col1',
-                    type: DataShapeUtility.describeDataType(2048 /* String */)
+                    type: DataShapeUtility.describeDataType(2048 /* String */),
                 },
                 {
                     name: 'col2',
@@ -45,13 +45,15 @@ var powerbitests;
                 },
             ]
         };
+        var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
+        var seriesColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col2' });
         var dataViewMetadata2 = {
             columns: [
                 { name: 'col1' },
                 { name: 'col2' }
             ]
         };
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
         it('LineChart registered capabilities', function () {
             expect(powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').capabilities).toBe(powerbi.visuals.lineChartCapabilities);
@@ -128,7 +130,7 @@ var powerbitests;
         it('Sortable roles with scalar axis', function () {
             var objects = {
                 categoryAxis: {
-                    axisType: 'Scalar'
+                    axisType: 'Scalar',
                 }
             };
             var dataViewMapping = createCompiledDataViewMapping(ValueType.fromPrimitiveTypeAndCategory(7 /* DateTime */), objects);
@@ -139,7 +141,7 @@ var powerbitests;
         it('Sortable roles with categorical axis', function () {
             var objects = {
                 categoryAxis: {
-                    axisType: 'Categorical'
+                    axisType: 'Categorical',
                 }
             };
             var dataViewMapping = createCompiledDataViewMapping(ValueType.fromPrimitiveTypeAndCategory(7 /* DateTime */), objects);
@@ -202,20 +204,22 @@ var powerbitests;
                     yCol: dataView.metadata.columns[1],
                     data: [],
                     selected: false,
-                    identity: SelectionId.createWithMeasure('col2')
+                    identity: SelectionId.createWithMeasure('col2'),
                 }],
                 isScalar: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
             });
         });
         it('Check convert categorical + fill color', function () {
+            var seriesColor = '#41BEE0';
             var dataView = {
                 metadata: dataViewMetadata,
                 categorical: {
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }]
+                        objects: [{ dataPoint: { fill: { solid: { color: seriesColor } } } }]
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dataViewMetadata.columns[1],
@@ -231,7 +235,7 @@ var powerbitests;
                 series: [{
                     key: key,
                     lineIndex: 0,
-                    color: '#41BEE0',
+                    color: seriesColor,
                     xCol: dataView.metadata.columns[0],
                     yCol: dataView.metadata.columns[1],
                     data: [
@@ -245,7 +249,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 0 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: seriesColor,
                         },
                         {
                             categoryValue: 'Delta Force',
@@ -257,7 +261,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 1 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: seriesColor,
                         },
                         {
                             categoryValue: 'Jean Tablau',
@@ -269,14 +273,15 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 2 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: seriesColor,
                         },
                     ],
                     identity: SelectionId.createWithMeasure('col2'),
-                    selected: false
+                    selected: false,
                 }],
                 isScalar: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null }
             };
             expect(actualData).toEqual(expectedData);
         });
@@ -297,13 +302,13 @@ var powerbitests;
             };
             var selectionId = SelectionId.createWithMeasure('col2');
             var key = selectionId.getKey();
-            var hexDefaultCOlorRed = "#FF0000";
-            var actualData = LineChart.converter(dataView, blankCategoryValue, colors, false, null, hexDefaultCOlorRed);
+            var hexDefaultColorRed = "#FF0000";
+            var actualData = LineChart.converter(dataView, blankCategoryValue, colors, false, null, hexDefaultColorRed);
             var expectedData = {
                 series: [{
                     key: key,
                     lineIndex: 0,
-                    color: hexDefaultCOlorRed,
+                    color: hexDefaultColorRed,
                     xCol: dataView.metadata.columns[0],
                     yCol: dataView.metadata.columns[1],
                     data: [
@@ -317,7 +322,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 0 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: hexDefaultColorRed,
                         },
                         {
                             categoryValue: 'Delta Force',
@@ -329,7 +334,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 1 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: hexDefaultColorRed,
                         },
                         {
                             categoryValue: 'Jean Tablau',
@@ -341,14 +346,15 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 2 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: hexDefaultColorRed,
                         },
                     ],
                     identity: SelectionId.createWithMeasure('col2'),
-                    selected: false
+                    selected: false,
                 }],
                 isScalar: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null }
             };
             expect(actualData).toEqual(expectedData);
         });
@@ -359,29 +365,34 @@ var powerbitests;
             var seriesKey2 = seriesId2.getKey();
             var seriesId3 = SelectionId.createWithMeasure('col4');
             var seriesKey3 = seriesId3.getKey();
+            var seriesColors = [
+                '#41BEE0',
+                '#41BEE1',
+                '#41BEE2',
+            ];
             var dataView = {
                 metadata: dataViewMetadata,
                 categorical: {
                     categories: [{
                         source: dataViewMetadata.columns[0],
                         values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE1' } } } }, { dataPoint: { fill: { solid: { color: '#41BEE2' } } } }]
+                        objects: [{ dataPoint: { fill: { solid: { color: seriesColors[0] } } } }, { dataPoint: { fill: { solid: { color: seriesColors[1] } } } }, { dataPoint: { fill: { solid: { color: seriesColors[2] } } } }]
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [100, 200, 700]
+                            values: [100, 200, 700],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [700, 100, 200]
+                            values: [700, 100, 200],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200, 700, 100]
+                            values: [200, 700, 100],
                         }
                     ])
-                }
+                },
             };
             dataView.categorical.values.source = dataViewMetadata.columns[4];
             var actualData = LineChart.converter(dataView, blankCategoryValue, colors, false);
@@ -390,7 +401,7 @@ var powerbitests;
                     {
                         key: seriesKey1,
                         lineIndex: 0,
-                        color: '#41BEE0',
+                        color: seriesColors[0],
                         xCol: dataView.metadata.columns[0],
                         yCol: dataView.metadata.columns[1],
                         data: [
@@ -404,7 +415,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey1, catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey1).value
+                                labelFill: seriesColors[0],
                             },
                             {
                                 categoryValue: 'Delta Force',
@@ -416,7 +427,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey1, catIdx: 1 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey1).value
+                                labelFill: seriesColors[0],
                             },
                             {
                                 categoryValue: 'Jean Tablau',
@@ -428,7 +439,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey1, catIdx: 2 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey1).value
+                                labelFill: seriesColors[0],
                             },
                         ],
                         identity: seriesId1,
@@ -437,7 +448,7 @@ var powerbitests;
                     {
                         key: seriesKey2,
                         lineIndex: 1,
-                        color: '#41BEE1',
+                        color: seriesColors[1],
                         xCol: dataView.metadata.columns[0],
                         yCol: dataView.metadata.columns[2],
                         data: [
@@ -451,7 +462,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey2, catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey2).value
+                                labelFill: seriesColors[1],
                             },
                             {
                                 categoryValue: 'Delta Force',
@@ -463,7 +474,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey2, catIdx: 1 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey2).value
+                                labelFill: seriesColors[1],
                             },
                             {
                                 categoryValue: 'Jean Tablau',
@@ -475,7 +486,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey2, catIdx: 2 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey2).value
+                                labelFill: seriesColors[1],
                             },
                         ],
                         identity: seriesId2,
@@ -484,7 +495,7 @@ var powerbitests;
                     {
                         key: seriesKey3,
                         lineIndex: 2,
-                        color: '#41BEE2',
+                        color: seriesColors[2],
                         xCol: dataView.metadata.columns[0],
                         yCol: dataView.metadata.columns[3],
                         data: [
@@ -498,7 +509,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey3, catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey3).value
+                                labelFill: seriesColors[2],
                             },
                             {
                                 categoryValue: 'Delta Force',
@@ -510,7 +521,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey3, catIdx: 1 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey3).value
+                                labelFill: seriesColors[2],
                             },
                             {
                                 categoryValue: 'Jean Tablau',
@@ -522,19 +533,20 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey3, catIdx: 2 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey3).value
+                                labelFill: seriesColors[2],
                             },
                         ],
                         identity: seriesId3,
-                        selected: false
+                        selected: false,
                     },
                 ],
                 isScalar: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
             };
             expect(actualData).toEqual(expectedData);
         });
-        it('Check convert categorical multi-series + default color + fill color', function () {
+        it('Check convert categorical multi-series', function () {
             var seriesId1 = SelectionId.createWithMeasure('col2');
             var seriesKey1 = seriesId1.getKey();
             var seriesId2 = SelectionId.createWithMeasure('col3');
@@ -546,34 +558,36 @@ var powerbitests;
                 categorical: {
                     categories: [{
                         source: dataViewMetadata.columns[0],
-                        values: ['John Domo', 'Delta Force', 'Jean Tablau'],
-                        objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }, undefined, undefined]
+                        values: ['John Domo', 'Delta Force', 'Jean Tablau']
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [100, 200, 700]
+                            values: [100, 200, 700],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [700, 100, 200]
+                            values: [700, 100, 200],
                         },
                         {
                             source: dataViewMetadata.columns[3],
-                            values: [200, 700, 100]
+                            values: [200, 700, 100],
                         }
-                    ])
-                }
+                    ]),
+                },
             };
-            dataView.categorical.values.source = dataViewMetadata.columns[4];
-            var hexDefaultColorRed = "FF0000";
-            var actualData = LineChart.converter(dataView, blankCategoryValue, colors, false, null, hexDefaultColorRed);
+            var seriesColors = [
+                colors.getColor(0).value,
+                colors.getColor(1).value,
+                colors.getColor(2).value,
+            ];
+            var actualData = LineChart.converter(dataView, blankCategoryValue, colors, false);
             var expectedData = {
                 series: [
                     {
                         key: seriesKey1,
                         lineIndex: 0,
-                        color: '#41BEE0',
+                        color: seriesColors[0],
                         xCol: dataView.metadata.columns[0],
                         yCol: dataView.metadata.columns[1],
                         data: [
@@ -587,7 +601,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey1, catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey1).value
+                                labelFill: seriesColors[0],
                             },
                             {
                                 categoryValue: 'Delta Force',
@@ -599,7 +613,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey1, catIdx: 1 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey1).value
+                                labelFill: seriesColors[0],
                             },
                             {
                                 categoryValue: 'Jean Tablau',
@@ -611,7 +625,192 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey1, catIdx: 2 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey1).value
+                                labelFill: seriesColors[0],
+                            },
+                        ],
+                        identity: seriesId1,
+                        selected: false
+                    },
+                    {
+                        key: seriesKey2,
+                        lineIndex: 1,
+                        color: seriesColors[1],
+                        xCol: dataView.metadata.columns[0],
+                        yCol: dataView.metadata.columns[2],
+                        data: [
+                            {
+                                categoryValue: 'John Domo',
+                                value: 700,
+                                categoryIndex: 0,
+                                seriesIndex: 1,
+                                tooltipInfo: [{ displayName: "col1", value: "John Domo" }, { displayName: "col3", value: "700" }],
+                                identity: seriesId2,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey2, catIdx: 0 }),
+                                showLabel: true,
+                                labelFill: seriesColors[1],
+                            },
+                            {
+                                categoryValue: 'Delta Force',
+                                value: 100,
+                                categoryIndex: 1,
+                                seriesIndex: 1,
+                                tooltipInfo: [{ displayName: "col1", value: "Delta Force" }, { displayName: "col3", value: "100" }],
+                                identity: seriesId2,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey2, catIdx: 1 }),
+                                showLabel: true,
+                                labelFill: seriesColors[1],
+                            },
+                            {
+                                categoryValue: 'Jean Tablau',
+                                value: 200,
+                                categoryIndex: 2,
+                                seriesIndex: 1,
+                                tooltipInfo: [{ displayName: "col1", value: "Jean Tablau" }, { displayName: "col3", value: "200" }],
+                                identity: seriesId2,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey2, catIdx: 2 }),
+                                showLabel: true,
+                                labelFill: seriesColors[1],
+                            },
+                        ],
+                        identity: seriesId2,
+                        selected: false
+                    },
+                    {
+                        key: seriesKey3,
+                        lineIndex: 2,
+                        color: seriesColors[2],
+                        xCol: dataView.metadata.columns[0],
+                        yCol: dataView.metadata.columns[3],
+                        data: [
+                            {
+                                categoryValue: 'John Domo',
+                                value: 200,
+                                categoryIndex: 0,
+                                seriesIndex: 2,
+                                tooltipInfo: [{ displayName: "col1", value: "John Domo" }, { displayName: "col4", value: "200" }],
+                                identity: seriesId3,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey3, catIdx: 0 }),
+                                showLabel: true,
+                                labelFill: seriesColors[2],
+                            },
+                            {
+                                categoryValue: 'Delta Force',
+                                value: 700,
+                                categoryIndex: 1,
+                                seriesIndex: 2,
+                                tooltipInfo: [{ displayName: "col1", value: "Delta Force" }, { displayName: "col4", value: "700" }],
+                                identity: seriesId3,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey3, catIdx: 1 }),
+                                showLabel: true,
+                                labelFill: seriesColors[2],
+                            },
+                            {
+                                categoryValue: 'Jean Tablau',
+                                value: 100,
+                                categoryIndex: 2,
+                                seriesIndex: 2,
+                                tooltipInfo: [{ displayName: "col1", value: "Jean Tablau" }, { displayName: "col4", value: "100" }],
+                                identity: seriesId3,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey3, catIdx: 2 }),
+                                showLabel: true,
+                                labelFill: seriesColors[2],
+                            },
+                        ],
+                        identity: seriesId3,
+                        selected: false,
+                    },
+                ],
+                isScalar: false,
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
+            };
+            expect(actualData).toEqual(expectedData);
+        });
+        it('Check convert categorical multi-series + default color + fill color', function () {
+            var seriesId1 = SelectionId.createWithMeasure('col2');
+            var seriesKey1 = seriesId1.getKey();
+            var seriesId2 = SelectionId.createWithMeasure('col3');
+            var seriesKey2 = seriesId2.getKey();
+            var seriesId3 = SelectionId.createWithMeasure('col4');
+            var seriesKey3 = seriesId3.getKey();
+            var series1Color = '#41BEE0';
+            var dataView = {
+                metadata: dataViewMetadata,
+                categorical: {
+                    categories: [{
+                        source: dataViewMetadata.columns[0],
+                        values: ['John Domo', 'Delta Force', 'Jean Tablau'],
+                        objects: [{ dataPoint: { fill: { solid: { color: series1Color } } } }, undefined, undefined]
+                    }],
+                    values: DataViewTransform.createValueColumns([
+                        {
+                            source: dataViewMetadata.columns[1],
+                            values: [100, 200, 700],
+                        },
+                        {
+                            source: dataViewMetadata.columns[2],
+                            values: [700, 100, 200],
+                        },
+                        {
+                            source: dataViewMetadata.columns[3],
+                            values: [200, 700, 100],
+                        }
+                    ])
+                },
+            };
+            dataView.categorical.values.source = dataViewMetadata.columns[4];
+            var hexDefaultColorRed = "FF0000";
+            var actualData = LineChart.converter(dataView, blankCategoryValue, colors, false, null, hexDefaultColorRed);
+            var expectedData = {
+                series: [
+                    {
+                        key: seriesKey1,
+                        lineIndex: 0,
+                        color: series1Color,
+                        xCol: dataView.metadata.columns[0],
+                        yCol: dataView.metadata.columns[1],
+                        data: [
+                            {
+                                categoryValue: 'John Domo',
+                                value: 100,
+                                categoryIndex: 0,
+                                seriesIndex: 0,
+                                tooltipInfo: [{ displayName: "col1", value: "John Domo" }, { displayName: "col2", value: "100" }],
+                                identity: seriesId1,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey1, catIdx: 0 }),
+                                showLabel: true,
+                                labelFill: series1Color,
+                            },
+                            {
+                                categoryValue: 'Delta Force',
+                                value: 200,
+                                categoryIndex: 1,
+                                seriesIndex: 0,
+                                tooltipInfo: [{ displayName: "col1", value: "Delta Force" }, { displayName: "col2", value: "200" }],
+                                identity: seriesId1,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey1, catIdx: 1 }),
+                                showLabel: true,
+                                labelFill: series1Color,
+                            },
+                            {
+                                categoryValue: 'Jean Tablau',
+                                value: 700,
+                                categoryIndex: 2,
+                                seriesIndex: 0,
+                                tooltipInfo: [{ displayName: "col1", value: "Jean Tablau" }, { displayName: "col2", value: "700" }],
+                                identity: seriesId1,
+                                selected: false,
+                                key: JSON.stringify({ ser: seriesKey1, catIdx: 2 }),
+                                showLabel: true,
+                                labelFill: series1Color,
                             },
                         ],
                         identity: seriesId1,
@@ -634,7 +833,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey2, catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey2).value
+                                labelFill: hexDefaultColorRed,
                             },
                             {
                                 categoryValue: 'Delta Force',
@@ -646,7 +845,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey2, catIdx: 1 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey2).value
+                                labelFill: hexDefaultColorRed,
                             },
                             {
                                 categoryValue: 'Jean Tablau',
@@ -658,7 +857,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey2, catIdx: 2 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey2).value
+                                labelFill: hexDefaultColorRed,
                             },
                         ],
                         identity: seriesId2,
@@ -681,7 +880,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey3, catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey3).value
+                                labelFill: hexDefaultColorRed,
                             },
                             {
                                 categoryValue: 'Delta Force',
@@ -693,7 +892,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey3, catIdx: 1 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey3).value
+                                labelFill: hexDefaultColorRed,
                             },
                             {
                                 categoryValue: 'Jean Tablau',
@@ -705,19 +904,24 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: seriesKey3, catIdx: 2 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(seriesKey3).value
+                                labelFill: hexDefaultColorRed,
                             },
                         ],
                         identity: seriesId3,
-                        selected: false
+                        selected: false,
                     },
                 ],
                 isScalar: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
             };
             expect(actualData).toEqual(expectedData);
         });
         it('Check convert non-category multi-measure + fill colors', function () {
+            var seriesColors = [
+                '#41BEE0',
+                '#41BEE1',
+            ];
             var dataView = {
                 metadata: dataViewMetadata2,
                 categorical: {
@@ -725,12 +929,12 @@ var powerbitests;
                         {
                             source: dataViewMetadata2.columns[0],
                             values: [100],
-                            objects: [{ dataPoint: { fill: { solid: { color: '#41BEE0' } } } }]
+                            objects: [{ dataPoint: { fill: { solid: { color: seriesColors[0] } } } }]
                         },
                         {
                             source: dataViewMetadata2.columns[1],
                             values: [200],
-                            objects: [{ dataPoint: { fill: { solid: { color: '#41BEE1' } } } }]
+                            objects: [{ dataPoint: { fill: { solid: { color: seriesColors[1] } } } }]
                         }
                     ])
                 }
@@ -743,7 +947,7 @@ var powerbitests;
                     {
                         key: keys[0],
                         lineIndex: 0,
-                        color: '#41BEE0',
+                        color: seriesColors[0],
                         xCol: undefined,
                         yCol: dataView.metadata.columns[0],
                         data: [
@@ -757,16 +961,16 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: keys[0], catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(keys[0]).value
+                                labelFill: seriesColors[0],
                             }
                         ],
                         identity: ids[0],
-                        selected: false
+                        selected: false,
                     },
                     {
                         key: keys[1],
                         lineIndex: 1,
-                        color: '#41BEE1',
+                        color: seriesColors[1],
                         xCol: undefined,
                         yCol: dataView.metadata.columns[1],
                         data: [
@@ -780,7 +984,7 @@ var powerbitests;
                                 selected: false,
                                 key: JSON.stringify({ ser: keys[1], catIdx: 0 }),
                                 showLabel: true,
-                                labelFill: colors.getColor(keys[1]).value
+                                labelFill: seriesColors[1],
                             }
                         ],
                         identity: ids[1],
@@ -788,7 +992,8 @@ var powerbitests;
                     }
                 ],
                 isScalar: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
             };
             expect(actualData).toEqual(expectSlices);
         });
@@ -804,11 +1009,11 @@ var powerbitests;
                 categorical: {
                     categories: [{
                         source: dateTimeColumnsMetadata.columns[0],
-                        values: [new Date('2014/9/25'), new Date('2014/12/12'), new Date('2015/9/25')]
+                        values: [new Date('2014/9/25'), new Date('2014/12/12'), new Date('2015/9/25')],
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dateTimeColumnsMetadata.columns[1],
-                        values: [8000, 20000, 1000000]
+                        values: [8000, 20000, 1000000],
                     }])
                 }
             };
@@ -819,7 +1024,7 @@ var powerbitests;
                 series: [{
                     key: key,
                     lineIndex: 0,
-                    color: colors.getColor(key).value,
+                    color: colors.getColor(0).value,
                     xCol: dataView.metadata.columns[0],
                     yCol: dataView.metadata.columns[1],
                     data: [
@@ -833,7 +1038,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 0 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                         {
                             categoryValue: new Date('2014/12/12').getTime(),
@@ -845,7 +1050,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 1 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                         {
                             categoryValue: new Date('2015/9/25').getTime(),
@@ -857,14 +1062,15 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 2 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                     ],
                     identity: selectionId,
                     selected: false
                 }],
                 isScalar: true,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
             };
             expect(actualData).toEqual(expectedData);
         });
@@ -884,7 +1090,7 @@ var powerbitests;
                     }],
                     values: DataViewTransform.createValueColumns([{
                         source: dateTimeColumnsMetadata.columns[1],
-                        values: [30000, 8000, 20000, 1000000]
+                        values: [30000, 8000, 20000, 1000000],
                     }])
                 }
             };
@@ -895,7 +1101,7 @@ var powerbitests;
                 series: [{
                     key: key,
                     lineIndex: 0,
-                    color: colors.getColor(key).value,
+                    color: colors.getColor(0).value,
                     xCol: dataView.metadata.columns[0],
                     yCol: dataView.metadata.columns[1],
                     data: [
@@ -909,7 +1115,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 1 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                         {
                             categoryValue: new Date('2014/12/12').getTime(),
@@ -921,7 +1127,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 2 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                         {
                             categoryValue: new Date('2015/9/25').getTime(),
@@ -933,14 +1139,15 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 3 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                     ],
                     identity: selectionId,
-                    selected: false
+                    selected: false,
                 }],
                 isScalar: true,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
             };
             expect(actualData).toEqual(expectedData);
         });
@@ -966,7 +1173,7 @@ var powerbitests;
                 series: [{
                     key: key,
                     lineIndex: 0,
-                    color: colors.getColor(key).value,
+                    color: colors.getColor(0).value,
                     xCol: dataView.metadata.columns[0],
                     yCol: dataView.metadata.columns[1],
                     data: [
@@ -980,7 +1187,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 0 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                         {
                             categoryValue: null,
@@ -992,7 +1199,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 1 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                         {
                             categoryValue: 'Delta Force',
@@ -1004,7 +1211,7 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 2 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                         {
                             categoryValue: 'Jean Tablau',
@@ -1016,14 +1223,15 @@ var powerbitests;
                             selected: false,
                             key: JSON.stringify({ ser: key, catIdx: 3 }),
                             showLabel: true,
-                            labelFill: colors.getColor(key).value
+                            labelFill: colors.getColor(0).value,
                         },
                     ],
                     identity: selectionId,
-                    selected: false
+                    selected: false,
                 }],
                 isScalar: false,
-                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings()
+                dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings(),
+                axesLabels: { x: null, y: null },
             };
             expect(actualData).toEqual(expectedData);
         });
@@ -1039,20 +1247,20 @@ var powerbitests;
                         name: 'col2',
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(1 /* Number */),
-                        objects: { general: { formatString: '0.000' } }
+                        objects: { general: { formatString: '0.000' } },
                     },
                     {
                         name: 'col3',
                         isMeasure: false,
                         type: DataShapeUtility.describeDataType(4 /* DateTime */),
-                        objects: { general: { formatString: 'd' } }
+                        objects: { general: { formatString: 'd' } },
                     }
-                ]
+                ],
             };
             var dataViewMetadataWithScalarObject = powerbi.Prototype.inherit(dataViewMetadata);
             dataViewMetadataWithScalarObject.objects = { categoryAxis: { scalar: true } };
             beforeEach(function () {
-                VisualHostServices.initialize(powerbi.common.createLocalizationService());
+                powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
                 element = powerbitests.helpers.testDom('500', '500');
                 v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
                 v.init({
@@ -1064,7 +1272,7 @@ var powerbitests;
                         width: element.width()
                     },
                     animation: { transitionImmediate: true },
-                    interactivity: { isInteractiveLegend: interactiveChart }
+                    interactivity: { isInteractiveLegend: interactiveChart },
                 });
             });
             it('line chart dom validation', function (done) {
@@ -1146,7 +1354,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dateTimeColumnsMetadata.columns[1],
-                            values: [8000, 20000, 1000000]
+                            values: [8000, 20000, 1000000],
                         }])
                     }
                 };
@@ -1187,7 +1395,7 @@ var powerbitests;
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dateTimeColumnsMetadata.columns[1],
-                            values: []
+                            values: [],
                         }])
                     }
                 };
@@ -1291,18 +1499,19 @@ var powerbitests;
                     powerbitests.mocks.dataViewScopeIdentity('col3'),
                 ];
                 var measureColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
+                var col3Ref = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'sales' });
                 var valueColumns = DataViewTransform.createValueColumns([
                     {
                         source: metadata.columns[1],
                         values: [110, 120, 130, 140, 150],
-                        identity: seriesIdentities[0]
+                        identity: seriesIdentities[0],
                     },
                     {
                         source: metadata.columns[2],
                         values: [210, 220, 230, 240, 250],
-                        identity: seriesIdentities[1]
+                        identity: seriesIdentities[1],
                     }
-                ]);
+                ], [col3Ref]);
                 valueColumns.source = measureColumn;
                 v.onDataChanged({
                     dataViews: [{
@@ -1310,7 +1519,8 @@ var powerbitests;
                         categorical: {
                             categories: [{
                                 source: metadata.columns[0],
-                                values: ['a', 'b', 'c', 'd', 'e']
+                                values: ['a', 'b', 'c', 'd', 'e'],
+                                identityFields: [categoryColumnRef],
                             }],
                             values: valueColumns
                         }
@@ -1324,7 +1534,7 @@ var powerbitests;
                     var lineTwo = $(lines.get(1)).attr('style');
                     expect(lineTwo).toBeDefined();
                     if (!interactiveChart)
-                        expect($('.lineChart .legend .title').text()).toBe('sales');
+                        expect($('.legendTitle').text()).toBe('sales');
                     done();
                 }, DefaultWaitForRender);
             });
@@ -1374,7 +1584,6 @@ var powerbitests;
                 setTimeout(function () {
                     var svg = $('.lineChart svg');
                     var height = svg.height();
-                    expect(svg.length).toBe(2);
                     for (var i = 0; i < 5; i++) {
                         v.onDataChanged({
                             dataViews: [{
@@ -1468,7 +1677,7 @@ var powerbitests;
                                 values: [10, null, 5, null, 15],
                                 subtotal: 15
                             }])
-                        }
+                        },
                     }]
                 });
                 setTimeout(function () {
@@ -1573,7 +1782,7 @@ var powerbitests;
                     ]
                 };
                 v.onDataChanged({
-                    dataViews: [DataViewTransform.pivot({
+                    dataViews: [DataViewPivotCategorical.apply({
                         metadata: metadata,
                         categorical: {
                             categories: [{
@@ -1583,7 +1792,8 @@ var powerbitests;
                                     powerbitests.mocks.dataViewScopeIdentity('a'),
                                     powerbitests.mocks.dataViewScopeIdentity('b'),
                                     powerbitests.mocks.dataViewScopeIdentity('c'),
-                                ]
+                                ],
+                                identityFields: [categoryColumnRef],
                             }],
                             values: DataViewTransform.createValueColumns([
                                 {
@@ -1688,7 +1898,7 @@ var powerbitests;
                             isMeasure: true,
                             type: DataShapeUtility.describeDataType(SemanticType.Integer)
                         }
-                    ]
+                    ],
                 };
                 v.onDataChanged({
                     dataViews: [{
@@ -1768,7 +1978,7 @@ var powerbitests;
                         width: element.width()
                     },
                     animation: { transitionImmediate: true },
-                    interactivity: { isInteractiveLegend: interactiveChart }
+                    interactivity: { isInteractiveLegend: interactiveChart },
                 });
             });
             it('check area rendered', function (done) {
@@ -1880,7 +2090,7 @@ var powerbitests;
                     {
                         name: 'col2',
                         isMeasure: true,
-                        type: DataShapeUtility.describeDataType(1 /* Number */)
+                        type: DataShapeUtility.describeDataType(1 /* Number */),
                     },
                     {
                         name: 'col3',
@@ -1888,7 +2098,7 @@ var powerbitests;
                         type: DataShapeUtility.describeDataType(4 /* DateTime */),
                         format: 'd'
                     }
-                ]
+                ],
             };
             var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
             var dataViewMetadataWithLabelsOnObject = powerbi.Prototype.inherit(dataViewMetadata);
@@ -1900,7 +2110,7 @@ var powerbitests;
             var dataViewMetadataWithDisplayUnitsAndPrecisionObject = powerbi.Prototype.inherit(dataViewMetadata);
             dataViewMetadataWithDisplayUnitsAndPrecisionObject.objects = { labels: { show: true, labelDisplayUnits: 1000, labelPrecision: 1 } };
             beforeEach(function () {
-                VisualHostServices.initialize(powerbi.common.createLocalizationService());
+                powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
                 element = powerbitests.helpers.testDom('500', '500');
                 v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
                 v.init({
@@ -1912,7 +2122,7 @@ var powerbitests;
                         width: element.width()
                     },
                     animation: { transitionImmediate: true },
-                    interactivity: { isInteractiveLegend: interactiveChart }
+                    interactivity: { isInteractiveLegend: interactiveChart },
                 });
             });
             it('line chart show labels validation', function (done) {
@@ -2085,18 +2295,19 @@ var powerbitests;
                 var color0 = colors.getColor(keys[0]).value;
                 var color1 = colors.getColor(keys[1]).value;
                 var measureColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
+                var measureColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'sales' });
                 var valueColumns = DataViewTransform.createValueColumns([
                     {
                         source: metadata.columns[1],
                         values: [110, 120, 130, 140, 150],
-                        identity: seriesScopeIdentities[0]
+                        identity: seriesScopeIdentities[0],
                     },
                     {
                         source: metadata.columns[2],
                         values: [210, 220, 230, 240, 250],
-                        identity: seriesScopeIdentities[1]
+                        identity: seriesScopeIdentities[1],
                     }
-                ]);
+                ], [measureColumnRef]);
                 valueColumns.source = measureColumn;
                 v.onDataChanged({
                     dataViews: [{
@@ -2104,7 +2315,8 @@ var powerbitests;
                         categorical: {
                             categories: [{
                                 source: metadata.columns[0],
-                                values: ['a', 'b', 'c', 'd', 'e']
+                                values: ['a', 'b', 'c', 'd', 'e'],
+                                identityFields: [categoryColumnRef],
                             }],
                             values: valueColumns
                         }
@@ -2143,18 +2355,19 @@ var powerbitests;
                 var keys = [ids[0].getKey(), ids[1].getKey()];
                 var color0 = colors.getColor(keys[0]).value;
                 var measureColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
+                var measureColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'sales' });
                 var valueColumns = DataViewTransform.createValueColumns([
                     {
                         source: metadata.columns[1],
                         values: [110, 120, 130, 140, 150],
-                        identity: seriesScopeIdentities[0]
+                        identity: seriesScopeIdentities[0],
                     },
                     {
                         source: metadata.columns[2],
                         values: [210, 220, 230, 240, 250],
-                        identity: seriesScopeIdentities[1]
+                        identity: seriesScopeIdentities[1],
                     }
-                ]);
+                ], [measureColumnRef]);
                 valueColumns.source = measureColumn;
                 v.onDataChanged({
                     dataViews: [{
@@ -2162,7 +2375,8 @@ var powerbitests;
                         categorical: {
                             categories: [{
                                 source: metadata.columns[0],
-                                values: ['a', 'b', 'c', 'd', 'e']
+                                values: ['a', 'b', 'c', 'd', 'e'],
+                                identityFields: [categoryColumnRef],
                             }],
                             values: valueColumns
                         }
@@ -2173,9 +2387,9 @@ var powerbitests;
                     {
                         source: metadata.columns[1],
                         values: [110, 120, 130, 140, 150],
-                        identity: seriesScopeIdentities[0]
+                        identity: seriesScopeIdentities[0],
                     }
-                ]);
+                ], [measureColumnRef]);
                 valueColumns2.source = measureColumn;
                 v.onDataChanged({
                     dataViews: [{
@@ -2183,7 +2397,8 @@ var powerbitests;
                         categorical: {
                             categories: [{
                                 source: metadata.columns[0],
-                                values: ['a', 'b', 'c', 'd', 'e']
+                                values: ['a', 'b', 'c', 'd', 'e'],
+                                identityFields: [categoryColumnRef],
                             }],
                             values: valueColumns2
                         }
@@ -2230,7 +2445,7 @@ var powerbitests;
                             }],
                             values: DataViewTransform.createValueColumns([{
                                 source: dataViewMetadataWithLabelsOnObject.columns[1],
-                                values: [500000, 495000, 490000, 480000, 500000]
+                                values: [500000, 495000, 490000, 480000, 500000],
                             }])
                         }
                     }]
@@ -2248,7 +2463,7 @@ var powerbitests;
                                 }],
                                 values: DataViewTransform.createValueColumns([{
                                     source: dataViewMetadataWithLabelsOnObject.columns[1],
-                                    values: [400, 500, 300, 200]
+                                    values: [400, 500, 300, 200],
                                 }])
                             }
                         }]
@@ -2339,7 +2554,7 @@ var powerbitests;
         describe("interactive lineChart Data Labels validation", function () { return lineChartDataLabelsValidation(true); });
     });
     describe("Line Chart Legend Formatting", function () {
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var v, element;
         var dataViewMetadata = {
             columns: [
@@ -2353,10 +2568,10 @@ var powerbitests;
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(1 /* Number */)
                 }
-            ]
+            ],
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
             v.init({
@@ -2368,7 +2583,7 @@ var powerbitests;
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: true }
+                interactivity: { isInteractiveLegend: true },
             });
             v.onDataChanged({
                 dataViews: [{
@@ -2396,7 +2611,7 @@ var powerbitests;
         });
     });
     describe("Line Chart Interactivity", function () {
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var v, element;
         var dataViewMetadata = {
             columns: [
@@ -2409,10 +2624,10 @@ var powerbitests;
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Integer)
                 }
-            ]
+            ],
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
             v.init({
@@ -2424,7 +2639,7 @@ var powerbitests;
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: true }
+                interactivity: { isInteractiveLegend: true },
             });
             v.onDataChanged({
                 dataViews: [{
@@ -2474,7 +2689,7 @@ var powerbitests;
         });
     });
     describe("Line Chart Interactivity - Creation", function () {
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var v, element;
         var dataViewMetadata = {
             columns: [
@@ -2487,10 +2702,10 @@ var powerbitests;
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(1 /* Number */)
                 }
-            ]
+            ],
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
             v.init({
@@ -2502,7 +2717,7 @@ var powerbitests;
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: true }
+                interactivity: { isInteractiveLegend: true },
             });
             // Invoke onDataChange to force creation of chart layers.
             v.onDataChanged({ dataViews: [] });
@@ -2554,17 +2769,17 @@ var powerbitests;
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(1 /* Number */)
                 }
-            ]
+            ],
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -2580,7 +2795,7 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadata.columns[0],
-                            values: ['a', 'b', 'c']
+                            values: ['a', 'b', 'c'],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -2612,7 +2827,7 @@ var powerbitests;
         });
     });
     describe("Line Chart Scrollbar Validation", function () {
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var v, element;
         var dataViewMetadata = {
             columns: [
@@ -2625,15 +2840,15 @@ var powerbitests;
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Integer)
                 }
-            ]
+            ],
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('150', '50');
             v = powerbi.visuals.visualPluginFactory.createMinerva({
                 heatMap: false,
                 newTable: false,
-                scrollableVisuals: true
+                scrollableVisuals: true,
             }).getPlugin('lineChart').create();
             v.init({
                 element: element,
@@ -2644,7 +2859,7 @@ var powerbitests;
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: true }
+                interactivity: { isInteractiveLegend: true },
             });
             v.onDataChanged({
                 dataViews: [{
@@ -2698,7 +2913,7 @@ var powerbitests;
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(1 /* Number */)
                     }
-                ]
+                ],
             };
             var nonNumericDataViewMetadata = {
                 columns: [
@@ -2716,17 +2931,17 @@ var powerbitests;
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(1 /* Number */)
                     }
-                ]
+                ],
             };
             beforeEach(function () {
-                VisualHostServices.initialize(powerbi.common.createLocalizationService());
+                powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             });
             beforeEach(function () {
                 element = powerbitests.helpers.testDom('500', '500');
                 v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
                 v.init({
                     element: element,
-                    host: powerbi.explore.services.createVisualHostServices(),
+                    host: powerbitests.mocks.createVisualHostServices(),
                     style: powerbi.common.services.visualStyles.create(),
                     viewport: {
                         height: element.height(),
@@ -2753,7 +2968,7 @@ var powerbitests;
                         categorical: {
                             categories: [{
                                 source: dataViewMetadata.columns[0],
-                                values: [1, 2, 5, 10, 20]
+                                values: [1, 2, 5, 10, 20],
                             }],
                             values: DataViewTransform.createValueColumns([
                                 {
@@ -2867,7 +3082,7 @@ var powerbitests;
         });
     });
     describe("Area Chart Scrollbar Validation", function () {
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var v, element;
         var dataViewMetadata = {
             columns: [
@@ -2880,15 +3095,15 @@ var powerbitests;
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Integer)
                 }
-            ]
+            ],
         };
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('150', '50');
             v = powerbi.visuals.visualPluginFactory.createMinerva({
                 heatMap: false,
                 newTable: false,
-                scrollableVisuals: true
+                scrollableVisuals: true,
             }).getPlugin('areaChart').create();
             v.init({
                 element: element,
@@ -2899,7 +3114,7 @@ var powerbitests;
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: true }
+                interactivity: { isInteractiveLegend: true },
             });
             v.onDataChanged({
                 dataViews: [{
@@ -2933,10 +3148,10 @@ var powerbitests;
         });
     });
     describe("Line Chart Tooltips", function () {
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var v, element;
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
             v.init({
@@ -2948,7 +3163,7 @@ var powerbitests;
                     width: element.width()
                 },
                 animation: { transitionImmediate: true },
-                interactivity: { isInteractiveLegend: true }
+                interactivity: { isInteractiveLegend: true },
             });
             // Invoke onDataChange to force creation of chart layers.
             v.onDataChanged({ dataViews: [] });
@@ -2965,8 +3180,9 @@ var powerbitests;
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(1 /* Number */)
                     }
-                ]
+                ],
             };
+            var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
             var lineChart = v.layers[0];
             spyOn(lineChart, 'selectColumn').and.callThrough();
             v.onDataChanged({
@@ -2975,7 +3191,8 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadata.columns[0],
-                            values: [2001, 2002, 2003, 2004, 2005]
+                            values: [2001, 2002, 2003, 2004, 2005],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([{
                             source: dataViewMetadata.columns[1],
@@ -3017,24 +3234,25 @@ var powerbitests;
                         type: DataShapeUtility.describeDataType(1 /* Number */),
                         isMeasure: true
                     }
-                ]
+                ],
             };
             var seriesIdentities = [
                 powerbitests.mocks.dataViewScopeIdentity('col2'),
                 powerbitests.mocks.dataViewScopeIdentity('col3'),
             ];
+            var measureColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col2' });
             var valueColumns = DataViewTransform.createValueColumns([
                 {
                     source: dataViewMetadata.columns[1],
                     values: [500000, 495000, 490000, 480000, 500000],
-                    identity: seriesIdentities[0]
+                    identity: seriesIdentities[0],
                 },
                 {
                     source: dataViewMetadata.columns[2],
                     values: [null, null, 490000, 480000, 500000],
-                    identity: seriesIdentities[1]
+                    identity: seriesIdentities[1],
                 }
-            ]);
+            ], [measureColumnRef]);
             valueColumns.source = dataViewMetadata.columns[2];
             var dataView = {
                 metadata: dataViewMetadata,
@@ -3065,6 +3283,73 @@ var powerbitests;
             tooltipInfo = LineChart.getTooltipInfoByPointX(lineChart, dataPoint, pointX);
             expect(tooltipInfo).toEqual([{ displayName: 'col1', value: '2005' }, { displayName: 'col3', value: '(Blank)' }, { displayName: 'col2', value: '500000' }]);
         });
+        it('Line Chart X and Y-axis show/hide Title ', function () {
+            var element = powerbitests.helpers.testDom('500', '500');
+            var hostServices = powerbitests.mocks.createVisualHostServices();
+            var categoryIdentities = [powerbitests.mocks.dataViewScopeIdentity("John Domo")];
+            var v = powerbi.visuals.visualPluginFactory.create().getPlugin('lineChart').create();
+            v.init({
+                element: element,
+                host: hostServices,
+                style: powerbi.common.services.visualStyles.create(),
+                viewport: {
+                    height: element.height(),
+                    width: element.width()
+                },
+                interactivity: { isInteractiveLegend: false },
+                animation: { transitionImmediate: true },
+            });
+            var dataViewMetadataOneColumn = {
+                columns: [
+                    {
+                        name: 'AxesTitleTest',
+                        type: DataShapeUtility.describeDataType(1 /* Number */)
+                    }
+                ],
+                objects: {
+                    categoryAxis: {
+                        showAxisTitle: true
+                    },
+                    valueAxis: {
+                        showAxisTitle: true
+                    }
+                }
+            };
+            v.onDataChanged({
+                dataViews: [{
+                    metadata: dataViewMetadataOneColumn,
+                    categorical: {
+                        categories: [{
+                            source: dataViewMetadataOneColumn.columns[0],
+                            values: [500, 2000, 5000, 10000],
+                            identity: categoryIdentities
+                        }],
+                        values: DataViewTransform.createValueColumns([{
+                            source: dataViewMetadataOneColumn.columns[0],
+                            values: [20, 1000],
+                            subtotal: 1020
+                        }])
+                    }
+                }]
+            });
+            expect($('.xAxisLabel').first().text()).toBe('AxesTitleTest');
+            expect($('.yAxisLabel').first().text()).toBe('AxesTitleTest');
+            dataViewMetadataOneColumn.objects = {
+                categoryAxis: {
+                    showAxisTitle: false
+                },
+                valueAxis: {
+                    showAxisTitle: false
+                }
+            };
+            v.onDataChanged({
+                dataViews: [{
+                    metadata: dataViewMetadataOneColumn,
+                }]
+            });
+            expect($('.xAxisLabel').length).toBe(0);
+            expect($('.yAxisLabel').length).toBe(0);
+        });
         it('Non scalar xAxis - closest data point', function () {
             var dataViewMetadata = {
                 columns: [
@@ -3077,7 +3362,7 @@ var powerbitests;
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(1 /* Number */)
                     }
-                ]
+                ],
             };
             var lineChart = v.layers[0];
             spyOn(lineChart, 'selectColumn').and.callThrough();

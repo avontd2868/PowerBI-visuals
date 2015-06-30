@@ -36,42 +36,42 @@ describe("legendChart DOM validation", function () {
         ];
         legend.drawLegend({ dataPoints: legendData }, viewport);
         setTimeout(function () {
-            expect($('.label').length).toBe(1);
-            expect($('.item').length).toBe(1);
-            expect($('.legendTopBottom').length).toBe(1);
+            expect($('.legendItem').length).toBe(1);
+            expect($('.legendText').length).toBe(1);
+            expect($('.legendIcon').length).toBe(1);
             done();
         }, DefaultWaitForRender);
     });
     it('legend dom validation three legend items count validation', function (done) {
         var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'blue', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
+            { label: 'California', color: '#ff0000', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
+            { label: 'Texas', color: '#0000ff', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
+            { label: 'Washington', color: '00ff00', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
         ];
         legend.drawLegend({ dataPoints: legendData }, viewport);
         setTimeout(function () {
-            expect($('.label').length).toBe(3);
-            expect($('.item').length).toBe(3);
-            expect($('.legendTopBottom').length).toBe(1);
+            expect($('.legendItem').length).toBe(3);
+            expect($('.legendText').length).toBe(3);
+            expect($('.legendIcon').length).toBe(3);
             done();
         }, DefaultWaitForRender);
     });
     it('legend dom validation incremental build', function (done) {
         // Draw the legend once with the 3 states
         var initialData = [
-            { label: 'California', color: 'red', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'blue', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
+            { label: 'California', color: '#fff000', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
+            { label: 'Texas', color: '#ff00ff', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
+            { label: 'Washington', color: '#fff000', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
         ];
         legend.drawLegend({ dataPoints: initialData }, viewport);
         setTimeout(function () {
             validateLegendDOM(initialData);
             // Draw the legend against with a new state at the start
             var legendData = [
-                { label: 'Alaska', color: 'red', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'California', color: 'blue', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Texas', color: 'green', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Washington', color: 'orange', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
+                { label: 'Alaska', color: '#fff000', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
+                { label: 'California', color: '#fff00d', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
+                { label: 'Texas', color: '#fffe00', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
+                { label: 'Washington', color: '#0000dd', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
             ];
             legend.reset();
             legend.drawLegend({ dataPoints: legendData }, viewport);
@@ -90,7 +90,7 @@ describe("legendChart DOM validation", function () {
         legend.reset();
         legend.drawLegend({ dataPoints: legendData }, viewport);
         setTimeout(function () {
-            expect($('.label').first().text()).toBe('California');
+            expect($('.legendText').first().text()).toBe('California');
             done();
         }, DefaultWaitForRender);
     });
@@ -102,7 +102,7 @@ describe("legendChart DOM validation", function () {
         ];
         legend.drawLegend({ dataPoints: legendData }, viewport);
         setTimeout(function () {
-            expect($('.label').last().text()).toBe('Washington');
+            expect($('.legendText').last().text()).toBe('Washington');
             done();
         }, DefaultWaitForRender);
     });
@@ -114,381 +114,103 @@ describe("legendChart DOM validation", function () {
         ];
         legend.drawLegend({ dataPoints: legendData }, viewport);
         setTimeout(function () {
-            expect($('.icon.short').length).toBe(3);
+            expect($('.legendIcon').length).toBe(3);
             done();
         }, DefaultWaitForRender);
     });
-    it('legend dom validation three legend items colors', function (done) {
-        var legendData = [
-            { label: 'California', color: 'rgb(255, 0, 0)', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 0 /* Box */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
+    it('legend with title', function () {
+        var legendData = getLotsOfLegendData();
+        legend.drawLegend({ dataPoints: legendData, title: 'states' }, viewport);
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendTitle').length).toBe(1);
+    });
+    it('legend no title', function () {
+        var legendData = getLotsOfLegendData();
         legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            var items = $('.icon.tall');
-            expect(items.first().css('background-color')).toBe('rgb(255, 0, 0)');
-            expect(items.last().css('background-color')).toBe('rgb(0, 0, 255)');
-            var itemsCombo = $('.icon.short');
-            expect(itemsCombo.last().css('background-color')).toBe('rgb(0, 255, 0)');
-            done();
-        }, DefaultWaitForRender);
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendTitle').length).toBe(0);
     });
-    it('legend dom validation right render validation', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.item').length).toBe(0);
-            expect($('.verticalItem').length).toBe(1);
-            expect($('.legendTopBottom').length).toBe(0);
-            expect($('.legendLeftRight').length).toBe(1);
-            expect(element.children().first().get(0).tagName).toBe("SVG");
-            expect(element.children().last().get(0).tagName).toBe("DIV");
-            expect(element.children().last().css('width')).toBe("90px");
-            expect($('.legendLeftRight').first().height()).toBe(element.height());
-            done();
-        }, DefaultWaitForRender);
+    it('legend Top & horizontal trim', function () {
+        var legendData = getLotsOfLegendData();
+        legend.changeOrientation(0 /* Top */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 100, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendItem').length).toBeGreaterThan(5);
+        expect($('.legendItem').length).toBeLessThan(52);
     });
-    it('legend dom validation left render validation', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 3 /* Left */);
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.item').length).toBe(0);
-            expect($('.verticalItem').length).toBe(1);
-            expect($('.legendTopBottom').length).toBe(0);
-            expect($('.legendLeftRight').length).toBe(1);
-            expect(element.children().first().get(0).tagName).toBe("DIV");
-            expect(element.children().last().get(0).tagName).toBe("SVG");
-            done();
-        }, DefaultWaitForRender);
+    it('legend Bottom & horizontal trim', function () {
+        var legendData = getLotsOfLegendData();
+        legend.changeOrientation(1 /* Bottom */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 100, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendItem').length).toBeGreaterThan(5);
+        expect($('.legendItem').length).toBeLessThan(52);
     });
-    it('legend dom validation bottom render validation', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 1 /* Bottom */);
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').length).toBe(1);
-            expect($('.item').length).toBe(1);
-            expect($('.verticalItem').length).toBe(0);
-            expect($('.legendTopBottom').length).toBe(1);
-            expect($('.legendLeftRight').length).toBe(0);
-            expect(element.children().first().get(0).tagName).toBe("SVG");
-            expect(element.children().last().get(0).tagName).toBe("DIV");
-            expect(element.children().last().css('width')).toBe("500px");
-            expect(element.children().last().css('height')).toBe("20px");
-            done();
-        }, DefaultWaitForRender);
+    it('legend Left & vertical trim', function () {
+        var legendData = getLotsOfLegendData();
+        legend.changeOrientation(3 /* Left */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 200, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendItem').length).toBeGreaterThan(5);
+        expect($('.legendItem').length).toBeLessThan(52);
     });
-    it('legend dom validation top render validation', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService);
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').length).toBe(1);
-            expect($('.item').length).toBe(1);
-            expect($('.verticalItem').length).toBe(0);
-            expect($('.legendTopBottom').length).toBe(1);
-            expect($('.legendLeftRight').length).toBe(0);
-            expect(element.children().first().get(0).tagName).toBe("DIV");
-            expect(element.children().last().get(0).tagName).toBe("SVG");
-            expect($('.legend').children().length).toBe(1);
-            done();
-        }, DefaultWaitForRender);
+    it('legend Right & vertical trim', function () {
+        var legendData = getLotsOfLegendData();
+        legend.changeOrientation(2 /* Right */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 200, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendItem').length).toBeGreaterThan(5);
+        expect($('.legendItem').length).toBeLessThan(52);
     });
-    it('legend dom validation top render scrollMargin validation', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, true, 0 /* Top */);
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').length).toBe(1);
-            expect($('.item').length).toBe(1);
-            expect($('.legendTopBottom').length).toBe(1);
-            expect(legend.getMargins().height).toBe(defaultLegendHeight + scrollMargin);
-            done();
-        }, DefaultWaitForRender);
+    it('Intelligent Layout: Low label count should result in longer max-width', function () {
+        var legendData = [{
+            label: 'Really long label, but i have the space to show',
+            color: 'red',
+            icon: 2 /* Line */,
+            identity: powerbi.visuals.SelectionId.createNull(),
+            selected: false
+        }];
+        legend.changeOrientation(0 /* Top */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 100, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendItem').length).toBe(1);
+        expect($($('.legendText')[0]).text()).not.toContain('...');
     });
-    it('legend top/bottom render data slice validation no title', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 0 /* Top */);
-        var legendData = getLegendData();
-        viewport = {
-            height: 150,
-            width: 250
-        };
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.item').length).toBe(3);
-            // Bigger viewport
-            viewport = {
-                height: 500,
-                width: 500
-            };
-            legend.reset();
-            legend.drawLegend({ dataPoints: legendData }, viewport);
-            setTimeout(function () {
-                expect($('.item').length).toBe(6);
-                done();
-            }, DefaultWaitForRender);
-        }, DefaultWaitForRender);
+    it('Intelligent Layout: Lots of small labels should get compacted in horizontal layout', function () {
+        var legendData = getLotsOfLegendData();
+        legend.changeOrientation(0 /* Top */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 100, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect($('.legendItem').length).toBe(25);
     });
-    it('legend top/bottom render data slice validation with title', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 1 /* Bottom */);
-        var legendData = getLegendData();
-        viewport = {
-            height: 150,
-            width: 250
-        };
-        legend.drawLegend({ title: "States", dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.item').length).toBe(2);
-            done();
-        }, DefaultWaitForRender);
+    it('Intelligent Layout: If labels in horizontal layout have small widths, width of legend should be small', function () {
+        var legendData = getLotsOfLegendData();
+        legend.changeOrientation(2 /* Right */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 100, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect(legend.getMargins().width).toBeLessThan(200);
     });
-    it('legend left/right render data slice validation no title', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 3 /* Left */);
-        var legendData = getLegendData();
-        viewport = {
-            height: 150,
-            width: 250
-        };
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.verticalItem').length).toBe(7);
-            // Bigger viewport
-            viewport = {
-                height: 500,
-                width: 500
-            };
-            legend.reset();
-            legend.drawLegend({ dataPoints: legendData }, viewport);
-            setTimeout(function () {
-                expect($('.verticalItem').length).toBe(10);
-                done();
-            }, DefaultWaitForRender);
-        }, DefaultWaitForRender);
-    });
-    it('legend left/right render data slice validation with title', function (done) {
-        var svgElement = $('<svg/>').addClass("columnChart");
-        element.append(svgElement);
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        var legendData = getLegendData();
-        viewport = {
-            height: 150,
-            width: 250
-        };
-        legend.drawLegend({ title: "States", dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.verticalItem').length).toBe(6);
-            done();
-        }, DefaultWaitForRender);
-    });
-    it('legend getIconClass Circle', function () {
-        expect(powerbi.visuals.getIconClass(1 /* Circle */)).toBe('icon circle');
-    });
-    it('legend getIconClass Box', function () {
-        expect(powerbi.visuals.getIconClass(0 /* Box */)).toBe('icon tall');
-    });
-    it('legend getIconClass Line', function () {
-        expect(powerbi.visuals.getIconClass(2 /* Line */)).toBe('icon short');
-    });
-    it('legend getMargins empty', function () {
-        expect(legend.getMargins().height).toBe(0);
-        expect(legend.getMargins().width).toBe(0);
-    });
-    it('legend getMargins no data', function () {
-        legend.drawLegend({ dataPoints: [] }, viewport);
-        expect(legend.getMargins().height).toBe(0);
-        expect(legend.getMargins().width).toBe(0);
-    });
-    it('legend getMargins data top position', function () {
-        legend.drawLegend({
-            dataPoints: [
-                { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-            ]
-        }, viewport);
-        expect(legend.getMargins().height).toBe(defaultLegendHeight);
-        expect(legend.getMargins().width).toBe(0);
-    });
-    it('legend getMargins data bottom position', function () {
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 1 /* Bottom */);
-        legend.drawLegend({
-            dataPoints: [
-                { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-            ]
-        }, viewport);
-        expect(legend.getMargins().width).toBe(0);
-        expect(legend.getMargins().height).toBe(defaultLegendHeight);
-    });
-    it('legend getMargins data right position', function () {
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        legend.drawLegend({
-            dataPoints: [
-                { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-            ]
-        }, viewport);
-        expect(legend.getMargins().width).toBe(defaultLegendWidth);
-        expect(legend.getMargins().height).toBe(0);
-    });
-    it('legend getMargins data left position', function () {
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        legend.drawLegend({
-            dataPoints: [
-                { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-            ]
-        }, viewport);
-        expect(legend.getMargins().width).toBe(defaultLegendWidth);
-        expect(legend.getMargins().height).toBe(0);
-    });
-    it('legend getMargins one data point', function () {
-        legend.drawLegend({
-            dataPoints: [
-                { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-            ]
-        }, viewport);
-        expect(legend.getMargins().height).toBe(defaultLegendHeight);
-        expect(legend.getMargins().width).toBe(0);
-    });
-    it('legend getMargins right position resize greater than max ', function () {
-        var legendData = {
-            dataPoints: [
-                { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-                { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-            ]
-        };
-        var viewport = {
-            height: 500,
-            width: 305
-        };
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        legend.drawLegend(legendData, viewport);
-        expect(legend.getMargins().width).toBe(defaultLegendWidth);
-        expect(legend.getMargins().height).toBe(0);
-    });
-    it('legend getMargins right position resize between min and max ', function () {
-        var legendData = [
-            { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        var viewport = {
-            height: 500,
-            width: 150
-        };
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        expect(legend.getMargins().width).toBe(45);
-        expect(legend.getMargins().height).toBe(0);
-    });
-    it('legend getMargins right position resize less than min', function () {
-        var legendData = [
-            { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        var viewport = {
-            height: 300,
-            width: 88
-        };
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        expect(legend.getMargins().width).toBe(0);
-        expect(legend.getMargins().height).toBe(0);
-    });
-    it('legend getMargins bottom position resize less than min', function () {
-        var legendData = [
-            { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        var viewport = {
-            height: 300,
-            width: 88
-        };
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 1 /* Bottom */);
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        expect(legend.getMargins().width).toBe(0);
-        expect(legend.getMargins().height).toBe(defaultLegendHeight);
-    });
-    it('legend right position title ', function () {
-        var legendData = [
-            { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        var viewport = {
-            height: 500,
-            width: 500
-        };
-        legend = powerbi.visuals.createLegend(element, false, interactivityService, false, 2 /* Right */);
-        legend.drawLegend({ title: "Right Data", dataPoints: legendData }, viewport);
-        expect($('.verticalItem').length).toBe(3);
-        expect($('.legendLeftRight').length).toBe(1);
-        expect($('.legend .title').length).toBe(1);
-        expect($('.legend .title').text()).toBe('Right Data');
-        expect($('.legend .title').css('display')).toBe('block');
-    });
-    it('legend top position title ', function () {
-        var legendData = [
-            { label: 'California', color: 'rgb(255, 0, 0)', icon: 1 /* Circle */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        var viewport = {
-            height: 500,
-            width: 500
-        };
-        legend = powerbi.visuals.createLegend(element, false, interactivityService);
-        legend.drawLegend({ title: "Top Data", dataPoints: legendData }, viewport);
-        expect($('.item').length).toBe(3);
-        expect($('.legendTopBottom').length).toBe(1);
-        expect($('.legend .title').length).toBe(1);
-        expect($('.legend .title').text()).toBe('Top Data');
-        expect($('.legend .title').css('display')).toBe('inline-block');
+    it('Intelligent Layout: If labels in horizontal layout have large widths, width of legend should be 30% of viewport', function () {
+        var legendData = [{
+            label: 'I am a really long label, but you should not allow me to take more than 300px',
+            color: 'red',
+            icon: 2 /* Line */,
+            identity: powerbi.visuals.SelectionId.createNull(),
+            selected: false
+        }];
+        legend.changeOrientation(2 /* Right */);
+        legend.drawLegend({ dataPoints: legendData }, { height: 100, width: 1000 });
+        powerbi.visuals.SVGUtil.flushAllD3Transitions();
+        expect(legend.getMargins().width).toBe(300);
     });
     it('legend interactivity test ', function () {
         var scopeId1 = powerbitests.mocks.dataViewScopeIdentity('California');
         var scopeId2 = powerbitests.mocks.dataViewScopeIdentity('Texas');
         var scopeId3 = powerbitests.mocks.dataViewScopeIdentity('Washington');
         var legendData = [
-            { label: 'California', color: 'rgb(255, 0, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createWithId(scopeId1), selected: false },
-            { label: 'Texas', color: 'rgb(0, 0, 255)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createWithId(scopeId2), selected: false },
-            { label: 'Washington', color: 'rgb(0, 255, 0)', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createWithId(scopeId3), selected: false }
+            { label: 'California', color: '#ff0000', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createWithId(scopeId1), selected: false },
+            { label: 'Texas', color: '#0000ff', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createWithId(scopeId2), selected: false },
+            { label: 'Washington', color: '#00ff00', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createWithId(scopeId3), selected: false }
         ];
         var viewport = {
             height: 500,
@@ -496,35 +218,34 @@ describe("legendChart DOM validation", function () {
         };
         legend = powerbi.visuals.createLegend(element, false, interactivityService);
         legend.drawLegend({ title: "Top Data", dataPoints: legendData }, viewport);
-        var icons = $('.icon.short');
+        var icons = $('.legendIcon');
         spyOn(hostServices, 'onSelect').and.callThrough();
         // Click first legend
         icons.first().d3Click(0, 0);
-        expect(icons[0].style.backgroundColor).toBe('rgb(255, 0, 0)');
-        expect(icons[1].style.backgroundColor).toBe('rgb(166, 166, 166)');
-        expect(icons[2].style.backgroundColor).toBe('rgb(166, 166, 166)');
+        expect(icons[0].style.fill).toBe('#ff0000');
+        expect(icons[1].style.fill).toBe('#a6a6a6');
+        expect(icons[2].style.fill).toBe('#a6a6a6');
         // Control + Click legend item, should just select current and clear others
         icons.last().d3Click(0, 0, 1 /* CtrlKey */);
-        expect(icons[0].style.backgroundColor).toBe('rgb(166, 166, 166)');
-        expect(icons[1].style.backgroundColor).toBe('rgb(166, 166, 166)');
-        expect(icons[2].style.backgroundColor).toBe('rgb(0, 255, 0)');
+        expect(icons[0].style.fill).toBe('#a6a6a6');
+        expect(icons[1].style.fill).toBe('#a6a6a6');
+        expect(icons[2].style.fill).toBe('#00ff00');
         // Click the container should clear the legend selection
         element.first().d3Click(0, 0);
-        expect(icons[0].style.backgroundColor).toBe('rgb(255, 0, 0)');
-        expect(icons[1].style.backgroundColor).toBe('rgb(0, 0, 255)');
-        expect(icons[2].style.backgroundColor).toBe('rgb(0, 255, 0)');
+        expect(icons[0].style.fill).toBe('#ff0000');
+        expect(icons[1].style.fill).toBe('#0000ff');
+        expect(icons[2].style.fill).toBe('#00ff00');
     });
     function validateLegendDOM(expectedData) {
         var len = expectedData.length;
-        var labels = $('.label');
+        var labels = $('.legendText');
         expect(labels.length).toBe(len);
-        // Assuming all icons are lines for now.
-        var icons = $('.icon.tall');
+        var icons = $('.legendIcon');
         expect(icons.length).toBe(len);
         for (var i = 0; i < len; ++i) {
             var expectedDatum = expectedData[i];
             expect($(labels.get(i)).text()).toBe(expectedDatum.label);
-            expect($(icons.get(i)).attr('style').trim()).toBe(jsCommon.StringExtensions.format(colorStyle, expectedDatum.color));
+            expect($(icons.get(i)).css('fill')).toBe(expectedDatum.color);
         }
     }
     function getLegendData() {
@@ -540,6 +261,15 @@ describe("legendChart DOM validation", function () {
             { label: 'Louisiana', color: 'yellow', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
             { label: 'Florida', color: 'orange', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
         ];
+        return legendData;
+    }
+    function getLotsOfLegendData() {
+        var states = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'AE', 'AA', 'AP'];
+        var colors = d3.scale.category20c();
+        var legendData = [];
+        for (var i = 0; i < states.length; i++) {
+            legendData.push({ label: states[i], color: colors(i), icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false });
+        }
         return legendData;
     }
 });
@@ -703,113 +433,4 @@ describe("interactive legend DOM validation", function () {
             expect(icon.attr('style').trim()).toBe(jsCommon.StringExtensions.format(colorStyle, expectedDatum.color));
         }
     }
-    it('legend dom validation legend label max width large tile', function (done) {
-        var legend;
-        element = powerbitests.helpers.testDom('500', '500');
-        legend = powerbi.visuals.createLegend(element, false, interactivityService);
-        viewport = {
-            height: element.height(),
-            width: element.width()
-        };
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'blue', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').first().css('max-width')).toBe('178px');
-            done();
-        }, DefaultWaitForRender);
-    });
-    it('legend dom validation legend label max width small tile', function (done) {
-        var legend;
-        element = powerbitests.helpers.testDom('150', '250');
-        legend = powerbi.visuals.createLegend(element, false, interactivityService);
-        viewport = {
-            height: element.height(),
-            width: element.width()
-        };
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'blue', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').first().css('max-width')).toBe('48px');
-            done();
-        }, DefaultWaitForRender);
-    });
-    it('legend dom validation legend label max width medium tile', function (done) {
-        var legend;
-        element = powerbitests.helpers.testDom('350', '480');
-        legend = powerbi.visuals.createLegend(element, false, interactivityService);
-        viewport = {
-            height: element.height(),
-            width: element.width()
-        };
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'blue', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').first().css('max-width')).toBe('110px');
-            done();
-        }, DefaultWaitForRender);
-    });
-    it('legend dom validation legend count medium tile', function (done) {
-        var legend;
-        legend = powerbi.visuals.createLegend(element, false, interactivityService);
-        element = powerbitests.helpers.testDom('350', '480');
-        viewport = {
-            height: element.height(),
-            width: element.width()
-        };
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'blue', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Oregon', color: 'purple', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'New york', color: 'cyan', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Chicago', color: 'yellow', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Nevada', color: 'black', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Arizona', color: 'darkred', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Florida', color: 'darksalmon', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Hawaii', color: 'crimson', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').length).toBeLessThan(11);
-            done();
-        }, DefaultWaitForRender);
-    });
-    it('legend dom validation legend label max width medium tile', function (done) {
-        var legend;
-        element = powerbitests.helpers.testDom('350', '480');
-        legend = powerbi.visuals.createLegend(element, false, interactivityService);
-        viewport = {
-            height: element.height(),
-            width: element.width()
-        };
-        var legendData = [
-            { label: 'California', color: 'red', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'blue', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Oregon', color: 'purple', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'New york', color: 'cyan', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Chicago', color: 'yellow', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Nevada', color: 'black', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Arizona', color: 'darkred', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Florida', color: 'darksalmon', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Hawaii', color: 'crimson', icon: 2 /* Line */, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-        ];
-        legend.drawLegend({ dataPoints: legendData }, viewport);
-        setTimeout(function () {
-            expect($('.label').first().css('max-width')).toBe('66px');
-            done();
-        }, DefaultWaitForRender);
-    });
 });

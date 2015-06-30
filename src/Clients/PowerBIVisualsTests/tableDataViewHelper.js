@@ -46,7 +46,7 @@ var powerbitests;
             }
             var dataViewMetadata = {
                 columns: columns,
-                objects: objects
+                objects: objects,
             };
             var rowsArray = [];
             for (var i = 0; i < numRows; i++)
@@ -56,7 +56,7 @@ var powerbitests;
                 table: {
                     rows: rowsArray,
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             if (totals.length > 0)
                 data.table.totals = totals;
@@ -66,7 +66,7 @@ var powerbitests;
         function dataViewObjectsTotals(totalsEnabled) {
             return {
                 general: {
-                    totals: totalsEnabled
+                    totals: totalsEnabled,
                 }
             };
         }

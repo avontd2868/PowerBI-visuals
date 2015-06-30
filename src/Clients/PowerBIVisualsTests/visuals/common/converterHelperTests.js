@@ -6,31 +6,24 @@
 var powerbitests;
 (function (powerbitests) {
     describe("converterHelper tests", function () {
-        it('getDataViewConverterStrategy default', function () {
+        it('categoryIsAlsoSeriesRole default', function () {
             var dataView = createCategoricalDataView({});
-            expect(powerbi.visuals.converterHelper.getDataViewConverterStrategy(dataView, 'Series', 'Category')).toBe(0 /* Default */);
+            expect(powerbi.visuals.converterHelper.categoryIsAlsoSeriesRole(dataView, 'Series', 'Category')).toBeFalsy();
             // Only a 'Series' role prevents us from using the Default strategy
             var dataView = createCategoricalDataView({ 'Category': true });
-            expect(powerbi.visuals.converterHelper.getDataViewConverterStrategy(dataView, 'Series', 'Category')).toBe(0 /* Default */);
+            expect(powerbi.visuals.converterHelper.categoryIsAlsoSeriesRole(dataView, 'Series', 'Category')).toBeFalsy();
             var dataView = createCategoricalDataView({ 'E === mc^2': true });
-            expect(powerbi.visuals.converterHelper.getDataViewConverterStrategy(dataView, 'Series', 'Category')).toBe(0 /* Default */);
+            expect(powerbi.visuals.converterHelper.categoryIsAlsoSeriesRole(dataView, 'Series', 'Category')).toBeFalsy();
         });
-        it('getDataViewConverterStrategy series and category', function () {
+        it('categoryIsAlsoSeriesRole series and category', function () {
             var dataView = createCategoricalDataView({ 'Series': true, 'Category': true });
-            expect(powerbi.visuals.converterHelper.getDataViewConverterStrategy(dataView, 'Series', 'Category')).toBe(1 /* CategoryAndSeriesRolePivot */);
+            expect(powerbi.visuals.converterHelper.categoryIsAlsoSeriesRole(dataView, 'Series', 'Category')).toBe(true);
             var dataView = createCategoricalDataView({ 'Series': true, 'F === ma': true, 'Category': true });
-            expect(powerbi.visuals.converterHelper.getDataViewConverterStrategy(dataView, 'Series', 'Category')).toBe(1 /* CategoryAndSeriesRolePivot */);
+            expect(powerbi.visuals.converterHelper.categoryIsAlsoSeriesRole(dataView, 'Series', 'Category')).toBe(true);
         });
         it('getPivotedCategories default', function () {
             var dataView = createCategoricalDataView({});
-            var categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, 0 /* Default */, formatStringProp());
-            // Note: Since the result includes a function property we can't perform a toEqual directly on the result, so check each part individually.
-            expect(categoryInfo.categories).toEqual(['a', 'b']);
-            expect(categoryInfo.categoryIdentities).toEqual([dataView.categories[0].identity[0], dataView.categories[0].identity[1]]);
-        });
-        it('getPivotedCategories series and category', function () {
-            var dataView = createCategoricalDataView({});
-            var categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, 1 /* CategoryAndSeriesRolePivot */, formatStringProp());
+            var categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, formatStringProp());
             // Note: Since the result includes a function property we can't perform a toEqual directly on the result, so check each part individually.
             expect(categoryInfo.categories).toEqual(['a', 'b']);
             expect(categoryInfo.categoryIdentities).toEqual([dataView.categories[0].identity[0], dataView.categories[0].identity[1]]);
@@ -39,19 +32,14 @@ var powerbitests;
             var dataView = createCategoricalDataView({});
             // Empty the categories array
             dataView.categories = [];
-            var categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, 0 /* Default */, formatStringProp());
-            validateEmptyCategoryInfo(categoryInfo);
-            categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, 1 /* CategoryAndSeriesRolePivot */, formatStringProp());
+            var categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, formatStringProp());
             validateEmptyCategoryInfo(categoryInfo);
         });
         it('getPivotedCategories empty category values', function () {
             var dataView = createCategoricalDataView({});
             // Empty the category values array
             dataView.categories[0].values = [];
-            var categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, 0 /* Default */, formatStringProp());
-            expect(categoryInfo.categories).toEqual([]);
-            expect(categoryInfo.categoryIdentities).toBeUndefined();
-            categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, 1 /* CategoryAndSeriesRolePivot */, formatStringProp());
+            var categoryInfo = powerbi.visuals.converterHelper.getPivotedCategories(dataView, formatStringProp());
             expect(categoryInfo.categories).toEqual([]);
             expect(categoryInfo.categoryIdentities).toBeUndefined();
         });

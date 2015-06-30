@@ -15,7 +15,6 @@ var powerbitests;
     var SQExprBuilder = powerbi.data.SQExprBuilder;
     var Treemap = powerbi.visuals.Treemap;
     var SelectionId = powerbi.visuals.SelectionId;
-    var VisualHostServices = powerbi.explore.services.VisualHostServices;
     var DefaultWaitForRender = 500;
     var dataViewMetadataCategorySeriesColumns = {
         columns: [
@@ -26,6 +25,8 @@ var powerbitests;
             { name: null, queryName: 'select2', groupName: '201503', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(1 /* Number */) }
         ]
     };
+    var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'Squad' });
+    var seriesColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'Period' });
     var dataViewMetadataCategoryColumn = {
         columns: [
             { name: 'Genre', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(2048 /* String */) },
@@ -61,6 +62,9 @@ var powerbitests;
         it('Capabilities should include objects', function () {
             expect(powerbi.visuals.treemapCapabilities.objects).toBeDefined();
         });
+        it('Capabilities should include implicitSort', function () {
+            expect(powerbi.visuals.treemapCapabilities.sorting.implicit).toBeDefined();
+        });
         it('FormatString property should match calculated', function () {
             expect(powerbi.data.DataViewObjectDescriptors.findFormatString(powerbi.visuals.treemapCapabilities.objects)).toEqual(powerbi.visuals.treemapProps.general.formatString);
         });
@@ -69,7 +73,7 @@ var powerbitests;
                 columns: [
                     { name: 'Year' },
                     { name: 'Value', isMeasure: true }
-                ]
+                ],
             };
             var dataView = {
                 metadata: dataViewMetadata,
@@ -81,7 +85,7 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([{
                         source: measureColumn,
                         values: []
-                    }])
+                    }]),
                 }
             };
             expect(DataViewAnalysis.supports(dataView, powerbi.visuals.treemapCapabilities.dataViewMappings[0], true)).toBe(false);
@@ -91,7 +95,7 @@ var powerbitests;
                 columns: [
                     { name: 'Year' },
                     { name: 'Value', isMeasure: true }
-                ]
+                ],
             };
             var dataView = {
                 metadata: dataViewMetadata,
@@ -103,7 +107,7 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([{
                         source: measureColumn,
                         values: [200]
-                    }])
+                    }]),
                 }
             };
             expect(DataViewAnalysis.supports(dataView, powerbi.visuals.treemapCapabilities.dataViewMappings[0], true)).toBe(false);
@@ -262,12 +266,12 @@ var powerbitests;
     describe("treemap data labels validation", function () {
         var v, element;
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('treemap').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -287,25 +291,26 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef]
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
-                        ])
+                        ], [seriesColumnRef])
                     }
                 }]
             };
@@ -329,23 +334,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -371,23 +377,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -406,7 +413,7 @@ var powerbitests;
             dataViewMetadataCategorySeriesColumns.objects = {
                 labels: {
                     color: { solid: { color: colorRgb } },
-                    show: true
+                    show: true,
                 }
             };
             var dataChangedOptions = {
@@ -419,23 +426,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -458,14 +466,14 @@ var powerbitests;
     describe("Enumerate Objects", function () {
         var v, element;
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('treemap').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -485,23 +493,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -530,14 +539,14 @@ var powerbitests;
             dataViewMetadataCategorySeriesColumns.objects = undefined;
         }
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.create().getPlugin('treemap').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -557,23 +566,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -608,23 +618,24 @@ var powerbitests;
                         identity: [
                             powerbitests.mocks.dataViewScopeIdentity('a'),
                             powerbitests.mocks.dataViewScopeIdentity('b'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadataCategorySeriesColumns.columns[2],
                             values: [110, 120],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201501')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201501'),
                         },
                         {
                             source: dataViewMetadataCategorySeriesColumns.columns[3],
                             values: [210, 220],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201502')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201502'),
                         },
                         {
                             source: dataViewMetadataCategorySeriesColumns.columns[4],
                             values: [310, 320],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201503')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201503'),
                         }
                     ])
                 }
@@ -647,18 +658,19 @@ var powerbitests;
                         identity: [
                             powerbitests.mocks.dataViewScopeIdentity('a'),
                             powerbitests.mocks.dataViewScopeIdentity('b'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: updatedMetadata.columns[2],
                             values: [210, 220],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201503')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201503'),
                         },
                         {
                             source: updatedMetadata.columns[3],
                             values: [310, 320],
-                            identity: powerbitests.mocks.dataViewScopeIdentity('201504')
+                            identity: powerbitests.mocks.dataViewScopeIdentity('201504'),
                         }
                     ])
                 }
@@ -709,23 +721,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('a'),
                                 powerbitests.mocks.dataViewScopeIdentity('b'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: powerbitests.mocks.dataViewScopeIdentity('201501')
+                                identity: powerbitests.mocks.dataViewScopeIdentity('201501'),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: powerbitests.mocks.dataViewScopeIdentity('201502')
+                                identity: powerbitests.mocks.dataViewScopeIdentity('201502'),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: powerbitests.mocks.dataViewScopeIdentity('201503')
+                                identity: powerbitests.mocks.dataViewScopeIdentity('201503'),
                             }
                         ])
                     }
@@ -766,7 +779,8 @@ var powerbitests;
                                 powerbitests.mocks.dataViewScopeIdentity('a'),
                                 powerbitests.mocks.dataViewScopeIdentity('b'),
                                 powerbitests.mocks.dataViewScopeIdentity('c'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -800,7 +814,8 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataCategoryColumn.columns[0],
                             values: ['Drama', 'Comedy', 'Documentary'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -836,7 +851,8 @@ var powerbitests;
                                 powerbitests.mocks.dataViewScopeIdentity('a'),
                                 powerbitests.mocks.dataViewScopeIdentity('b'),
                                 powerbitests.mocks.dataViewScopeIdentity('c'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -871,7 +887,8 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('f'),
                                 powerbitests.mocks.dataViewScopeIdentity('b'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -911,7 +928,8 @@ var powerbitests;
                             powerbitests.mocks.dataViewScopeIdentity('a'),
                             powerbitests.mocks.dataViewScopeIdentity('b'),
                             powerbitests.mocks.dataViewScopeIdentity('c'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -930,7 +948,8 @@ var powerbitests;
                         identity: [
                             powerbitests.mocks.dataViewScopeIdentity('b'),
                             powerbitests.mocks.dataViewScopeIdentity('c'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -972,7 +991,8 @@ var powerbitests;
                                 powerbitests.mocks.dataViewScopeIdentity('a'),
                                 powerbitests.mocks.dataViewScopeIdentity('b'),
                                 powerbitests.mocks.dataViewScopeIdentity('c'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -1014,7 +1034,8 @@ var powerbitests;
                             values: ['Very very long value'],
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('a'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -1082,23 +1103,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -1109,14 +1131,14 @@ var powerbitests;
                     dataViews: [dataView]
                 });
                 setTimeout(function () {
-                    expect($('.legend.legendTopBottom')).toBeInDOM();
+                    expect($('.legendItem')).toBeInDOM();
                     //change legend position
                     dataView.metadata.objects = { legend: { show: true, position: 'Right' } };
                     v.onDataChanged({
                         dataViews: [dataView]
                     });
                     setTimeout(function () {
-                        expect($('.legend.legendLeftRight')).toBeInDOM();
+                        expect($('.legendItem')).toBeInDOM();
                         //set title
                         var testTitle = 'Test Title';
                         dataView.metadata.objects = { legend: { show: true, position: 'Right', showTitle: true, titleText: testTitle } };
@@ -1124,15 +1146,15 @@ var powerbitests;
                             dataViews: [dataView]
                         });
                         setTimeout(function () {
-                            expect($('.legend.legendLeftRight')).toBeInDOM();
-                            expect($('.title').text()).toBe(testTitle);
+                            expect($('.legendItem')).toBeInDOM();
+                            expect($('.legendTitle').text()).toBe(testTitle);
                             //hide legend
                             dataView.metadata.objects = { legend: { show: false, position: 'Right' } };
                             v.onDataChanged({
                                 dataViews: [dataView]
                             });
                             setTimeout(function () {
-                                expect($('.legend')).not.toBeInDOM();
+                                expect($('.legendItem')).not.toBeInDOM();
                                 done();
                             }, DefaultWaitForRender);
                         }, DefaultWaitForRender);
@@ -1147,17 +1169,17 @@ var powerbitests;
     describe("treemap web animation", function () {
         var v, element;
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
             v = powerbi.visuals.visualPluginFactory.createMinerva({
                 heatMap: false,
-                newTable: false
+                newTable: false,
             }).getPlugin('treemap').create();
             v.init({
                 element: element,
-                host: powerbi.explore.services.createVisualHostServices(),
+                host: powerbitests.mocks.createVisualHostServices(),
                 style: powerbi.common.services.visualStyles.create(),
                 viewport: {
                     height: element.height(),
@@ -1177,23 +1199,24 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -1210,26 +1233,27 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
                                 highlights: [60, 70],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
                                 highlights: [160, 170],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
                                 highlights: [260, 270],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -1246,26 +1270,27 @@ var powerbitests;
                             identity: [
                                 powerbitests.mocks.dataViewScopeIdentity('The Nuthatches'),
                                 powerbitests.mocks.dataViewScopeIdentity('Skylarks'),
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
                                 highlights: [20, 10],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201501')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
                                 highlights: [120, 110],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201502')),
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
                                 highlights: [220, 210],
-                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503'))
+                                identity: data.createDataViewScopeIdentity(SQExprBuilder.text('201503')),
                             }
                         ])
                     }
@@ -1299,7 +1324,7 @@ var powerbitests;
         var defaultOpacity = '';
         var dimmedOpacity = Treemap.DimmedShapeOpacity.toString();
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('500', '500');
@@ -1334,23 +1359,24 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataCategorySeriesColumns.columns[0],
                             values: ['A', 'B'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: seriesIdentities[0]
+                                identity: seriesIdentities[0],
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: seriesIdentities[1]
+                                identity: seriesIdentities[1],
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: seriesIdentities[2]
+                                identity: seriesIdentities[2],
                             }
                         ])
                     }
@@ -1444,7 +1470,8 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataCategoryAndMeasures.columns[0],
                             values: ['Front end', 'Back end'],
-                            identity: identities
+                            identity: identities,
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -1625,23 +1652,24 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataCategorySeriesColumns.columns[0],
                             values: ['A', 'B'],
-                            identity: categoryIdentities
+                            identity: categoryIdentities,
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[2],
                                 values: [110, 120],
-                                identity: seriesIdentities[0]
+                                identity: seriesIdentities[0],
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[3],
                                 values: [210, 220],
-                                identity: seriesIdentities[1]
+                                identity: seriesIdentities[1],
                             },
                             {
                                 source: dataViewMetadataCategorySeriesColumns.columns[4],
                                 values: [310, 320],
-                                identity: seriesIdentities[2]
+                                identity: seriesIdentities[2],
                             }
                         ])
                     }
@@ -1708,7 +1736,8 @@ var powerbitests;
                             identity: [
                                 categoryIdentities[0],
                                 categoryIdentities[1],
-                            ]
+                            ],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -1770,7 +1799,7 @@ var powerbitests;
     });
     describe("treemap converter validation", function () {
         beforeEach(function () {
-            VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         it('treemap dataView multi measure', function () {
             var metadata = {
@@ -1879,7 +1908,8 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['Africa', 'Asia', 'Australia', 'Europe', 'North America'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -1970,7 +2000,8 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['2004', '2008', '2012'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2032,23 +2063,24 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: ['Africa', 'Asia', 'Australia', 'Europe', 'North America'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: metadata.columns[2],
                             values: [110, 120, 130, 140, 150],
-                            identity: seriesIdentities[0]
+                            identity: seriesIdentities[0],
                         },
                         {
                             source: metadata.columns[3],
                             values: [210, 220, 230, 240, 250],
-                            identity: seriesIdentities[1]
+                            identity: seriesIdentities[1],
                         },
                         {
                             source: metadata.columns[4],
                             values: [310, 320, 330, 340, 350],
-                            identity: seriesIdentities[2]
+                            identity: seriesIdentities[2],
                         }
                     ])
                 }
@@ -2116,23 +2148,24 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: [null, 'Asia', 'Australia', 'Europe', 'North America'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: metadata.columns[2],
                             values: [null, 120, 130, 140, null],
-                            identity: seriesIdentities[0]
+                            identity: seriesIdentities[0],
                         },
                         {
                             source: metadata.columns[3],
                             values: [210, 220, null, 240, null],
-                            identity: seriesIdentities[1]
+                            identity: seriesIdentities[1],
                         },
                         {
                             source: metadata.columns[4],
                             values: [null, 320, 330, 340, null],
-                            identity: seriesIdentities[2]
+                            identity: seriesIdentities[2],
                         }
                     ])
                 }
@@ -2183,23 +2216,24 @@ var powerbitests;
                     categories: [{
                         source: metadata.columns[0],
                         values: [null, 'Asia', 'Australia', 'Europe', 'North America'],
-                        identity: categoryIdentities
+                        identity: categoryIdentities,
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
                             source: metadata.columns[2],
                             values: [null, 120, 130, 140, null],
-                            identity: seriesIdentities[0]
+                            identity: seriesIdentities[0],
                         },
                         {
                             source: metadata.columns[3],
                             values: [210, 220, null, 240, null],
-                            identity: seriesIdentities[1]
+                            identity: seriesIdentities[1],
                         },
                         {
                             source: metadata.columns[4],
                             values: [null, 320, 330, 340, null],
-                            identity: seriesIdentities[2]
+                            identity: seriesIdentities[2],
                         }
                     ])
                 }
@@ -2232,15 +2266,15 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: dataViewMetadata.columns[0],
-                            values: [1]
+                            values: [1],
                         },
                         {
                             source: dataViewMetadata.columns[1],
-                            values: [2]
+                            values: [2],
                         },
                         {
                             source: dataViewMetadata.columns[2],
-                            values: [3]
+                            values: [3],
                         }
                     ])
                 }
@@ -2313,9 +2347,9 @@ var powerbitests;
                     values: DataViewTransform.createValueColumns([
                         {
                             source: metadata.columns[0],
-                            values: [110]
+                            values: [110],
                         }
-                    ])
+                    ]),
                 }
             };
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
@@ -2346,7 +2380,8 @@ var powerbitests;
                         identity: [
                             powerbitests.mocks.dataViewScopeIdentity('f'),
                             powerbitests.mocks.dataViewScopeIdentity('b'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2428,7 +2463,8 @@ var powerbitests;
                         identity: [
                             powerbitests.mocks.dataViewScopeIdentity('f'),
                             powerbitests.mocks.dataViewScopeIdentity('b'),
-                        ]
+                        ],
+                        identityFields: [categoryColumnRef],
                     }],
                     values: DataViewTransform.createValueColumns([
                         {
@@ -2452,6 +2488,54 @@ var powerbitests;
             var node2 = rootNode.children[1];
             expect(node1.color).toEqual(defaultColorRed);
             expect(node2.color).toEqual(hexGreen);
+        });
+        it("treemap gradient color test", function () {
+            var dataPointColors = ["#d9f2fb", "#ff557f", "#b1eab7"];
+            var objectDefinitions = [
+                { dataPoint: { fill: { solid: { color: dataPointColors[0] } } } },
+                { dataPoint: { fill: { solid: { color: dataPointColors[1] } } } },
+                { dataPoint: { fill: { solid: { color: dataPointColors[2] } } } }
+            ];
+            var dataViewGradientMetadata = {
+                columns: [
+                    { name: 'col1' },
+                    { name: 'col2', isMeasure: true },
+                    { name: 'col3', isMeasure: true, roles: { 'Gradient': true } }
+                ]
+            };
+            var dataView = {
+                metadata: dataViewGradientMetadata,
+                categorical: {
+                    categories: [{
+                        source: dataViewGradientMetadata.columns[0],
+                        values: ['Front end', 'Back end'],
+                        objects: objectDefinitions,
+                        identity: [
+                            powerbitests.mocks.dataViewScopeIdentity('f'),
+                            powerbitests.mocks.dataViewScopeIdentity('b'),
+                        ]
+                    }],
+                    values: DataViewTransform.createValueColumns([
+                        {
+                            source: dataViewGradientMetadata.columns[1],
+                            values: [110, 120],
+                            highlights: [60, 60]
+                        },
+                        {
+                            source: dataViewGradientMetadata.columns[2],
+                            values: [210, 220],
+                            highlights: [140, 200]
+                        }
+                    ])
+                }
+            };
+            var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
+            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var rootNode = Treemap.converter(dataView, colors, dataLabelSettings, null, null).root;
+            var node1 = rootNode.children[0];
+            var node2 = rootNode.children[1];
+            expect(node1.color).toEqual(dataPointColors[0]);
+            expect(node2.color).toEqual(dataPointColors[1]);
         });
     });
 })(powerbitests || (powerbitests = {}));

@@ -8,6 +8,9 @@ var powerbitests;
     var mocks;
     (function (mocks) {
         var SQExprBuilder = powerbi.data.SQExprBuilder;
+        var BeautifiedFormat = {
+            '0.00 %;-0.00 %;0.00 %': 'Percentage',
+        };
         var TelemetryCallbackMock = (function () {
             function TelemetryCallbackMock() {
             }
@@ -74,21 +77,6 @@ var powerbitests;
             return LocalyticsMock;
         })();
         mocks.LocalyticsMock = LocalyticsMock;
-        var MockEmptyUndoRedoHandler = (function () {
-            function MockEmptyUndoRedoHandler() {
-            }
-            MockEmptyUndoRedoHandler.prototype.takeSnapshot = function (explorationSerializer, selectedSlideNameParam) {
-                return {
-                    contract: undefined,
-                    selectedSlide: "0",
-                    selectedVisualsIndex: []
-                };
-            };
-            MockEmptyUndoRedoHandler.prototype.rollback = function (explorationSerializer, snapshot) {
-            };
-            return MockEmptyUndoRedoHandler;
-        })();
-        mocks.MockEmptyUndoRedoHandler = MockEmptyUndoRedoHandler;
         var AppInsightsV2Mock = (function () {
             function AppInsightsV2Mock() {
                 this.trackPageViewTimes = 0;
@@ -104,7 +92,7 @@ var powerbitests;
                     sessionId: null,
                     client: null,
                     build: null,
-                    cluster: null
+                    cluster: null,
                 };
             }
             AppInsightsV2Mock.prototype.trackPageView = function () {
@@ -275,7 +263,7 @@ var powerbitests;
                 setWarnings: function (warnings) {
                 },
                 setToolbar: function ($toolbar) {
-                }
+                },
             };
         }
         mocks.createVisualHostServices = createVisualHostServices;
@@ -292,24 +280,10 @@ var powerbitests;
                     }
                     return id;
                 },
-                formatValue: function (arg) { return arg; }
+                formatValue: function (arg) { return arg; },
             };
         }
         mocks.createLocalizationService = createLocalizationService;
-        var MockSelectable = (function () {
-            function MockSelectable() {
-            }
-            return MockSelectable;
-        })();
-        mocks.MockSelectable = MockSelectable;
-        ;
-        var MockSection = (function () {
-            function MockSection() {
-            }
-            return MockSection;
-        })();
-        mocks.MockSection = MockSection;
-        ;
         var MockTraceListener = (function () {
             function MockTraceListener() {
             }
@@ -319,25 +293,6 @@ var powerbitests;
             return MockTraceListener;
         })();
         mocks.MockTraceListener = MockTraceListener;
-        var MockInterpretService = (function () {
-            function MockInterpretService() {
-            }
-            MockInterpretService.prototype._setDefaultResultSource = function (dataSourceName) {
-            };
-            MockInterpretService.prototype._setResultSources = function (selectedResultSourceName, defaultResultSourceName) {
-            };
-            MockInterpretService.prototype.registerTransientLinguisticSchemaProvider = function (databaseName, provider) {
-            };
-            MockInterpretService.prototype.interpretAsync = function (utterance, parentActivity, successHandler, errorHandler) {
-                if (successHandler)
-                    successHandler(new InJs.InterpretSuccessEventArgs(mocks.MockInterpretResponse.WithAutoCompletion()));
-                return null;
-            };
-            MockInterpretService.prototype.abortAllInterpretRequests = function (clearCurrentResult) {
-            };
-            return MockInterpretService;
-        })();
-        mocks.MockInterpretService = MockInterpretService;
         function dataViewScopeIdentity(fakeValue) {
             var expr = constExpr(fakeValue);
             return powerbi.data.createDataViewScopeIdentity(expr);
@@ -347,18 +302,6 @@ var powerbitests;
             return powerbi.data.createDataViewScopeIdentity(powerbi.data.SQExprBuilder.equal(keyExpr, constExpr(fakeValue)));
         }
         mocks.dataViewScopeIdentityWithEquality = dataViewScopeIdentityWithEquality;
-        function createMockVisualContainerHostServices() {
-            return {
-                getFilters: function () {
-                    return null;
-                },
-                selectDataPoint: function () {
-                },
-                clearHighlight: function () {
-                }
-            };
-        }
-        mocks.createMockVisualContainerHostServices = createMockVisualContainerHostServices;
         function constExpr(fakeValue) {
             if (fakeValue === null)
                 return SQExprBuilder.nullConstant();
@@ -373,7 +316,7 @@ var powerbitests;
                 var details = {
                     message: MockVisualWarning.Message,
                     title: 'key',
-                    detail: 'val'
+                    detail: 'val',
                 };
                 return details;
             };
@@ -381,5 +324,51 @@ var powerbitests;
             return MockVisualWarning;
         })();
         mocks.MockVisualWarning = MockVisualWarning;
+        function setLocale(localize) {
+            debug.assertValue(localize, 'localize');
+            setLocaleOptions(localize);
+            setLocalizedStrings(localize);
+        }
+        mocks.setLocale = setLocale;
+        function setLocaleOptions(localize) {
+            var valueFormatterLocalizationOptions = createLocaleOptions(localize);
+            powerbi.visuals.valueFormatter.setLocaleOptions(valueFormatterLocalizationOptions);
+        }
+        function setLocalizedStrings(localize) {
+            var tooltipLocalizationOptions = createTooltipLocaleOptions(localize);
+            powerbi.visuals.TooltipManager.setLocalizedStrings(tooltipLocalizationOptions);
+        }
+        function createLocaleOptions(localize) {
+            return {
+                null: localize.get('NullValue'),
+                true: localize.get('BooleanTrue'),
+                false: localize.get('BooleanFalse'),
+                beautify: function (format) { return beautify(localize, format); },
+                describe: function (exponent) { return describeUnit(localize, exponent); },
+                restatementComma: powerbi.visuals.valueFormatter.getLocalizedString('RestatementComma'),
+                restatementCompoundAnd: powerbi.visuals.valueFormatter.getLocalizedString('RestatementCompoundAnd')
+            };
+        }
+        function createTooltipLocaleOptions(localize) {
+            return {
+                highlightedValueDisplayName: localize.get(powerbi.visuals.ToolTipComponent.highlightedValueDisplayNameResorceKey)
+            };
+        }
+        function beautify(localize, format) {
+            if (format) {
+                var regEx = RegExp('\\.0* %', 'g');
+                format = format.replace(regEx, '.00 %');
+            }
+            var key = BeautifiedFormat[format];
+            if (key)
+                return localize.getOptional(key) || format;
+            return format;
+        }
+        function describeUnit(localize, exponent) {
+            var title = localize.getOptional("DisplayUnitSystem_E" + exponent + "_Title");
+            var format = localize.getOptional("DisplayUnitSystem_E" + exponent + "_LabelFormat");
+            if (title || format)
+                return { title: title, format: format };
+        }
     })(mocks = powerbitests.mocks || (powerbitests.mocks = {}));
 })(powerbitests || (powerbitests = {}));

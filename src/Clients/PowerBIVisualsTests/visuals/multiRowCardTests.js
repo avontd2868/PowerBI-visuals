@@ -27,13 +27,13 @@ var powerbitests;
     describe("MultiRowCard DOM tests", function () {
         var v, element;
         var defaultTimeout = 30;
-        var hostServices = powerbi.explore.services.createVisualHostServices();
+        var hostServices = powerbitests.mocks.createVisualHostServices();
         var dataViewMetadata = {
             columns: [
                 { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) },
                 { name: 'date', type: ValueType.fromDescriptor({ dateTime: true }) },
                 { name: 'category', type: ValueType.fromDescriptor({ text: true }) },
-            ]
+            ],
         };
         var data = {
             metadata: dataViewMetadata,
@@ -43,13 +43,13 @@ var powerbitests;
                     [12345, new Date(2014, 7, 1), 'category2']
                 ],
                 columns: dataViewMetadata.columns
-            }
+            },
         };
         var dataViewMetadataWithTitle = {
             columns: [
                 { name: 'value', type: ValueType.fromDescriptor({ numeric: true }), isMeasure: true },
                 { name: 'genre', type: ValueType.fromDescriptor({ text: true }) },
-            ]
+            ],
         };
         var dataWithTitle = {
             metadata: dataViewMetadataWithTitle,
@@ -59,7 +59,7 @@ var powerbitests;
                     [12345, 'Adventure']
                 ],
                 columns: dataViewMetadataWithTitle.columns
-            }
+            },
         };
         beforeEach(function () {
             createMultiRowCard();
@@ -76,7 +76,7 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                settings: settings
+                settings: settings,
             });
         }
         it('Validate multiRowCard DOM without Title', function (done) {
@@ -117,7 +117,7 @@ var powerbitests;
                 columns: [
                     { name: 'Label', type: ValueType.fromDescriptor({ text: true }) },
                     { name: 'Category', type: ValueType.fromDescriptor({ text: true }) }
-                ]
+                ],
             };
             var data = {
                 metadata: dataViewMetadata,
@@ -126,7 +126,7 @@ var powerbitests;
                         ['this is the label that never ends, it just goes on and on my friends.Some axis started rendering it not knowing what it was, and now it keeps on rendering forever just because this the label that never ends...', 'Category1']
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             v.onDataChanged({ dataViews: [data] });
             setTimeout(function () {
@@ -191,12 +191,12 @@ var powerbitests;
                 viewport: {
                     height: element.height(),
                     width: element.width()
-                }
+                },
             });
             var dataViewMetadata = {
                 columns: [
                     { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) },
-                ]
+                ],
             };
             var singleRowdata = {
                 metadata: dataViewMetadata,
@@ -205,7 +205,7 @@ var powerbitests;
                         [123456.789],
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             v.onDataChanged({ dataViews: [singleRowdata] });
             setTimeout(function () {
@@ -270,7 +270,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) },
-                ]
+                ],
             };
             var singleRowdata = {
                 metadata: dataViewMetadata,
@@ -279,7 +279,7 @@ var powerbitests;
                         [123456.789],
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             v.onDataChanged({ dataViews: [singleRowdata] });
             setTimeout(function () {
@@ -398,7 +398,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) }
-                ]
+                ],
             };
             var data = {
                 metadata: dataViewMetadata,
@@ -407,20 +407,20 @@ var powerbitests;
                         [123456.789]
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             v.onDataChanged({ dataViews: [data] });
             setTimeout(function () {
                 expect($('.card').length).toBe(1);
                 dataViewMetadata = {
-                    columns: []
+                    columns: [],
                 };
                 data = {
                     metadata: dataViewMetadata,
                     table: {
                         rows: [],
                         columns: dataViewMetadata.columns
-                    }
+                    },
                 };
                 v.onDataChanged({ dataViews: [data] });
                 expect($('.card').length).toBe(0);
@@ -431,7 +431,7 @@ var powerbitests;
             var dataViewMetadata = {
                 columns: [
                     { name: 'value', type: ValueType.fromDescriptor({ numeric: true }), objects: { general: { formatString: '0%' } } }
-                ]
+                ],
             };
             var data = {
                 metadata: dataViewMetadata,
@@ -440,7 +440,7 @@ var powerbitests;
                         [.22]
                     ],
                     columns: dataViewMetadata.columns
-                }
+                },
             };
             v.onDataChanged({ dataViews: [data] });
             setTimeout(function () {

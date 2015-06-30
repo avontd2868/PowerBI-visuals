@@ -3801,7 +3801,7 @@ var powerbitests;
     describe('Matrix DOM validation', function () {
         var v, element, EmptyHeaderCell = '\xa0', NoMarginClass = 'bi-tablix-cellNoMarginStyle', HeaderClass = 'bi-tablix-header', ColumnHeaderLeafClass = 'bi-tablix-column-header-leaf', RowHeaderLeafClass = 'bi-tablix-row-header-leaf', BodyCellClass = 'bi-matrix-body-cell', TotalClass = 'total', TableTotalLabel = 'TableTotalLabel';
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         beforeEach(function () {
             element = powerbitests.helpers.testDom('1500', '1500');
@@ -4579,7 +4579,7 @@ var powerbitests;
                     height: element.height(),
                     width: element.width()
                 },
-                interactivity: { isInteractiveLegend: false }
+                interactivity: { isInteractiveLegend: false },
             });
             v.onDataChanged({
                 dataViews: [matrixTwoRowGroupsTwoColumnGroupsTwoMeasuresDataView]
@@ -4899,7 +4899,7 @@ var powerbitests;
             var data = matrixOneMeasureOneColumnGroupWithUrlOneGroupInstanceDataView;
             var renderTablixPromise = powerbitests.tablixHelper.renderNewTablix(element, {
                 visualType: 'matrix',
-                data: data
+                data: data,
             });
             renderTablixPromise.then(function () {
                 var tableBody = $('.tablixContainer > div.bi-tablix > div:nth-child(1) > table.unselectable > tbody');
@@ -4917,7 +4917,7 @@ var powerbitests;
             var data = matrixOneMeasureOneRowGroupUrlOneGroupInstanceDataView;
             var renderTablixPromise = powerbitests.tablixHelper.renderNewTablix(element, {
                 visualType: 'matrix',
-                data: data
+                data: data,
             });
             renderTablixPromise.then(function () {
                 var tableBody = $('.tablixContainer > div.bi-tablix > div:nth-child(1) > table.unselectable > tbody');

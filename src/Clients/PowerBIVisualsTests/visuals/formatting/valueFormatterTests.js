@@ -10,7 +10,7 @@ var powerbitests;
         var columnIntObjFormat = { name: 'col', objects: { fmtObj: { fmtProp: 'R' } } };
         var columnIntObjFormatIdentitifer = { objectName: 'fmtObj', propertyName: 'fmtProp' };
         beforeEach(function () {
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.createLocalizationService());
+            powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
         });
         it("format null", function () {
             expect(valueFormatter.format(null)).toBe('(Blank)');
@@ -31,6 +31,9 @@ var powerbitests;
         });
         it("format 52 pct - 4 decimals beautified", function () {
             expect(valueFormatter.format(0.52, '0.0000 %;-0.0000 %;0.0000 %')).toBe('52%');
+        });
+        it("format whole pct", function () {
+            expect(valueFormatter.format(0.5, '0 %;-0 %;0 %')).toBe('50 %');
         });
         it("getFormatString: column with custom object", function () {
             expect(valueFormatter.getFormatString(columnIntObjFormat, columnIntObjFormatIdentitifer)).toBe('R');
@@ -242,6 +245,28 @@ var powerbitests;
             expect(scale.format(minDate)).toBe('Nov 04');
             expect(scale.format(maxDate)).toBe('Nov 09');
             expect(scale.format(null)).toBe('(Blank)');
+        });
+        it('formatListAnd no values', function () {
+            var result = valueFormatter.formatListAnd([]);
+            expect(result).toBeNull();
+        });
+        it('formatListAnd 1 value', function () {
+            var result = valueFormatter.formatListAnd(['1']);
+            expect(result).toBe('1');
+        });
+        it('formatListAnd 2 values', function () {
+            var result = valueFormatter.formatListAnd(['1', '2']);
+            expect(result).toBe('1 and 2');
+        });
+        it('formatListAnd 3 values', function () {
+            var result = valueFormatter.formatListAnd(['1', '2', '3']);
+            expect(result).toBe('1, 2 and 3');
+        });
+        it('formatListAnd wrong parameters values', function () {
+            var result = valueFormatter.formatListAnd(null);
+            expect(result).toBeNull();
+            var result = valueFormatter.formatListAnd(undefined);
+            expect(result).toBeNull();
         });
     });
 })(powerbitests || (powerbitests = {}));

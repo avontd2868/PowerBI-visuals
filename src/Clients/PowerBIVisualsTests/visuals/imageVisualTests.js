@@ -43,7 +43,7 @@ var powerbitests;
                 },
                 animation: {
                     transitionImmediate: true
-                }
+                },
             };
             var image = new ImageVisual();
             image.init(options);
@@ -69,7 +69,7 @@ var powerbitests;
                 },
                 animation: {
                     transitionImmediate: true
-                }
+                },
             };
             var image = new ImageVisual();
             image.init(options);

@@ -12,7 +12,7 @@ var powerbitests;
         beforeEach(function () {
             powerbitests.helpers.suppressDebugAssertFailure();
             powerbi.common.localize = powerbi.common.createLocalizationService();
-            powerbi.explore.services.VisualHostServices.initialize(powerbi.common.localize);
+            powerbitests.mocks.setLocale(powerbi.common.localize);
         });
         afterEach(function () {
         });
@@ -27,10 +27,11 @@ var powerbitests;
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(1 /* Number */)
                 }
-            ]
+            ],
         };
+        var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
         function initVisual(v) {
-            var hostServices = powerbi.explore.services.createVisualHostServices();
+            var hostServices = powerbitests.mocks.createVisualHostServices();
             var element = powerbitests.helpers.testDom('500', '500');
             v.init({
                 element: element,
@@ -42,7 +43,7 @@ var powerbitests;
                 },
                 settings: undefined,
                 interactivity: undefined,
-                animation: undefined
+                animation: undefined,
             });
         }
         function setData(v) {
@@ -54,7 +55,8 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataTwoColumn.columns[0],
                             values: ['abc', 'def'],
-                            identity: [powerbitests.mocks.dataViewScopeIdentity('abc'), powerbitests.mocks.dataViewScopeIdentity('def')]
+                            identity: [powerbitests.mocks.dataViewScopeIdentity('abc'), powerbitests.mocks.dataViewScopeIdentity('def')],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -76,7 +78,7 @@ var powerbitests;
             v.onDataChanged({
                 dataViews: [{
                     metadata: dataViewMetadataTwoColumn,
-                    categorical: undefined
+                    categorical: undefined,
                 }]
             });
             // no metadata
@@ -85,7 +87,7 @@ var powerbitests;
                     metadata: undefined,
                     categorical: {
                         categories: [],
-                        values: undefined
+                        values: undefined,
                     }
                 }]
             });
@@ -97,9 +99,10 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataTwoColumn.columns[0],
                             values: ['abc', 'def'],
-                            identity: [powerbitests.mocks.dataViewScopeIdentity('abc'), powerbitests.mocks.dataViewScopeIdentity('def')]
+                            identity: [powerbitests.mocks.dataViewScopeIdentity('abc'), powerbitests.mocks.dataViewScopeIdentity('def')],
+                            identityFields: [categoryColumnRef],
                         }],
-                        values: undefined
+                        values: undefined,
                     }
                 }]
             });
@@ -129,7 +132,8 @@ var powerbitests;
                         categories: [{
                             source: dataViewMetadataTwoColumn.columns[0],
                             values: ['abc', 'def'],
-                            identity: [powerbitests.mocks.dataViewScopeIdentity('abc'), powerbitests.mocks.dataViewScopeIdentity('def')]
+                            identity: [powerbitests.mocks.dataViewScopeIdentity('abc'), powerbitests.mocks.dataViewScopeIdentity('def')],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
@@ -147,7 +151,8 @@ var powerbitests;
                     categorical: {
                         categories: [{
                             source: dataViewMetadataTwoColumn.columns[0],
-                            values: []
+                            values: [],
+                            identityFields: [categoryColumnRef],
                         }],
                         values: DataViewTransform.createValueColumns([
                             {
