@@ -1,0 +1,97 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+/* 
+    POWER BI V2 "Bumblebee" COLOR PALLETE
+    Please use only the colors declared here  - this file is to be kept in sync with the palette defined by the design team
+    If you need a color that is not here, talk to your designer and get it added to the main palette and then add it here
+
+    - Use #HEX codes - if you need to get alpha use fadeout(color, percentage)
+    - Colors should be reusable, and not duplicated.
+*/
+
+/* THEME COLORS */
+@themePrimaryColor: #F2C811;
+@themeDarkColor: #CDA521;
+@themeDarkerColor: #BE9A27;
+@themeSecondaryColor: #000000;
+@themeSecondaryAltColor: #444444;
+@themeTertiaryColor: #F2C811;
+@themeLightColor: #F2C811;
+@themeLighterColor: #F2C811;
+
+/* NEUTRAL COLORS */
+@blackColor: #000;
+@neutralDarkColor: #212121;
+@neutralPrimaryColor: #333333;
+@neutralPrimaryColorAlt: #444444;
+@neutralPrimaryColorAlt2: #4a4a4a;
+@neutralPrimaryColorAlt3: #515151;
+@neutralSecondaryColor: #666666;
+@neutralSecondaryAltColor: #777777;
+@neutralSecondaryAltColor2: #888888;
+@neutralTertiaryColor: #A6A6A6;
+@neutralTertiaryAltColor: #C8C8C8;
+@neutralLightColor: #EAEAEA;
+@neutralLighterColor: #F4F4F4;
+@whiteColor: #FFF;
+
+/* ACCENT COLORS */
+@linkColor: @themeSecondaryColor;
+@highlightColor: @themeDarkerColor;
+@warningColor: #E81123;
+
+@successColor: #3bb44a;
+@infoColor: #DEEBF6;
+@alertColor: #FFF9AE;
+@alertDarkColor: #DDB53B;
+@alertBorderColor: #D7D889;
+@criticalColor: #FADBD2;
+@questionBoxForegroundColor: #999;
+
+/* APPLICATION CHROME COLORS */
+/*dark chrome*/
+@primaryNavColor: @themeSecondaryColor;
+@primaryChromeColor: @neutralPrimaryColor;
+@secondaryChromeColor: fadeout(@neutralSecondaryColor, 80%);
+@tertiaryChromeColor: @whiteColor;
+@primaryChromeFontColor: @whiteColor;
+@secondaryChromeFontColor: @neutralTertiaryColor;
+
+/*light chrome*/
+/*@primaryChromeColor: @whiteColor;
+@secondaryChromeColor: @whiteColor;
+@tertiaryChromeColor: @whiteColor;*/
+
+/* 
+    DEPRECATED COLORS: Please refrain from adding one time use colors to the section below.
+    These will be all be removed. New colors must be provided by design and be in the design OneNote palette
+*/
+
+/* PowerView specific colors */
+@reportBackgroundColor_editing: #fafafa;
+@reportAppBarBackgroundColor_editing: #fafafa;
+
+@reportBorderColor_editing: #e1e1e1;
+@reportAppBarBorderColor_editing: #e1e1e1;
+@modalDialogNormalButtonHoverBackgroundColor: #e1e1e1;
+@dashboardTaskPaneBorderColor: #E2E2E2;
+
+@reportThumbnailHoverBorderColor_edting: #444444;
+@reportSelectedThumbnailBorderColor_edting: #444444;
+@reportAppBarDropdownMenuBackgroundColor: #444444;
+@reportPaginationBarBackgroundColor: #434343;
+@reportPaginationBarBorderColor: #555;
+
+@reportBackgroundColor: #393a3d;
+
+/* Visual colors */
+@chartTemplateColor: rgb(40, 172, 226);
+@chartTemplateColorDarker: rgb(35, 159, 209);
+@chartAxisGridLineColor: #e9e9e9;
+@interactiveHoverLineColor: #666666; 
+@chartConnectorColor: #A6A6A6;
+@tooltipShadowColor: fadeout(@blackColor, 90%);

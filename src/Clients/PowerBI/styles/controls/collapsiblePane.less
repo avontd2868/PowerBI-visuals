@@ -1,0 +1,153 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../fonts.less";
+@import "../colorPalette.less";
+@import "../mixins.less";
+
+@collapsiblePaneCollapsedWidth: 0px;
+@collapsiblePaneWidth: 290px;
+@collapsiblePaneWidthWide: 460px;
+// NOTE: this value is @collapsiblePaneWidth - @collapsiblePaneWidth - not computed dynamically as LESS strips out the negative value
+@collapsiblePaneCollapsedRightOffset: 240px;
+@zIndexCollapsiblePane: 60;
+
+.collapsiblePane {
+    padding-top: 20px;
+    position: absolute;
+    height: 100%;
+    width: @collapsiblePaneCollapsedWidth;
+    //transform: translateX(-50px);
+    //-webkit-transform: translateX(-50px);
+    top: 0;
+    right: 0;
+    background: @neutralLightColor;
+    z-index: @zIndexCollapsiblePane;
+    overflow: hidden;
+    transition: transform 0.25s, border 0.25s, background-color 0.25s, width 0.25s;
+    -webkit-transition: transform 0.25s, border 0.25s, background-color 0.25s, width 0.25s;
+    box-shadow: 0 0 20px 0px @neutralSecondaryColor;
+
+    &.expanded {
+        width: @collapsiblePaneWidth;
+
+        &.wideWidth{
+            width: @collapsiblePaneWidthWide;
+        }
+
+        //transform: translateX(-290px);
+        //-webkit-transform: translateX(-290px);
+        .innerLayout .expanderBtn {
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+        }
+
+        .expandIcon {
+            left: 0px;
+        }
+    }
+
+    &.hidden {
+        > * {
+            display: none;
+        }
+
+        left: 100% !important;
+    }
+
+    .innerLayout::before {
+        content: '';
+        border-left: 1px solid @neutralTertiaryAltColor;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+    }
+
+    .innerLayout {
+        height: 100%;
+        width: 100%;
+        min-width: @collapsiblePaneWidth;
+
+        &:active {
+            color: @themeSecondaryAltColor;
+        }
+
+        .expandButtonContainer {
+            height: 40px;
+            padding-left: 18px;
+            background: none;
+
+            .expanderBtn {
+                position: relative;
+                height: 30px;
+                width: 100%;
+                cursor: pointer;
+
+                .expandIcon {
+                    position: absolute;
+                    font-size: 1.8em;
+                    color: @neutralSecondaryColor;
+                    height: 30px;
+                    width: 16px;
+                    line-height: 30px;
+
+                    &:hover, &:focus {
+                        color: @themePrimaryColor;
+                    }
+
+                    &:active {
+                        color: @themeDarkColor;
+                    }
+                }
+            }
+        }
+
+        .paneHandle.expanded {
+            .expanderBtn {
+                -moz-transform: rotate(-180deg);
+                -ms-transform: rotate(-180deg);
+                -o-transform: rotate(-180deg);
+                transform: rotate(-180deg);
+                -webkit-transform: rotate(-180deg);
+                right: 0px;
+            }
+
+            .title {
+                display: none;
+            }
+        }
+
+        .contentFrameHost {
+            position: absolute;
+            border: 0px;
+            left: 0px;
+            display: block;
+            top: 24px;
+            bottom: 0px;
+            right: 0px;
+            overflow: auto;
+            min-width: @collapsiblePaneWidth;
+        }
+
+        .closeBtn {
+            position: absolute;
+            right: 20px;
+            color: @neutralTertiaryColor;
+            cursor: pointer;
+            z-index: 99;
+        }
+    }
+
+    &.wideWidth {
+        .innerLayout {
+            min-width: @collapsiblePaneWidthWide;
+        }
+    }
+}
+
+

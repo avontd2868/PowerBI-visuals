@@ -1,0 +1,186 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company="Microsoft Corporation">
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@glyphIconFamily: 'PowrMDL2';
+
+@font-face {
+    font-family: 'PowrMDL2';
+    src: ~"url('../fonts/PowrMDL2.eot')";
+    src: ~"url('../fonts/PowrMDL2.eot?#iefix') format('embedded-opentype'),url('../fonts/PowrMDL2.woff') format('woff'),url('../fonts/PowrMDL2.ttf') format('truetype'),url('../fonts/PowrMDL2.svg') format('svg')";
+    font-weight: normal;
+    font-style: normal;
+}
+
+//override bootstrap icons
+.glyphicon {
+  font-family: @glyphIconFamily;
+  font-style: normal;
+  font-size: 32px;
+  display: inline-block;
+}
+
+.glyph-micro{   font-size: 8px;     }
+.glyph-mini{    font-size: 12px;    }
+.glyph-small{   font-size: 16px;    }
+.glyph-med{     font-size: 32px;    }
+.glyph-large{   font-size: 48px;    }
+
+//Glyph Icon Mixins - icons below are used as mixins, so they need to have CSS declared with nested psuedoclasses instead of just styling the :before psuedo class directly
+.pbi-glyph-chevrondownmedium{       &::before{ content: "\E972"; }}
+.pbi-glyph-chevronupmedium{         &::before{ content: "\E971"; }}
+.pbi-glyph-caretdownright{          &::before{ content: "\E818"; }}
+//end mixins
+
+.pbi-glyph-share:before{                    content: "\E72D"; }
+.pbi-glyph-save:before{                     content: "\E74E"; }
+.pbi-glyph-financial:before{                content: "\E7BB"; }
+.pbi-glyph-edit:before{                     content: "\E70F"; }
+.pbi-glyph-filter:before{                   content: "\E71C"; }
+.pbi-glyph-emi:before{                      content: "\E731"; }
+.pbi-glyph-checkboxcomposite:before{        content: "\E73A"; }
+.pbi-glyph-checkmark:before{                content: "\E73E"; }
+.pbi-glyph-page2:before{                    content: "\E7C3"; }
+.pbi-glyph-folder:before{                   content: "\E8B7"; }
+.pbi-glyph-link:before{                     content: "\E71B"; }
+.pbi-glyph-group:before{                    content: "\E902"; }
+.pbi-glyph-paste:before{                    content: "\E77F"; }
+.pbi-glyph-emoji:before{                    content: "\E76E"; }
+.pbi-glyph-upload:before{                   content: "\E898"; }
+.pbi-glyph-pc1:before{                      content: "\E977"; }
+.pbi-glyph-add:before{                      content: "\E710"; }
+.pbi-glyph-search:before{                   content: "\E721"; }
+.pbi-glyph-globalnavbutton:before{          content: "\E700"; }
+.pbi-glyph-pageright:before{                content: "\E761"; }
+.pbi-glyph-pageleft:before{                 content: "\E760"; }
+.pbi-glyph-tvmonitor:before{                content: "\E7F4"; }
+.pbi-glyph-chromerestore:before{            content: "\E923"; }
+.pbi-glyph-world:before{                    content: "\E128"; }
+.pbi-glyph-repairlegacy:before{             content: "\E15E"; }
+.pbi-glyph-more:before{                     content: "\E712"; }
+.pbi-glyph-slideshow:before{                content: "\E786"; }
+.pbi-glyph-photo:before{                    content: "\E91B"; }
+.pbi-glyph-calendar:before{                 content: "\E787"; }
+.pbi-glyph-favoritestar:before{             content: "\E734"; }
+.pbi-glyph-collection:before{               content: "\E7AA"; }
+.pbi-glyph-chromefullscreen:before{         content: "\E92D"; }
+.pbi-glyph-undo:before{                     content: "\E7A7"; }
+.pbi-glyph-back:before{                     content: "\E72B"; }
+.pbi-glyph-font:before{                     content: "\E8D2"; }
+.pbi-glyph-flickup:before{                  content: "\E936"; }
+.pbi-glyph-chromeminimize:before{           content: "\E921"; }
+.pbi-glyph-gripperbarhorizontal:before{     content: "\E76F"; }
+.pbi-glyph-barchart:before{                 content: "\EAE7"; }
+.pbi-glyph-gauge:before{                    content: "\EB24"; }
+.pbi-glyph-warning:before{                  content: "\E7BA"; }
+.pbi-glyph-error:before{                    content: "\E783"; }
+.pbi-glyph-success:before{                  content: "\E73E"; }
+.pbi-glyph-settings:before{                 content: "\E713"; }
+.pbi-glyph-globe:before{                    content: "\E774"; }
+.pbi-glyph-repair:before{                   content: "\E90F"; }
+.pbi-glyph-emi:before{                      content: "\E731"; }
+.pbi-glyph-info:before{                     content: "\E946"; }
+.pbi-glyph-go:before{                       content: "\E8AD"; }
+.pbi-glyph-blockedsite:before{              content: "\E72F"; }
+.pbi-glyph-close:before{                    content: "\E8BB"; }
+.pbi-glyph-circlefill:before{               content: "\EA3B"; }
+.pbi-glyph-circlering:before{               content: "\EA3A"; }
+.pbi-glyph-pinned:before{                   content: "\E840"; }
+.pbi-glyph-pinnedfill:before{               content: "\E842"; }
+.pbi-glyph-excel:before{                    content: "\EC28"; }
+.pbi-glyph-flag:before{                     content: "\E7C1"; }
+.pbi-glyph-library:before{                  content: "\E8F1"; }
+.pbi-glyph-mail:before{                     content: "\E715"; }
+.pbi-glyph-lock:before{                     content: "\E72E"; }
+.pbi-glyph-piedouble:before{                content: "\EB04"; }
+.pbi-glyph-rewind:before{                   content: "\EB9E"; }
+.pbi-glyph-asterisk:before{                 content: "\EA38"; }
+.pbi-glyph-comment:before{                  content: "\E90A"; }
+.pbi-glyph-checkbox:before{                 content: "\E739"; }
+.pbi-glyph-checkboxfill:before{             content: "\E73B"; }
+.pbi-glyph-checkboxindeterminate:before{    content: "\E73C"; }
+.pbi-glyph-checkboxreversed:before{         content: "\E73D"; }
+.pbi-glyph-inserttextbox:before{            content: "\EC7D"; }
+.pbi-glyph-toggle:before{                   content: "\EC12"; }
+.pbi-glyph-togglefilled:before{             content: "\EC11"; }
+.pbi-glyph-delete:before{                   content: "\E74D"; }
+.pbi-glyph-refresh:before{                  content: "\E72C"; }
+
+.pbi-glyph-pin{                  
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    
+    &:before{
+        content: "\E718";
+    }
+}
+
+.pbi-glyph-caretright{
+    .pbi-glyph-caretdownright();
+    
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.pbi-glyph-caretdown{
+    .pbi-glyph-caretdownright();
+    
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.pbi-glyph-caretleft{
+    .pbi-glyph-caretdownright();
+    
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.pbi-glyph-chevronrightmedium{       
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    &::before{   content: "\E972"; }
+}
+
+.pbi-glyph-chevronleftmedium{       
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    &::before{   content: "\E972"; }
+}
+
+.pbi-glyph-uparrow{
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    &::before{ content: "\E72B"; }
+}
+
+.pbi-glyph-rightarrow{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    &::before{ content: "\E72B" }
+}
+
+.pbi-glyph-getdata{
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    &::before{ content: "\E72B" }
+    font-weight: bold;
+}
+
+.pbi-glyph-cancel{
+    &::before{
+        content: "\E8BB";
+    }
+    font-weight: bold;
+}
+
+//glyph specific styles - This should be a full glyph
+/*.pbi-glyph-success{
+    border: 2px solid;
+    border-radius: 50%;
+    font-size: 22px !important;
+    padding: 4px;
+    font-weight: bold;
+}*/

@@ -1,0 +1,134 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../fonts.less";
+@import "../colorPalette.less";
+@import "../mixins.less";
+
+.contextMenu {
+    position: absolute;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
+    display: none;
+    min-width: 300px;
+    max-width: 750px;
+    z-index: 100;
+
+    .wrapper {
+        border: 1px solid @neutralLightColor;
+        background: @whiteColor;
+        position: relative;
+
+        .metadata-container {
+            padding: 20px;
+            font-size: 18px;
+            min-height: 47px;
+
+            .metadata {
+                font-size: 11px;
+                line-height: 1em;
+                margin-top: 20px;
+            }
+
+            .title {
+                vertical-align: top;
+                max-width: ~"calc(100% - 20px)";
+                .trimmedTextWithEllipsis;
+                padding-bottom: 3px;
+                line-height: 16px;
+                min-height: 18px;
+            }
+
+            .close-btn {
+                opacity: 0.5;
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                right: 16px;
+
+                &:after {
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                    cursor: pointer;
+                    font-size: 16px;
+                }
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .buttonContainer {
+            position: relative;
+            background-color: @neutralLighterColor;
+            height: 40px;
+            padding-right: 20px;
+        }
+
+        .contextMenuButton {
+            display: inline-block;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            margin-left: 20px;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 40px;
+            max-width: 150px;
+            .trimmedTextWithEllipsis;
+
+            &:hover {
+                color: @neutralSecondaryColor;
+            }
+
+            a:link, a:visited, a:hover {
+                color: @neutralSecondaryColor;
+                text-decoration: none;
+            }
+        }
+
+        .arrow {
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: @whiteColor;
+            transform: rotate(45deg);
+            top: ~"calc(50% - 10px)";
+            left: -3px;
+        }
+
+        &:after {
+            display: block;
+            content: " ";
+            clear: both;
+        }
+    }
+
+        .wrapper.left:before {
+            left: -11px;
+            box-shadow: -2.5px 2.5px 5px -0.5px @neutralLightColor;
+            border-left: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .wrapper.right:before {
+            right: -11px;
+            top: 50px;
+            box-shadow: 2.5px -2.5px 5px -0.5px @neutralLightColor;
+            border-right: 1px solid @neutralLightColor;
+            border-top: 1px solid @neutralLightColor;
+        }
+
+    &.active {
+        display: block;
+    }
+
+    &.inactive {
+        display: none;
+    }
+}

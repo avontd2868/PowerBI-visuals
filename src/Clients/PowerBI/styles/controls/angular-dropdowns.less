@@ -1,0 +1,97 @@
+﻿/* 
+ * Color styles MUST be set through the color palette in colors.less. This
+ * will allow us to easily change the palette and get a consistent look. DO NOT
+ * hard-code colors directly inside classes.
+ *
+ * To get integrated VS support for LESS install the Visual Studio Web Essentials.
+ */
+
+@import "../colorPalette.less";
+
+/****** dropdown-menu *******/
+.angular-dropdown {
+    /* Size & position */
+    position: absolute;
+    min-width: 200px;
+    margin: 0px;
+    z-index: 1000;
+
+    /* Styles */
+    background: @whiteColor;
+    padding: 0;
+    font-weight: normal;
+    font-size: 14px;
+    list-style: none;
+    border: 1px solid #dedede;
+    box-shadow: 0px 0px 8px @secondaryChromeColor;
+
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+    display: none;
+
+    li.divider {
+        padding-top: 1px;
+        background: @neutralLightColor;
+    }
+
+    .dropdown-item {
+        > a, span {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        > a {
+            color: @neutralPrimaryColor;
+            cursor: pointer;
+        }
+
+        &:hover {
+            background: @themeLightColor;
+        }
+
+        > span {
+            color: @neutralTertiaryColor;
+            cursor: default;
+            font-size: 11px;
+           
+            &:hover {
+                background: @whiteColor;
+            }
+        }
+
+        i {
+            float: right;
+            color: inherit;
+        }
+
+        .dropdown-separator {
+            padding: 0px;
+            border-bottom: 1px solid @secondaryChromeColor;
+        }
+    }
+
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+        display: block;
+    }
+
+    &.dark {
+        background-color: @reportAppBarDropdownMenuBackgroundColor;
+        border-color: @neutralDarkColor;
+
+        .dropdown-item {
+            &:hover {
+                background: @neutralSecondaryAltColor;
+            }
+
+            .dropdown-content > * {
+                color: @whiteColor;
+            }
+        }
+    }
+}

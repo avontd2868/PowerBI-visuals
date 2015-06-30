@@ -1,0 +1,35 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../colors.less";
+@import "../fonts.less";
+@import "../grid.less";
+
+.pbi-spinner, .pbi-spinner-large {
+    background: url('../../images/spinner.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    vertical-align: middle;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+
+    width: 20px;
+    height: 20px;
+}
+
+.pbi-spinner-large{
+    background: url('../../images/spinner_big.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    width: 32px;
+    height: 32px;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

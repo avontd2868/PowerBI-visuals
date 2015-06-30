@@ -1,0 +1,48 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../fonts.less";
+@import "../colorPalette.less";
+@import "../mixins.less";
+
+.editableLabel {
+    min-width: 50px;
+    padding: 2px;
+    border: 1px solid transparent;
+    font-family: @lightFontFamily;
+
+    &:hover {
+        border-color: @themeSecondaryColor;
+    }
+
+    &.error, &.error.active, &.error:hover {
+        border-color: @warningColor;
+    }
+
+    &.active {
+        border: 1px solid @themeSecondaryColor;
+    }
+
+    .textLabel {
+        cursor: pointer;
+        font-size: 1em;
+        white-space: pre;
+    }
+
+    .textInput {
+        font-family: @lightFontFamily;
+        padding: 0px;
+        border-width: 0px;
+        min-width: 50px;
+        font-size: 1em;
+        white-space: pre;
+        cursor: text;
+    }
+
+    .textInput:focus {
+        outline: 0;
+    }
+}

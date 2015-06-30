@@ -1,0 +1,74 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../colors.less";
+@import "../fonts.less";
+@import "../grid.less";
+@import "../icons.less";
+
+.dropdown-toggle{
+    border-color: @neutralTertiaryAltColor;
+    background-color: transparent;
+    color: @neutralPrimaryColor;
+    padding-right: @gridCellSize;
+
+    &:hover{
+        background-color: @neutralSecondaryAltColor;
+        background-color: transparent;
+    }
+
+    &:focus{
+        border-color: @themePrimaryColor;
+        background-color: transparent;
+    }
+
+    &:active{
+        border-color:@neutralSecondaryAltColor;
+        background-color: @neutralLightColor;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    .disabled, .disabled:hover, .disabled:focus, .disabled:disabled{
+        background-color: @neutralLighterColor;
+        border-color: @neutralLighterColor;
+    }
+
+    .dropdown-icon{
+        margin-left: @gridCellSize * 2;
+        margin-top: 2px;
+        .glyphicon();
+        .glyph-micro();
+        .pbi-glyph-chevrondownmedium();
+    }
+}
+
+.dropdown.open{
+    .dropdown-toggle{
+        background-color: transparent;
+            
+        .dropdown-icon{
+            .pbi-glyph-chevronupmedium();
+        }
+    }
+}
+
+
+.dropdown-menu{
+    margin-top: 0;
+    border-radius: 0;
+    border-color: @neutralSecondaryColor;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    
+    > li > a{
+
+        &:hover, &:focus, &:active{
+            background-color: @neutralLightColor;
+            background-image: none;
+        }
+    }
+}

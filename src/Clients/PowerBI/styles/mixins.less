@@ -1,0 +1,110 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+/* 
+ * Color styles MUST be set through the color palette in colors.less. This
+ * will allow us to easily change the palette and get a consistent look. DO NOT
+ * hard-code colors directly inside classes.
+ *
+ * To get integrated VS support for LESS install the Visual Studio Web Essentials.
+ */
+
+@import "colorPalette.less";
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.trimmedTextWithEllipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.skittlesNormal {
+    opacity: 0;
+    border: 1px solid @neutralTertiaryColor;
+    color: @neutralPrimaryColor;
+    background-color: @whiteColor;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    -moz-transition: opacity 0.2s ease-in;
+    -o-transition: opacity 0.2s ease-in;
+    -webkit-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+    -webkit-transition-delay: 0s; /* Safari */
+    transition-delay: 0s;
+}
+
+.skittlesHovered {
+    background-color: @neutralLighterColor;
+}
+
+.skittlesPressed {
+    border-color: @neutralSecondaryAltColor;
+    background-color: @neutralLightColor;
+}
+
+.skittlesIconNormal {
+    vertical-align: middle;
+    text-align: center;
+    color: @neutralTertiaryColor;
+}
+
+.skittlesIconHovered {
+    color: @neutralSecondaryAltColor;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s linear, left 0.5s linear, transform 0.5s;
+    -webkit-transition: opacity 0.5s linear, left 0.5s linear, transform 0.5s;
+}
+
+.hidden {
+    visibility: hidden;
+    /* Fully hide the element*/
+    opacity: 0;
+    transition: visibility 0s 0.5s, width 0s 0.5s, height 0s 0.5s, opacity 0.5s linear, left 0.5s linear, transform 0.5s;
+    -webkit-transition: visibility 0s 0.5s, width 0s 0.5s, height 0s 0.5s, opacity 0.5s linear, left 0.5s linear, transform 0.5s;
+}
+
+.hiddenNoTransition {
+    visibility: hidden;
+    opacity: 0;    
+}
+
+.placeholderColor(@color: @neutralSecondaryColor) {
+    &::-webkit-input-placeholder { /* WebKit browsers */
+        color: @color;
+    }
+
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: @color;
+        opacity: 1;
+    }
+
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: @color;
+        opacity: 1;
+    }
+
+    &:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: @color;
+    }
+}
+
+.imgResource(@filename) {
+    background: url('../images/@{filename}.png') center center no-repeat;
+}

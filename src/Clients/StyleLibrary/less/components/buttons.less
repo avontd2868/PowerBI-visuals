@@ -1,0 +1,116 @@
+//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../colors.less";
+@import "../fonts.less";
+
+.btn, button, .ok-btn, input[type=button]{
+    font-family: wf_segoe-ui_Semibold;
+    background-image: none;
+    box-shadow: none;
+    background-color: @neutralLighterColor;
+    padding: 6px 18px 6px 18px;
+    border: 2px solid @neutralLighterColor;
+    border-radius: 0;
+    text-shadow: none;
+    font-size: 14px;
+    width: auto;
+    line-height: 16px;
+    white-space: nowrap;
+    color: @themeSecondaryColor;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+    
+    &:hover, &:focus, &:active, &:active:hover, &:focus:hover
+    {
+        border-color: @themeSecondaryColor;
+        background-color: @neutralLighterColor;
+        color: @themeSecondaryColor;
+        outline: none;
+    }
+    
+    &:active{
+        background-color: @neutralSecondaryColor;
+        border-color: @neutralSecondaryColor;
+        color: @themeSecondaryColor;
+    }
+    
+    &.primary{
+        background-color: @themePrimaryColor;
+        border-color: @themePrimaryColor;
+        color: @themeSecondaryColor;
+        
+        &:hover, &:focus, &:active{
+            background-color: @themeDarkColor;
+            border-color: @themeDarkColor;
+            color: @themeSecondaryColor;
+        }
+        
+        &:focus{
+            border-color: @themeSecondaryColor;
+            color: @themeSecondaryColor;
+        }
+    }
+    
+    &.disabled, &[disabled]{
+        background-color: @neutralTertiaryAltColor;
+        border-color: @neutralTertiaryAltColor;
+        color: @neutralLightColor;
+        
+        &:hover, &:focus, &:active{
+            background-color: @neutralTertiaryAltColor;
+            border-color: @neutralTertiaryAltColor;
+            color: @neutralLightColor;
+        }
+    }
+
+	&.imgButton {
+        background-color: transparent;
+        border: 0px;
+        background-image: url('../../images/powerbi-sprites.png');
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        padding: 0px;
+        outline: none;
+
+        &.addButton {
+            width: 16px;
+            height: 16px;
+            margin: 4px;
+            background-position: -20px -103px;
+
+            &:hover {
+                background-position: -2px -103px;
+            }
+        }
+
+        &.resizeButton {
+            background-position: -54px -122px;
+        }
+
+        &.optionsButton {
+            opacity: 0.7;
+            background-position: -68px -2px;
+
+            &:focus {
+                opacity: 1.0;
+                background-position: -48px -2px;
+                background-color: @neutralPrimaryColor;
+            }
+
+            &:active {
+                background-position: -48px -2px;
+            }
+        }
+
+        &.deleteButton {
+            width: 16px;
+            height: 16px;
+            margin: 4px;
+            background-position: -35px -24px;
+        }
+    }
+}									   

@@ -1,0 +1,60 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../colors.less";
+@import "../icons.less";
+@import "../fonts.less";
+
+#toast-container button{
+    color: @neutralPrimaryColor;
+}
+
+#toast-container>div{
+    width: 420px;
+    font-family: @regularFontFamily;
+    background-color: @whiteColor;
+    color: @neutralSecondaryColor;
+    font-size: 14px;
+    opacity: 1;
+    border-radius: 0;
+    padding: 12px 16px 16px 60px;
+
+    .toast-title{
+        color: @neutralPrimaryColor;
+        font-family: @semiboldFontFamily;
+    }
+
+    .glyphicon{
+        position: absolute;
+        font-family: @glyphIconFamily;
+        .glyph-med();
+        left: 16px;
+        font-size: 32px;
+        top: 16px;
+        color: @blackColor;
+
+        &.pbi-glyph-pin{
+            transform: rotate(145deg);
+            -webkit-transform: rotate(-45deg);
+        }
+    }
+
+    .toast-close-button{
+        &:hover{
+            background-color: transparent;
+            opacity: 1;
+        }
+        
+        .pbi-glyph-close{
+            font-size: 8px;
+            position: relative;
+            margin-right: 18px;
+            top: 0px;
+            font-weight: bold;
+
+        }
+    }
+}

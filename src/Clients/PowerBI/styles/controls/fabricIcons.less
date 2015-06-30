@@ -1,0 +1,20 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../fonts.less";
+@import "../colorPalette.less";
+@import "../mixins.less";
+
+// This controls base styling for Office Fabric icons in Power BI - be very careful when making changes to this.
+i.ms-Icon {
+    @defaultOfficeIconCircleStrokeWidth: 2px;
+    color: @neutralPrimaryColor;
+
+    &.ms-Icon--circle {
+        border-width: @defaultOfficeIconCircleStrokeWidth;
+        border-color: @neutralPrimaryColor;
+    }
+}

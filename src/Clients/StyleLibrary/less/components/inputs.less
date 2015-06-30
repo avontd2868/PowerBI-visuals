@@ -1,0 +1,38 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../colors.less";
+@import "../fonts.less";
+@import "../grid.less";
+
+input[type=text]{
+    border: 2px solid @neutralTertiaryAltColor;
+    outline: none;
+    padding: @gridCellSize;
+    clear: both;
+    
+    &:hover{
+        border-color: @neutralSecondaryAltColor;
+    }
+    
+    &:focus, &:active{
+        border-color: @themePrimaryColor;   
+    }
+}
+
+.input-field-label{
+    font-family: @regularFontFamily;
+    font-size: 11px;
+    color: @neutralPrimaryColor;
+    padding-bottom: 8px;
+    width: 100%;
+}
+
+input[disabled], input[disabled]:hover, input[disabled]:focus, input[disabled]:active{
+    background-color: @neutralLighterColor;
+    border-color: @neutralLighterColor;
+    color: @neutralTertiaryColor;
+}

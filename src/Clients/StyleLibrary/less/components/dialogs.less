@@ -1,0 +1,50 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../colors.less";
+@import "../fonts.less";
+@import "../grid.less";
+
+//TODO: this will be replaced by generic styles and prefixes
+.modal-container{
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+
+    .dialog-layout{
+        padding: 28px;
+    }
+
+    .modal-dialog{
+        border: 1px solid @neutralSecondaryColor;
+        background-color: @whiteColor;
+    }
+
+    .dialog-actions{
+        padding-top: 28px;
+        padding-bottom: 28px;
+    
+        button{
+            margin-left: @gridCellSize;
+            float: right;
+        }
+    }
+
+    .dialog-title{
+        font-family: @regularFontFamily;
+        font-size: 28px;
+        padding-bottom: 20px;
+        color: @neutralPrimaryColor;
+    }
+
+    .dialog-close-icon{
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 12px;
+    }
+}

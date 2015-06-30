@@ -1,0 +1,28 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../fonts.less";
+@import "../colorPalette.less";
+@import "../mixins.less";
+
+.collapsibleSectionControl {
+    &.isExpanded {
+        .collapseToggle {
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
+    }
+
+    .collapseToggleContainer {
+        cursor: pointer;
+
+        .collapseToggle {
+            position: static;
+            color: @neutralSecondaryColor;
+            display: inline-block;
+        }
+    }
+}

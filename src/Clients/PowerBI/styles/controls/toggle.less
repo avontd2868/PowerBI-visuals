@@ -1,0 +1,98 @@
+﻿//-----------------------------------------------------------------------
+// <copyright company='Microsoft Corporation'>
+//        Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+@import "../fonts.less";
+@import "../colorPalette.less";
+@import "../mixins.less";
+
+label.toggleControl {
+
+    @toggleWidth: 48px;
+    @toggleHeight: 20px;
+    @switchWidth: 10px;
+    @borderWidth: 2px;
+    @innerBorderWidth: 2px;
+    @toggleOutlineColor: @whiteColor;
+    @BorderColor: @neutralSecondaryAltColor;
+    @transitionSpeed: 0.25s;
+
+    input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+    }
+    // toggleControl: background
+    .toggle {
+        position: relative;
+        width: @toggleWidth;
+        height: @toggleHeight - @borderWidth - @innerBorderWidth;
+        cursor: pointer;
+        z-index: 1;
+        display: inline-block;
+        vertical-align: middle;
+        border: solid @innerBorderWidth @BorderColor;
+        transition: background-color @transitionSpeed;
+        background-color: @neutralLightColor;
+    }
+    // toggleControl: switch
+    .toggle:after {
+        background-color: @BorderColor;
+        position: absolute;
+        left: -@borderWidth;
+        top: -@borderWidth;
+        display: block;
+        content: "";
+        width: @switchWidth;
+        height: @toggleHeight;
+        cursor: pointer;
+        z-index: 2;
+        transition: left @transitionSpeed;
+        outline: 3px solid @toggleOutlineColor;
+    }
+    // Normal ON
+    input[type="checkbox"]:checked ~ .toggle {
+        background-color: @themePrimaryColor;
+    }
+    // Hover OFF
+    &:hover .toggle {
+        background-color: @neutralTertiaryAltColor;
+    }
+    // Hover ON
+    &:hover input[type="checkbox"]:checked ~ .toggle {
+        background-color: @themeDarkColor;
+    }
+    // Active OFF
+    input[type="checkbox"]:active ~ .toggle {
+        background-color: @neutralTertiaryColor;
+    }
+    // Active ON
+    input[type="checkbox"]:active:checked ~ .toggle {
+        background-color: @themeDarkerColor;
+    }
+    // Disabled, OFF
+    input[type="checkbox"]:disabled ~ .toggle {
+        background-color:  @whiteColor;
+        border-color: @neutralTertiaryAltColor;
+
+        &:after {
+            background-color: @neutralTertiaryAltColor;
+        }
+    }
+    // Disabled, ON
+    input[type="checkbox"]:checked:disabled ~ .toggle {
+        background-color:  @whiteColor;
+        border-color: @neutralTertiaryAltColor;
+
+        &:after {
+            background-color: @neutralTertiaryAltColor;
+        }
+    }
+    /* move switch */
+    input[type="checkbox"]:checked ~ .toggle:after {
+        left: @toggleWidth - @switchWidth + @borderWidth + @innerBorderWidth;
+    }
+}
