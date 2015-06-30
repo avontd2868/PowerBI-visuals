@@ -62,7 +62,6 @@
     <TypeScriptCompile Include="visuals\geocodingManagerTests.ts" />
     <TypeScriptCompile Include="visuals\imageVisualTests.ts" />
     <TypeScriptCompile Include="visuals\legendTests.ts" />
-    <TypeScriptCompile Include="visuals\lineChartTests.ts" />
     <TypeScriptCompile Include="visuals\mapTests.ts" />
     <TypeScriptCompile Include="visuals\matrixTests.ts" />
     <TypeScriptCompile Include="visuals\multiRowCardTests.ts" />

@@ -35,7 +35,6 @@ visuals\funnelChartTests.ts
 visuals\geocodingManagerTests.ts
 visuals\gaugeTests.ts
 visuals\imageVisualTests.ts
-visuals\lineChartTests.ts
 visuals\legendTests.ts
 visuals\mapTests.ts
 visuals\matrixTests.ts
