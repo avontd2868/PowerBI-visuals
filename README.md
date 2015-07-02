@@ -32,19 +32,34 @@ To build the library and run run sample application you will need:
 - [Grunt-cli](https://github.com/gruntjs/grunt-cli)
   (can be easily installed via NPM package manager: `npm install -g grunt-cli`)
 
-Platform specific development tools depending on platform(s) you want to run sample application on:
+In order to run unit tests you will also need [Chutzpah JavaScript test runner](https://github.com/mmanela/chutzpah):
+- Command Line Runner [nuget](https://www.nuget.org/packages/Chutzpah) or [chocolatey](http://chocolatey.org/packages/chutzpah)
 
-## Build and Run
+After all required tools are installed you can download the repository, for example from command line
+```
+git clone https://github.com/Microsoft/PowerBI-Visuals
+cd PowerBI-Visuals
+```
+__Important__: Run the following command from root folder to complete installation
 
-### Prerequisites
+`npm install`
 
-To run this sample you will need ..  VS2013 Community edition, typescript, node, grunt, chutzpah...:
 
 ### Build Power BI Visuals Library
 
-### Run Sample App
+To build Power BI Visuals Library run `npm run build` (or `src\buildVisuals.cmd`) from repository root folder. Resultant files will be copied to `build` folder after build task is finished.
 
 ### Run Unit Tests
+
+To run tests execute `npm test` command from repository root folder.
+
+### Run Sample App
+
+To run sample app open `src\PowerBIVisualsClient.sln` in Visual Studio and then run *PowerBIVisualsRunner* project.
+
+__Note__: Sample App requires 64 bit version of IIS Express, you can enable it from Visual Studio
+
+`Tools | Options | Projects and Solutions | Web Projects | Use the 64 bit version of IIS Express`
 
 ### Copyrights
 
