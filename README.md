@@ -59,7 +59,7 @@ npm install
 
 Use the following commands to build and test:
 ```
-npm run build                               # Build PowerBI Visualsinto `built` folder
+npm run build                               # Build PowerBI Visuals into `built` folder
 npm test                                    # Run unit tests (requires 'chutzpah', see Prerequisites)
 ```
 
