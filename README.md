@@ -65,9 +65,6 @@ __Note__: This sample requires 64-bit mode of IIS Express:
 
 ### Copyrights
 
-Coming soong
-
-The MIT License (MIT)
-
 Copyright (c) 2015 Microsoft
 
+See the [LICENSE](/LICENSE) file for license rights and limitations (MIT).
