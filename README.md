@@ -57,9 +57,11 @@ To run tests execute `npm test` command from repository root folder.
 
 To run sample app open `src\PowerBIVisualsClient.sln` in Visual Studio and then run *PowerBIVisualsRunner* project.
 
-__Note__: Sample App requires 64 bit version of IIS Express, you can enable it from Visual Studio
+__Note__: This sample requires 64-bit mode of IIS Express:
 
-`Tools | Options | Projects and Solutions | Web Projects | Use the 64 bit version of IIS Express`
+1. Start Visual Studio and click on `Tools` -> `Options`.
+2. From the tree: `Projects and Solution`s, then `Web Projects`.
+3. Make sure that `Use the 64 bit version of IIS Express for web sites and projects` is checked (press OK)
 
 ### Copyrights
 
