@@ -1,3 +1,13 @@
 detailed info/instructions how to contribute + legal notes
 
-coming soon
+##Contributing bug fixes
+Coming soon...
+
+##Contributing new visuals
+Coming soon...
+
+##Legal
+Coming soon...
+
+##Running unit tests
+Coming soon...
