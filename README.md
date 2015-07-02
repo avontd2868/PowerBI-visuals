@@ -8,8 +8,13 @@ Power BI Visuals is an visualization engine used by [Microsoft Power BI](https:/
 3. `src\Clients\PowerBIVisualsRunner` is a sample application which could be used as a playground for existing and new visuals.
 
 ## Contribute
-Coming soon
-https://github.com/Microsoft/PowerBI-Visuals/edit/master/Contribute.md
+
+Want to hack on PowerBI Visuals? Brilliant! We have [instructions to help you get started contributing code](/Contribute.md).
+We would love to see both bugfixes and new visuals.
+
+There are also the following ways to help us:
+* [Submit bugs](https://github.com/Microsoft/PowerBI-Visuals/issues) and help us verify fixes as they are checked in.
+* Engage with other users and developers on [StackOverflow](http://stackoverflow.com/questions/tagged/powerbi?sort=newest). 
 
 ## Documentation
 
