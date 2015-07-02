@@ -29,29 +29,39 @@ To build the library and run run sample application you will need:
 - [TypeScript 1.4 for Visual Studio 2013](https://visualstudiogallery.msdn.microsoft.com/2d42d8dc-e085-45eb-a30b-3f7d50d55304)
 - [Git](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [NodeJS](https://nodejs.org/download/)
-- [Grunt-cli](https://github.com/gruntjs/grunt-cli)
-  (can be easily installed via NPM package manager: `npm install -g grunt-cli`)
 
 In order to run unit tests you will also need [Chutzpah JavaScript test runner](https://github.com/mmanela/chutzpah):
 - Command Line Runner [nuget](https://www.nuget.org/packages/Chutzpah) or [chocolatey](http://chocolatey.org/packages/chutzpah)
 
-After all required tools are installed you can download the repository, for example from command line
-```
-git clone https://github.com/Microsoft/PowerBI-Visuals
-cd PowerBI-Visuals
-```
-__Important__: Run the following command from root folder to complete installation
-
-`npm install`
-
 
 ### Build Power BI Visuals Library
 
-To build Power BI Visuals Library run `npm run build` (or `src\buildVisuals.cmd`) from repository root folder. Resultant files will be copied to `build` folder after build task is finished.
+In order to build the Power BI Visuals, ensure that you have [Git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/) installed.
 
-### Run Unit Tests
+Clone a copy of the repo:
 
-To run tests execute `npm test` command from repository root folder.
+```
+git clone https://github.com/Microsoft/PowerBI-Visuals.git
+```
+
+Change to the PowerBI-Visuals directory:
+
+```
+cd PowerBI-Visuals
+```
+
+Install Grunt and dev dependencies:
+
+```
+npm install -g grunt-cli
+npm install
+```
+
+Use the following commands to build and test:
+```
+npm run build                               # Build PowerBI Visualsinto `built` folder
+npm test                                    # Run unit tests (requires 'chutzpah', see Prerequisites)
+```
 
 ### Run Sample App
 
