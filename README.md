@@ -3,9 +3,9 @@ Power BI Visuals is an visualization engine used by [Microsoft Power BI](https:/
 
 ## What is included
 
-*  `build` folder representing pre-built version of Power BI Visuals library so that you can start using it right away;
-*  `src` folder includes library source code for your experiments and if you will desire to create a new visual;
-*  `src\Clients\PowerBIVisualsRunner` is a sample application which could be used as a playground for existing and new visuals.
+1. `build` folder representing pre-built version of Power BI Visuals library so that you can start using it right away.
+2. `src` folder includes library source code for your experiments and if you will desire to create a new visual.
+3. `src\Clients\PowerBIVisualsRunner` is a sample application which could be used as a playground for existing and new visuals.
 
 ## Contribute
 Coming soon
