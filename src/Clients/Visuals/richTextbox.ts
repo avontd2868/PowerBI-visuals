@@ -628,10 +628,6 @@ module powerbi.visuals {
                 return $('<label>').text(text);
             }
 
-            function formatSeparator() {
-                return span().addClass('ql-format-separator');
-            }
-
             function div(): JQuery {
                 return $('<div>');
             }
@@ -663,15 +659,12 @@ module powerbi.visuals {
                         )
                         .append(
                             formatGroup()
-                            .append(this.formatButton('Bold', 'bold'))
-                            .append(formatSeparator())
-                            .append(this.formatButton('Italic', 'italic'))
-                            .append(formatSeparator())
-                            .append(this.formatButton('Underline', 'underline'))
+                            .append(this.formatButton(this.getLocalizationString('Bold'), 'bold').text('B'))
+                            .append(this.formatButton(this.getLocalizationString('Italic'), 'italic').text('I'))
+                            .append(this.formatButton(this.getLocalizationString('Underline'), 'underline').text('U'))
                         )
                         .append(
                             formatGroup()
-                            .append(formatSeparator())
                             .append(this.toggleGroup('Text Alignment', textAlignments, 'align', 'Left'))
                         );
                 }
@@ -687,7 +680,7 @@ module powerbi.visuals {
                         .css('display', 'none');
 
                     var $buttons = list.map((option) => {
-                        var $button = this.formatButton(option.label)
+                        var $button = this.formatButton(this.getLocalizationString(option.label))
                             .attr('data-value', option.value)
                             .click((e) => setSelectValue($select, option.value));
                         return $button;
@@ -736,13 +729,14 @@ module powerbi.visuals {
                     return $selector;
                 }
 
-                private formatButton(title: string, format?: string) {
+                private formatButton(tooltip?: string, format?: string) {
                     var $button = span()
-                        .addClass('ql-format-button')
-                        .attr('localize-tooltip', this.getLocalizationString(title))
-                        .text(title);
+                        .addClass('ql-format-button');
 
-                    if (format !== undefined)
+                    if (tooltip != null)
+                        $button.attr('localize-tooltip', tooltip);
+
+                    if (format != null)
                         $button.addClass('ql-' + format);
 
                     // Swallow this so that mouse down on a button does not steal selection from the editor.

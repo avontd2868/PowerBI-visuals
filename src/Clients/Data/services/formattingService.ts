@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+ï»¿//-----------------------------------------------------------------------
 // <copyright company="Microsoft Corporation">
 //        Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -508,7 +508,7 @@ module powerbi {
 
                 // Preserve literals and escaped chars
                 if (formatMeta.hasEscapes) {
-                    format = FormattingEncoder.preserveEscaped(format, "\\0#.,%‰");
+                    format = FormattingEncoder.preserveEscaped(format, "\\0#.,%â€°");
                 }
                 var literals: string[] = [];
                 if (formatMeta.hasQuotes) {
@@ -560,7 +560,7 @@ module powerbi {
                     result = FormattingEncoder.restoreLiterals(result, literals);
                 }
                 if (formatMeta.hasEscapes) {
-                    result = FormattingEncoder.restoreEscaped(result, "\\0#.,%‰");
+                    result = FormattingEncoder.restoreEscaped(result, "\\0#.,%â€°");
                 }
 
                 _lastCustomFormatMeta = formatMeta;
@@ -660,7 +660,7 @@ module powerbi {
                     case "%":
                         result.hasPercent = true;
                         break;
-                    case "‰":
+                    case "â€°":
                         result.hasPermile = true;
                         break;
                 }
@@ -699,7 +699,7 @@ module powerbi {
             if (formatMeta.hasPercent && format.indexOf("%") > -1) {
                 result = result * 100;
             }
-            if (formatMeta.hasPermile && format.indexOf("‰") > -1) {
+            if (formatMeta.hasPermile && format.indexOf("â€°") > -1) {
                 result = result * 1000;
             }
             if (formatMeta.hasCommas) {
@@ -759,12 +759,14 @@ module powerbi {
             var result = "";
             var leftBuffer = "";
             var vi = value.length - 1;
+            var fmtOnly = true;
             // Iterate through format chars and replace 0 and # with the digits from the value string
             for (var fi = format.length - 1; fi > -1; fi--) {
                 var formatChar = format.charAt(fi);
                 switch (formatChar) {
                     case "0":
                     case "#":
+                        fmtOnly = false;
                         if (leftBuffer !== "") {
                             result = leftBuffer + result;
                             leftBuffer = "";
@@ -832,6 +834,10 @@ module powerbi {
                 return sign + leftBuffer + result;
             }
 
+            if (fmtOnly)
+                // If the format doesn't specify any digits to be displayed, then just return the format we've parsed up until now.
+                return sign + leftBuffer;
+
             return sign + leftBuffer + value;
         }
 
@@ -841,13 +847,16 @@ module powerbi {
             var vCount = value.length;
             if (suppressModifyValue) {
                 debug.assert(fCount > 0, "Empty formatting string");
+
                 if ((format.charAt(fCount - 1) !== "0") && (format.charAt(fCount - 1) !== "#"))
                     return {
                         value: value + format.charAt(fCount - 1),
+                        fmtOnly: value === "",
                     };
 
                 return {
                     value: value,
+                    fmtOnly: value === "",
                 };
             }
 

@@ -37,9 +37,9 @@ module powerbitests {
 
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) },
-                { name: 'date', type: ValueType.fromDescriptor({ dateTime: true }) },
-                { name: 'category', type: ValueType.fromDescriptor({ text: true }) },
+                { displayName: 'value', type: ValueType.fromDescriptor({ numeric: true }) },
+                { displayName: 'date', type: ValueType.fromDescriptor({ dateTime: true }) },
+                { displayName: 'category', type: ValueType.fromDescriptor({ text: true }) },
             ],
         };
 
@@ -56,8 +56,8 @@ module powerbitests {
 
         var dataViewMetadataWithTitle: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'value', type: ValueType.fromDescriptor({ numeric: true }), isMeasure: true },
-                { name: 'genre', type: ValueType.fromDescriptor({ text: true }) },
+                { displayName: 'value', type: ValueType.fromDescriptor({ numeric: true }), isMeasure: true },
+                { displayName: 'genre', type: ValueType.fromDescriptor({ text: true }) },
             ],
         };
 
@@ -84,7 +84,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -137,8 +137,8 @@ module powerbitests {
 
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Label', type: ValueType.fromDescriptor({ text: true }) },
-                    { name: 'Category', type: ValueType.fromDescriptor({ text: true }) }
+                    { displayName: 'Label', type: ValueType.fromDescriptor({ text: true }) },
+                    { displayName: 'Category', type: ValueType.fromDescriptor({ text: true }) }
                 ],
             };
 
@@ -192,7 +192,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -218,7 +218,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -227,7 +227,7 @@ module powerbitests {
 
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) },                    
+                    { displayName: 'value', type: ValueType.fromDescriptor({ numeric: true }) },                    
                 ],
             };
 
@@ -263,7 +263,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -289,7 +289,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -311,7 +311,7 @@ module powerbitests {
         it('Validate multiRowCard styling when there is a single card item',(done) => {       
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) },
+                    { displayName: 'value', type: ValueType.fromDescriptor({ numeric: true }) },
                 ],
             };
 
@@ -340,7 +340,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -366,7 +366,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -391,7 +391,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -417,7 +417,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -437,7 +437,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -458,7 +458,7 @@ module powerbitests {
         it('Card should be cleared when there is a empty dataview ', (done) => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'value', type: ValueType.fromDescriptor({ numeric: true }) }
+                    { displayName: 'value', type: ValueType.fromDescriptor({ numeric: true }) }
                 ],
             };
 
@@ -493,7 +493,7 @@ module powerbitests {
         it('Card should format values',(done) => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'value', type: ValueType.fromDescriptor({ numeric: true }), objects: { general: { formatString: '0%' } } }
+                    { displayName: 'value', type: ValueType.fromDescriptor({ numeric: true }), objects: { general: { formatString: '0%' } } }
                 ],
             };
 

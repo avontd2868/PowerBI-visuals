@@ -19,7 +19,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
-    <Content Include="app.js" />
     <Content Include="Data.js" />
     <Content Include="index.html" />
     <Content Include="moment.js" />

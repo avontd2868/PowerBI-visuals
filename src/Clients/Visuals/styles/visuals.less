@@ -944,11 +944,10 @@
     }
 }
 
-.data-labels{
+.data-labels {
     font-size: 12px;
-    font-weight: bold;
     text-anchor: middle;
-    font-family: @regularFontFamily;
+    font-family: @semiboldFontFamily;
     /* Enables tooltip when hovering on data label inside visual */
     pointer-events: none;
 }
@@ -966,11 +965,12 @@
 }
 
 div.ql-toolbar {
-    padding: 6px;
+    padding: 4px;
     background: @neutralPrimaryColor;
     color: @whiteColor;
     white-space: nowrap;
     overflow-x: hidden;
+    font-size: 14px;
 
     // TODO: fix SELECT dropdown arrow in IE
     /*
@@ -978,6 +978,12 @@ div.ql-toolbar {
         display: none;
     }
     */
+
+    .ql-format-group {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 2px;
+    }
 
     select.ql-picker {
         margin: 3px;
@@ -996,7 +1002,8 @@ div.ql-toolbar {
 
     .ql-format-button {
         margin: 3px;
-        padding: 3px;
+        display: inline-block;
+        vertical-align: middle;
     }
 
     .ql-format-button:hover {
@@ -1007,6 +1014,38 @@ div.ql-toolbar {
     .ql-format-button.ql-active {
         background: @themePrimaryColor;
         color: @neutralPrimaryColor;
+    }
+
+    .ql-format-button[data-value="left"] {
+        .sprite(@left-align-text-white);
+    }
+
+    .ql-format-button[data-value="left"].ql-active {
+        .sprite(@left-align-text-black);
+    }
+
+    .ql-format-button[data-value="right"] {
+        .sprite(@right-align-text-white);
+    }
+
+    .ql-format-button[data-value="right"].ql-active {
+        .sprite(@right-align-text-black);
+    }
+
+    .ql-format-button[data-value="center"] {
+        .sprite(@center-align-text-white);
+    }
+
+    .ql-format-button[data-value="center"].ql-active {
+        .sprite(@center-align-text-black);
+    }
+
+    // TODO: temporary formatting until we get icons
+    .ql-format-button.ql-bold,.ql-italic,.ql-underline {
+        line-height: 24px;
+        text-align: center;
+        width: 24px;
+        height: 24px;
     }
 }
 

@@ -29,8 +29,8 @@ module powerbitests {
     var legendVisibleSmallerThanMinHeightString: string = legendVisibleSmallerThanMinHeight.toString();
     
     describe("ScatterChart", () => {
-        var categoryColumn: powerbi.DataViewMetadataColumn = { name: 'year', type: DataShapeUtility.describeDataType(SemanticType.String) };
-        var measureColumn: powerbi.DataViewMetadataColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
+        var categoryColumn: powerbi.DataViewMetadataColumn = { displayName: 'year', type: DataShapeUtility.describeDataType(SemanticType.String) };
+        var measureColumn: powerbi.DataViewMetadataColumn = { displayName: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
 
         it('ScatterChart registered capabilities', () => {
             expect(powerbi.visuals.visualPluginFactory.create().getPlugin('scatterChart').capabilities).toBe(powerbi.visuals.scatterChartCapabilities);
@@ -55,8 +55,8 @@ module powerbitests {
         it('preferred capability does not support zero rows', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Year' },
-                    { name: 'Value', isMeasure: true }],
+                    { displayName: 'Year' },
+                    { displayName: 'Value', isMeasure: true }],
             };
 
             var dataView: powerbi.DataView = {
@@ -80,8 +80,8 @@ module powerbitests {
         it('preferred capability does not support one row', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Year' },
-                    { name: 'Value', isMeasure: true }],
+                    { displayName: 'Year' },
+                    { displayName: 'Value', isMeasure: true }],
             };
 
             var dataView: powerbi.DataView = {
@@ -107,17 +107,17 @@ module powerbitests {
         var v: powerbi.IVisual, element: JQuery;
         var dataViewMetadataFourColumn: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                { name: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                { displayName: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                { displayName: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
             ]
         };
 
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1', type: DataShapeUtility.describeDataType(SemanticType.String) },
-                { name: 'col2', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) }],
+                { displayName: 'col1', type: DataShapeUtility.describeDataType(SemanticType.String) },
+                { displayName: 'col2', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) }],
         };
 
         beforeEach(() => {
@@ -133,7 +133,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -171,9 +171,9 @@ module powerbitests {
         it('scatter chart two measure dom validation', (done) => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true, objects: { general: { formatString: '0%' } } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true, objects: { general: { formatString: '0%' } } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -217,10 +217,10 @@ module powerbitests {
         it('scatter chart series dom validation', (done) => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: { 'Series': true } },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true, objects: { general: { formatString: '0%' } } },
-                    { name: 'col4', isMeasure: true },
+                    { displayName: 'col1', roles: { 'Series': true } },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true, objects: { general: { formatString: '0%' } } },
+                    { displayName: 'col4', isMeasure: true },
                 ]
             };
             v.onDataChanged({
@@ -266,10 +266,10 @@ module powerbitests {
         it('scatter chart measure and size dom validation', (done) => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true },
-                    { name: 'col4', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true },
+                    { displayName: 'col4', isMeasure: true }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -350,10 +350,10 @@ module powerbitests {
         it('scatter chart single category value dom validation', (done) => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col3', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col4', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'col1', type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col3', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col4', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             v.onDataChanged({
@@ -398,9 +398,9 @@ module powerbitests {
         it('scatter chart no category dom validation', (done) => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col3', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col4', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col3', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col4', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             v.onDataChanged({
@@ -639,10 +639,10 @@ module powerbitests {
         it('scatter chart axis labels dom validation', (done) => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'X-Axis', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'Size', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'Y-Axis', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'col1' },
+                    { displayName: 'X-Axis', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'Size', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'Y-Axis', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -935,24 +935,24 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number),
                     format: '0.000'
                 },
                 {
-                    name: 'col3',
+                    displayName: 'col3',
                     isMeasure: false,
                     type: DataShapeUtility.describeDataType(SemanticType.DateTime),
                     format: 'd'
                 }],
         };
         var hostServices = powerbitests.mocks.createVisualHostServices();
-        var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+        var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
 
         var dataViewMetadataWithLabelsOnObject = powerbi.Prototype.inherit(dataViewMetadata);
         dataViewMetadataWithLabelsOnObject.objects = { categoryLabels: { show: true } };
@@ -967,7 +967,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -1086,16 +1086,16 @@ module powerbitests {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
                     {
-                        name: 'col1',
+                        displayName: 'col1',
                         type: DataShapeUtility.describeDataType(SemanticType.String)
                     },
                     {
-                        name: 'col2',
+                        displayName: 'col2',
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(SemanticType.Number)
                     },
                     {
-                        name: 'col3',
+                        displayName: 'col3',
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(SemanticType.Number)
                     }]
@@ -1106,7 +1106,7 @@ module powerbitests {
             var color2 = ScatterChart.getBubbleColor(2, colors);
             var color3 = ScatterChart.getBubbleColor(3, colors);
 
-            var measureColumn: powerbi.DataViewMetadataColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
+            var measureColumn: powerbi.DataViewMetadataColumn = { displayName: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
             var valueColumns = DataViewTransform.createValueColumns([
                 {
                     source: metadata.columns[1],
@@ -1279,7 +1279,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -1289,10 +1289,10 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true },
-                    { name: 'col4', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true },
+                    { displayName: 'col4', isMeasure: true }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1357,10 +1357,10 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "Size": true } },
-                    { name: 'col4', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "Size": true } },
+                    { displayName: 'col4', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1382,7 +1382,7 @@ module powerbitests {
                     source: metadata.columns[3],
                     values: [310, 320, 330, 340, 350]
                 }]);
-            var measureColumn: powerbi.DataViewMetadataColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
+            var measureColumn: powerbi.DataViewMetadataColumn = { displayName: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
             valuesColumn.source = measureColumn;
 
             var dataView: powerbi.DataView = {
@@ -1403,7 +1403,7 @@ module powerbitests {
                     values: valuesColumn
                 }
             };
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
 
             var dataPoints = scatterChartData.dataPoints;
@@ -1437,10 +1437,10 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "Size": true } },
-                    { name: 'col4', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "Size": true } },
+                    { displayName: 'col4', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1476,7 +1476,7 @@ module powerbitests {
                         }])
                 }
             };
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var legendItems = scatterChartData.legendData.dataPoints;
             expect(legendItems[0].label).toBe(powerbi.visuals.valueFormatter.format(null));
@@ -1501,10 +1501,10 @@ module powerbitests {
             };
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true },
-                    { name: 'col4', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true },
+                    { displayName: 'col4', isMeasure: true }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1536,7 +1536,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var dataPoints = scatterChartData.dataPoints;
             expect(dataPoints[0].category).toBe("a");
@@ -1565,10 +1565,10 @@ module powerbitests {
             };
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true },
-                    { name: 'col4', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true },
+                    { displayName: 'col4', isMeasure: true }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1607,7 +1607,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
 
             var dataPoints = scatterChartData.dataPoints;
@@ -1639,10 +1639,10 @@ module powerbitests {
             };
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true },
-                    { name: 'col4', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true },
+                    { displayName: 'col4', isMeasure: true }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1676,7 +1676,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var dataPoints = scatterChartData.dataPoints;
             //var dataPointsWithRadius = ScatterChart.getDataPointsWithRadius(dataPoints, viewport);
@@ -1707,10 +1707,10 @@ module powerbitests {
             };
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true },
-                    { name: 'col4', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true },
+                    { displayName: 'col4', isMeasure: true }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1741,7 +1741,7 @@ module powerbitests {
                         }])
                 }
             };
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var dataPoints = scatterChartData.dataPoints;
             //var dataPointsWithRadius = ScatterChart.getDataPointsWithRadius(dataPoints, viewport);
@@ -1796,7 +1796,7 @@ module powerbitests {
                 dsrResult,
                 's').dataView;
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors).dataPoints;
             expect(scatterChartData[0].category).toBe('2012');
             expect(scatterChartData[0].x).toBe(150);
@@ -1851,7 +1851,7 @@ module powerbitests {
                 dsrResult,
                 's').dataView;
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var hexDefaultColorRed = "#FF0000";
             var rgbDefaultColorRed = "rgb(255,0,0)";
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors, null, hexDefaultColorRed).dataPoints;
@@ -1906,7 +1906,7 @@ module powerbitests {
                 dsrResult,
                 's').dataView;
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors).dataPoints;
             expect(scatterChartData[0].category).toBe('Bellevue, WA');
             expect(scatterChartData[0].x).toBe(126439);
@@ -1923,10 +1923,10 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: '', queryName: '$s1', index: 0 },
-                    { name: '', queryName: '$s2', isMeasure: true, index: 1 },
-                    { name: '', queryName: '$s3', isMeasure: true, index: 2 },
-                    { name: '', queryName: '$s4', isMeasure: true, index: 3 }
+                    { displayName: '', queryName: '$s1', index: 0 },
+                    { displayName: '', queryName: '$s2', isMeasure: true, index: 1 },
+                    { displayName: '', queryName: '$s3', isMeasure: true, index: 2 },
+                    { displayName: '', queryName: '$s4', isMeasure: true, index: 3 }
                 ]
             };
 
@@ -1970,7 +1970,7 @@ module powerbitests {
             })[0];
             expect(pivotedDataView).not.toBe(dataView);
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(pivotedDataView, viewport, colors).dataPoints;
             expect(scatterChartData[0].category).toBe(null);
             expect(scatterChartData[0].fill).not.toBe(scatterChartData[1].fill);
@@ -1988,9 +1988,9 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2019,7 +2019,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var dataPoints = scatterChartData.dataPoints;
             expect(dataPoints[0].fill).toBe(dataPoints[1].fill);
@@ -2041,9 +2041,9 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2072,7 +2072,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var hexDefaultColorRed = "#FF0000";
             var rgbDefaultColorRed = "rgb(255,0,0)";
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors, null, hexDefaultColorRed);
@@ -2088,10 +2088,10 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "Size": true } },
-                    { name: 'col4', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "Size": true } },
+                    { displayName: 'col4', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2128,7 +2128,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var scatterChartDataPoints = scatterChartData.dataPoints;
             expect(scatterChartDataPoints.length).toBe(0);
@@ -2142,10 +2142,10 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "Size": true } },
-                    { name: 'col4', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "Size": true } },
+                    { displayName: 'col4', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2177,7 +2177,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var scatterChartDataPoints = scatterChartData.dataPoints;
             expect(scatterChartDataPoints.length).toBe(0);
@@ -2191,9 +2191,9 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true, roles: { "Y": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true, roles: { "Y": true } }
                 ]
             };
 
@@ -2216,7 +2216,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var scatterChartDataPoints = scatterChartData.dataPoints;
             expect(scatterChartDataPoints.length).toBe(0);
@@ -2230,8 +2230,8 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col4', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col4', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2262,7 +2262,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var scatterChartDataPoints = scatterChartData.dataPoints;
             expect(scatterChartDataPoints[0].category).toBe('a');
@@ -2279,8 +2279,8 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2306,7 +2306,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var scatterChartDataPoints = scatterChartData.dataPoints;
             expect(scatterChartDataPoints.length).toBe(0);
@@ -2320,9 +2320,9 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2347,7 +2347,7 @@ module powerbitests {
                 }
             };
             var dataLabelsSettings = powerbi.visuals.dataLabelUtils.getDefaultPointLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
 
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             
@@ -2362,11 +2362,11 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Y": true } },
-                    { name: 'col3', isMeasure: true, roles: { "X": true } },
-                    { name: 'col4', isMeasure: true, roles: { "Size": true } },
-                    { name: 'col5', isMeasure: true, roles: { "Gradient": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Y": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "X": true } },
+                    { displayName: 'col4', isMeasure: true, roles: { "Size": true } },
+                    { displayName: 'col5', isMeasure: true, roles: { "Gradient": true } }
                 ]
             };
             var categoryIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -2409,7 +2409,7 @@ module powerbitests {
                 }
             };
 
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var scatterChartData = ScatterChart.converter(dataView, viewport, colors);
             var dataPoints = scatterChartData.dataPoints;
             
@@ -2426,10 +2426,10 @@ module powerbitests {
         var hostServices: powerbi.IVisualHostServices;
         var dataViewMetadataFourColumn: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                { name: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                { displayName: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                { displayName: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
             ]
         };
 
@@ -2444,7 +2444,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -3029,10 +3029,10 @@ module powerbitests {
         var element: JQuery;
         var dataViewMetadataFourColumn: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                { name: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
-                { name: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
-                { name: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) }
+                { displayName: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                { displayName: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
+                { displayName: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
+                { displayName: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) }
             ]
         };
         var identities: powerbi.DataViewScopeIdentity[] = [
@@ -3048,7 +3048,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -3277,10 +3277,10 @@ module powerbitests {
         var v: powerbi.IVisual, element: JQuery;
         var dataViewMetadataFourColumn: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                { name: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
-                { name: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
-                { name: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) }
+                { displayName: 'col1', roles: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                { displayName: 'col2', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
+                { displayName: 'col3', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) },
+                { displayName: 'col4', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Integer) }
             ]
         };
 
@@ -3294,7 +3294,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -3451,7 +3451,7 @@ module powerbitests {
         v.init({
             element: element,
             host: powerbitests.mocks.createVisualHostServices(),
-            style: powerbi.common.services.visualStyles.create(),
+            style: powerbi.visuals.visualStyles.create(),
             viewport: {
                 height: element.height(),
                 width: element.width()
@@ -3462,10 +3462,10 @@ module powerbitests {
 
         var metadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'X-Axis', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: 'Size', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: 'Y-Axis', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                { displayName: 'col1' },
+                { displayName: 'X-Axis', isMeasure: true, roles: { "X": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: 'Size', isMeasure: true, roles: { "Size": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: 'Y-Axis', isMeasure: true, roles: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
             ]
         };
         v.onDataChanged({

@@ -263,14 +263,15 @@ module powerbi.visuals {
         public drawLegend(data: LegendData, viewport: IViewport): void {
             var marker = jsCommon.PerformanceUtil.create('drawLegend');
             this.parentViewport = viewport;
-            var dataPoints = data.dataPoints;
+            //var dataPoints = data.dataPoints;
 
-            if (this.orientation === LegendPosition.None) {
-                dataPoints = [];
-            }
-            else if (dataPoints.length === 0) {
+            if (data.dataPoints.length === 0) {
                 this.changeOrientation(LegendPosition.None);
-            };
+            }
+
+            if (this.getOrientation() === LegendPosition.None) {
+                data.dataPoints = [];
+            }
 
             // Adding back the workaround for Legend Left/Right position for Map
             var mapControl = this.element.children(".mapControl");
@@ -366,7 +367,7 @@ module powerbi.visuals {
             }
 
             legendItems.exit().remove();
-
+            
             this.updateLayout();
             marker.end();
         }

@@ -21,6 +21,20 @@ module powerbi.visuals {
             { value: '#79C75B' }, // Green
         ];
 
+        // Hardcoded values for Color Picker.
+        private basePickerColors: IColorInfo[] = [
+            { value: '#FFFFFF' }, 
+            { value: '#000000' }, 
+            { value: '#00B8AA' }, 
+            { value: '#374649' }, 
+            { value: '#FD625E' }, 
+            { value: '#F2C811' }, 
+            { value: '#5F6B6D' }, 
+            { value: '#8AD4EB' }, 
+            { value: '#FE9666' },
+            { value: '#A66999' }
+        ];
+
         /**
          * Creates a DataColorPalette using the given theme, or the default theme.
          */
@@ -48,6 +62,10 @@ module powerbi.visuals {
 
         public getSentimentColors(): IColorInfo[] {
             return this.sentimentColors;
+        }
+
+        public getBasePickerColors(): IColorInfo[]{
+            return this.basePickerColors;
         }
     }
 

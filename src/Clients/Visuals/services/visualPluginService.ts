@@ -153,19 +153,28 @@ module powerbi.visuals {
                     if (customVisualizationList) {
                         var len = customVisualizationList.length;
                         for (var i = 0; i < len; i++) {
-                            var name = customVisualizationList[i].name;
-                            var plugin = this.getPlugin(name);
+                            var pluginName = customVisualizationList[i].pluginName;
+                            var plugin = this.getPlugin(pluginName);
                             // If the browser session got restarted or its a new window the plugin wont be available, so we need to add it
                             if (!plugin) {
-                                var jsCode = JSON.parse(customVisualizationList[i].javaScriptCode);
+                                var jsCode = customVisualizationList[i].javaScriptCode;
                                 var script = $("<script/>", {
-                                    html: jsCode + '//# sourceURL=' + name + '.js\n" + "' + '//# sourceMappingURL=' + name + '.js.map'
+                                    html: jsCode + '//# sourceURL=' + pluginName + '.js\n" + "' + '//# sourceMappingURL=' + pluginName + '.js.map'
                                 });
 
-                                script.attr('pluginName', name);
+                                script.attr('pluginName', pluginName);
 
                                 $('body').append(script);
-                                plugin = this.getPlugin(name);
+
+                                var style = $("<style/>", {
+                                    html: customVisualizationList[i].cssCode
+                                });
+
+                                style.attr('pluginName', pluginName);
+
+                                $('head').append(style);
+
+                                plugin = this.getPlugin(pluginName);
                             }
                             convertibleVisualTypes.push(plugin);
                         }

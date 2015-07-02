@@ -845,6 +845,7 @@ module powerbi.data {
     }
 
     export enum SQExprValidationError {
+        invalidAggregateFunction,
         invalidSchemaReference,
         invalidEntityReference,
         invalidColumnReference,
@@ -888,6 +889,15 @@ module powerbi.data {
                 }
             }
             return expr;
+        }
+
+        public visitAggr(expr: SQAggregationExpr): SQExpr {
+            var supportedFuncs = SQExprUtils.getSupportedAggregates(expr, false, this.schema);
+            if (supportedFuncs.indexOf(expr.func) < 0)
+                this.register(SQExprValidationError.invalidAggregateFunction);
+
+            var aggregateExpr = super.visitAggr(expr);
+            return aggregateExpr;
         }
 
         public visitEntity(expr: SQEntityExpr): SQExpr {

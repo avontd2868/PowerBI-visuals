@@ -79,8 +79,8 @@ module powerbi.visuals {
                 .attr(Treemap.layout.highlightShapeLayout); // Animate to the highlighted positions
 
             highlightShapes.exit().remove();
-
-            var labels = this.animateDefaultLabels(options.labelGraphicsContext, options.labeledNodes);
+            var labeledNodes = options.viewModel.dataLabelsSettings.show? options.labeledNodes : [];
+            var labels = this.animateDefaultLabels(options.labelGraphicsContext, labeledNodes);
 
             return {
                 failed: false,
@@ -101,7 +101,8 @@ module powerbi.visuals {
 
             var highlightShapes = this.animateDefaultHighlightShapes(options.shapeGraphicsContext, options.highlightNodes, hasSelection, hasHighlights);
 
-            var labels = this.animateDefaultLabels(options.labelGraphicsContext, options.labeledNodes);
+            var labeledNodes = options.viewModel.dataLabelsSettings.show ? options.labeledNodes : [];
+            var labels = this.animateDefaultLabels(options.labelGraphicsContext, labeledNodes);
 
             return {
                 failed: false,
@@ -150,7 +151,8 @@ module powerbi.visuals {
 
             highlightShapes.exit().remove();
 
-            var labels = this.animateDefaultLabels(options.labelGraphicsContext, options.labeledNodes);
+            var labeledNodes = options.viewModel.dataLabelsSettings.show ? options.labeledNodes : [];
+            var labels = this.animateDefaultLabels(options.labelGraphicsContext, labeledNodes);
 
             return {
                 failed: false,

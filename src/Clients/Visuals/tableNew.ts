@@ -241,11 +241,11 @@ module powerbi.visuals {
         public bindColumnHeader(item: DataViewMetadataColumn, cell: controls.ITablixCell): void {
             cell.extension.setContainerStyle(TableBinder.columnHeaderClassName);
             cell.extension.disableDragResize();
-            cell.extension.contentHost.textContent = item.name;
+            cell.extension.contentHost.textContent = item.displayName;
 
             if (this.options.onColumnHeaderClick) {
                 var handler = (e: MouseEvent) => {
-                    this.options.onColumnHeaderClick(item.queryName ? item.queryName : item.name);
+                    this.options.onColumnHeaderClick(item.queryName ? item.queryName : item.displayName);
                 };
                 cell.extension.registerClickHandler(handler);
             }
@@ -311,7 +311,7 @@ module powerbi.visuals {
         }
 
         public getEstimatedColumnHeaderWidth(item: DataViewMetadataColumn): number {
-            return this.getEstimatedTextWidth(item.name);
+            return this.getEstimatedTextWidth(item.displayName);
         }
 
         public getEstimatedBodyCellWidth(item: any): number {

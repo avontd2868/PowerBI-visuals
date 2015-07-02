@@ -5,9 +5,9 @@ tablixHelper.ts
 typedefs\defaultStringsForVisuals.ts
 typedefs\localizationLoader.ts
 typedefs\localizationService.ts
-typedefs\visualStyles.ts
 utils\colorUtility.ts
 visuals\common\axisHelperTests.ts
+visuals\common\colorHelperTests.ts
 visuals\common\converterHelperTests.ts
 visuals\common\dataRoleHelperTests.ts
 visuals\common\dataLabelUtilsTests.ts
@@ -35,6 +35,7 @@ visuals\funnelChartTests.ts
 visuals\geocodingManagerTests.ts
 visuals\gaugeTests.ts
 visuals\imageVisualTests.ts
+visuals\lineChartTests.ts
 visuals\legendTests.ts
 visuals\mapTests.ts
 visuals\matrixTests.ts

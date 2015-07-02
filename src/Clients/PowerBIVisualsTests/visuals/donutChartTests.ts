@@ -1,4 +1,4 @@
-﻿0//-----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright company="Microsoft Corporation">
 //        Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -14,35 +14,35 @@ module powerbitests {
     import SelectionId = powerbi.visuals.SelectionId;
     import SemanticType = powerbi.data.SemanticType;
 
-    var donutColors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+    var donutColors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
     var DefaultWaitForRender = 10;
 
     describe("DonutChart", () => {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true }]
+                { displayName: 'col1', queryName: 'col1' },
+                { displayName: 'col2', queryName: 'col2', isMeasure: true }]
         };
 
         var dataViewMetadata3Measure: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1', isMeasure: true },
-                { name: 'col2', isMeasure: true },
-                { name: 'col3', isMeasure: true }]
+                { displayName: 'col1', queryName: 'col1', isMeasure: true },
+                { displayName: 'col2', queryName: 'col2', isMeasure: true },
+                { displayName: 'col3', queryName: 'col3', isMeasure: true }]
         };
 
         var dataViewMetadata1Category2Measure: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
-                { name: 'col3', isMeasure: true }]
+                { displayName: 'col1', queryName: 'col1' },
+                { displayName: 'col2', queryName: 'col2', isMeasure: true },
+                { displayName: 'col3', queryName: 'col3', isMeasure: true }]
         };
 
         var dataViewMetadata1Category2MeasureWithFormat: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true, objects: { general: { formatString: "\$#,0;(\$#,0);\$#,0" } } },
-                { name: 'col3', isMeasure: true }]
+                { displayName: 'col1', queryName: 'col1' },
+                { displayName: 'col2', queryName: 'col2', isMeasure: true, objects: { general: { formatString: "\$#,0;(\$#,0);\$#,0" } } },
+                { displayName: 'col3', queryName: 'col3', isMeasure: true }]
         };
 
         var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'p' });
@@ -103,11 +103,11 @@ module powerbitests {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
                     {
-                        name: 'col1',
+                        displayName: 'col1',
                         type: DataShapeUtility.describeDataType(SemanticType.String)
                     },
                     {
-                        name: 'col2',
+                        displayName: 'col2',
                         isMeasure: true,
                         type: DataShapeUtility.describeDataType(SemanticType.Integer)
                     }],
@@ -127,7 +127,7 @@ module powerbitests {
                 v.init({
                     element: element,
                     host: powerbitests.mocks.createVisualHostServices(),
-                    style: powerbi.common.services.visualStyles.create(),
+                    style: powerbi.visuals.visualStyles.create(),
                     viewport: {
                         height: element.height(),
                         width: element.width()
@@ -563,8 +563,6 @@ module powerbitests {
                 var actualData = DonutChart.converter(dataView, true, donutColors);
                 var selectionIds: SelectionId[] = categoryIdentities.map(categoryId => SelectionId.createWithId(categoryId));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     donutColors.getColorByScale(categoryColumnId, 'b').value,
@@ -624,8 +622,6 @@ module powerbitests {
                 var actualData = DonutChart.converter(dataView, false, donutColors);
                 var selectionIds: SelectionId[] = categoryIdentities.map(categoryId => SelectionId.createWithId(categoryId));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     donutColors.getColorByScale(categoryColumnId, 'b').value,
@@ -686,10 +682,7 @@ module powerbitests {
                 };
 
                 var actualData = DonutChart.converter(dataView, true, donutColors);
-                var legendIds: SelectionId[] = categoryIdentities.map(categoryId => SelectionId.createWithId(categoryId));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     donutColors.getColorByScale(categoryColumnId, 'b').value,
@@ -710,7 +703,7 @@ module powerbitests {
                         value: 0.3,
                         index: 0,
                         label: 'a',
-                        tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col2", value: "-300" }],
+                        tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col3", value: "-300" }],
                         color: sliceColors[0],
                     }, {
                         identity: SelectionId.createWithIds(categoryIdentities[1], dataView.categorical.values[0].identity),
@@ -726,7 +719,7 @@ module powerbitests {
                         value: 0.3,
                         index: 1,
                         label: 'b',
-                        tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col2", value: "300" }],
+                        tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col3", value: "300" }],
                         color: sliceColors[1],
                     }, {
                         identity: SelectionId.createWithIds(categoryIdentities[2], dataView.categorical.values[0].identity),
@@ -742,7 +735,7 @@ module powerbitests {
                         value: 0.05,
                         index: 2,
                         label: 'c',
-                        tooltipInfo: [{ displayName: "col1", value: "c" }, { displayName: "col2", value: "-50" }],
+                        tooltipInfo: [{ displayName: "col1", value: "c" }, { displayName: "col3", value: "-50" }],
                         color: sliceColors[2],
                     }].map(buildDataPoint);
 
@@ -782,8 +775,6 @@ module powerbitests {
                 var actualData = DonutChart.converter(dataView, false, donutColors);
                 var selectionIds: SelectionId[] = categoryIdentities.map(categoryId => SelectionId.createWithId(categoryId));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     hexGreen,
@@ -845,8 +836,6 @@ module powerbitests {
                 var actualData = DonutChart.converter(dataView, false, donutColors);
                 var selectionIds: SelectionId[] = categoryIdentities.map(categoryId => SelectionId.createWithId(categoryId));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     donutColors.getColorByScale(categoryColumnId, 'b').value,
@@ -911,10 +900,7 @@ module powerbitests {
                 };
 
                 var actualData = DonutChart.converter(dataView, true, donutColors);
-                var categorySelectionIds = categoryIdentities.map((id) => SelectionId.createWithId(id));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     donutColors.getColorByScale(categoryColumnId, 'b').value,
@@ -935,7 +921,7 @@ module powerbitests {
                             label: 'a',
                             value: 0.3,
                             index: 0,
-                            tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col2", value: "-300" }],
+                            tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col3", value: "-300" }],
                             color: sliceColors[0],
                         }, {
                             identity: SelectionId.createWithIdAndMeasure(categoryIdentities[1], 'col2'),
@@ -951,7 +937,7 @@ module powerbitests {
                             label: 'b',
                             value: 0.3,
                             index: 1,
-                            tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col2", value: "300" }],
+                            tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col3", value: "300" }],
                             color: sliceColors[1],
                         }, {
                             identity: SelectionId.createWithIdAndMeasure(categoryIdentities[2], 'col2'),
@@ -967,7 +953,7 @@ module powerbitests {
                             measure: -50,
                             value: 0.05,
                             index: 2,
-                            tooltipInfo: [{ displayName: "col1", value: "c" }, { displayName: "col2", value: "-50" }],
+                            tooltipInfo: [{ displayName: "col1", value: "c" }, { displayName: "col3", value: "-50" }],
                             color: sliceColors[2],
                     }].map(buildDataPoint);
                 expect(actualData.dataPoints.map((value) => value.data)).toEqual(expectSlices);
@@ -1002,11 +988,11 @@ module powerbitests {
 
                 // Slicing does not come into effect for non-categorical multi-measure
                 var actualData = DonutChart.converter(dataView, true, donutColors);
-                var selectionIds = dataViewMetadata3Measure.columns.map((c) => SelectionId.createWithMeasure(c.name));
+                var selectionIds = dataViewMetadata3Measure.columns.map((c) => SelectionId.createWithMeasure(c.displayName));
                 var sliceColors = [
-                    donutColors.getColor(0).value,
-                    donutColors.getColor(1).value,
-                    donutColors.getColor(2).value,
+                    donutColors.getColor(dataViewMetadata3Measure.columns[0].queryName).value,
+                    donutColors.getColor(dataViewMetadata3Measure.columns[1].queryName).value,
+                    donutColors.getColor(dataViewMetadata3Measure.columns[2].queryName).value,
                 ];
                 var expectSlices: DonutDataPoint[] = [
                         {
@@ -1055,8 +1041,8 @@ module powerbitests {
 
                 // Slicing does not come into effect for non-categorical single-measure
                 var actualData = DonutChart.converter(dataView, true, donutColors);
-                var selectionIds = dataViewMetadata3Measure.columns.map((c) => SelectionId.createWithMeasure(c.name));
-                var sliceColors = [donutColors.getColor(0).value];
+                var selectionIds = dataViewMetadata3Measure.columns.map((c) => SelectionId.createWithMeasure(c.displayName));
+                var sliceColors = [donutColors.getColor(dataViewMetadata3Measure.columns[0].queryName).value];
                 var expectSlices: DonutDataPoint[] = [
                     {
                         identity: selectionIds[0],
@@ -1153,8 +1139,6 @@ module powerbitests {
                 var actualData = DonutChart.converter(dataView, false, donutColors);
                 var selectionIds: SelectionId[] = categoryIdentities.map(categoryId => SelectionId.createWithId(categoryId));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     donutColors.getColorByScale(categoryColumnId, 'b').value,
@@ -1256,8 +1240,6 @@ module powerbitests {
                 var actualData = DonutChart.converter(dataView, false, donutColors);
                 var selectionIds: SelectionId[] = categoryIdentities.map(categoryId => SelectionId.createWithId(categoryId));
                 var categoryColumnId = powerbi.data.SQExprShortSerializer.serializeArray(dataView.categorical.categories[0].identityFields);
-                // Get a dummy color so the color scale for this key is shifted, so we don't accidentally get the right colors.
-                var dummyColor = donutColors.getColorByScale(categoryColumnId, 'foo').value;
                 var sliceColors = [
                     donutColors.getColorByScale(categoryColumnId, 'a').value,
                     donutColors.getColorByScale(categoryColumnId, 'b').value,
@@ -1302,9 +1284,9 @@ module powerbitests {
         it('non-categorical multi-measure tooltip values test', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'a', isMeasure: true },
-                    { name: 'b', isMeasure: true },
-                    { name: 'c', isMeasure: true }
+                    { displayName: 'a', isMeasure: true },
+                    { displayName: 'b', isMeasure: true },
+                    { displayName: 'c', isMeasure: true }
                 ]
             };
 
@@ -1359,10 +1341,10 @@ module powerbitests {
         var dataViewMetadataTwoColumn: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number)
                 }
@@ -1377,9 +1359,9 @@ module powerbitests {
 
         var dataViewMetadata1Category2Measure: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
-                { name: 'col3', isMeasure: true }]
+                { displayName: 'col1', queryName: 'col1' },
+                { displayName: 'col2', queryName: 'col2', isMeasure: true },
+                { displayName: 'col3', queryName: 'col3', isMeasure: true }]
         };
         if (hasLegendObject) {
             dataViewMetadata1Category2Measure.objects = { legend: { show: true } };
@@ -1405,7 +1387,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -2182,10 +2164,10 @@ module powerbitests {
         var dataViewMetadataTwoColumn: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number)
                 }
@@ -2201,7 +2183,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -2359,10 +2341,10 @@ module powerbitests {
         var dataViewMetadataTwoColumn: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number)
                 }
@@ -2381,7 +2363,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -2426,9 +2408,9 @@ module powerbitests {
         it('Check enumeration for category and series', (done) => {
             var dataViewMetadata1Category2Measure: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true }]
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true }]
             };
 
             var categoryIdentities = [mocks.dataViewScopeIdentity('a'), mocks.dataViewScopeIdentity('b'), mocks.dataViewScopeIdentity('c')];
@@ -2473,10 +2455,10 @@ module powerbitests {
         var dataViewMetadataTwoColumn: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number)
                 }
@@ -2496,7 +2478,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()

@@ -394,7 +394,7 @@ module powerbi.visuals {
 
         private createOptions(col: DataViewMetadataColumn): DataTables.ColumnOptions {
             var options: DataTables.ColumnOptions = {
-                sTitle: col.name,
+                sTitle: col.displayName,
             };
 
             if (col.type.numeric)

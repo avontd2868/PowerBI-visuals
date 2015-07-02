@@ -54,10 +54,12 @@ module powerbi.visuals.runner {
                 columns: [
                     {
                         name: 'col1',
+                        type: ValueType.fromDescriptor({text: true})
                     },
                     {
                         name: 'col2',
                         isMeasure: true,
+                        type: ValueType.fromDescriptor({numeric: true})
                     }],
             };
 

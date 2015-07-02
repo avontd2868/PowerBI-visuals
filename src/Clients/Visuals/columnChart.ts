@@ -26,6 +26,7 @@ module powerbi.visuals {
         scalarCategoryAxis: boolean;
         labelSettings: VisualDataLabelsSettings;
         axesLabels: ChartAxesLabels;
+        hasDynamicSeries: boolean;
     }
 
     export interface ColumnChartSeries extends CartesianSeries {
@@ -374,7 +375,15 @@ module powerbi.visuals {
                 valuesMetadata.push(seriesSources[j]);
             }
   
-            var labels = converterHelper.createColumnChartAxesLabels(xAxisCardProperties, valueAxisProperties, categoryMetadata, valuesMetadata, EnumExtensions.hasFlag(chartType, flagColumn));
+            var labels = converterHelper.createAxesLabels(xAxisCardProperties, valueAxisProperties, categoryMetadata, valuesMetadata);
+
+            if (!EnumExtensions.hasFlag(chartType, flagColumn)) {
+                // Replace between x and y axes
+                var temp = labels.xAxisLabel;
+                labels.xAxisLabel = labels.yAxisLabel;
+                labels.yAxisLabel = temp;
+            }
+
             return {
                 categories: categories,
                 categoryFormatter: categoryFormatter,
@@ -385,7 +394,8 @@ module powerbi.visuals {
                 categoryMetadata: categoryMetadata,
                 scalarCategoryAxis: isScalar,
                 labelSettings: labelSettings,
-                axesLabels: { x: labels.xAxisLabel, y: labels.yAxisLabel}
+                axesLabels: { x: labels.xAxisLabel, y: labels.yAxisLabel },
+                hasDynamicSeries: result.hasDynamicSeries,
             };
         }
 
@@ -402,7 +412,7 @@ module powerbi.visuals {
             supportsOverflow: boolean = false,
             isCategoryAlsoSeries?: boolean,
             categoryObjectsList?: DataViewObjects[],
-            defaultDataPointColor?: string): { series: ColumnChartSeries[]; hasHighlights: boolean; } {
+            defaultDataPointColor?: string): { series: ColumnChartSeries[]; hasHighlights: boolean; hasDynamicSeries: boolean; } {
 
             var grouped = dataViewCat && dataViewCat.values ? dataViewCat.values.grouped() : undefined;
             var categoryCount = categories.length;
@@ -410,7 +420,7 @@ module powerbi.visuals {
             var columnSeries: ColumnChartSeries[] = [];
 
             if (seriesCount < 1 || categoryCount < 1)
-                return { series: columnSeries, hasHighlights: false };
+                return { series: columnSeries, hasHighlights: false, hasDynamicSeries: false };
 
             var dvCategories = dataViewCat.categories;
             var categoryMetadata = (dvCategories && dvCategories.length > 0)
@@ -423,7 +433,7 @@ module powerbi.visuals {
             var rawValues: number[][] = [];
             var rawHighlightValues: number[][] = [];
 
-            var hasDynamicSeries = dataViewCat.values && dataViewCat.values.source;
+            var hasDynamicSeries = !!(dataViewCat.values && dataViewCat.values.source);
 
             var highlightsOverflow = false; // Overflow means the highlight larger than value or the signs being different
             var hasHighlights = converterStrategy.hasHighlightValues(0);
@@ -545,8 +555,7 @@ module powerbi.visuals {
                         identity: identity,
                         key: identity.getKey(),
                         tooltipInfo: tooltipInfo,
-                        labelFill: labelSettings.overrideDefaultColor ? labelSettings.labelColor : color,
-                        showLabel: true,
+                        labelFill: labelSettings.overrideDefaultColor ? labelSettings.labelColor : color,                        
                     };
 
                     seriesDataPoints.push(dataPoint);
@@ -603,7 +612,6 @@ module powerbi.visuals {
                             key: highlightIdentity.getKey(),
                             tooltipInfo: tooltipInfo,
                             labelFill: labelSettings.overrideDefaultColor ? labelSettings.labelColor : color,
-                            showLabel: true,
                         };
 
                         seriesDataPoints.push(highlightDataPoint);
@@ -611,7 +619,11 @@ module powerbi.visuals {
                 }
             }
 
-            return { series: columnSeries, hasHighlights: hasHighlights };
+            return {
+                series: columnSeries,
+                hasHighlights: hasHighlights,
+                hasDynamicSeries: hasDynamicSeries,
+            };
         }
 
         private static getDataPointColor(
@@ -691,7 +703,8 @@ module powerbi.visuals {
                 categoryMetadata: null,
                 scalarCategoryAxis: false,
                 labelSettings: null,
-                axesLabels: { x: null, y: null }
+                axesLabels: { x: null, y: null },
+                hasDynamicSeries: false,
             };
 
             if (dataViews.length > 0) {
@@ -781,34 +794,29 @@ module powerbi.visuals {
                 },
             });
 
-            if (seriesCount === 1) {
-                var singleSeriesData = data.series[0].data;
-                for (var i = 0; i < singleSeriesData.length; i++) {
-                    var selector = singleSeriesData[i].identity.getSelector();
-
-                    // For single-series charts, colors are set per category.  So, exclude any measure (metadata repetition) from the selector.
-                    if (selector.metadata)
-                        selector = { data: selector.data };
-
-                    instances.push({
-                        objectName: 'dataPoint',
-                        displayName: data.categories[i],
-                        selector: selector,
-                        properties: {
-                            fill: { solid: { color: singleSeriesData[i].color } }
-                        },
-                    });
-                }
-            }
-            else {
+            if (data.hasDynamicSeries || seriesCount > 1) {
                 for (var i = 0; i < seriesCount; i++) {
                     var series = data.series[i];
                     instances.push({
                         objectName: 'dataPoint',
                         displayName: series.displayName,
-                        selector: series.identity.getSelector(),
+                        selector: ColorHelper.normalizeSelector(series.identity.getSelector()),
                         properties: {
                             fill: { solid: { color: series.data[0].color } }
+                        },
+                    });
+                }
+            }
+            else {
+                var singleSeriesData = data.series[0].data;
+                for (var i = 0; i < singleSeriesData.length; i++) {
+                    var singleSeriesDataPoints = singleSeriesData[i];
+                    instances.push({
+                        objectName: 'dataPoint',
+                        displayName: data.categories[i],
+                        selector: ColorHelper.normalizeSelector(singleSeriesDataPoints.identity.getSelector(), /*isSingleSeries*/true),
+                        properties: {
+                            fill: { solid: { color: singleSeriesDataPoints.color } }
                         },
                     });
                 }
@@ -938,7 +946,8 @@ module powerbi.visuals {
                     //set drag interaction on the visual
                     this.svg.call(drag);
                     //set drag interaction on the background
-                    d3.select(this.element.get(0)).call(drag);                }
+                    d3.select(this.element.get(0)).call(drag);
+                }
             }
         }
 
@@ -1084,7 +1093,7 @@ module powerbi.visuals {
 
                         var color = hasDynamicSeries
                             ? colorHelper.getColorForSeriesValue(valueGroupObjects || source.objects, allValues.identityFields, source.groupName)
-                            : colorHelper.getColorForMeasure(valueGroupObjects || source.objects, valueIndex);
+                            : colorHelper.getColorForMeasure(valueGroupObjects || source.objects, source.queryName);
 
                         legend.push({
                             icon: LegendIcon.Box,
@@ -1101,7 +1110,7 @@ module powerbi.visuals {
                 }
 
                 var dvValues = this.dataView.values;
-                var legendTitle = dvValues && dvValues.source ? dvValues.source.name : "";
+                var legendTitle = dvValues && dvValues.source ? dvValues.source.displayName : "";
             }
 
             var legendData = {

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    
+    <!-- Below properties must be removed one by one for Visuals OSS work -->
+  <PropertyGroup>
+    <!-- InfoNav properties -->
+    <INFONAV>$(MSBuildThisFileDirectory)\..\</INFONAV>
+    <INFONAV_SRC>$(INFONAV)\Src</INFONAV_SRC>
+    <INFONAV_CLIENT>$(INFONAV_SRC)\Clients</INFONAV_CLIENT>
+    <INFONAV_TOOLS>$(INFONAV)\Tools</INFONAV_TOOLS>
+
+    <InfonavDropRootPath>$(ClientTargetDir)\neutral\InfoNav</InfonavDropRootPath>
+    <InfonavScriptsDropPath>$(InfonavDropRootPath)\scripts</InfonavScriptsDropPath>
+    <InfonavCssDropPath>$(InfonavDropRootPath)\styles</InfonavCssDropPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PowerBIClientBuildTargets>$(INFONAV_SRC)\PowerBI.Client.Build.Targets</PowerBIClientBuildTargets>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!$(VisualsStandaloneBuild)">
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\tools\snk\SQL2003SNKEY.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);TRACE;INFONAV</DefineConstants>
+  </PropertyGroup>
+
+</Project>

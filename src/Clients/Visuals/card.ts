@@ -175,7 +175,7 @@ module powerbi.visuals {
                 })
 
                 if (metaDataColumn)
-                    label = metaDataColumn.name;
+                    label = metaDataColumn.displayName;
                 
                 // using != null intentionally, this also checks for undefined.
                 if (target != null)

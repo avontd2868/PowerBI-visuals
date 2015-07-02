@@ -90,19 +90,6 @@ module powerbi.visuals {
                     }
                 }
             },
-            labels: {
-                displayName: data.createDisplayNameGetter('Visual_DataPointsLabels'),
-                properties: {
-                    show: {
-                        displayName: data.createDisplayNameGetter('Visual_Show'),
-                        type: { bool: true }
-                    },
-                    color: {
-                        displayName: data.createDisplayNameGetter('Visual_LabelsFill'),
-                        type: { fill: { solid: { color: true } } }
-                    },
-                },
-            },
         },
         dataViewMappings: [{
             conditions: [

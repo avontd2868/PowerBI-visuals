@@ -111,8 +111,7 @@ module powerbi.visuals {
         private style: IVisualStyle;
         private colors: IDataColorPalette;
         private element: JQuery;
-        private options: VisualInitOptions;
-        private defaultDataPointColor: string;
+        private options: VisualInitOptions;        
         private isScrollable: boolean;
 
         /* Public for testing */
@@ -188,7 +187,7 @@ module powerbi.visuals {
         }
 
         /** Public for testing purposes */
-        public static converter(dataView: DataView, colors: IDataColorPalette, labelSettings: VisualDataLabelsSettings, interactivityService: IInteractivityService, defaultColor?: string, legendObjectProperties?: DataViewObject): TreemapData {
+        public static converter(dataView: DataView, colors: IDataColorPalette, labelSettings: VisualDataLabelsSettings, interactivityService: IInteractivityService, legendObjectProperties?: DataViewObject): TreemapData {
             var rootNode: TreemapNode = {
                 key: "root",
                 name: "root",
@@ -203,7 +202,7 @@ module powerbi.visuals {
             var legendDataPoints: LegendDataPoint[] = [];
             var legendTitle = "";
             var legendData: LegendData = { title: legendTitle, dataPoints: legendDataPoints };
-            var colorHelper = new ColorHelper(colors, treemapProps.dataPoint.fill, defaultColor);
+            var colorHelper = new ColorHelper(colors, treemapProps.dataPoint.fill);
 
             if (dataView && dataView.metadata && dataView.metadata.objects) {
                 var labelsObj = <DataLabelObject>dataView.metadata.objects['labels'];
@@ -243,7 +242,7 @@ module powerbi.visuals {
 
                         var identity = hasDynamicSeries
                             ? SelectionId.createWithId(valueColumns[i].identity)
-                            : SelectionId.createWithMeasure(valueColumns[i].source.name);
+                            : SelectionId.createWithMeasure(valueColumns[i].source.queryName);
 
                         var key = identity.getKey();
 
@@ -251,7 +250,7 @@ module powerbi.visuals {
 
                         var color = hasDynamicSeries
                             ? colorHelper.getColorForSeriesValue(objects, data.values.identityFields, converterHelper.getSeriesName(valueColumn.source))
-                            : colorHelper.getColorForMeasure(objects, i);
+                            : colorHelper.getColorForMeasure(objects, valueColumn.source.queryName);
 
                         var highlightedValue = hasHighlights && highlight !== 0 ? highlight : undefined;
                         var categorical = dataView.categorical;
@@ -292,7 +291,7 @@ module powerbi.visuals {
                     var categoryColumn = data.categories[0];
                     var valueColumnCount = valueColumns.length;
 
-                    legendTitle = categoryColumn.source ? categoryColumn.source.name : "";
+                    legendTitle = categoryColumn.source ? categoryColumn.source.displayName : "";
 
                     for (var i = 0, ilen = values.length; i < ilen; i++) {
                         var categoryIdentity = categoryColumn.identity ? categoryColumn.identity[i] : undefined;
@@ -366,7 +365,7 @@ module powerbi.visuals {
                                 if (isMultiSeries) {
                                     // Measure: use name and index
                                     childKey.nodeId = { name: childName, index: j };
-                                    childName = valueColumn.source.name;
+                                    childName = valueColumn.source.displayName;
                                 }
                                 else {
                                     // Series group instance
@@ -485,14 +484,10 @@ module powerbi.visuals {
                     objects = dataViewMetadata.objects;
 
                 if (objects) {
-                    legendObjectProperties = objects['legend'];
-
-                    var defaultColor = DataViewObjects.getFillColor(objects, treemapProps.dataPoint.defaultColor);
-                    if (defaultColor)
-                        this.defaultDataPointColor = defaultColor;
+                    legendObjectProperties = objects['legend'];                    
                 }
 
-                this.data = Treemap.converter(dataView, this.colors, labelSettings, this.interactivityService, this.defaultDataPointColor, legendObjectProperties);
+                this.data = Treemap.converter(dataView, this.colors, labelSettings, this.interactivityService, legendObjectProperties);
             }
             else {
                 var rootNode: TreemapNode = {
@@ -558,14 +553,7 @@ module powerbi.visuals {
         }
 
         private enumerateDataPoints(data: TreemapData): VisualObjectInstance[] {
-            var instances: VisualObjectInstance[] = [];
-            instances.push({
-                objectName: 'dataPoint',
-                selector: null,
-                properties: {
-                    defaultColor: { solid: { color: this.defaultDataPointColor || this.colors.getColor((<TreemapNode>data.root.children[0]).identity.getKey()).value } }
-                },
-            });
+            var instances: VisualObjectInstance[] = [];           
 
             for (var y = 0; y < data.root.children.length; y++) {
                 var treemapNode = <TreemapNode>data.root.children[y];
@@ -744,7 +732,7 @@ module powerbi.visuals {
             // Highlight shapes are drawn only for nodes with non-null/undefed highlightMultipliers that have no children
             var highlightNodes = nodes.filter((value: TreemapNode) => value.highlightMultiplier != null && (!value.children || value.children.length === 0));
             // Labels are drawn only for nodes that can display labels
-            var labeledNodes = nodes.filter((d) => Treemap.canDisplayLabel(d));
+            var labeledNodes = labelSettings.show? nodes.filter((d) => Treemap.canDisplayLabel(d)) : [];
 
             var shapes: D3.UpdateSelection;
             var highlightShapes: D3.UpdateSelection;
@@ -895,7 +883,6 @@ module powerbi.visuals {
 
             labels.attr(Treemap.layout.labelLayout)
                 .text(Treemap.layout.labelText)
-                .style('opacity', function () { return labelSettings.show ? 1 : 0; })
                 .style('fill', () => labelSettings.labelColor);
 
             labels.exit().remove();

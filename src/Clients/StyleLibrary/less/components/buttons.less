@@ -8,7 +8,7 @@
 @import "../fonts.less";
 
 .btn, button, .ok-btn, input[type=button]{
-    font-family: wf_segoe-ui_Semibold;
+    font-family: @semiboldFontFamily;
     background-image: none;
     box-shadow: none;
     background-color: @neutralLighterColor;
@@ -54,7 +54,7 @@
         }
     }
     
-    &.disabled, &[disabled]{
+    &.disabled, &[disabled], &.disabled.primary, &[disabled].primary{
         background-color: @neutralTertiaryAltColor;
         border-color: @neutralTertiaryAltColor;
         color: @neutralLightColor;

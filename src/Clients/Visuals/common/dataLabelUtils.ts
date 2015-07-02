@@ -29,7 +29,6 @@ module powerbi.visuals {
 
     export interface LabelEnabledDataPoint {
         //for collistion detection use
-        showLabel?: boolean;
         labelX?: number;
         labelY?: number;
         //for overriding color from label settings
@@ -129,11 +128,9 @@ module powerbi.visuals {
             debug.assertValue(data, 'data could not be null or undefined');
 
             // Hide and reposition labels that overlap
-                var dataLabelManager = new DataLabelManager();
-                dataLabelManager.hideCollidedLabels(viewport, data, layout);
-
-            var filteredData = data.filter(layout.filter);
-
+            var dataLabelManager = new DataLabelManager();
+            var filteredData = dataLabelManager.hideCollidedLabels(viewport, data, layout);
+            
             var labels = context.selectAll(labelsClass.selector).data(filteredData);
             labels.enter().append('text').classed(labelsClass.class, true);
 
@@ -204,7 +201,7 @@ module powerbi.visuals {
                     },
                 },
                 filter: (d: MapVisualDataPoint) => {
-                    return (d != null && d.labeltext != null && d.showLabel);
+                    return (d != null && d.labeltext != null);
                 },
                 style: {
                     'fill': (d: MapVisualDataPoint) => d.labelFill,
@@ -223,7 +220,7 @@ module powerbi.visuals {
                 },
                 labelLayout: labelLayoutXY,
                 filter: (d: ColumnChartDataPoint) => {
-                    return (d != null && d.value != null && d.value !== 0 && d.showLabel);
+                    return (d != null && d.value != null && d.value !== 0);
                 },
                 style: {
                     'fill': (d: ColumnChartDataPoint) => d.labelFill,
@@ -246,11 +243,11 @@ module powerbi.visuals {
                 },
                 },
                 filter: (d: ScatterChartDataPoint) => {
-                    return (d != null && d.category != null && d.showLabel);
+                    return (d != null && d.category != null);
                 },
                 style: {
                     'fill': (d: ScatterChartDataPoint) => d.labelFill,
-                    'fill-opacity': (d: ScatterChartDataPoint) => (d != null && d.category != null) ? ScatterChart.getBubbleOpacity(d, false) : 0,
+                    'fill-opacity': (d: ScatterChartDataPoint) => ScatterChart.getBubbleOpacity(d, false),
                     'font-family': LabelTextProperties.fontFamily,
                     'font-size': LabelTextProperties.fontSize,
                     'font-weight': LabelTextProperties.fontWeight,
@@ -269,11 +266,11 @@ module powerbi.visuals {
                     y: (d: LineChartDataPoint) => { return labelSettings.position === PointLabelPosition.Above ? yScale(d.value) - labelMargin : yScale(d.value) + labelMargin; },
                 },
                 filter: (d: LineChartDataPoint) => {
-                    return (d != null && d.value != null && d.showLabel);
+                    return (d != null && d.value != null);
                 },
                 style: {
                     'fill': (d: LineChartDataPoint) => d.labelFill,
-                    'fill-opacity': (d: LineChartDataPoint) => (d != null && d.value != null && d.showLabel) ? 1 : 0,
+                    'fill-opacity': 1,
                     'font-family': LabelTextProperties.fontFamily,
                     'font-size': LabelTextProperties.fontSize,
                     'font-weight': LabelTextProperties.fontWeight,
@@ -349,7 +346,7 @@ module powerbi.visuals {
                     },
                 },
                 filter: (d: FunnelSlice) => {
-                    return (d != null && d.value != null && d.showLabel);
+                    return (d != null && d.value != null);
                 },
                 style: {
                     'fill': (d: FunnelSlice) => d.labelFill,

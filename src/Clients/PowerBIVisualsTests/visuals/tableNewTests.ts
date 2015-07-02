@@ -24,14 +24,14 @@ module powerbitests {
     var dataTypeString = DataShapeUtility.describeDataType(SemanticType.String);
     var dataTypeWebUrl = DataShapeUtility.describeDataType(SemanticType.String, 'WebUrl');
 
-    var groupSource1: DataViewMetadataColumn = { name: 'group1', type: dataTypeString, index: 0 };
-    var groupSource2: DataViewMetadataColumn = { name: 'group2', type: dataTypeString, index: 1 };
-    var groupSource3: DataViewMetadataColumn = { name: 'group3', type: dataTypeString, index: 2 };
-    var groupSourceWebUrl: DataViewMetadataColumn = { name: 'groupWebUrl', type: dataTypeWebUrl, index: 0 };
+    var groupSource1: DataViewMetadataColumn = { displayName: 'group1', type: dataTypeString, index: 0 };
+    var groupSource2: DataViewMetadataColumn = { displayName: 'group2', type: dataTypeString, index: 1 };
+    var groupSource3: DataViewMetadataColumn = { displayName: 'group3', type: dataTypeString, index: 2 };
+    var groupSourceWebUrl: DataViewMetadataColumn = { displayName: 'groupWebUrl', type: dataTypeWebUrl, index: 0 };
 
-    var measureSource1: DataViewMetadataColumn = { name: 'measure1', type: dataTypeNumber, isMeasure: true, index: 3, objects: { general: { formatString: '#.0' } } };
-    var measureSource2: DataViewMetadataColumn = { name: 'measure2', type: dataTypeNumber, isMeasure: true, index: 4, objects: { general: { formatString: '#.00' } } };
-    var measureSource3: DataViewMetadataColumn = { name: 'measure3', type: dataTypeNumber, isMeasure: true, index: 5, objects: { general: { formatString: '#' } } };
+    var measureSource1: DataViewMetadataColumn = { displayName: 'measure1', type: dataTypeNumber, isMeasure: true, index: 3, objects: { general: { formatString: '#.0' } } };
+    var measureSource2: DataViewMetadataColumn = { displayName: 'measure2', type: dataTypeNumber, isMeasure: true, index: 4, objects: { general: { formatString: '#.00' } } };
+    var measureSource3: DataViewMetadataColumn = { displayName: 'measure3', type: dataTypeNumber, isMeasure: true, index: 5, objects: { general: { formatString: '#' } } };
 
     var webPluginService = new powerbi.visuals.visualPluginFactory.MinervaVisualPluginService({
         heatMap: false,
@@ -654,7 +654,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -851,7 +851,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -942,7 +942,7 @@ module powerbitests {
 
                 var cellValue: string = formatter(dataView.table.rows[0][0], measureSource1);
                 var expectedCells: string[][] = [
-                    ['', measureSource1.name, ''],
+                    ['', measureSource1.displayName, ''],
                     ['', cellValue]
                 ];
 
@@ -966,7 +966,7 @@ module powerbitests {
 
             setTimeout(() => {
                 var expectedCells: string[][] = [
-                    ['', groupSource1.name, ''],
+                    ['', groupSource1.displayName, ''],
                     [EmptyHeaderCell, ''],
                     [EmptyHeaderCell, '']
                 ];
@@ -983,7 +983,7 @@ module powerbitests {
 
             setTimeout(() => {
                 var expectedCells: string[][] = [
-                    ['', groupSource1.name, groupSource2.name, measureSource1.name, ''],
+                    ['', groupSource1.displayName, groupSource2.displayName, measureSource1.displayName, ''],
                     ['', 'A', 'a1', '100.0'],
                     ['', '', '', '103.0'],
                     ['','', 'a3', '106.0'],
@@ -1007,7 +1007,7 @@ module powerbitests {
                 var cellValue2: string = formatter(dataView.table.rows[1][0], groupSource1);
                 var cellValue3: string = formatter(dataView.table.rows[2][0], groupSource1);
                 var expectedCells: string[][] = [
-                    ['', groupSource1.name, ''],
+                    ['', groupSource1.displayName, ''],
                     ['', cellValue1],
                     ['', cellValue2],
                     ['', cellValue3]
@@ -1051,7 +1051,7 @@ module powerbitests {
                 var cellValue14: string = formatter(dataView.table.rows[6][1], groupSource2);
 
                 var expectedCells: string[][] = [
-                    ['', groupSource1.name, groupSource2.name, ''],
+                    ['', groupSource1.displayName, groupSource2.displayName, ''],
                     ['', cellValue1, cellValue8],
                     ['', cellValue2, cellValue9],
                     ['', cellValue3, cellValue10],
@@ -1105,7 +1105,7 @@ module powerbitests {
                 var total3: string = formatter(dataView.table.totals[4], measureSource3);
 
                 var expectedCells: string[][] = [
-                    ['', groupSource1.name, groupSource2.name, measureSource1.name, measureSource2.name, measureSource3.name, ''],
+                    ['', groupSource1.displayName, groupSource2.displayName, measureSource1.displayName, measureSource2.displayName, measureSource3.displayName, ''],
                     ['', dataView.table.rows[0][0], dataView.table.rows[0][1], cellValue1, cellValue8, cellValue15],
                     ['', dataView.table.rows[1][0], dataView.table.rows[1][1], cellValue2, cellValue9, cellValue16],
                     ['', dataView.table.rows[2][0], dataView.table.rows[2][1], cellValue3, cellValue10, cellValue17],
@@ -1153,7 +1153,7 @@ module powerbitests {
                 var total: string = formatter(dataView.table.totals[0], measureSource1);
 
                 var expectedCells: string[][] = [
-                    ['', measureSource1.name, groupSource1.name, ''],
+                    ['', measureSource1.displayName, groupSource1.displayName, ''],
                     ['', cellValue1, dataView.table.rows[0][1]],
                     ['', cellValue2, dataView.table.rows[1][1]],
                     ['', cellValue3, dataView.table.rows[2][1]],
@@ -1193,7 +1193,7 @@ module powerbitests {
                 var total: string = formatter(dataView.table.totals[0], measureSource1);
 
                 var expectedCells: string[][] = [
-                    ['', measureSource1.name, groupSource1.name, ''],
+                    ['', measureSource1.displayName, groupSource1.displayName, ''],
                     ['', cellValue1, dataView.table.rows[0][1]],
                     ['', cellValue2, dataView.table.rows[1][1]],
                     ['', cellValue3, dataView.table.rows[2][1]],
@@ -1210,7 +1210,7 @@ module powerbitests {
                 setTimeout(() => {
 
                     var expectedCellsNoTotal: string[][] = [
-                        ['', measureSource1.name, groupSource1.name, ''],
+                        ['', measureSource1.displayName, groupSource1.displayName, ''],
                         ['', cellValue1, dataViewNoTotal.table.rows[0][1]],
                         ['', cellValue2, dataViewNoTotal.table.rows[1][1]],
                         ['', cellValue3, dataViewNoTotal.table.rows[2][1]]
@@ -1234,7 +1234,7 @@ module powerbitests {
                 var cellValue2: string = formatter(dataView.table.rows[1][0], groupSourceWebUrl);
                 var cellValue3: string = formatter(dataView.table.rows[2][0], groupSourceWebUrl);
                 var expectedCells: string[][] = [
-                    ['', groupSourceWebUrl.name, ''],
+                    ['', groupSourceWebUrl.displayName, ''],
                     ['', cellValue1],
                     ['', cellValue2],
                     ['', cellValue3]
@@ -1308,7 +1308,7 @@ module powerbitests {
                 var cellValue4: string = formatter(dataView.table.rows[3][0], groupSource1);
                 var cellValue5: string = formatter(dataView.table.rows[4][0], groupSource1);
                 var expectedCells: string[][] = [
-                    ['', groupSource1.name, ''],
+                    ['', groupSource1.displayName, ''],
                     ['', cellValue1],
                     ['', cellValue2],
                     ['', cellValue3],
@@ -1367,7 +1367,7 @@ module powerbitests {
             setTimeout(() => {
 
                 var expectedCells: string[][] = [
-                    ['', groupSource2.name, groupSource1.name, ''],
+                    ['', groupSource2.displayName, groupSource1.displayName, ''],
                     ['', '1', 'A'],
                     ['', '2', 'B'],
                     ['', '3', 'C'],
@@ -1385,10 +1385,10 @@ module powerbitests {
             var transforms: powerbi.data.DataViewTransformActions = {
                 selects: [
                     {
-                        displayName: groupSource1.name,
+                        displayName: groupSource1.displayName,
                         type: powerbi.ValueType.fromDescriptor({ text: true }),
                     }, {
-                        displayName: groupSource2.name,
+                        displayName: groupSource2.displayName,
                         type: powerbi.ValueType.fromDescriptor({ text: true }),
                     }
                 ],

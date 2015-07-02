@@ -9,12 +9,12 @@ module powerbitests {
 
     describe("UrlHelper isValidUrl",() => {
         var webUrlColumnMetadata: powerbi.DataViewMetadataColumn = {
-            name: 'webUrl',
+            displayName: 'webUrl',
             type: new powerbi.ValueType(powerbi.ExtendedType.WebUrl, 'WebUrl')
         };
 
         var textColumnMetadata: powerbi.DataViewMetadataColumn = {
-            name: 'text',
+            displayName: 'text',
             type: new powerbi.ValueType(powerbi.ExtendedType.Text, 'Text')
         };
 

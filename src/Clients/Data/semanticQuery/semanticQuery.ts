@@ -179,7 +179,7 @@ module powerbi.data {
         }
 
         public selectNameOf(expr: SQExpr): string {
-            var index = SQExprUtil.indexOfExpr(this.selectItems.map(s => s.expr), expr);
+            var index = SQExprUtils.indexOfExpr(this.selectItems.map(s => s.expr), expr);
             if (index >= 0)
                 return this.selectItems[index].name;
         }
@@ -208,7 +208,7 @@ module powerbi.data {
             var selectItems = this.select(),
                 from = this.fromValue.clone();
             selectItems.push({
-                name: SemanticQueryUtil.uniqueName(selectItems),
+                name: this.getUniqueExprName(selectItems),
                 expr: SQExprRewriterWithSourceRenames.rewrite(expr, from)
             });
 
@@ -341,6 +341,17 @@ module powerbi.data {
             var select = rewriter.rewriteSelect(this.selectItems, from);
 
             return SemanticQuery.createWithTrimmedFrom(from, where, orderBy, select);
+        }
+
+        private getUniqueExprName(namedItems: NamedSQExpr[]): string {
+            debug.assertValue(namedItems, 'namedItems');
+
+            // Determine all names
+            var names: { [name: string]: boolean } = {};
+            for (var i = 0, len = namedItems.length; i < len; i++)
+                names[namedItems[i].name] = true;
+
+            return StringExtensions.findUniqueName(names, 'select');
         }
     }
 
@@ -508,48 +519,6 @@ module powerbi.data {
             $.extend(cloned.items, this.items);
 
             return cloned;
-        }
-    }
-
-    export module SQExprUtil {
-        export function indexOfExpr(items: SQExpr[], searchElement: SQExpr): number {
-            debug.assertValue(items, 'items');
-            debug.assertValue(searchElement, 'searchElement');
-
-            for (var i = 0, len = items.length; i < len; i++) {
-                if (SQExpr.equals(items[i], searchElement))
-                    return i;
-            }
-            return -1;
-        }
-
-        export function sequenceEqual(x: SQExpr[], y: SQExpr[]): boolean {
-            debug.assertValue(x, 'x');
-            debug.assertValue(y, 'y');
-
-            var len = x.length;
-            if (len !== y.length)
-                return false;
-
-            for (var i = 0; i < len; i++) {
-                if (!SQExpr.equals(x[i], y[i]))
-                    return false;
-            }
-
-            return true;
-        }
-    }
-
-    module SemanticQueryUtil {
-        export function uniqueName(namedItems: NamedSQExpr[]): string {
-            debug.assertValue(namedItems, 'namedItems');
-
-            // Determine all names
-            var names: { [name: string]: boolean } = {};
-            for (var i = 0, len = namedItems.length; i < len; i++)
-                names[namedItems[i].name] = true;
-
-            return StringExtensions.findUniqueName(names, 'select');
         }
     }
 

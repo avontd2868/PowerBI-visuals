@@ -36,7 +36,7 @@ module jsCommon {
         private static dialogContentClassSelector: string = '.' + ModalDialog.dialogContentCssClass;
         private static dialogActionsClassSelector: string = '.' + ModalDialog.dialogActionsCssClass;
         private static modalDialogContainerHostClassName: string = 'infonav-modalContainerHost';
-        private static modalDialogContainerHostClassSelector: string = '.' + ModalDialog.modalDialogContainerHostClassName;
+        private static modalDialogContainerHostClassSelector: string = '.' + ModalDialog.modalDialogContainerHostClassName;        
 
         private static ModalDialogHtml =
         '<div class="infonav-modalContainer' + (location.search.indexOf('renderAsModalDialog') !== -1 ? ' small' : '') + '">' +
@@ -62,6 +62,7 @@ module jsCommon {
         private _messageQueue = new Array();
         private _isReady = false;
         private _messageCurrentlyShown = false;
+        private _modalDialogCustomClass: string;
 
         /**
          * ModalDialog is currently used for showing initialization error messages and hence 
@@ -209,7 +210,12 @@ module jsCommon {
          * @param focusOnFirstButton - Whether to focus on the first button after the dialog presents
          * @returns The host element for the dialog
          */
-        public showCustomDialog(titleText: string, dialogContent: JQuery, dialogActions: InJs.ModalDialogAction[], onDialogDisplayed: ModalDialogCallback, isDismissable?: boolean, focusOnFirstButton?: boolean) {
+        public showCustomDialog(titleText: string, dialogContent: JQuery, dialogActions: InJs.ModalDialogAction[], onDialogDisplayed: ModalDialogCallback, isDismissable?: boolean, focusOnFirstButton?: boolean, dialogCssClass?: string) {
+            if (dialogCssClass) {
+                this._modalDialogElement.addClass(dialogCssClass);
+                this._modalDialogCustomClass = dialogCssClass;
+            } 
+
             var actionsButtons = [];
             for (var i = 0; i < dialogActions.length; i++) {
                 var thisAction = dialogActions[i];
@@ -226,15 +232,16 @@ module jsCommon {
         }
 
         /** Hides the current contents of the modal dialog */
-        public hideDialog() {
+        public hideDialog() {        
             this._modalContainer.fadeTo(ModalDialog.AnimationSpeedMs, 0,() => {
                 this._modalContainer.css(CssConstants.displayProperty, CssConstants.noneValue);
+                this._modalDialogElement.removeClass(this._modalDialogCustomClass);  
                 this._messageCurrentlyShown = false;
                 if (this._messageQueue.length) {
                     var nextMessage = this._messageQueue.shift();
                     this.showDialogInternal(nextMessage);
                 }
-            });
+            });           
         }
 
         private updatePosition(animate: boolean) {

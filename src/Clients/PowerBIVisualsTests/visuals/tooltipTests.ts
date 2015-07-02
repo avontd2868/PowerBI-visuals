@@ -251,10 +251,10 @@
         it('createTooltipInfo: category & measure',() => {
             var columns: powerbi.DataViewMetadataColumn[] = [
                 {
-                    name: 'cat',
+                    displayName: 'cat',
                     type: ValueType.fromDescriptor({ text: true })
                 }, {
-                    name: 'val',
+                    displayName: 'val',
                     isMeasure: true,
                     type: ValueType.fromDescriptor({ numeric: true })
                 },
@@ -297,22 +297,18 @@
         it('createTooltipInfo: category, series & measure',() => {
             var columns: powerbi.DataViewMetadataColumn[] = [
                 {
-                    name: 'cat',
+                    displayName: 'cat',
                     type: ValueType.fromDescriptor({ text: true })
                 }, {
-                    name: 'ser',
+                    displayName: 'ser',
                     type: ValueType.fromDescriptor({ text: true }),
                 }, {
-                    name: 'val',
+                    displayName: 'val',
                     isMeasure: true,
                     type: ValueType.fromDescriptor({ numeric: true }),
                     groupName: 'ser1',
                 },
             ];
-            var categoryIdentities = [
-                mocks.dataViewScopeIdentity("abc"),
-                mocks.dataViewScopeIdentity("def"),
-                mocks.dataViewScopeIdentity("ghi")];
             var dataView: powerbi.DataView = {
                 metadata: { columns: columns },
                 categorical: {
@@ -353,10 +349,10 @@
         it('createTooltipInfo: self cross-joined category & measure',() => {
             var columns: powerbi.DataViewMetadataColumn[] = [
                 {
-                    name: 'cat',
+                    displayName: 'cat',
                     type: ValueType.fromDescriptor({ text: true })
                 }, {
-                    name: 'val',
+                    displayName: 'val',
                     isMeasure: true,
                     type: ValueType.fromDescriptor({ numeric: true })
                 },

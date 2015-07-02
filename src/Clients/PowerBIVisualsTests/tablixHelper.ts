@@ -49,7 +49,7 @@ module powerbitests.tablixHelper {
         var viewport = options.viewport ? options.viewport : { height: element.height() + 200, width: element.width() + 200 };
         var data = options.data;
         var redraw = options.redraw ? options.redraw : false;
-        var style = powerbi.common.services.visualStyles.create();
+        var style = powerbi.visuals.visualStyles.create();
 
         element.width(viewport.width);
         element.css(CssConstants.minWidthProperty, viewport.width);

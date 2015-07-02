@@ -181,9 +181,9 @@ module powerbi.visuals {
                 ? ScatterChart.createSeriesLegend(grouped, colorPalette, dataValues, valueFormatter.getFormatString(dvSource, scatterChartProps.general.formatString), defaultDataPointColor)
                 : ScatterChart.createCategoryLegend(categoryValues, categoryFormatter, colorPalette, categoryIdentities, categories ? categories[0] : undefined, defaultDataPointColor);
 
-            var legendTitle = dataValues && dvSource ? dvSource.name : "";
+            var legendTitle = dataValues && dvSource ? dvSource.displayName : "";
             if (!legendTitle) {
-                legendTitle = categories && categories[0].source.name ? categories[0].source.name : "";
+                legendTitle = categories && categories[0].source.displayName ? categories[0].source.displayName : "";
             }
             
             var legendData = { title: legendTitle, dataPoints: legendItems };
@@ -316,7 +316,6 @@ module powerbi.visuals {
                         identity: identity,
                         tooltipInfo: tooltipInfo,
                         labelFill: labelSettings.overrideDefaultColor ? labelSettings.labelColor : color,
-                        showLabel: true,
                     };
 
                     dataPoints.push(dataPoint);
@@ -468,11 +467,11 @@ module powerbi.visuals {
 
                 if (xIndex >= 0) {
                     xCol = firstGroup.values[xIndex].source;
-                    xAxisLabel = firstGroup.values[xIndex].source.name;
+                    xAxisLabel = firstGroup.values[xIndex].source.displayName;
                 }
                 if (yIndex >= 0) {
                     yCol = firstGroup.values[yIndex].source;
-                    yAxisLabel = firstGroup.values[yIndex].source.name;
+                    yAxisLabel = firstGroup.values[yIndex].source.displayName;
                 }
                 if (sizeIndex >= 0) {
                     sizeCol = firstGroup.values[sizeIndex].source;
@@ -720,7 +719,7 @@ module powerbi.visuals {
             var sortedData = dataPoints.sort(function (a, b) {
                 return b.radius.sizeMeasure ? (b.radius.sizeMeasure.values[b.radius.index] - a.radius.sizeMeasure.values[a.radius.index]) : 0;
             });
-            var dots = this.mainGraphicsContext.selectAll(ScatterChart.DotClassSelector).data(sortedData);
+            var dots = this.mainGraphicsContext.selectAll(ScatterChart.DotClassSelector).data(sortedData,(d: ScatterChartDataPoint) => d.identity.getKey());
 
             dots.enter().append(ScatterChart.ScatterChartCircleTagName)
                 .classed(ScatterChart.DotClassName, true);

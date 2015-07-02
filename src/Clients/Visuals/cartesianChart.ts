@@ -40,6 +40,7 @@ module powerbi.visuals {
         domain: number[];
         merged: boolean;
         tickCount: number;
+        forceStartToZero: boolean;
     }
 
     export interface CartesianSmallViewPortProperties {
@@ -121,6 +122,7 @@ module powerbi.visuals {
         x: IAxisProperties;
         y1: IAxisProperties;
         y2?: IAxisProperties;
+        forceValueDomainStartToZero: boolean;
     }
 
     /** Renders a data series as a cartestian visual. */
@@ -771,12 +773,24 @@ module powerbi.visuals {
             }
         }
 
-        private shouldRenderAxis(axisProperties: IAxisProperties): boolean {    
-            if (axisProperties.isCategoryAxis && (!this.categoryAxisProperties || this.categoryAxisProperties["show"] == null || this.categoryAxisProperties["show"])) {
+        private shouldRenderSecondaryAxis(axisProperties: IAxisProperties): boolean {
+            if (!this.valueAxisProperties || this.valueAxisProperties["secShow"] == null || this.valueAxisProperties["secShow"]) {
                 return true;
             }
 
-            if (!axisProperties.isCategoryAxis && (!this.valueAxisProperties || this.valueAxisProperties["show"] == null || this.valueAxisProperties["show"])) {
+            return false;
+        }
+
+        private shouldRenderAxis(axisProperties: IAxisProperties): boolean {    
+            if (!axisProperties) {
+                return false;
+            }
+
+            else if (axisProperties.isCategoryAxis && (!this.categoryAxisProperties || this.categoryAxisProperties["show"] == null || this.categoryAxisProperties["show"])) {
+                return true;
+            }
+
+            else if (!axisProperties.isCategoryAxis && (!this.valueAxisProperties || this.valueAxisProperties["show"] == null || this.valueAxisProperties["show"])) {
                 return true;
             }
 
@@ -801,6 +815,17 @@ module powerbi.visuals {
             margin.right = 0;
 
             var axes = calculateAxes(this.layers, viewport, margin, this.categoryAxisProperties, this.valueAxisProperties);
+            if (axes.forceValueDomainStartToZero) {
+                if (!this.valueAxisProperties) {
+                    this.valueAxisProperties = {};
+                }
+                CartesianHelper.forceValueDomainToZero(this.valueAxisProperties);
+            }
+
+            var renderXAxis = this.shouldRenderAxis(axes.x);
+            var renderYAxes = this.shouldRenderAxis(axes.y1);
+            var renderY2Axis = this.shouldRenderSecondaryAxis(axes.y2);
+            
             var width = viewport.width - (margin.left + margin.right);
 
             var properties: TextProperties = {
@@ -856,7 +881,10 @@ module powerbi.visuals {
                 properties,
                 axes.y2,
                 scrollbarVisible,
-                showOnRight);
+                showOnRight,
+                renderXAxis,
+                renderYAxes,
+                renderY2Axis);            
 
             // We look at the y axes as main and second sides, if the y axis orientation is right so the main side is represents the right side
             var maxMainYaxisSide = showOnRight ? margins.yRight : margins.yLeft,
@@ -896,7 +924,7 @@ module powerbi.visuals {
             }
 
             //hide show x-axis here
-            if (this.shouldRenderAxis(axes.x)) {
+            if (renderXAxis) {
                 axes.x.axis.orient("bottom");
                 if (needRotate)
                     axes.x.axis.tickPadding(CartesianChart.TickPaddingRotatedX);
@@ -927,11 +955,11 @@ module powerbi.visuals {
                 this.xAxisGraphicsContext.selectAll('*').remove();
             }
 
-            if (this.shouldRenderAxis(axes.y1)) {
+            if (renderYAxes) {
                 axes.y1.axis
                     .tickSize(width)
                     .tickPadding(CartesianChart.TickPaddingY)
-                    .orient(yAxisOrientation.toLowerCase());
+                .orient(yAxisOrientation.toLowerCase());
 
                 var y1AxisGraphicsElement = this.y1AxisGraphicsContext;
                 if (duration) {
@@ -947,7 +975,7 @@ module powerbi.visuals {
                 if (axes.y2 && (!this.valueAxisProperties || this.valueAxisProperties['secShow'] == null || this.valueAxisProperties['secShow'])) {
                     axes.y2.axis
                         .tickPadding(CartesianChart.TickPaddingY)
-                        .orient(showOnRight ? yAxisPosition.left.toLowerCase() : yAxisPosition.right.toLowerCase());
+                    .orient(showOnRight ? yAxisPosition.left.toLowerCase() : yAxisPosition.right.toLowerCase());
                     
                     if (duration) {
                         this.y2AxisGraphicsContext
@@ -956,7 +984,7 @@ module powerbi.visuals {
                             .call(axes.y2.axis);
                     }
                     else {
-                        this.y2AxisGraphicsContext.call(axes.y2.axis);
+                    this.y2AxisGraphicsContext.call(axes.y2.axis);
                     }
                     this.y2AxesRendered = true;
                 }
@@ -1440,6 +1468,7 @@ module powerbi.visuals {
             domain: undefined,
             merged: false,
             tickCount: 3, //safe default for small viewports
+            forceStartToZero: false
         };
 
         if (layers.length < 2)
@@ -1456,6 +1485,10 @@ module powerbi.visuals {
         var y2props = layers[1].calculateAxesProperties(visualOptions)[1];
         var firstYDomain = y1props.scale.domain();
         var secondYDomain = y2props.scale.domain();
+
+        if (firstYDomain[0] >= 0 && secondYDomain[0] >= 0) {
+            noMerge.forceStartToZero = true;
+        }
 
         if (y1props.values && y1props.values.length > 0 && y2props.values && y2props.values.length > 0) {
             noMerge.tickCount = Math.max(y1props.values.length, y2props.values.length);
@@ -1487,6 +1520,7 @@ module powerbi.visuals {
                 domain: [min, max],
                 merged: true,
                 tickCount: noMerge.tickCount,
+                forceStartToZero: false
             };
     }
     
@@ -1506,15 +1540,16 @@ module powerbi.visuals {
         };
         
         var yAxisWillMerge = false;
-
+        var mergeResult: MergedValueAxisResult;
         if (hasMultipleYAxes(layers)) {
-            var mergeResult: MergedValueAxisResult = tryMergeYDomains(layers, visualOptions);
+            mergeResult = tryMergeYDomains(layers, visualOptions);
             yAxisWillMerge = mergeResult.merged;
             if (yAxisWillMerge) {
                 visualOptions.forcedYDomain = mergeResult.domain;
             }
             else {
                 visualOptions.forcedTickCount = mergeResult.tickCount;
+
             }
         }
 
@@ -1535,6 +1570,7 @@ module powerbi.visuals {
                 result = {
                     x: axes[0],                   
                     y1: axes[1],
+                    forceValueDomainStartToZero: mergeResult ? mergeResult.forceStartToZero: false
                 };
             }
             else if (axes && !result.y2) {

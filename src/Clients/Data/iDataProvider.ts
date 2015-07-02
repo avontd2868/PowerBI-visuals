@@ -69,6 +69,7 @@ module powerbi.data {
         dataSource?: DataProviderDataSource;
         command: DataProviderCommand;
         allowCache?: boolean;
+        cacheResponseOnServer?: boolean;
     }
 
     export interface IDataProviderHostServices {

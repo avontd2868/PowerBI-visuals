@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\InfoNavClient.props" />
-  <Import Project="$(INFONAV_SRC)\InfoNav.Client.Build.Targets" />
+  <Import Project="..\..\PowerBIClient.props" />
+  <Import Project="$(PowerBIClientBuildTargets)" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{378A4333-7D33-446D-8608-8D1CCB171326}</ProjectGuid>
@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>powerbivisualstests</RootNamespace>
     <TypeScriptBinaryDropPath>$(InfonavScriptsDropPath)\Test</TypeScriptBinaryDropPath>
-    <TypeScriptLintingEnabled>false</TypeScriptLintingEnabled>
+    <TypeScriptLintingEnabled>true</TypeScriptLintingEnabled>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\JsCommon\JsCommon.csproj">
@@ -33,10 +33,10 @@
     <TypeScriptCompile Include="typedefs\defaultStringsForVisuals.ts" />
     <TypeScriptCompile Include="typedefs\localizationLoader.ts" />
     <TypeScriptCompile Include="typedefs\localizationService.ts" />
-    <TypeScriptCompile Include="typedefs\visualStyles.ts" />
     <TypeScriptCompile Include="utils\colorUtility.ts" />
     <TypeScriptCompile Include="typedefs\typedefs.ts" />
     <TypeScriptCompile Include="visuals\common\axisHelperTests.ts" />
+    <TypeScriptCompile Include="visuals\common\colorHelperTests.ts" />
     <TypeScriptCompile Include="visuals\common\converterHelperTests.ts" />
     <TypeScriptCompile Include="visuals\common\dataLabelUtilsTests.ts" />
     <TypeScriptCompile Include="visuals\common\dataRoleHelperTests.ts" />
@@ -62,6 +62,7 @@
     <TypeScriptCompile Include="visuals\geocodingManagerTests.ts" />
     <TypeScriptCompile Include="visuals\imageVisualTests.ts" />
     <TypeScriptCompile Include="visuals\legendTests.ts" />
+    <TypeScriptCompile Include="visuals\lineChartTests.ts" />
     <TypeScriptCompile Include="visuals\mapTests.ts" />
     <TypeScriptCompile Include="visuals\matrixTests.ts" />
     <TypeScriptCompile Include="visuals\multiRowCardTests.ts" />
@@ -83,8 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chutzpah.json" />
-    <Content Include="chutzpah.vsobuild.json" />
-    <Content Include="chutzpah_compile.bat" />
     <Content Include="chutzpah_filelist.txt" />
     <Content Include="chutzpah_references.txt" />
   </ItemGroup>
@@ -92,7 +91,9 @@
     <Content Include="gruntfile.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="compile.proj" />
     <None Include="package.json" />
+    <None Include="run_tests.bat" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -123,8 +124,5 @@
   <!-- Copy files for running tests outside VS context -->
   <Target Name="CopyPowerBIStaticFilesToTestBuild" Inputs="@(PowerBIStaticFiles)" Outputs="@(PowerBIStaticFiles->'$(TypeScriptBinaryDropPath)\%(RecursiveDir)%(Filename)%(Extension)')" AfterTargets="PrepareCopyPowerBIStaticFiles">
     <Copy SourceFiles="@(PowerBIStaticFiles)" DestinationFiles="@(PowerBIStaticFiles->'$(TypeScriptBinaryDropPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
-  <Target Name="CopyChutzpahTfsJson" Outputs="$(TypeScriptBinaryDropPath)\chutzpah.json" AfterTargets="CopyPowerBIStaticFilesToTestBuild">
-    <Copy SourceFiles="chutzpah.vsobuild.json" DestinationFiles="$(TypeScriptBinaryDropPath)\chutzpah.json" />
   </Target>
 </Project>

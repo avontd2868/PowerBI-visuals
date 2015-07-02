@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="CompileTypeScriptForTests" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\PowerBIClient.props" />
+  <Import Project="..\..\PowerBI.Client.Build.TypeScript.targets" />
+  
+  <PropertyGroup>
+    <ChutzpahFileList>chutzpah_filelist.txt</ChutzpahFileList>
+    <ChutzpahReferences>chutzpah_references.txt</ChutzpahReferences>
+    <ChutzpahArgsFile>chutzpah_args_file.txt</ChutzpahArgsFile>
+  </PropertyGroup>
+  
+  <Target Name="CompileTypeScriptForTests">
+    <Delete Files="$(ChutzpahArgsFile)" />
+
+    <ReadLinesFromFile File="$(ChutzpahFileList)">
+      <Output TaskParameter="Lines" ItemName="ChutzpahFileListContents" />
+    </ReadLinesFromFile>
+
+    <ReadLinesFromFile File="$(ChutzpahReferences)">
+      <Output TaskParameter="Lines" ItemName="ChutzpahReferencesContents" />
+    </ReadLinesFromFile>
+
+    <ItemGroup>
+      <ChutzpahArgsContent Include="@(ChutzpahReferencesContents)"/>
+      <ChutzpahArgsContent Include="@(ChutzpahFileListContents)"/>
+    </ItemGroup>
+    
+    <WriteLinesToFile File="$(ChutzpahArgsFile)" Lines="@(ChutzpahArgsContent)"/>
+
+    <Message Text="Path to TypeScript compiler: $(TypeScriptExec)" />
+
+    <Exec Command="$(TypeScriptExec) @$(ChutzpahArgsFile) --target ES5">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    
+    <Delete Files="$(ChutzpahArgsFile)" />
+    <OnError ExecuteTargets="ErrorHandler" />
+  </Target>
+
+  <Target Name="ErrorHandler">
+    <Delete Files="$(ChutzpahArgsFile)" />
+    <Message Text="Typescript Build Failed" />
+  </Target>
+</Project>

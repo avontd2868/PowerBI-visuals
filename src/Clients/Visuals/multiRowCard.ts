@@ -266,7 +266,7 @@ module powerbi.visuals {
                     var columnCaption: string = formatter(row[j], valueFormatter.getFormatString(column, MultiRowCard.formatStringProp));
                     
                     // The columnDetail represents column name. In card the column name is shown as details
-                    var columnDetail: string = columnMetadata[j].name;
+                    var columnDetail: string = columnMetadata[j].displayName;
 
                     //Title is shown only on Canvas and only if there is one Category field.
                     if (!isDashboardVisual && !column.type.numeric) {

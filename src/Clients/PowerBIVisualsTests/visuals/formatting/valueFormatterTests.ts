@@ -7,7 +7,7 @@
 module powerbitests {
     describe("ValueFormatter",() => {
         var valueFormatter = powerbi.visuals.valueFormatter;
-        var columnIntObjFormat: powerbi.DataViewMetadataColumn = { name: 'col', objects: { fmtObj: { fmtProp: 'R' } } };
+        var columnIntObjFormat: powerbi.DataViewMetadataColumn = { displayName: 'col', objects: { fmtObj: { fmtProp: 'R' } } };
         var columnIntObjFormatIdentitifer: powerbi.DataViewObjectPropertyIdentifier = { objectName: 'fmtObj', propertyName: 'fmtProp' };
 
         beforeEach(() => {
@@ -48,7 +48,7 @@ module powerbitests {
         });
 
         it("getFormatString: column with custom object (unspecified)",() => {
-            expect(valueFormatter.getFormatString({ name: 'col' }, columnIntObjFormatIdentitifer)).toBeUndefined();
+            expect(valueFormatter.getFormatString({ displayName: 'col' }, columnIntObjFormatIdentitifer)).toBeUndefined();
         });
 
         it("format Boolean",() => {
@@ -351,7 +351,11 @@ module powerbitests {
             var result = valueFormatter.formatListAnd(undefined);
             expect(result).toBeNull();
         });
+
+        it('getDisplayUnits',() => {
+            var displayUnits = valueFormatter.getDisplayUnits(powerbi.DisplayUnitSystemType.Default);
+            expect(displayUnits).toBeDefined();
+            expect(displayUnits.length).toBeGreaterThan(0);
+        });
     });
-
-
 }

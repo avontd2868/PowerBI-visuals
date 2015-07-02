@@ -19,7 +19,8 @@ module powerbitests {
         tileSmallLandscapeRowSpan: 1,
         tileSmallLandscapeColSpan: 1,
         tileMediumLandscapeRowSpan: 0,
-    }
+    };
+	
     TileLayoutConstants.tileMediumLandscapeRowSpan = TileLayoutConstants.tileSmallLandscapeRowSpan * 2;
     TileLayoutConstants.tileMediumLandscapeColSpan = TileLayoutConstants.tileSmallLandscapeColSpan * 2;
     TileLayoutConstants.tileLargeLandscapeRowSpan = TileLayoutConstants.tileSmallLandscapeRowSpan * 3;
@@ -97,7 +98,7 @@ module powerbitests {
 
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
+                    { displayName: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
                 ],
             };
 
@@ -159,7 +160,7 @@ module powerbitests {
 
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
+                    { displayName: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
                 ],
             };
 
@@ -787,7 +788,7 @@ module powerbitests {
 
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'date', type: ValueType.fromDescriptor({ time: true }) }
+                    { displayName: 'date', type: ValueType.fromDescriptor({ time: true }) }
                 ],
             };
 
@@ -832,7 +833,7 @@ module powerbitests {
             var viewport = options.viewport ? options.viewport : { height: element.height(), width: element.width() };
             var data = options.data ? options.data : getDefaultData();
             var redraw = options.redraw ? options.redraw : false;
-            var style = powerbi.common.services.visualStyles.create();
+            var style = powerbi.visuals.visualStyles.create();
 
             element.width(viewport.width);
             element.css(CssConstants.minWidthProperty, viewport.width);
@@ -873,7 +874,7 @@ module powerbitests {
         function getDefaultData(): powerbi.DataView {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
+                    { displayName: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
                 ],
             };
 

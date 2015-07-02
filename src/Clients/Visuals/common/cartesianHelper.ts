@@ -59,6 +59,15 @@ module powerbi.visuals {
             }
             return toReturn;
         }
+
+        export function forceValueDomainToZero(valueAxisProperties: DataViewObject) {            
+            if (valueAxisProperties['start'] == null) {
+                valueAxisProperties['start'] = 0;
+            }
+            if (valueAxisProperties['secStart'] == null) {
+                valueAxisProperties['secStart'] = 0;
+            }
+        }
        
         export function isScalar(isScalar: boolean, xAxisCardProperties: DataViewObject): boolean {
             if (isScalar) {

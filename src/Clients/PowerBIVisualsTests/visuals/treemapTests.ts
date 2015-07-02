@@ -12,7 +12,6 @@ module powerbitests {
     import DataViewAnalysis = powerbi.DataViewAnalysis;
     import DataViewTransform = powerbi.data.DataViewTransform;
     import DataView = powerbi.DataView;
-    import EventType = powerbitests.helpers.ClickEventType;
     import QueryProjectionsByRole = powerbi.data.QueryProjectionsByRole;
     import SemanticType = powerbi.data.SemanticType;
     import SQExprBuilder = powerbi.data.SQExprBuilder;
@@ -24,11 +23,11 @@ module powerbitests {
 
     var dataViewMetadataCategorySeriesColumns: powerbi.DataViewMetadata = {
         columns: [
-            { name: 'Squad', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-            { name: 'Period', queryName: 'select1', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-            { name: null, queryName: 'select2', groupName: '201501', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-            { name: null, queryName: 'select2', groupName: '201502', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-            { name: null, queryName: 'select2', groupName: '201503', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+            { displayName: 'Squad', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+            { displayName: 'Period', queryName: 'select1', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+            { displayName: null, queryName: 'select2', groupName: '201501', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+            { displayName: null, queryName: 'select2', groupName: '201502', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+            { displayName: null, queryName: 'select2', groupName: '201503', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
         ]
     };
     var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'Squad' });
@@ -36,30 +35,30 @@ module powerbitests {
 
     var dataViewMetadataCategoryColumn: powerbi.DataViewMetadata = {
         columns: [
-            { name: 'Genre', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-            { name: 'TotalSales', queryName: 'select1', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+            { displayName: 'Genre', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+            { displayName: 'TotalSales', queryName: 'select1', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
         ]
     };
 
     var dataViewMetadataCategoryColumnAndLongText: powerbi.DataViewMetadata = {
         columns: [
-            { name: 'Category group', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-            { name: 'Measure with long name', queryName: 'select1', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-            { name: 'Measure', queryName: 'select2', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+            { displayName: 'Category group', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+            { displayName: 'Measure with long name', queryName: 'select1', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+            { displayName: 'Measure', queryName: 'select2', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
         ]
     };
 
     var dataViewMetadataCategoryAndMeasures: powerbi.DataViewMetadata = {
         columns: [
-            { name: 'Area', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-            { name: 'BugsFiled', queryName: 'select1', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-            { name: 'BugsFixed', queryName: 'select2', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+            { displayName: 'Area', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+            { displayName: 'BugsFiled', queryName: 'select1', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+            { displayName: 'BugsFixed', queryName: 'select2', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
         ]
     };
 
     describe("Treemap",() => {
-        var categoryColumn: powerbi.DataViewMetadataColumn = { name: 'year', queryName: 'select0', type: DataShapeUtility.describeDataType(SemanticType.String) };
-        var measureColumn: powerbi.DataViewMetadataColumn = { name: 'sales', queryName: 'select1', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
+        var categoryColumn: powerbi.DataViewMetadataColumn = { displayName: 'year', queryName: 'select0', type: DataShapeUtility.describeDataType(SemanticType.String) };
+        var measureColumn: powerbi.DataViewMetadataColumn = { displayName: 'sales', queryName: 'select1', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer) };
 
         it('Treemap registered capabilities',() => {
             expect(powerbi.visuals.visualPluginFactory.create().getPlugin('treemap').capabilities).toBe(powerbi.visuals.treemapCapabilities);
@@ -88,8 +87,8 @@ module powerbitests {
         it('preferred capability does not support zero rows',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Year' },
-                    { name: 'Value', isMeasure: true }],
+                    { displayName: 'Year' },
+                    { displayName: 'Value', isMeasure: true }],
             };
 
             var dataView: powerbi.DataView = {
@@ -113,8 +112,8 @@ module powerbitests {
         it('preferred capability does not support one row',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Year' },
-                    { name: 'Value', isMeasure: true }],
+                    { displayName: 'Year' },
+                    { displayName: 'Value', isMeasure: true }],
             };
 
             var dataView: powerbi.DataView = {
@@ -337,7 +336,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -471,8 +470,43 @@ module powerbitests {
             v.onDataChanged(dataChangedOptions);
 
             setTimeout(() => {
-                expect($('.treemap .labels .minorLabel').css('opacity')).toBe('0');
-                expect($('.treemap .labels .majorLabel').css('opacity')).toBe('0');
+                expect($('.treemap .labels .minorLabel').length).toEqual(0);
+                expect($('.treemap .labels .majorLabel').length).toEqual(0);
+                done();
+            }, DefaultWaitForRender);
+        });
+
+        it('hidden labels with highlights dom validation',(done) => {
+
+            dataViewMetadataCategorySeriesColumns.objects = { labels: { show: false } };
+            var categoryIdentities = [
+                mocks.dataViewScopeIdentity("Drama"),
+                mocks.dataViewScopeIdentity("Comedy"),
+                mocks.dataViewScopeIdentity("Documentary"),
+            ];
+            v.onDataChanged({
+                dataViews: [{
+                    metadata: dataViewMetadataCategorySeriesColumns,
+                    categorical: {
+                        categories: [{
+                            source: dataViewMetadataCategorySeriesColumns.columns[0],
+                            values: ['Drama', 'Comedy', 'Documentary'],
+                            identity: categoryIdentities,
+                            identityFields: [categoryColumnRef],
+                        }],
+                        values: DataViewTransform.createValueColumns([
+                            {
+                                source: dataViewMetadataCategorySeriesColumns.columns[1],
+                                values: [110, 120, 130],
+                                highlights: [60, 80, 20]
+                            }])
+                    }
+                }]
+            });
+
+            setTimeout(() => {
+                expect($('.treemap .labels .majorLabel').length).toBe(0);
+                expect($('.treemap .labels .minorLabel').length).toBe(0);
                 done();
             }, DefaultWaitForRender);
         });
@@ -548,7 +582,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -592,13 +626,12 @@ module powerbitests {
             v.onDataChanged(dataChangedOptions);
 
             setTimeout(() => {
-                var points = v.enumerateObjectInstances({ objectName: 'dataPoint' });
-                //length is 3 because of the default color instance
-                expect(points.length).toBe(3);
-                expect(points[1].displayName).toEqual('The Nuthatches');
+                var points = v.enumerateObjectInstances({ objectName: 'dataPoint' });                
+                expect(points.length).toBe(2);
+                expect(points[0].displayName).toEqual('The Nuthatches');
+                expect(points[0].properties['fill']).toBeDefined();
+                expect(points[1].displayName).toEqual('Skylarks');
                 expect(points[1].properties['fill']).toBeDefined();
-                expect(points[2].displayName).toEqual('Skylarks');
-                expect(points[2].properties['fill']).toBeDefined();
                 done();
             }, DefaultWaitForRender);
         });
@@ -624,7 +657,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -718,10 +751,10 @@ module powerbitests {
             initialDataViews[0].categorical.values.source = dataViewMetadataCategorySeriesColumns.columns[1];
             var updatedMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Squad', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'Period', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '201503', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '201504', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'Squad', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'Period', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '201503', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '201504', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var updatedDataViews: DataView[] = [{
@@ -1271,7 +1304,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -1428,7 +1461,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -1658,10 +1691,10 @@ module powerbitests {
             initialDataViews[0].categorical.values.source = dataViewMetadataCategorySeriesColumns.columns[1];
             var updatedMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Squad', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'Period', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: '201503', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: '201504', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'Squad', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'Period', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: '201503', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: '201504', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var updatedDataViewsSeriesIdentities: powerbi.DataViewScopeIdentity[] = [
@@ -1923,8 +1956,8 @@ module powerbitests {
         it('treemap dataView multi measure',() => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'EventCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'MedalCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'EventCount', queryName: 'EventCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'MedalCount', queryName: 'MedalCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
 
@@ -1943,7 +1976,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
             var selectionIds: SelectionId[] = [
@@ -1974,8 +2007,8 @@ module powerbitests {
         it('treemap dataView multi measure with null values',() => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'EventCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'MedalCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'EventCount', queryName: 'EventCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'MedalCount', queryName: 'MedalCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
 
@@ -1994,7 +2027,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
             var selectionIds: SelectionId[] = [
@@ -2017,9 +2050,9 @@ module powerbitests {
         it('treemap dataView multi category multi measure',() => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Continent', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'EventCount', queryName: 'select1', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'MedalCount', queryName: 'select2', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'Continent', queryName: 'select0', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'EventCount', queryName: 'select1', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'MedalCount', queryName: 'select2', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var categoryIdentities = [
@@ -2051,7 +2084,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
 
@@ -2126,8 +2159,8 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'MedalCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'MedalCount', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var categoryIdentities = [
@@ -2154,7 +2187,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
             var selectionIds = [
@@ -2187,11 +2220,11 @@ module powerbitests {
 
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Continent', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2004', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2008', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2012', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'Continent', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2004', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2008', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2012', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var categoryIdentities = [
@@ -2235,7 +2268,7 @@ module powerbitests {
             dataView.categorical.values.source = metadata.columns[1];
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
             var selectionIds: SelectionId[] = [
@@ -2277,11 +2310,11 @@ module powerbitests {
         it('treemap dataView multi category/series with null values',() => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Continent', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2004', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2008', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2012', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'Continent', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2004', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2008', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2012', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var categoryIdentities = [
@@ -2324,7 +2357,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
 
@@ -2348,11 +2381,11 @@ module powerbitests {
         it('treemap dataView multi category/series with null values tooltip data test',() => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Continent', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2004', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2008', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: null, groupName: '2012', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'Continent', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'Year', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2004', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2008', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: null, groupName: '2012', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var categoryIdentities = [
@@ -2395,7 +2428,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var rootNode = Treemap.converter(dataView, colors, dataLabelSettings, null).root;
 
             var node1: TreemapNode = <TreemapNode>rootNode.children[0];
@@ -2416,9 +2449,9 @@ module powerbitests {
         it('treemap non-categorical multi-measure tooltip values test',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'a', isMeasure: true },
-                    { name: 'b', isMeasure: true },
-                    { name: 'c', isMeasure: true }
+                    { displayName: 'a', isMeasure: true },
+                    { displayName: 'b', isMeasure: true },
+                    { displayName: 'c', isMeasure: true }
                 ]
             };
 
@@ -2443,7 +2476,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var rootNode = Treemap.converter(dataView, colors, dataLabelSettings, null).root;
 
             var node1: TreemapNode = <TreemapNode>rootNode.children[0];
@@ -2458,8 +2491,8 @@ module powerbitests {
         it('treemap dataView multi measure',() => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'EventCount', queryName: 'select1', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'MedalCount', queryName: 'select2', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'EventCount', queryName: 'select1', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'MedalCount', queryName: 'select2', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var dataView: DataView = {
@@ -2477,11 +2510,11 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
 
-            var selectionIds: SelectionId[] = metadata.columns.map((measure) => SelectionId.createWithMeasure(measure.name));
+            var selectionIds: SelectionId[] = metadata.columns.map((measure) => SelectionId.createWithMeasure(measure.queryName));
 
             var nodes = rootNode.children;
             expect(nodes.length).toBe(2);
@@ -2510,7 +2543,7 @@ module powerbitests {
         it('treemap dataView single measure',() => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'EventCount', queryName: 'select1', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                    { displayName: 'EventCount', queryName: 'select1', isMeasure: true, properties: { "Y": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
                 ]
             };
             var dataView: DataView = {
@@ -2526,11 +2559,11 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var treeMapData = Treemap.converter(dataView, colors, dataLabelSettings, null);
             var rootNode = treeMapData.root;
 
-            var selectionIds: SelectionId[] = metadata.columns.map((measure) => SelectionId.createWithMeasure(measure.name));
+            var selectionIds: SelectionId[] = metadata.columns.map((measure) => SelectionId.createWithMeasure(measure.queryName));
 
             var nodes = rootNode.children;
             expect(nodes.length).toBe(1);
@@ -2549,7 +2582,7 @@ module powerbitests {
             expect(treeMapData.legendData.dataPoints[0].label).toBe('EventCount');
         });
 
-        it("treemap categories and measures with highlights tooltip data test",() => {
+        it("treemap categories and measures with highlights tooltip data test", () => {
             var dataView: DataView = {
                 metadata: dataViewMetadataCategoryAndMeasures,
                 categorical: {
@@ -2576,7 +2609,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var rootNode = Treemap.converter(dataView, colors, dataLabelSettings, null).root;
             var node1: TreemapNode = <TreemapNode>rootNode.children[0].children[0];
             var node2: TreemapNode = <TreemapNode>rootNode.children[0].children[1];
@@ -2596,84 +2629,6 @@ module powerbitests {
             expect(node4.highlightedTooltipInfo).toEqual([{ displayName: "Area", value: "Back end" }, { displayName: "BugsFixed", value: "220" }, { displayName: powerbi.visuals.ToolTipComponent.localizationOptions.highlightedValueDisplayName, value: "200" }]);
         });
 
-        it("treemap categories and measures default color test",() => {
-            var dataView: DataView = {
-                metadata: dataViewMetadataCategoryAndMeasures,
-                categorical: {
-                    categories: [{
-                        source: dataViewMetadataCategoryAndMeasures.columns[0],
-                        values: ['Front end', 'Back end'],
-                        identity: [
-                            mocks.dataViewScopeIdentity('f'),
-                            mocks.dataViewScopeIdentity('b'),
-                        ]
-                    }],
-                    values: DataViewTransform.createValueColumns([
-                        {
-                            source: dataViewMetadataCategoryAndMeasures.columns[1],
-                            values: [110, 120],
-                            highlights: [60, 60]
-                        }, {
-                            source: dataViewMetadataCategoryAndMeasures.columns[2],
-                            values: [210, 220],
-                            highlights: [140, 200]
-                        }])
-                }
-            };
-
-            var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
-            var hexDefaultColorRed = "#FF0000";
-            var rootNode = Treemap.converter(dataView, colors, dataLabelSettings, null, hexDefaultColorRed).root;
-            var node1: TreemapNode = <TreemapNode>rootNode.children[0];
-            var node2: TreemapNode = <TreemapNode>rootNode.children[1];
-
-            expect(node1.color).toEqual(hexDefaultColorRed);
-            expect(node2.color).toEqual(hexDefaultColorRed);
-        });
-
-        it("treemap categories and measures default color and formatted color test",() => {
-            var hexGreen = "#00FF00";
-            var dataView: DataView = {
-                metadata: dataViewMetadataCategoryAndMeasures,
-                categorical: {
-                    categories: [{
-                        source: dataViewMetadataCategoryAndMeasures.columns[0],
-                        values: ['Front end', 'Back end'],
-                        objects: [
-                            undefined,
-                            { dataPoint: { fill: { solid: { color: hexGreen } } } }
-                        ],
-                        identity: [
-                            mocks.dataViewScopeIdentity('f'),
-                            mocks.dataViewScopeIdentity('b'),
-                        ],
-                        identityFields: [categoryColumnRef],
-                    }],
-                    values: DataViewTransform.createValueColumns([
-                        {
-                            source: dataViewMetadataCategoryAndMeasures.columns[1],
-                            values: [110, 120],
-                            highlights: [60, 60]
-                        }, {
-                            source: dataViewMetadataCategoryAndMeasures.columns[2],
-                            values: [210, 220],
-                            highlights: [140, 200]
-                        }])
-                }
-            };
-
-            var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
-            var defaultColorRed = "#FF0000";
-            var rootNode = Treemap.converter(dataView, colors, dataLabelSettings, null, defaultColorRed).root;
-            var node1: TreemapNode = <TreemapNode>rootNode.children[0];
-            var node2: TreemapNode = <TreemapNode>rootNode.children[1];
-
-            expect(node1.color).toEqual(defaultColorRed);
-            expect(node2.color).toEqual(hexGreen);
-        });
-
         it("treemap gradient color test",() => {
             var dataPointColors = ["#d9f2fb", "#ff557f", "#b1eab7"];
             var objectDefinitions: powerbi.DataViewObjects[] = [
@@ -2684,9 +2639,9 @@ module powerbitests {
 
             var dataViewGradientMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true, roles: { 'Gradient': true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true, roles: { 'Gradient': true } }
                 ]
             };
 
@@ -2716,7 +2671,7 @@ module powerbitests {
             };
 
             var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var rootNode = Treemap.converter(dataView, colors, dataLabelSettings, null, null).root;
             var node1: TreemapNode = <TreemapNode>rootNode.children[0];
             var node2: TreemapNode = <TreemapNode>rootNode.children[1];

@@ -281,13 +281,20 @@ module powerbi.visuals {
             return (item1 === item2);
         }
 
-        public update(): void {
+         /** Implementation for MatrixDataAdapter interface */
+        public update(dataViewMatrix?: DataViewMatrix): void {
+            if (dataViewMatrix) {
+                this.matrix = dataViewMatrix;
+                this.rowHierarchy = MatrixHierarchyNavigator.wrapMatrixHierarchy(dataViewMatrix.rows);
+                this.columnHierarchy = MatrixHierarchyNavigator.wrapMatrixHierarchy(dataViewMatrix.columns);
+            }
             this.updateHierarchy(this.rowHierarchy);
             this.updateHierarchy(this.columnHierarchy);
 
             MatrixHierarchyNavigator.updateStaticColumnHeaders(this.columnHierarchy);
         }
 
+        /** Implementation for MatrixDataAdapter interface */
         public updateRows(): void {
             this.updateHierarchy(this.rowHierarchy);
         }
@@ -348,7 +355,7 @@ module powerbi.visuals {
                         // We make distincion between null and undefined. Null can be considered as legit value, undefined means we need to fall back to metadata
                         var source = columnLeafSources[columnLeafNode.levelSourceIndex ? columnLeafNode.levelSourceIndex : 0];
                         if (source)
-                            columnLeafNode.name = source.name;
+                            columnLeafNode.name = source.displayName;
                     }
                 }
             }
@@ -496,7 +503,7 @@ module powerbi.visuals {
         private registerColumnHeaderClickHandler(columnMetadata: DataViewMetadataColumn, cell: controls.ITablixCell) {
             if (this.options.onColumnHeaderClick) {
                 var handler = (e: MouseEvent) => {
-                    this.options.onColumnHeaderClick(columnMetadata.queryName ? columnMetadata.queryName : columnMetadata.name);
+                    this.options.onColumnHeaderClick(columnMetadata.queryName ? columnMetadata.queryName : columnMetadata.displayName);
                 };
                 cell.extension.registerClickHandler(handler);
             }
@@ -534,7 +541,7 @@ module powerbi.visuals {
                 cell.extension.setContainerStyle(MatrixBinder.headerClassName);
 
             cell.extension.disableDragResize();
-            cell.extension.contentHost.textContent = item.metadata ? item.metadata.name : '';
+            cell.extension.contentHost.textContent = item.metadata ? item.metadata.displayName : '';
         }
 
         public unbindCornerCell(item: MatrixCornerItem, cell: controls.ITablixCell): void {

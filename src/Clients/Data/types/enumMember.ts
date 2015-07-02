@@ -6,7 +6,7 @@
 
 module powerbi {
     export interface IEnumMember {
-        value: string;
+        value: string | number;
         displayName: data.DisplayNameGetter;
     }
 }

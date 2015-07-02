@@ -17,6 +17,7 @@ module powerbi.visuals {
         positionMin: number;
         sentimentColors: WaterfallChartSentimentColors;
         dataLabelsSettings: VisualDataLabelsSettings;
+        axesLabels: ChartAxesLabels;
     }
 
     export interface WaterfallChartDataPoint extends CartesianDataPoint, SelectableDataPoint, TooltipEnabledDataPoint, LabelEnabledDataPoint {
@@ -107,7 +108,7 @@ module powerbi.visuals {
                 .classed(WaterfallChart.MainGraphicsContextClassName, true);
         }
 
-        public static converter(dataView: DataViewCategorical, palette: IDataColorPalette, hostServices: IVisualHostServices, dataLabelSettings: VisualDataLabelsSettings, sentimentColors: WaterfallChartSentimentColors, interactivityService: IInteractivityService): WaterfallChartData {
+        public static converter(dataView: DataViewCategorical, palette: IDataColorPalette, hostServices: IVisualHostServices, dataLabelSettings: VisualDataLabelsSettings, sentimentColors: WaterfallChartSentimentColors, interactivityService: IInteractivityService, dataViewMetadata: DataViewMetadata): WaterfallChartData {
             debug.assertValue(palette, 'palette');
 
             var formatStringProp = WaterfallChart.formatStringProp;
@@ -172,7 +173,6 @@ module powerbi.visuals {
                         key: identity.getKey(),
                         tooltipInfo: tooltipInfo,
                         labelFill: dataLabelSettings.overrideDefaultColor ? dataLabelSettings.labelColor : color,
-                        showLabel: true
                     });
 
                     pos += value;
@@ -200,8 +200,7 @@ module powerbi.visuals {
                     highlight: false,
                     key: identity.getKey(),
                     tooltipInfo: tooltipInfo,
-                    labelFill: dataLabelSettings.overrideDefaultColor ? dataLabelSettings.labelColor : WaterfallChart.defaultTotalColor,
-                    showLabel: true
+                    labelFill: dataLabelSettings.overrideDefaultColor ? dataLabelSettings.labelColor : sentimentColors.totalFill.solid.color,
                 });
 
                 legend.push({
@@ -216,6 +215,12 @@ module powerbi.visuals {
             if (interactivityService)
                 interactivityService.applySelectionStateToData(dataPoints);
 
+            var xAxisProperties = CartesianHelper.getCategoryAxisProperties(dataViewMetadata);
+            var yAxisProperties = CartesianHelper.getValueAxisProperties(dataViewMetadata);
+            var valuesMetadataArray: powerbi.DataViewMetadataColumn[] = [];
+            valuesMetadataArray.push(valuesMetadata);
+            var axesLabels = converterHelper.createAxesLabels(xAxisProperties, yAxisProperties, categoryMetadata, valuesMetadataArray);
+
             return {
                 categories: categories,
                 categoryMetadata: categoryMetadata,
@@ -227,6 +232,7 @@ module powerbi.visuals {
                 positionMax: posMax,
                 dataLabelsSettings: dataLabelSettings,
                 sentimentColors: sentimentColors,
+                axesLabels: { x: axesLabels.xAxisLabel, y: axesLabels.yAxisLabel },
             };
         }
 
@@ -247,6 +253,7 @@ module powerbi.visuals {
                 positionMin: 0,
                 dataLabelsSettings: dataLabelUtils.getDefaultLabelSettings(),
                 sentimentColors: sentimentColors,
+                axesLabels: {x: null, y: null},
             };
 
             if (dataViews.length > 0) {
@@ -278,7 +285,7 @@ module powerbi.visuals {
                     }
 
                     if (dataView.categorical) {
-                        this.data = WaterfallChart.converter(dataView.categorical, this.colors, this.hostServices, this.data.dataLabelsSettings, sentimentColors, this.interactivityService);
+                        this.data = WaterfallChart.converter(dataView.categorical, this.colors, this.hostServices, this.data.dataLabelsSettings, sentimentColors, this.interactivityService, dataView.metadata);
                     }
                 }
             }
@@ -385,11 +392,14 @@ module powerbi.visuals {
                     y: (d, i) => { return WaterfallChart.getRectTop(yAxisProperties.scale, d.position, d.value) - dataLabelUtils.labelMargin; },
                     x: (d, i) => { return xAxisProperties.scale(d.categoryIndex) + (categoryWidth / 2); },
                 },
-                filter: (d: WaterfallChartDataPoint) => { return (d != null && d.showLabel); },
+                filter: (d: WaterfallChartDataPoint) => { return (d != null); },
                 style: {
                     'fill': (d: WaterfallChartDataPoint) => d.labelFill
                 },
             };
+
+            this.xAxisProperties.axisLabel = data.axesLabels.x;
+            this.yAxisProperties.axisLabel = data.axesLabels.y;
 
             return [xAxisProperties, yAxisProperties];
         }

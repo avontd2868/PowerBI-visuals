@@ -30,7 +30,7 @@ module powerbitests {
 
         it('AnimatedText onDataChanged sets text (no settings)',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
-                columns: [{ name: 'col1', isMeasure: true }],
+                columns: [{ displayName: 'col1', isMeasure: true }],
             };
             var dataView: powerbi.DataView = {
                 metadata: dataViewMetadata,
@@ -40,7 +40,7 @@ module powerbitests {
             var initOptions: powerbi.VisualInitOptions = {
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width(),

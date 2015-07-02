@@ -31,14 +31,14 @@ module powerbitests.tableDataViewHelper {
         for (var i = 0, len = columnTypes.length; i < len; ++i) {
             var isMeasure = columnTypes[i] === ColumnType.NumericMeasure;
             if (columnTypes[i] === ColumnType.Numeric || isMeasure) {
-                columns.push({ name: 'numeric' + i, type: ValueType.fromDescriptor({ numeric: true }), isMeasure: isMeasure });
+                columns.push({ displayName: 'numeric' + i, type: ValueType.fromDescriptor({ numeric: true }), isMeasure: isMeasure });
                 rows.push(i);
 
                 if (hasSubtotals)
                     totals.push(isMeasure ? i : null);
             }
             else {
-                columns.push({ name: 'text' + i, type: ValueType.fromDescriptor({ numeric: false }) });
+                columns.push({ displayName: 'text' + i, type: ValueType.fromDescriptor({ numeric: false }) });
                 rows.push('cell text ' + i);
 
                 if (hasSubtotals)

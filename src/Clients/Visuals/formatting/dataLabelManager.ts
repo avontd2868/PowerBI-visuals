@@ -226,14 +226,18 @@ module powerbi {
         }        
 
         /** Arranges the lables position and visibility*/
-        public hideCollidedLabels(viewport: IViewport, data: any[], layout: any): void {
+        public hideCollidedLabels(viewport: IViewport, data: any[], layout: any): powerbi.visuals.LabelEnabledDataPoint[] {
 
             this._size = { width: viewport.width, height: viewport.height };
-
             // Split size into a grid
             var arrangeGrid = new DataLabelArrangeGrid(this._size, data, layout);
+            var filteredData = [];
             
             for (var i = 0, len = data.length; i < len; i++) {
+
+                // Filter unwanted data points
+                if (!layout.filter(data[i]))
+                    continue;
 
                 // Set default values where properties values are undefined
                 var info = this.getLabelInfo(data[i]);
@@ -269,13 +273,16 @@ module powerbi {
                 if (DataLabelManager.isValid(position)) {
                     data[i].labelX = position.left;
                     data[i].labelY = position.top;
-                    data[i].showLabel = true;
-
+                    
                     // Keep track of all panel elements positions.
                     arrangeGrid.add(info, position);
+
+                    // Save all data points to display
+                    filteredData.push(data[i]);
                 }
-                else data[i].showLabel = false;
             }
+
+            return filteredData;
         }
 
         /**

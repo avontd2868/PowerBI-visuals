@@ -351,5 +351,10 @@ module powerbi.visuals {
 
             return formattingService.formatValue(value, format);
         }
+
+        export function getDisplayUnits(displayUnitSystemType: DisplayUnitSystemType): DisplayUnit[] {
+            var displayUnitSystem = createDisplayUnitSystem(displayUnitSystemType);
+            return displayUnitSystem.units;
+        }
     }
 }

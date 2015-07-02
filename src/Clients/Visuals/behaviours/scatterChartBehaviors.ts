@@ -251,7 +251,7 @@ module powerbi.visuals {
                     category: title,
                     color: point.fill,
                     icon: LegendIcon.Box,
-                    label: valueFormatter.format(data.size.name),
+                    label: valueFormatter.format(data.size.displayName),
                     measure: valueFormatter.format(point.radius.sizeMeasure.values[point.radius.index], valueFormatter.getFormatString(data.size, formatStringProp)),
                     iconOnlyOnLabel: true
                 });

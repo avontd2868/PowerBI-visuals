@@ -26,8 +26,8 @@ module powerbi {
     }
 
     export interface DataViewMetadataColumn {
-        /** The name of the column. */
-        name: string;
+        /** The user-facing display name of the column. */
+        displayName: string;
 
         /** The query name the source column in the query. */
         queryName?: string;

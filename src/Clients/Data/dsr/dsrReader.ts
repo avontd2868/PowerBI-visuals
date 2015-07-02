@@ -1443,7 +1443,7 @@ module powerbi.data.dsr {
             debug.assertValue(select, 'select');
 
             var column: DataViewMetadataColumn = {
-                name: '',
+                displayName: '',
                 index: selectIndex,
             };
             if (select.Format)

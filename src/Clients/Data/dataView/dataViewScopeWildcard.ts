@@ -19,7 +19,7 @@ module powerbi.data {
             if (!instanceExprs)
                 return false;
 
-            return SQExprUtil.sequenceEqual(wildcard.exprs, instanceExprs);
+            return SQExprUtils.sequenceEqual(wildcard.exprs, instanceExprs);
         }
 
         export function fromExprs(exprs: SQExpr[]): DataViewScopeWildcard {

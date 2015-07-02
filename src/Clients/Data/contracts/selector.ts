@@ -102,7 +102,7 @@ module powerbi.data {
 
                 if (!selectorDataExprs)
                     continue;
-                if (!SQExprUtil.sequenceEqual(keysList[i], selectorDataExprs))
+                if (!SQExprUtils.sequenceEqual(keysList[i], selectorDataExprs))
                     return false;
             }
 

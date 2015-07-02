@@ -18,7 +18,7 @@ module powerbi {
             var validMembersToReturn: IEnumMember[] = [];
             if (validMembers) {
                 for (var i = 0, len = allMembers.length; i < len; i++) {
-                    if (validMembers.indexOf(allMembers[i].value) !== -1) {
+                    if (validMembers.indexOf(<string>allMembers[i].value) !== -1) {
                         validMembersToReturn.push(allMembers[i]);
                     }
                 }

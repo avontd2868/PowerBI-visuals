@@ -24,7 +24,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()

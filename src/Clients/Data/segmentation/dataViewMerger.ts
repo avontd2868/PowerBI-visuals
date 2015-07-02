@@ -175,7 +175,7 @@ module powerbi.data.segmentation {
             debug.assertValue(sourceColumn, 'sourceColumn');
             debug.assertValue(segmentColumn, 'segmentColumn');
 
-            if (sourceColumn.name !== segmentColumn.name)
+            if (sourceColumn.displayName !== segmentColumn.displayName)
                 return false;
 
             if (sourceColumn.isMeasure !== segmentColumn.isMeasure)

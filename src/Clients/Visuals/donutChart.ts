@@ -1521,6 +1521,7 @@ module powerbi.visuals {
             index: number;
             label: any;
             color: string;
+            seriesIndex?: number;
         };
 
         interface MeasureAndValue {
@@ -1677,6 +1678,7 @@ module powerbi.visuals {
                     var categoryValue = point.label;
                     var categorical = this.dataViewCategorical;
                     var valueIndex: number = categorical.categories ? null : i;
+                    valueIndex = point.seriesIndex !== undefined ? point.seriesIndex : valueIndex;
                     var highlightedValue: number = this.hasHighlights && point.highlight.value !== 0 ? value * highlightRatio : undefined;
                     var tooltipInfo: TooltipDataItem[] = TooltipBuilder.createTooltipInfo(formatStringProp, categorical.categories, categoryValue, categorical.values, value, null, valueIndex, highlightedValue);
 
@@ -1703,9 +1705,9 @@ module powerbi.visuals {
                     // If category exists, we render title using category source. If not, we render title
                     // using measure.
                     var dvValuesSourceName = this.dataViewCategorical.values && this.dataViewCategorical.values.source
-                        ? this.dataViewCategorical.values.source.name : "";
+                        ? this.dataViewCategorical.values.source.displayName : "";
                     var dvCategorySourceName = this.dataViewCategorical.categories && this.dataViewCategorical.categories.length > 0 && this.dataViewCategorical.categories[0].source
-                        ? this.dataViewCategorical.categories[0].source.name : "";
+                        ? this.dataViewCategorical.categories[0].source.displayName : "";
                     if (this.categoryValues) {
                         if (this.slicingEnabled) {
                             return this.seriesCount > 1 ? dvValuesSourceName : dvCategorySourceName;
@@ -1744,7 +1746,7 @@ module powerbi.visuals {
                         var highlight = this.hasHighlights ? seriesData.highlights[categoryIndex] || 0 : 0;
 
                         var identity: SelectionId = this.isMultiMeasure
-                            ? SelectionId.createWithIdAndMeasure(this.categoryIdentities[categoryIndex], seriesData.source.name)
+                            ? SelectionId.createWithIdAndMeasure(this.categoryIdentities[categoryIndex], seriesData.source.queryName)
                             : SelectionId.createWithIds(this.categoryIdentities[categoryIndex], seriesData.identity);
 
                         var dataPoint: ConvertedDataPoint = {
@@ -1760,7 +1762,8 @@ module powerbi.visuals {
                             },
                             index: categoryIndex,
                             label: label,
-                            color: color
+                            color: color,
+                            seriesIndex: seriesIndex
                         };
                         dataPoints.push(dataPoint);
                     }
@@ -1849,15 +1852,15 @@ module powerbi.visuals {
                 for (var measureIndex = 0; measureIndex < this.seriesCount; measureIndex++) {
                     var measureData = dataViewCategorical.values[measureIndex];
                     var measureFormat = valueFormatter.getFormatString(measureData.source, formatStringProp, true);
-                    var measureLabel = measureData.source.name;
-                    var identity = SelectionId.createWithMeasure(measureLabel);
+                    var measureLabel = measureData.source.displayName;
+                    var identity = SelectionId.createWithMeasure(measureData.source.queryName);
 
                     debug.assert(measureData.values.length > 0, 'measure should have data points');
                     debug.assert(!this.hasHighlights || measureData.highlights.length > 0, 'measure with highlights should have highlight data points');
                     var nonHighlight = measureData.values[0] || 0;
                     var highlight = this.hasHighlights ? measureData.highlights[0] || 0 : 0;
 
-                    var color = this.colorHelper.getColorForMeasure(null, measureIndex);
+                    var color = this.colorHelper.getColorForMeasure(null, measureData.source.queryName);
 
                     var dataPoint: ConvertedDataPoint = {
                         identity: identity,
@@ -1921,7 +1924,8 @@ module powerbi.visuals {
                         },
                         index: seriesIndex,
                         label: label,
-                        color: color
+                        color: color,
+                        seriesIndex: seriesIndex
                     };
                     dataPoints.push(dataPoint);
 

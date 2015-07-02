@@ -18,7 +18,7 @@ module powerbi.data.dsr {
 
     /** Defines the atomic query execution options. */
     export interface IExecuteSemanticQueryProxyCommunication {
-        execute(commands: SemanticQueryDataShapeCommand[], dataSource: ExecuteSemanticQueryDataSource): IPromise<ExecuteSemanticQueryResult>;
+        execute(commands: SemanticQueryDataShapeCommand[], dataSource: ExecuteSemanticQueryDataSource, cacheResponseOnServer?: boolean): IPromise<ExecuteSemanticQueryResult>;
     }
 
     export interface IExecuteSemanticQueryProxy {
@@ -43,13 +43,20 @@ module powerbi.data.dsr {
         dataSource: ExecuteSemanticQueryDataSource;
         commands: powerbi.data.SemanticQueryDataShapeCommand[];
         promises: IDeferred2<DataViewData, IClientError>[];
+        cacheResponseOnServer?: boolean;
     }
 
     export interface ExecuteSemanticQueryRequest {
-        semanticQueryDataShapeCommands: powerbi.data.SemanticQueryDataShapeCommand[];
+        semanticQueryDataShapeCommands?: powerbi.data.SemanticQueryDataShapeCommand[];
+        commands?: SemanticQueryDataShapeCommandWithCacheKey[];
         databaseName: string;
         virtualServerName: string;
         modelId: number;
+    }
+
+    export interface SemanticQueryDataShapeCommandWithCacheKey {
+        Command: powerbi.data.SemanticQueryDataShapeCommand;
+        CacheKey?: string;
     }
 
     export interface ExecuteSemanticQueryResult {
@@ -230,7 +237,7 @@ module powerbi.data.dsr {
             var promises = batch.promises;
             var schemaName = batch.dataSource.schemaName;
 
-            this.communication.execute(batch.commands, batch.dataSource)
+            this.communication.execute(batch.commands, batch.dataSource, batch.cacheResponseOnServer)
                 .then(
                 result => this.onSuccess(result, promises, schemaName),
                 result => this.onError(promises));
@@ -342,7 +349,7 @@ module powerbi.data.dsr {
             this.httpService = httpService;
         }
 
-        public execute(commands: SemanticQueryDataShapeCommand[], dataSource: ExecuteSemanticQueryDataSource): IPromise<ExecuteSemanticQueryResult> {
+        public execute(commands: SemanticQueryDataShapeCommand[], dataSource: ExecuteSemanticQueryDataSource, cacheResponse?: boolean): IPromise<ExecuteSemanticQueryResult> {
             var requestOptions = this.httpService.powerbiRequestOptions();
             var executeSemanticQueryRequest: ExecuteSemanticQueryRequest = {
                 semanticQueryDataShapeCommands: commands,
@@ -350,6 +357,11 @@ module powerbi.data.dsr {
                 virtualServerName: dataSource.vsName,
                 modelId: dataSource.modelId,
             };
+
+            if (cacheResponse) {
+                // Send both for back compat
+                executeSemanticQueryRequest.commands = commands.map(command => <SemanticQueryDataShapeCommandWithCacheKey> { Command: command, CacheKey: JSON.stringify(command) });
+            }
 
             return this.httpService.post<ExecuteSemanticQueryResult>(ExecuteSemanticQueryProxyHttpCommunication.uri, executeSemanticQueryRequest, requestOptions).then(
                 result => result.data);

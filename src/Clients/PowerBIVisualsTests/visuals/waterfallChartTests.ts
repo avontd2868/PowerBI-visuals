@@ -26,7 +26,7 @@ module powerbitests {
             updateLegend: data => dummyDrawLegend(data, viewport),
         };
         var svg = d3.select($('<svg/>').get(0));
-        var style = powerbi.common.services.visualStyles.create();
+        var style = powerbi.visuals.visualStyles.create();
         var initOptions: powerbi.visuals.CartesianVisualInitOptions = {
             element: powerbitests.helpers.testDom('500', '500'),
             host: mocks.createVisualHostServices(),
@@ -39,9 +39,82 @@ module powerbitests {
             cartesianHost: cartesianHost,
         };
 
-        var categoryColumn: powerbi.DataViewMetadataColumn = { name: 'year', type: DataShapeUtility.describeDataType(SemanticType.String) };
-        var measureColumn: powerbi.DataViewMetadataColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer), objects: { general: { formatString: '$0' } } };
+        var categoryColumn: powerbi.DataViewMetadataColumn = { displayName: 'year', type: DataShapeUtility.describeDataType(SemanticType.String) };
+        var measureColumn: powerbi.DataViewMetadataColumn = { displayName: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer), objects: { general: { formatString: '$0' } } };
         var colors = style.colorPalette.dataColors;
+
+        describe('axes', () => {
+            it('Waterfall Chart X and Y-axis show/hide Title ', () => {
+
+            var element = powerbitests.helpers.testDom('500', '500');
+            var hostServices = mocks.createVisualHostServices();
+            var categoryIdentities = [mocks.dataViewScopeIdentity("John Domo")];
+                var v = powerbi.visuals.visualPluginFactory.create().getPlugin('waterfallChart').create();
+                v.init({
+                    element: element,
+                    host: hostServices,
+                    style: powerbi.visuals.visualStyles.create(),
+                    viewport: {
+                        height: element.height(),
+                        width: element.width()
+                    },
+                    interactivity: { isInteractiveLegend: false },
+                    animation: { transitionImmediate: true },
+                });
+                var dataViewMetadataOneColumn: powerbi.DataViewMetadata = {
+                    columns: [
+                        {
+                            displayName: 'AxesTitleTest',
+                            type: DataShapeUtility.describeDataType(SemanticType.Number)
+                        }],
+                    objects: {
+                        categoryAxis: {
+                            showAxisTitle: true
+                        },
+                        valueAxis: {
+                            showAxisTitle: true
+                        }
+                    }
+                };
+
+                v.onDataChanged({
+                    dataViews: [{
+                        metadata: dataViewMetadataOneColumn,
+                        categorical: {
+                            categories: [{
+                                source: dataViewMetadataOneColumn.columns[0],
+                                values: [500, 2000, 5000, 10000],
+                                identity: categoryIdentities
+                            }],
+                            values: DataViewTransform.createValueColumns([{
+                                source: dataViewMetadataOneColumn.columns[0],
+                                values: [20, 1000],
+                                subtotal: 1020
+                            }])
+                        }
+                    }]
+                });
+                expect($('.xAxisLabel').first().text()).toBe('AxesTitleTest');
+                expect($('.yAxisLabel').first().text()).toBe('AxesTitleTest');
+
+                dataViewMetadataOneColumn.objects = {
+                    categoryAxis: {
+                        showAxisTitle: false
+                    },
+                    valueAxis: {
+                        showAxisTitle: false
+                    }
+                };
+
+                v.onDataChanged({
+                    dataViews: [{
+                        metadata: dataViewMetadataOneColumn,
+                    }]
+                });
+                expect($('.xAxisLabel').length).toBe(0);
+                expect($('.yAxisLabel').length).toBe(0);
+            });
+        });
 
         describe('capabilities',() => {
             it('should include dataViewMappings',() => {
@@ -99,7 +172,7 @@ module powerbitests {
                     solid: { color: "#0000FF" }
                 },
             };
-            var data = WaterfallChart.converter(dataView, colors, initOptions.host, dataLabelSettings, sentimentColors, null);
+            var data = WaterfallChart.converter(dataView, colors, initOptions.host, dataLabelSettings, sentimentColors, null, null);
             
             it('legend should have 3 items', () => {
                 expect(data.legend.dataPoints.length).toBe(3);  // Gain, Loss, Total
@@ -154,8 +227,6 @@ module powerbitests {
                     values: values,
                 }]),
             };
-
-            var dataLabelSettings = powerbi.visuals.dataLabelUtils.getDefaultLabelSettings();
 
             var sentimentColors = colors.getSentimentColors();
             var gainFillHex = sentimentColors[2].value;
@@ -233,7 +304,7 @@ module powerbitests {
                 v.init({
                     element: element,
                     host: mocks.createVisualHostServices(),
-                    style: powerbi.common.services.visualStyles.create(),
+                    style: powerbi.visuals.visualStyles.create(),
                     viewport: {
                         height: element.height(),
                         width: element.width()
@@ -275,7 +346,7 @@ module powerbitests {
                     totalFill: { solid: { color: totalFillHex } }
                 };
                
-                var data = WaterfallChart.converter(dataView, colors, initOptions.host, dataLabelSettings, sentimentColors, null);
+                var data = WaterfallChart.converter(dataView, colors, initOptions.host, dataLabelSettings, sentimentColors, null, null);
                 expect(data.dataPoints[0].tooltipInfo).toEqual([{ displayName: 'year', value: 'a' }, { displayName: 'sales', value: '$500000' }]);
                 expect(data.dataPoints[1].tooltipInfo).toEqual([{ displayName: 'year', value: 'b' }, { displayName: 'sales', value: '$495000' }]);
                 expect(data.dataPoints[2].tooltipInfo).toEqual([{ displayName: 'year', value: 'c' }, { displayName: 'sales', value: '$490000' }]);
@@ -294,11 +365,17 @@ module powerbitests {
 
             var values = [100, -200, 250];
             var categories = [2010, 2011, 2012];
+            var categoryIdentities = [
+                mocks.dataViewScopeIdentity("2010"),
+                mocks.dataViewScopeIdentity("2011"),
+                mocks.dataViewScopeIdentity("2012"),
+            ];
 
             var dataView: powerbi.DataViewCategorical = {
                 categories: [{
                     source: categoryColumn,
                     values: categories,
+                    identity: categoryIdentities,
                 }],
                 values: DataViewTransform.createValueColumns([{
                     source: measureColumn,
@@ -321,7 +398,7 @@ module powerbitests {
                 v.init({
                     element: element,
                     host: powerbitests.mocks.createVisualHostServices(),
-                    style: powerbi.common.services.visualStyles.create(),
+                    style: powerbi.visuals.visualStyles.create(),
                     viewport: {
                         height: element.height(),
                         width: element.width()
@@ -483,6 +560,46 @@ module powerbitests {
                     done();
                 }, DefaultWaitForRender);
             });
+
+            it('labels color should be same as sentiments color', (done) => {
+                var totalSentimentColor = 'rgb(1,2,3)';
+                var increaseSentimentColors = 'rgb(4,5,6)';
+                var decreaseSentimentColors = 'rgb(7,8,9)';
+
+                data.metadata.objects = {
+                    labels: {
+                        show: true,
+                    },
+                    sentimentColors: {
+                        totalFill: { solid: { color: totalSentimentColor } },
+                        increaseFill: { solid: { color: increaseSentimentColors } },
+                        decreaseFill: { solid: { color: decreaseSentimentColors } },
+                    }
+                };
+                var dataChangedOptions = {
+                    dataViews: [data]
+                };
+
+                v.onDataChanged(dataChangedOptions);
+
+                setTimeout(() => {
+                    var texts = $('.mainGraphicsContext text');
+
+                    var totalTextColor = texts.last().css('fill').replace(/\ /g, "");
+                    var increaseTextColor = texts.first().css('fill').replace(/\ /g, "");
+                    var decreaseTextColor = $(texts[1]).css('fill').replace(/\ /g, "");
+
+                    var rgbTotalTextColor = (totalTextColor[0] === '#') ? jsCommon.color.rgbString(jsCommon.color.parseRgb(totalTextColor)) : totalTextColor;
+                    var rgbIncreaseTextColor = (increaseTextColor[0] === '#') ? jsCommon.color.rgbString(jsCommon.color.parseRgb(increaseTextColor)) : increaseTextColor;
+                    var rgbDecreaseTextColor = (decreaseTextColor[0] === '#') ? jsCommon.color.rgbString(jsCommon.color.parseRgb(decreaseTextColor)) : decreaseTextColor;
+
+                    expect(rgbTotalTextColor).toBe(totalSentimentColor);
+                    expect(rgbIncreaseTextColor).toBe(increaseSentimentColors);
+                    expect(rgbDecreaseTextColor).toBe(decreaseSentimentColors);
+
+                    done();
+                }, DefaultWaitForRender);
+            });
            
         });
 
@@ -518,7 +635,7 @@ module powerbitests {
                 v.init({
                     element: element,
                     host: powerbitests.mocks.createVisualHostServices(),
-                    style: powerbi.common.services.visualStyles.create(),
+                    style: powerbi.visuals.visualStyles.create(),
                     viewport: {
                         height: element.height(),
                         width: element.width()

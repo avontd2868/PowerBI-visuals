@@ -165,8 +165,7 @@ module powerbi.visuals {
             var categoryValues = category.values;
             var series: LineChartSeries[] = [];
             var seriesLen = categorical.values ? categorical.values.length : 0;
-            var hasDynamicSeries = categorical.values && categorical.values.source;
-            var categories = categorical.categories ? categorical.categories[0] : undefined;
+            var hasDynamicSeries = !!(categorical.values && categorical.values.source);
             var values = categorical.values;
             var dataLabelsSettings: PointDataLabelsSettings = dataLabelUtils.getDefaultPointLabelSettings();
             var colorHelper = new ColorHelper(colors, lineChartProps.dataPoint.fill, defaultDataPointColor);
@@ -193,7 +192,7 @@ module powerbi.visuals {
                     dataLabelsSettings.formatterOptions = dataView.metadata.columns[1];
             }
 
-            var grouped;
+            var grouped: DataViewValueColumnGroup[];
             if (dataView.categorical.values)
                 grouped = dataView.categorical.values.grouped();
 
@@ -202,23 +201,10 @@ module powerbi.visuals {
                 var dataPoints: LineChartDataPoint[] = [];
                 var groupedIdentity = grouped[seriesIndex];
                 var identity = hasDynamicSeries ?
-                    SelectionId.createWithIdAndMeasure(groupedIdentity.identity, column.source.name) :
-                    SelectionId.createWithMeasure(column.source.name);
+                    SelectionId.createWithIdAndMeasure(groupedIdentity.identity, column.source.queryName) :
+                    SelectionId.createWithMeasure(column.source.queryName);
                 var key = identity.getKey();
-
-                var objects: DataViewObjects;
-                if (categories && categories.objects && categories.objects.length > 0) {
-                    objects = categories.objects[seriesIndex];
-                }
-                else if (values && values.length > 0) {
-                    var valuesObjects = values[seriesIndex].objects;
-                    if (valuesObjects && valuesObjects.length > 0)
-                        objects = valuesObjects[0];
-                }
-
-                var color = hasDynamicSeries
-                    ? colorHelper.getColorForSeriesValue(objects, categorical.values.identityFields, groupedIdentity.name)
-                    : colorHelper.getColorForMeasure(objects, seriesIndex);
+                var color = this.getColor(colorHelper, hasDynamicSeries, values, grouped, seriesIndex, groupedIdentity);
 
                 for (var categoryIndex = 0, len = column.values.length; categoryIndex < len; categoryIndex++) {
                     var categoryValue = categoryValues[categoryIndex];
@@ -239,7 +225,6 @@ module powerbi.visuals {
                         selected: false,
                         identity: identity,
                         key: JSON.stringify({ ser: key, catIdx: categoryIndex }),
-                        showLabel: true,
                         labelFill: dataLabelsSettings.overrideDefaultColor ? dataLabelsSettings.labelColor : color,
                     });
                 }
@@ -261,8 +246,20 @@ module powerbi.visuals {
             }
 
             var xAxisCardProperties = CartesianHelper.getCategoryAxisProperties(dataView.metadata);
-            var valueAxisProperties = CartesianHelper.getValueAxisProperties(dataView.metadata); 
-            var axesLabels = converterHelper.createLineChartAxesLabels(xAxisCardProperties, valueAxisProperties, category, values);
+            var valueAxisProperties = CartesianHelper.getValueAxisProperties(dataView.metadata);
+             
+            // Convert to DataViewMetadataColumn
+            var valuesMetadataArray: powerbi.DataViewMetadataColumn[] = [];
+            if (values) {
+                for (var i = 0; i < values.length; i++) {
+
+                    if (values[i] && values[i].source && values[i].source.displayName) {
+                        valuesMetadataArray.push({ displayName: values[i].source.displayName });
+                    }
+                }
+            }
+
+            var axesLabels = converterHelper.createAxesLabels(xAxisCardProperties, valueAxisProperties, category.source, valuesMetadataArray);
 
             if (interactivityService) {
                 interactivityService.applySelectionStateToData(series);
@@ -272,8 +269,30 @@ module powerbi.visuals {
                 series: series,
                 isScalar: isScalar,
                 dataLabelsSettings: dataLabelsSettings,
-                axesLabels: { x: axesLabels.xAxisLabel, y: axesLabels.yAxisLabel},
+                axesLabels: { x: axesLabels.xAxisLabel, y: axesLabels.yAxisLabel },
             };
+        }
+
+        private static getColor(
+            colorHelper: ColorHelper,
+            hasDynamicSeries: boolean,
+            values: DataViewValueColumns,
+            grouped: DataViewValueColumnGroup[],
+            seriesIndex: number,
+            groupedIdentity: DataViewValueColumnGroup): string {
+
+            var objects: DataViewObjects;
+            if (hasDynamicSeries) {
+                if (grouped)
+                    objects = grouped[seriesIndex].objects;
+            }
+            else {
+                objects = values[seriesIndex].source.objects;
+            }
+
+            return hasDynamicSeries
+                ? colorHelper.getColorForSeriesValue(objects, values.identityFields, groupedIdentity.name)
+                : colorHelper.getColorForMeasure(objects, values[seriesIndex].source.queryName);
         }
 
         constructor(options: LineChartConstructorOptions) {
@@ -356,7 +375,8 @@ module powerbi.visuals {
             this.data = {
                 series: [],
                 dataLabelsSettings: dataLabelUtils.getDefaultPointLabelSettings(),
-                axesLabels: { x:null, y:null},
+                axesLabels: { x: null, y: null },
+                hasDynamicSeries: false,
             };
 
             if (dataViews.length > 0) {
@@ -498,11 +518,9 @@ module powerbi.visuals {
             var formatStringProp = lineChartProps.general.formatString;
             var singleSeriesData = data.series;
             var seriesLength = singleSeriesData.length;
-            for (var i = 0; i < seriesLength; i++) {
 
-                var selector = singleSeriesData[i].identity.getSelector();
-                if (selector.metadata)
-                    selector = { data: selector.data };
+            for (var i = 0; i < seriesLength; i++) {
+                var selector = ColorHelper.normalizeSelector(singleSeriesData[i].identity.getSelector());
 
                 var label = converterHelper.getFormattedLegendLabel(singleSeriesData[i].yCol, this.dataViewCat.values, formatStringProp);
                 instances.push({
@@ -572,7 +590,7 @@ module powerbi.visuals {
 
             if (EnumExtensions.hasFlag(this.lineType, LineChartType.area)) {
                 var catAreaSelect = this.mainGraphicsContext.selectAll(LineChart.CategoryAreaClassSelector)
-                    .data(data.series);
+                    .data(data.series, (d: LineChartDataPoint) => d.identity.getKey());
 
                 var catAreaEnter =
                     catAreaSelect
@@ -596,7 +614,7 @@ module powerbi.visuals {
 
             if (EnumExtensions.hasFlag(this.lineType, LineChartType.lineShadow)) {
                 var catBackgroundSelect = this.mainGraphicsContext.selectAll(LineChart.CategoryBackgroundClassSelector)
-                    .data(data.series);
+                    .data(data.series,(d: LineChartDataPoint) => d.identity.getKey());
 
                 var catBackgroundEnter = catBackgroundSelect
                     .enter().append('g')
@@ -617,7 +635,7 @@ module powerbi.visuals {
             }
 
             var catSelect = this.mainGraphicsContext.selectAll(LineChart.CategoryClassSelector)
-                .data(data.series);
+                .data(data.series,(d: LineChartDataPoint) => d.identity.getKey());
 
             var catEnter = catSelect
                 .enter()
@@ -1036,7 +1054,7 @@ module powerbi.visuals {
             }
 
             var dvValues = this.dataViewCat ? this.dataViewCat.values : null;
-            var title = dvValues && dvValues.source ? dvValues.source.name : "";
+            var title = dvValues && dvValues.source ? dvValues.source.displayName : "";
 
             return {
                 title: title,

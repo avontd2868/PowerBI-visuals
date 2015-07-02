@@ -238,9 +238,9 @@ module powerbi.visuals {
                 bottom: 40,
                 left: 30
             };
-        }
+        }        
 
-        export function getTickLabelMargins(
+        export function getTickLabelMargins(//todo: Put the parameters into one object
             viewport: IViewport,
             leftMarginLimit: number,
             textMeasurer: (textProperties) => number,
@@ -251,7 +251,10 @@ module powerbi.visuals {
             properties: TextProperties,
             y2AxisProperties?: IAxisProperties,
             scrollbarVisible?: boolean,
-            showOnRight?: boolean) {
+            showOnRight?: boolean,
+            renderXAxis?: boolean,
+            renderYAxes?: boolean,
+            renderY2Axis?: boolean) {
 
             debug.assertValue(viewport, 'viewport');
             debug.assertValue(textMeasurer, 'textMeasurer');
@@ -323,11 +326,31 @@ module powerbi.visuals {
                 maxRight = temp;
             }
 
-            return {
+            var calulatedMargins = {
                 xMax: Math.min(maxHeight, Math.ceil(xMax)),
                 yLeft: Math.min(Math.ceil(maxLeft), leftMarginLimit),
                 yRight: Math.ceil(maxRight),
             };
+
+            //*******Adjust the axes based on if it's turn on or not
+            if (!renderYAxes) {
+                calulatedMargins.yLeft = 0;
+                calulatedMargins.yRight = 0;
+            }
+
+            if (!renderY2Axis && showOnRight) {
+                calulatedMargins.yLeft = 0;
+            }
+
+            if (!renderY2Axis && !showOnRight) {
+                calulatedMargins.yRight = 0;
+            }
+            if (!renderXAxis) {
+                calulatedMargins.xMax = 0;
+            }
+            //*******
+
+            return calulatedMargins;
         }
 
         export function columnDataTypeHasValue(dataType: ValueType) {

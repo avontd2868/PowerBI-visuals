@@ -56,19 +56,19 @@ module powerbitests {
         var domainNaN = [NaN, NaN];
 
         var metaDataColumnText: powerbi.DataViewMetadataColumn = {
-            name: 'Column',
+            displayName: 'Column',
             type: ValueType.fromDescriptor({ text: true })
         };
         var metaDataColumnNumeric: powerbi.DataViewMetadataColumn = {
-            name: 'Column',
+            displayName: 'Column',
             type: ValueType.fromDescriptor({ numeric: true })
         };
         var metaDataColumnBool: powerbi.DataViewMetadataColumn = {
-            name: 'Column',
+            displayName: 'Column',
             type: ValueType.fromDescriptor({ bool: true })
         };
         var metaDataColumnTime: powerbi.DataViewMetadataColumn = {
-            name: 'Column',
+            displayName: 'Column',
             type: ValueType.fromDescriptor({ dateTime: true })
         };
         var formatStringProp: powerbi.DataViewObjectPropertyIdentifier = {
@@ -533,12 +533,12 @@ module powerbitests {
     describe("AxisHelper get best number of ticks tests",() => {
         var dataViewMetadataColumnWithIntegersOnly: powerbi.DataViewMetadataColumn[] = [
             {
-                name: 'col1',
+                displayName: 'col1',
                 isMeasure: true,
                 type: ValueType.fromDescriptor({ integer: true })
             },
             {
-                name: 'col2',
+                displayName: 'col2',
                 isMeasure: true,
                 type: ValueType.fromDescriptor({ integer: true })
             }
@@ -546,12 +546,12 @@ module powerbitests {
 
         var dataViewMetadataColumnWithNonInteger: powerbi.DataViewMetadataColumn[] = [
             {
-                name: 'col1',
+                displayName: 'col1',
                 isMeasure: true,
                 type: ValueType.fromDescriptor({ integer: true })
             },
             {
-                name: 'col2',
+                displayName: 'col2',
                 isMeasure: true,
                 type: ValueType.fromDescriptor({ numeric: true })
             }
@@ -641,5 +641,134 @@ module powerbitests {
             var tickCount = AxisHelper.getRecommendedNumberOfTicksForYAxis(350);
             expect(tickCount).toBe(6);
         });
+    });
+
+    describe("AxisHelper margins",() => {
+        var viewPort: powerbi.IViewport = { width: 10, height: 20 };
+        var xAxisProperties: powerbi.visuals.IAxisProperties = {
+            scale: undefined,
+            axis: undefined,
+            values: [87, 78],
+            axisType: undefined,
+            formatter: undefined,
+            axisLabel: '',
+            isCategoryAxis: true,
+            xLabelMaxWidth: 20,
+        };
+        var y1AxisProperties: powerbi.visuals.IAxisProperties = {
+            scale: undefined,
+            axis: undefined,
+            values: [20, 30, 50],
+            axisType: undefined,
+            formatter: undefined,
+            axisLabel: '',
+            isCategoryAxis: true,
+            xLabelMaxWidth: 20,
+        };
+
+        var y2AxisProperties: powerbi.visuals.IAxisProperties = {
+            scale: undefined,
+            axis: undefined,
+            values: [2000, 3000, 5000],
+            axisType: undefined,
+            formatter: undefined,
+            axisLabel: '',
+            isCategoryAxis: true,
+            xLabelMaxWidth: 20,
+        };
+		
+        var textProperties: powerbi.TextProperties = {
+            fontFamily: '',
+            fontSize: '16',
+        };
+
+        it('Check that margins are calculatde correctly when you render 2 axes',() => {
+            var tickCount = AxisHelper.getTickLabelMargins(
+                viewPort,
+                20,
+                powerbi.TextMeasurementService.measureSvgTextWidth,
+                xAxisProperties,
+                y1AxisProperties,
+                true,
+                77,
+                textProperties,
+                y2AxisProperties,
+                undefined,
+                false,
+                true,
+                true,
+                true);
+
+            expect(tickCount.xMax).toBe(7);
+            expect(tickCount.yLeft).toBe(12);
+            expect(tickCount.yRight).toBe(24);
+        });
+
+        it('Check that margins are calculated correctly when you hide all axes',() => {
+            var tickCount = AxisHelper.getTickLabelMargins(
+                viewPort,
+                20,
+                powerbi.TextMeasurementService.measureSvgTextWidth,
+                xAxisProperties,
+                y1AxisProperties,
+                true,
+                77,
+                textProperties,
+                y2AxisProperties,
+                undefined,
+                false,
+                false,
+                false,
+                false);
+
+            expect(tickCount.xMax).toBe(0);
+            expect(tickCount.yLeft).toBe(0);
+            expect(tickCount.yRight).toBe(0);
+        });
+
+        it('Disable the secondary axis',() => {
+            var tickCount = AxisHelper.getTickLabelMargins(
+                viewPort,
+                20,
+                powerbi.TextMeasurementService.measureSvgTextWidth,
+                xAxisProperties,
+                y1AxisProperties,
+                true,
+                77,
+                textProperties,
+                y2AxisProperties,
+                undefined,
+                false,//switch the left and right axes
+                true,
+                true,
+                false);//don't display secondary which is on the left now
+
+            expect(tickCount.xMax).toBe(7);
+            expect(tickCount.yLeft).toBe(12);
+            expect(tickCount.yRight).toBe(0);
+        });
+
+        it('Switch the y-axes, and disable the secondary axis',() => {
+            var tickCount = AxisHelper.getTickLabelMargins(
+                viewPort,
+                20,
+                powerbi.TextMeasurementService.measureSvgTextWidth,
+                xAxisProperties,
+                y1AxisProperties,
+                true,
+                77,
+                textProperties,
+                y2AxisProperties,
+                undefined,
+                true,//switch the left and right axes
+                true,
+                true,
+                false);//don't display secondary which is on the left now
+
+            expect(tickCount.xMax).toBe(7);
+            expect(tickCount.yLeft).toBe(0);
+            expect(tickCount.yRight).toBe(12);
+        });
+
     });
 }

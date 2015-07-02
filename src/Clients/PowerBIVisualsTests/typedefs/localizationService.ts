@@ -24,8 +24,8 @@ module powerbi.common {
     }
 
     /** factory method to create the localization service. */
-    export function createLocalizationService(telemetryService?: ITelemetryService, promiseFactory?: IPromiseFactory, loader: localization.ILocalizationLoader = localization.loader): common.ILocalizationService {
-        return new LocalizationService(loader, telemetryService, promiseFactory);
+    export function createLocalizationService(promiseFactory?: IPromiseFactory, loader: localization.ILocalizationLoader = localization.loader): common.ILocalizationService {
+        return new LocalizationService(loader, promiseFactory);
     }
 
     /** 
@@ -35,14 +35,12 @@ module powerbi.common {
      * If the localized string ID doesn't exist, look for it in the default localized resources
      */
     class LocalizationService implements common.ILocalizationService {
-        private telemetryService: ITelemetryService;
         private loader: localization.ILocalizationLoader;
         private promiseFactory: IPromiseFactory;
 
-        public constructor(loader: localization.ILocalizationLoader, telemetryService?: ITelemetryService, promiseFactory?: IPromiseFactory) {
+        public constructor(loader: localization.ILocalizationLoader, promiseFactory?: IPromiseFactory) {
             this.promiseFactory = promiseFactory || createJQueryPromiseFactory();
             this.loader = loader;
-            this.telemetryService = telemetryService;
         }
 
         public get currentLanguageLocale(): string {
@@ -136,8 +134,7 @@ module powerbi.common {
 
             var defaultValue = powerbi.localization.defaultLocalizedStrings[id];
             if (Helpers.isUndefined(defaultValue) || defaultValue === null) {
-                if (!isOptional && this.telemetryService) {
-                  //this.telemetryService.logEvent(telemetry.LocalizationFailedToLoadStrings, this.currentLanguageLocale);
+                if (!isOptional) {
                     debug.assertFail('Localization Resource for ' + id + ' not found');
                 }
             }

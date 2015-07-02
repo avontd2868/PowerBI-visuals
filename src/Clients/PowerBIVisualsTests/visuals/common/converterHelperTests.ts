@@ -66,8 +66,8 @@ module powerbitests {
         function createCategoricalDataView(roles: { [x: string]: boolean; }): powerbi.DataViewCategorical {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: roles },
-                    { name: 'col2', isMeasure: true, roles: { 'Y': true } },
+                    { displayName: 'col1', roles: roles },
+                    { displayName: 'col2', isMeasure: true, roles: { 'Y': true } },
                 ]
             };
 

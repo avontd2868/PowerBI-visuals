@@ -18,17 +18,17 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number),
                     format: '0.000'
                 },
                 {
-                    name: 'col3',
+                    displayName: 'col3',
                     isMeasure: false,
                     type: DataShapeUtility.describeDataType(SemanticType.DateTime),
                     format: 'd'
@@ -46,7 +46,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -114,17 +114,17 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number),
                     format: '0.000'
                 },
                 {
-                    name: 'col3',
+                    displayName: 'col3',
                     isMeasure: false,
                     type: DataShapeUtility.describeDataType(SemanticType.DateTime),
                     format: 'd'
@@ -142,7 +142,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -240,7 +240,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 1",
-                    showLabel: true,
                 },
                 {
                     x: 50,
@@ -252,7 +251,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 2",
-                    showLabel: true,
                 }];
 
             var mockLayout: powerbi.visuals.ILabelLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
@@ -281,7 +279,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 1",
-                    showLabel: true,
                 },
                 {
                     x: 50,
@@ -293,7 +290,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 2",
-                    showLabel: true,
                 }];
 
             var mockLayout: powerbi.visuals.ILabelLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
@@ -322,7 +318,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 1",
-                    showLabel: true,
                     value: 20,
                 },
                 {
@@ -335,7 +330,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 2",
-                    showLabel: true,
                     value: 20,
                 }];
 
@@ -365,7 +359,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 1",
-                    showLabel: true,
                     value: 20,
                 },
                 {
@@ -378,7 +371,6 @@ module powerbitests {
                     selected: true,
                     identity: null,
                     labeltext: "Label 2",
-                    showLabel: true,
                     value: 20,
                 }];
 
@@ -402,16 +394,16 @@ module powerbitests {
 
         var dataViewMetadataThreeColumn: powerbi.DataViewMetadataColumn[] = [
             {
-                name: 'col1',
+                displayName: 'col1',
                 type: DataShapeUtility.describeDataType(SemanticType.String)
             },
             {
-                name: 'col2',
+                displayName: 'col2',
                 isMeasure: true,
                 type: DataShapeUtility.describeDataType(SemanticType.Number)
             },
             {
-                name: 'col3',
+                displayName: 'col3',
                 isMeasure: true,
                 type: DataShapeUtility.describeDataType(SemanticType.Number)
             }
@@ -443,7 +435,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -542,8 +534,8 @@ module powerbitests {
         var values = [100, -200, 250];
         var categories = [2010, 2011, 2012];
 
-        var categoryColumn: powerbi.DataViewMetadataColumn = { name: 'year', type: DataShapeUtility.describeDataType(SemanticType.String) };
-        var measureColumn: powerbi.DataViewMetadataColumn = { name: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer), objects: { general: { formatString: '$0' } } };
+        var categoryColumn: powerbi.DataViewMetadataColumn = { displayName: 'year', type: DataShapeUtility.describeDataType(SemanticType.String) };
+        var measureColumn: powerbi.DataViewMetadataColumn = { displayName: 'sales', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Integer), objects: { general: { formatString: '$0' } } };
 
         var dataView: powerbi.DataViewCategorical = {
             categories: [{
@@ -575,7 +567,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -607,7 +599,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()

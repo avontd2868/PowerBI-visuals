@@ -150,7 +150,7 @@ module powerbi {
     /** Provides a unit system that creates a more concise format for displaying values. This is suitable for most of the cases where
         we are showing values (chart axes) and as such it is the default unit system. */
     export class DefaultDisplayUnitSystem extends DisplayUnitSystem { 
-        public static _units: DisplayUnit[];
+        private static _units: DisplayUnit[];
         private static _scientificBigNumbersBoundary: number;
 
         // Constructor

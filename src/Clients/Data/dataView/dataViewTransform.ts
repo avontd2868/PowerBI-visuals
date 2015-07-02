@@ -202,7 +202,7 @@ module powerbi.data {
                 column.format = getFormatForColumn(select, column);
 
                 if (select.displayName)
-                    column.name = select.displayName;
+                    column.displayName = select.displayName;
                 if (select.queryName)
                     column.queryName = select.queryName;
 
@@ -1364,8 +1364,8 @@ module powerbi.data {
                         // allow null, which will be formatted as (Blank).
                         if (source.groupName !== undefined)
                             currentGroup.name = source.groupName;
-                        else if (source.name)
-                            currentGroup.name = source.name;
+                        else if (source.displayName)
+                            currentGroup.name = source.displayName;
                     }
 
                     groups.push(currentGroup);

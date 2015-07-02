@@ -42,16 +42,19 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'stringColumn',
+                    displayName: 'stringColumn',
+                    queryName: 'stringColumn',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'numberColumn',
+                    displayName: 'numberColumn',
+                    queryName: 'numberColumn',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number)
                 },
                 {
-                    name: 'dateTimeColumn',
+                    displayName: 'dateTimeColumn',
+                    queryName: 'dateTimeColumn',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.DateTime)
                 }
@@ -375,7 +378,7 @@ module powerbitests {
             for (var i = 0; i < actualData.series.data.length; i++) {
                 var seriesData = actualData.series.data[i];
                 expect(seriesData.identity).toBeDefined();
-                expect(seriesData.identity.getKey()).toContain(dataViewMetadata.columns[1].name);
+                expect(seriesData.identity.getKey()).toContain(dataViewMetadata.columns[1].displayName);
             }
         });
     });
@@ -390,17 +393,17 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'stringColumn',
+                    displayName: 'stringColumn',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'numberColumn',
+                    displayName: 'numberColumn',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number),
                     format: '0.000'
                 },
                 {
-                    name: 'dateTimeColumn',
+                    displayName: 'dateTimeColumn',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.DateTime)
                 }
@@ -414,7 +417,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -643,17 +646,17 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'stringColumn',
+                    displayName: 'stringColumn',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'numberColumn',
+                    displayName: 'numberColumn',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number),
                     format: '0.000'
                 },
                 {
-                    name: 'dateTimeColumn',
+                    displayName: 'dateTimeColumn',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.DateTime)
                 }
@@ -667,7 +670,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()

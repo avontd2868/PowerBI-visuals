@@ -82,9 +82,9 @@ module powerbitests {
         it('Map.getMeasureIndexOfRole',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true, roles: { "Size": true } },
-                    { name: 'col3', isMeasure: true, roles: { "X": true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true, roles: { "Size": true } },
+                    { displayName: 'col3', isMeasure: true, roles: { "X": true } }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -120,8 +120,8 @@ module powerbitests {
         it('Map.calculateGroupSizes', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -162,7 +162,7 @@ module powerbitests {
         });
 
         it('Map.createMapDataPoint', () => {
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var group = "Arizona";
             var value = 100;
             var mapSeriesInfo: MapSeriesInfo = {
@@ -201,8 +201,8 @@ module powerbitests {
         it('Map.calculateSeriesInfo', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -224,7 +224,7 @@ module powerbitests {
             var sizeIndex = 0;
             var latIndex = -1;
             var longIndex = -1;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, latIndex, longIndex, colors);
             expect(result.sizeValuesForGroup.length).toBe(1);
             expect(result.sizeValuesForGroup[0].value).toBe(-100);
@@ -270,7 +270,7 @@ module powerbitests {
             var sizeIndex = 0;
             var latIndex = -1;
             var longIndex = -1;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var categoryColumnRef = dataView.categorical.values.identityFields;
             var result = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, longIndex, latIndex, colors, undefined, undefined, categoryColumnRef);
             expect(result.sizeValuesForGroup.length).toBe(2);
@@ -293,10 +293,10 @@ module powerbitests {
         it('Map.calculateSeriesLegend colors from palette with dynamic series',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2' },
-                    { name: 'col3', isMeasure: true, groupName: 'a' },
-                    { name: 'col3', isMeasure: true, groupName: 'b' },
+                    { displayName: 'col1' },
+                    { displayName: 'col2' },
+                    { displayName: 'col3', isMeasure: true, groupName: 'a' },
+                    { displayName: 'col3', isMeasure: true, groupName: 'b' },
                 ]
             };
             var col3Ref = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col3' });
@@ -326,7 +326,7 @@ module powerbitests {
 
             var groupIndex: number = 0;
             var sizeIndex = 0;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
 
             var series1Color = colors.getColorByScale(SQExprShortSerializer.serialize(col3Ref), 'a');
             var series2Color = colors.getColorByScale(SQExprShortSerializer.serialize(col3Ref), 'b');
@@ -341,9 +341,9 @@ module powerbitests {
         it('Map.calculateSeriesLegend colors from palette with static series',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true },
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true },
                 ]
             };
             var col1Ref = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
@@ -373,7 +373,7 @@ module powerbitests {
 
             var groupIndex: number = 0;
             var sizeIndex = 0;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
 
             var series1Color = colors.getColorByScale(SQExprShortSerializer.serialize(col1Ref), 'col2').value;
             var series2Color = colors.getColorByScale(SQExprShortSerializer.serialize(col1Ref), 'col3').value;
@@ -385,72 +385,73 @@ module powerbitests {
             expect(result[1].color).toBe(series2Color);
         });
 
-        it('Map.calculateSeriesInfo same field category & series',() => {
-            var dataViewMetadata: powerbi.DataViewMetadata = {
-                columns: [
-                    { name: 'col1', roles: { 'Category': true, 'Series': true } },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'lat', isMeasure: true },
-                    { name: 'long', isMeasure: true },
-                ]
-            };
-            var dataView: powerbi.DataView = powerbi.data.DataViewSelfCrossJoin.apply({
-                metadata: dataViewMetadata,
-                categorical: {
-                    categories: [{
-                        source: dataViewMetadata.columns[0],
-                        values: ['Montana', 'California', 'Arizona'],
-                        identity: [mocks.dataViewScopeIdentity('M'), mocks.dataViewScopeIdentity('C'), mocks.dataViewScopeIdentity('A')]
-                    }],
-                    values: DataViewTransform.createValueColumns([
-                        {
-                            source: dataViewMetadata.columns[1],
-                            values: [-100, 200, 700],
-                        }, {
-                            source: dataViewMetadata.columns[2],
-                            values: [49, 54, 101],
-                        }, {
-                            source: dataViewMetadata.columns[3],
-                            values: [0, 40, 20],
-                        }
-                    ])
-                }
-            });
-            var groupedValues = dataView.categorical.values.grouped();
+        // TODO: verify this works when 4906998 is fixed
+        //it('Map.calculateSeriesInfo same field category & series',() => {
+        //    var dataViewMetadata: powerbi.DataViewMetadata = {
+        //        columns: [
+        //            { displayName: 'col1', roles: { 'Category': true, 'Series': true } },
+        //            { displayName: 'col2', isMeasure: true, queryName: 'selectCol2' },
+        //            { displayName: 'lat', isMeasure: true, queryName: 'selectLat' },
+        //            { displayName: 'long', isMeasure: true, queryName: 'selectLong' },
+        //        ]
+        //    };
+        //    var dataView: powerbi.DataView = powerbi.data.DataViewSelfCrossJoin.apply({
+        //        metadata: dataViewMetadata,
+        //        categorical: {
+        //            categories: [{
+        //                source: dataViewMetadata.columns[0],
+        //                values: ['Montana', 'California', 'Arizona'],
+        //                identity: [mocks.dataViewScopeIdentity('M'), mocks.dataViewScopeIdentity('C'), mocks.dataViewScopeIdentity('A')]
+        //            }],
+        //            values: DataViewTransform.createValueColumns([
+        //                {
+        //                    source: dataViewMetadata.columns[1],
+        //                    values: [-100, 200, 700],
+        //                }, {
+        //                    source: dataViewMetadata.columns[2],
+        //                    values: [49, 54, 101],
+        //                }, {
+        //                    source: dataViewMetadata.columns[3],
+        //                    values: [0, 40, 20],
+        //                }
+        //            ])
+        //        }
+        //    });
+        //    var groupedValues = dataView.categorical.values.grouped();
 
-            var sizeIndex = 0;
-            var latIndex = 1;
-            var longIndex = 2;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
-            var result0 = Map.calculateSeriesInfo(groupedValues, 0, sizeIndex, longIndex, latIndex, colors);
-            expect(result0.sizeValuesForGroup.length).toBe(1);
-            expect(result0.sizeValuesForGroup[0].value).toBe(-100);
-            expect(result0.sizeValuesForGroup[0].index).toBe(0);
-            expect(result0.sizeValuesForGroup[0].fill).not.toBeNull();
-            expect(result0.sizeValuesForGroup[0].stroke).not.toBeNull();
-            expect(result0.latitude).toBe(49);
-            expect(result0.longitude).toBe(0);
+        //    var sizeIndex = 0;
+        //    var latIndex = 1;
+        //    var longIndex = 2;
+        //    var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
+        //    var result0 = Map.calculateSeriesInfo(groupedValues, 0, sizeIndex, longIndex, latIndex, colors);
+        //    expect(result0.sizeValuesForGroup.length).toBe(1);
+        //    expect(result0.sizeValuesForGroup[0].value).toBe(-100);
+        //    expect(result0.sizeValuesForGroup[0].index).toBe(0);
+        //    expect(result0.sizeValuesForGroup[0].fill).not.toBeNull();
+        //    expect(result0.sizeValuesForGroup[0].stroke).not.toBeNull();
+        //    expect(result0.latitude).toBe(49);
+        //    expect(result0.longitude).toBe(0);
 
-            var result1 = Map.calculateSeriesInfo(groupedValues, 1, sizeIndex, longIndex, latIndex, colors);
-            expect(result1.sizeValuesForGroup.length).toBe(1);
-            expect(result1.latitude).toBe(54);
-            expect(result1.longitude).toBe(40);
+        //    var result1 = Map.calculateSeriesInfo(groupedValues, 1, sizeIndex, longIndex, latIndex, colors);
+        //    expect(result1.sizeValuesForGroup.length).toBe(1);
+        //    expect(result1.latitude).toBe(54);
+        //    expect(result1.longitude).toBe(40);
 
-            var result2 = Map.calculateSeriesInfo(groupedValues, 2, sizeIndex, longIndex, latIndex, colors);
-            expect(result2.sizeValuesForGroup.length).toBe(1);
-            expect(result2.latitude).toBe(101);
-            expect(result2.longitude).toBe(20);
+        //    var result2 = Map.calculateSeriesInfo(groupedValues, 2, sizeIndex, longIndex, latIndex, colors);
+        //    expect(result2.sizeValuesForGroup.length).toBe(1);
+        //    expect(result2.latitude).toBe(101);
+        //    expect(result2.longitude).toBe(20);
 
-            expect(result0.sizeValuesForGroup[0].fill).not.toBe(result1.sizeValuesForGroup[0].fill);
-            expect(result1.sizeValuesForGroup[0].fill).not.toBe(result2.sizeValuesForGroup[0].fill);
-            expect(result0.sizeValuesForGroup[0].fill).not.toBe(result2.sizeValuesForGroup[0].fill);
-        });
+        //    expect(result0.sizeValuesForGroup[0].fill).not.toBe(result1.sizeValuesForGroup[0].fill);
+        //    expect(result1.sizeValuesForGroup[0].fill).not.toBe(result2.sizeValuesForGroup[0].fill);
+        //    expect(result0.sizeValuesForGroup[0].fill).not.toBe(result2.sizeValuesForGroup[0].fill);
+        //});
 
         it('Map.calculateSeriesLegend',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -475,7 +476,7 @@ module powerbitests {
 
             var groupIndex: number = 0;
             var sizeIndex = 0;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var result = Map.calculateSeriesLegend(dataView.categorical.values.grouped(), groupIndex, sizeIndex, colors);
             expect(result.length).toBe(1);
         });
@@ -483,8 +484,8 @@ module powerbitests {
         it('Map.calculateSeriesLegend default color', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -504,7 +505,7 @@ module powerbitests {
 
             var groupIndex: number = 0;
             var sizeIndex = 0;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var hexDefaultColorRed = "#FF0000";
             var result = Map.calculateSeriesLegend(dataView.categorical.values.grouped(), groupIndex, sizeIndex, colors, hexDefaultColorRed);
             expect(result.length).toBe(1);
@@ -546,7 +547,7 @@ module powerbitests {
 
             var groupIndex: number = 0;
             var sizeIndex = 0;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var result = Map.calculateSeriesLegend(dataView.categorical.values.grouped(), groupIndex, sizeIndex, colors);
             expect(result.length).toBe(2);
         });
@@ -586,7 +587,7 @@ module powerbitests {
 
             var groupIndex: number = 0,
                 sizeIndex = 0;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var result = Map.calculateSeriesLegend(dataView.categorical.values.grouped(), groupIndex, sizeIndex, colors);
             expect(result[0].label).toBe(powerbi.visuals.valueFormatter.format(null));
         });
@@ -620,8 +621,8 @@ module powerbitests {
         it('Map.getGeocodingCategory', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: { "StateOrProvince": true }  },
-                    { name: 'col2', isMeasure: true, roles: { "Size": true } }
+                    { displayName: 'col1', roles: { "StateOrProvince": true }  },
+                    { displayName: 'col2', isMeasure: true, roles: { "Size": true } }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -645,8 +646,8 @@ module powerbitests {
         it('Map.getGeocodingCategoryDataCategory', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', type: ValueType.fromDescriptor({ geography: { stateOrProvince: true } }) },
-                    { name: 'col2', isMeasure: true, roles: { "Size": true } }
+                    { displayName: 'col1', type: ValueType.fromDescriptor({ geography: { stateOrProvince: true } }) },
+                    { displayName: 'col2', isMeasure: true, roles: { "Size": true } }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -673,7 +674,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createHostService(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -688,26 +689,26 @@ module powerbitests {
         it('Map.hasSizeField', () => {
             var dataViewMetadataOneColumn: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: { 'Category': true } }
+                    { displayName: 'col1', roles: { 'Category': true } }
                 ]
             };
             var dataViewMetadataTwoColumnsWithRoles: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: { 'Category': true } },
-                    { name: 'col2', roles: { 'Size': true } }
+                    { displayName: 'col1', roles: { 'Category': true } },
+                    { displayName: 'col2', roles: { 'Size': true } }
                 ]
             };
             var dataViewMetadataTwoColumnsWithoutRoles: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', type: ValueType.fromDescriptor({ text: true }) },
-                    { name: 'col2', type: ValueType.fromDescriptor({ numeric: true }) }
+                    { displayName: 'col1', type: ValueType.fromDescriptor({ text: true }) },
+                    { displayName: 'col2', type: ValueType.fromDescriptor({ numeric: true }) }
                 ]
             };
             var dataViewMetadataThreeColumns: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: { 'Category': true } },
-                    { name: 'col2', roles: { 'Y': true } },
-                    { name: 'col3', roles: { 'X': true } }
+                    { displayName: 'col1', roles: { 'Category': true } },
+                    { displayName: 'col2', roles: { 'Y': true } },
+                    { displayName: 'col3', roles: { 'X': true } }
                 ]
             };
 
@@ -787,7 +788,7 @@ module powerbitests {
         it('Map.createDefaultValueColumns', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: { 'Category': true } }
+                    { displayName: 'col1', roles: { 'Category': true } }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -801,8 +802,9 @@ module powerbitests {
             };
             var expected = [{
                 source: {
-                    name: 'col',
+                    displayName: 'col',
                     isMeasure: true,
+                    queryName: '',
                     roles: { Size: true },
                     type: ValueType.fromDescriptor({ numeric: true }),
                     isAutoGeneratedColumn: true
@@ -816,8 +818,8 @@ module powerbitests {
         it('Map.createDefaultValueColumns with Gradient',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1', roles: { 'Category': true } },
-                    { name: 'col2', roles: { 'Gradient': true } },
+                    { displayName: 'col1', roles: { 'Category': true } },
+                    { displayName: 'col2', roles: { 'Gradient': true } },
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -835,8 +837,9 @@ module powerbitests {
             };
             var expected = [{
                     source: {
-                        name: 'col',
+                        displayName: 'col',
                         isMeasure: true,
+                        queryName: '',
                         roles: { Size: true },
                         type: ValueType.fromDescriptor({ numeric: true }),
                         isAutoGeneratedColumn: true
@@ -844,7 +847,7 @@ module powerbitests {
                     values: [1, 1, 1, 1, 1]
                 }, {
                     source: {
-                        name: 'col2',
+                        displayName: 'col2',
                         roles: { Gradient: true }
                     },
                     values: [12, 1, 155, 543, 222]
@@ -856,8 +859,8 @@ module powerbitests {
         it('Map.tooltipInfo single series',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -880,7 +883,7 @@ module powerbitests {
             var latIndex = -1;
             var longIndex = -1;
             var categoryValue = dataView.categorical.categories[0].values[0];
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var seriesInfo = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, longIndex, latIndex, colors);
             var value = seriesInfo.sizeValuesForGroup[0].value;
             var tooltipInfo: powerbi.visuals.TooltipDataItem[] = powerbi.visuals.TooltipBuilder.createTooltipInfo(powerbi.visuals.mapProps.general.formatString, dataView.categorical.categories, categoryValue, dataView.categorical.values, value, null, 0);
@@ -938,7 +941,7 @@ module powerbitests {
             var latIndex = -1;
             var longIndex = -1;
             var categoryValue = dataView.categorical.categories[0].values[0];
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var seriesInfo = Map.calculateSeriesInfo(dataView.categorical.values.grouped(), groupIndex, sizeIndex, longIndex, latIndex, colors);
             var value = seriesInfo.sizeValuesForGroup[0].value;
             var tooltipInfo: powerbi.visuals.TooltipDataItem[] = powerbi.visuals.TooltipBuilder.createTooltipInfo(powerbi.visuals.mapProps.general.formatString, dataView.categorical.categories, categoryValue, dataView.categorical.values, value, null, 0);
@@ -968,7 +971,6 @@ module powerbitests {
                 selected: true,
                 identity: null,
                 labeltext: "Test Label",
-                showLabel: true,
             }];
             
             var mockLayout: powerbi.visuals.ILabelLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);            
@@ -1018,7 +1020,6 @@ module powerbitests {
                 selected: true,
                 identity: null,
                 labeltext: 'Test Label',
-                showLabel: true,
                 value: 0,
             }];
 
@@ -1069,7 +1070,6 @@ module powerbitests {
                 selected: true,
                 identity: null,
                 labeltext: "Test Label",
-                showLabel: false,
             }];
 
             var mockLayout: powerbi.visuals.ILabelLayout = DataLabelUtils.getMapLabelLayout(mockDatalabelSettings);
@@ -1116,7 +1116,6 @@ module powerbitests {
                 selected: true,
                 identity: null,
                 labeltext: "Test Label",
-                showLabel: false,
                 value: 0,
             }];
 
@@ -1144,7 +1143,7 @@ module powerbitests {
         it('Map.tooltipInfo no series, no values', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
+                    { displayName: 'col1' },
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -1162,7 +1161,7 @@ module powerbitests {
             var latIndex = -1;
             var longIndex = -1;
             var categoryValue = dataView.categorical.categories[0].values[0];
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var valueColumns: powerbi.DataViewValueColumns = Map.createDefaultValueColumns(dataView.categorical);
             var seriesInfo = Map.calculateSeriesInfo(valueColumns.grouped(), groupIndex, sizeIndex, latIndex, longIndex, colors);
             var value = seriesInfo.sizeValuesForGroup[0].value;
@@ -1174,13 +1173,13 @@ module powerbitests {
         it('Map shows warning with no Location set', () => {
             var dataView: powerbi.DataView = {
                 metadata: {
-                    columns: [{ name: 'NotLocation', roles: {'NotCategory': true, }, }],
+                    columns: [{ displayName: 'NotLocation', roles: {'NotCategory': true, }, }],
                 }
             };
 
             var options: powerbi.VisualDataChangedOptions = {
                 dataViews: [dataView, ],
-            }
+            };
 
             var warningSpy = jasmine.createSpy('warning');
 
@@ -1221,7 +1220,7 @@ module powerbitests {
 
             var options: powerbi.VisualDataChangedOptions = {
                 dataViews: [dataView, ],
-            }
+            };
 
             var warningSpy = jasmine.createSpy('warning');
 
@@ -1256,13 +1255,13 @@ module powerbitests {
         it('Map does not show warning with location set', () => {
             var dataView: powerbi.DataView = {
                 metadata: {
-                    columns: [{ name: 'Location', roles: { 'Category': true, }, }],
+                    columns: [{ displayName: 'Location', roles: { 'Category': true, }, }],
                 }
             };
 
             var options: powerbi.VisualDataChangedOptions = {
                 dataViews: [dataView, ],
-            }
+            };
 
             var warningSpy = jasmine.createSpy('warning');
 
@@ -1399,9 +1398,9 @@ module powerbitests {
         it('Map.calculateSeriesInfo - Gradient color',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true, roles: { 'Gradient': true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true, roles: { 'Gradient': true } }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -1426,7 +1425,7 @@ module powerbitests {
             var sizeIndex = 0;
             var latIndex = -1;
             var longIndex = -1;
-            var colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
             var objectDefinitions: powerbi.DataViewObjects[] = [
                 { dataPoint: { fill: { solid: { color: "#d9f2fb" } } } },
                 { dataPoint: { fill: { solid: { color: "#b1eab7" } } } }

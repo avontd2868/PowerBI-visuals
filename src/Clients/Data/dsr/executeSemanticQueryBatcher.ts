@@ -86,12 +86,12 @@ module powerbi.data.dsr {
 
                 // Skip the queries that were cancelled
                 if (!query.execution.rejected()) {
-                    var dataSourceGroup = this.findDataSourceGroup(query.options.dataSource, dataSourceGroups);
+                    var dataSourceGroup = this.findDataSourceGroup(query.options.dataSource, dataSourceGroups, query.options.cacheResponseOnServer);
                     if (dataSourceGroup) {
                         dataSourceGroup.queuedExecutions.push(query);
                     }
                     else {
-                        var newDataSourceGroup: QueriesByDataSource = { dataSource: <ExecuteSemanticQueryDataSource>query.options.dataSource, queuedExecutions: [query] };
+                        var newDataSourceGroup: QueriesByDataSource = { dataSource: <ExecuteSemanticQueryDataSource>query.options.dataSource, queuedExecutions: [query], cacheResponseOnServer: query.options.cacheResponseOnServer };
                         dataSourceGroups.push(newDataSourceGroup);
                     }
                 }
@@ -100,10 +100,10 @@ module powerbi.data.dsr {
             return dataSourceGroups;
         }
 
-        private findDataSourceGroup(dataSource: DataProviderDataSource, dataSourceGroups: QueriesByDataSource[]): QueriesByDataSource {
+        private findDataSourceGroup(dataSource: DataProviderDataSource, dataSourceGroups: QueriesByDataSource[], shouldCache: boolean): QueriesByDataSource {
             for (var i = 0, ilen = dataSourceGroups.length; i < ilen; ++i) {
                 var dataSourceGroup = dataSourceGroups[i];
-                if (JsonComparer.equals(dataSource, dataSourceGroup.dataSource))
+                if (JsonComparer.equals(dataSource, dataSourceGroup.dataSource) && dataSourceGroup.cacheResponseOnServer === shouldCache)
                     return dataSourceGroup;
             }
 
@@ -126,6 +126,7 @@ module powerbi.data.dsr {
                 dataSource: dataSourceGroup.dataSource,
                 commands: commands,
                 promises: promises,
+                cacheResponseOnServer: dataSourceGroup.cacheResponseOnServer
             };
         }
 
@@ -181,12 +182,14 @@ module powerbi.data.dsr {
                 dataSource: batch.dataSource,
                 commands: commands,
                 promises: promises,
+                cacheResponseOnServer: batch.cacheResponseOnServer
             };
         }
     }
 
     interface QueriesByDataSource {
         dataSource: ExecuteSemanticQueryDataSource;
+        cacheResponseOnServer: boolean;
         queuedExecutions: QueuedExecution[];
     }
 }

@@ -45,20 +45,20 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     roles: { 'Y': true },
                     isMeasure: true,
                     objects: { general: { formatString: '$0' } },
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     roles: { 'MinValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col3',
+                    displayName: 'col3',
                     roles: { 'MaxValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col4',
+                    displayName: 'col4',
                     roles: { 'TargetValue': true },
                     isMeasure: true
                 }],
@@ -74,7 +74,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -308,20 +308,20 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     roles: { 'Y': true },
                     isMeasure: true,
                     objects: { general: { formatString: '$0' } },
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     roles: { 'MinValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col3',
+                    displayName: 'col3',
                     roles: { 'MaxValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col4',
+                    displayName: 'col4',
                     roles: { 'TargetValue': true },
                     isMeasure: true
                 }],
@@ -332,20 +332,20 @@ module powerbitests {
         var dataViewMetadataNumbers: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     roles: { 'Y': true },
                     isMeasure: true,
                     objects: { general: { formatString: '0.00' } },
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     roles: { 'MinValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col3',
+                    displayName: 'col3',
                     roles: { 'MaxValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col4',
+                    displayName: 'col4',
                     roles: { 'TargetValue': true },
                     isMeasure: true
                 }],
@@ -571,7 +571,7 @@ module powerbitests {
                 adjustedTotal: 200,
                 total: 200,
                 metadataColumn: {
-                    name: 'col1',
+                    displayName: 'col1',
                     roles: { Y: true },
                     isMeasure: true,
                     objects: { general: { formatString: '$0' } },
@@ -635,7 +635,7 @@ module powerbitests {
                 v.init({
                     element: element,
                     host: hostServices,
-                    style: powerbi.common.services.visualStyles.create(),
+                    style: powerbi.visuals.visualStyles.create(),
                     viewport: {
                         height: element.height(),
                         width: element.width()
@@ -915,7 +915,7 @@ module powerbitests {
         v.init({
             element: element,
             host: hostServices,
-            style: powerbi.common.services.visualStyles.create(),
+            style: powerbi.visuals.visualStyles.create(),
             viewport: {
                 height: element.height(),
                 width: element.width()
@@ -931,20 +931,20 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     roles: { 'Y': true },
                     isMeasure: true,
                     objects: { general: { formatString: '$0' } }
                 }, {
-                    name: 'col2',
+                    displayName: 'col2',
                     roles: { 'MinValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col3',
+                    displayName: 'col3',
                     roles: { 'MaxValue': true },
                     isMeasure: true
                 }, {
-                    name: 'col4',
+                    displayName: 'col4',
                     roles: { 'TargetValue': true },
                     isMeasure: true
                 }],
@@ -961,7 +961,7 @@ module powerbitests {
         v.init({
             element: element,
             host: hostServices,
-            style: powerbi.common.services.visualStyles.create(),
+            style: powerbi.visuals.visualStyles.create(),
             viewport: {
                 height: element.height(),
                 width: element.width()

@@ -220,9 +220,10 @@ module powerbi {
         */
         export function svgEllipsis(textElement: SVGTextElement, maxWidth: number): void {
             var properties = getSvgMeasurementProperties(textElement);
+            var originalText = properties.text;
             var tailoredText = getTailoredTextOrDefault(properties, maxWidth);
 
-            if (properties.text !== tailoredText) {
+            if (originalText !== tailoredText) {
                 textElement.textContent = tailoredText;
             }
         }

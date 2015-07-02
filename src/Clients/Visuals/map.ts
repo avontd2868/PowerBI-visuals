@@ -71,6 +71,7 @@ module powerbi.visuals {
         fill: string;
         stroke: string;
         strokeWidth: number;
+        key: string;
     }
 
     /** Used because data points used in D3 pie layouts are placed within a container with pie information */
@@ -222,7 +223,6 @@ module powerbi.visuals {
                             identity: SelectionId.createWithId(canvasDataPoint.categoryIdentity),
                             selected: false,
                             labelFill: labelSettings.overrideDefaultColor ? labelSettings.labelColor : mapBubble.fill,
-                            showLabel: true,                            
                         });
                     }
                     else {
@@ -245,7 +245,6 @@ module powerbi.visuals {
                                 identity: SelectionId.createWithIds(canvasDataPoint.categoryIdentity, mapSlice.seriesId),
                                 selected: false,
                                 labelFill: labelSettings.labelColor,
-                                showLabel: true,
                             });
                         }
                         if (interactivityService) {
@@ -277,7 +276,7 @@ module powerbi.visuals {
                 }
             }
 
-            var bubbles = this.bubbleGraphicsContext.selectAll(".bubble").data(data.bubbleData);
+            var bubbles = this.bubbleGraphicsContext.selectAll(".bubble").data(data.bubbleData, (d: MapBubble) => d.identity.getKey());
 
             bubbles.enter()
                 .append("circle")
@@ -309,7 +308,7 @@ module powerbi.visuals {
             var slices = sliceContainers.selectAll(".slice")
                 .data(function (d) {
                     return sliceLayout(d);
-                });
+                }, (d: MapSliceContainer) => d.data.identity.getKey());
 
             slices.enter()
                 .append("path")
@@ -481,6 +480,8 @@ module powerbi.visuals {
                     var index = sizeValueForGroup.index;
                     var tooltipInfo: TooltipDataItem[] = TooltipBuilder.createTooltipInfo(formatStringProp, categorical.categories, categoryValue, categorical.values, value, null, index);
                     var paths = canvasDataPoint.paths;
+                    var identity = SelectionId.createWithId(canvasDataPoint.categoryIdentity);
+                    var idKey = identity.getKey();
                     for (var pathIndex = 0, pathCount = paths.length; pathIndex < pathCount; pathIndex++) {
                         var path = paths[pathIndex];
                         this.setMaxShapeDimension(path.absoluteBounds.width, path.absoluteBounds.height);
@@ -491,8 +492,9 @@ module powerbi.visuals {
                             stroke: canvasDataPoint.seriesInfo.sizeValuesForGroup[0].stroke,
                             strokeWidth: strokeWidth,
                             tooltipInfo: tooltipInfo,
-                            identity: SelectionId.createWithId(canvasDataPoint.categoryIdentity),
+                            identity: identity,
                             selected: false,
+                            key: JSON.stringify({ id: idKey, pIdx: pathIndex }),
                         });
                     }
                 }
@@ -511,7 +513,7 @@ module powerbi.visuals {
 
             var hasSelection = dataHasSelection(data.shapeData);
 
-            var shapes = this.shapeGraphicsContext.selectAll("polygon").data(data.shapeData);
+            var shapes = this.shapeGraphicsContext.selectAll("polygon").data(data.shapeData, (d: MapShape) => d.key);
 
             shapes.enter()
                 .append("polygon")
@@ -866,12 +868,22 @@ module powerbi.visuals {
 
             for (var i = 0; i < seriesCount; ++i) {
                 var seriesValues = grouped[i];
-                var sizeValueForCategory = sizeMeasureIndex >= 0 ? seriesValues.values[sizeMeasureIndex].values[groupIndex] : null;
+                var sizeValueForCategory: any;
+                var measureQueryName: string;
+                if (sizeMeasureIndex >= 0) {
+                    var sizeMeasure = seriesValues.values[sizeMeasureIndex];
+                    sizeValueForCategory = sizeMeasure.values[groupIndex];
+                    measureQueryName = sizeMeasure.source.queryName;
+                }
+                else {
+                    sizeValueForCategory = null;
+                    measureQueryName = '';
+                }
                 if (sizeValueForCategory !== null || sizeMeasureIndex < 0) {
                     var identity = seriesValues.identity ? SelectionId.createWithId(seriesValues.identity) : SelectionId.createNull();
                     var color = seriesSource !== undefined
                         ? colorHelper.getColorForSeriesValue(seriesValues.objects, seriesSource, seriesValues.name)
-                        : colorHelper.getColorForMeasure(seriesValues.objects, groupIndex);
+                        : colorHelper.getColorForMeasure(seriesValues.objects, measureQueryName);
 
                     legendData.push({
                         color: color,
@@ -906,14 +918,25 @@ module powerbi.visuals {
 
             for (var i = 0; i < seriesCount; ++i) {
                 var seriesValues = grouped[i];
-                var sizeValueForCategory = sizeMeasureIndex >= 0 ? seriesValues.values[sizeMeasureIndex].values[groupIndex] : null;
+                var sizeValueForCategory: any;
+                var measureQueryName: string;
+                if (sizeMeasureIndex >= 0) {
+                    var sizeMeasure = seriesValues.values[sizeMeasureIndex];
+                    sizeValueForCategory = sizeMeasure.values[groupIndex];
+                    measureQueryName = sizeMeasure.source.queryName;
+                }
+                else {
+                    sizeValueForCategory = null;
+                    measureQueryName = '';
+                }
+
                 var objects = (objectsDefinitions && objectsDefinitions[groupIndex]) || (seriesValues && seriesValues.objects);
 
                 if (sizeValueForCategory !== null || sizeMeasureIndex < 0) {
                     var seriesIdentity = grouped[i].identity;
                     var color = seriesSource !== undefined
                         ? colorHelper.getColorForSeriesValue(objects, seriesSource, seriesValues.name)
-                        : colorHelper.getColorForMeasure(objects, groupIndex);
+                        : colorHelper.getColorForMeasure(objects, measureQueryName);
 
                     var colorRgb = jsCommon.color.parseRgb(color);
                     var stroke = jsCommon.color.rgbToHexString(jsCommon.color.darken(colorRgb, Map.StrokeDarkenColorValue));
@@ -974,7 +997,7 @@ module powerbi.visuals {
                 }
 
                 // Check the category name
-                var categoryName = categorical.categories[0].source.name;
+                var categoryName = categorical.categories[0].source.displayName;
                 var geotaggedResult = geoTaggingAnalyzerService.getFieldType(categoryName);
                 if (geotaggedResult)
                     return geotaggedResult;
@@ -1027,7 +1050,7 @@ module powerbi.visuals {
             }
 
             var source: DataViewMetadataAutoGeneratedColumn = {
-                name: "col", isMeasure: true, roles: { "Size": true }, type: ValueType.fromDescriptor({ numeric: true }), isAutoGeneratedColumn: true
+                displayName: "col", isMeasure: true, queryName: '', roles: { "Size": true }, type: ValueType.fromDescriptor({ numeric: true }), isAutoGeneratedColumn: true
             };
 
             var categoricalValues: DataViewValueColumn[] = [{
@@ -1205,7 +1228,7 @@ module powerbi.visuals {
                             legendDataPoints = [];
 
                         var dvValues = categorical.values;
-                        var title = dvValues && dvValues.source ? dvValues.source.name : "";
+                        var title = dvValues && dvValues.source ? dvValues.source.displayName : "";
                         this.legendData = { title: title, dataPoints: legendDataPoints };
                         this.renderLegend(this.legendData);
                     });

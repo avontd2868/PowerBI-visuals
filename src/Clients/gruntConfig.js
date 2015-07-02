@@ -14,24 +14,27 @@ function getUglifyJsOptions(outputDir, isDebug) {
         sourceMapIncludeSources: true,
         sourceMapIn: outputDir + '/<%= name %>.js.map', // input sourcemap from a previous compilation
         screwIE8: true,
+        mangle: !isDebug,
+        beautify: isDebug,
         compress: {
             drop_console: true,
             pure_funcs: ['debug.assertValue', 'debug.assertFail', 'debug.assert', 'debug.assertAnyValue'],
             warnings: false,
             dead_code: true,
             sequences: true,
+            properties: true,
             conditionals: true,
             comparisons: true,
             booleans: true,
             cascade: true,
             unused: true,
             loops: true,
+            if_return: true,
+            join_vars: true,
             global_defs: {
                 'DEBUG': !isDebug,
             }
         },
-        mangle: !isDebug,
-        beautify: isDebug
     };
 }
 

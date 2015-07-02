@@ -5,6 +5,9 @@
 //-----------------------------------------------------------------------
 
 module powerbi {
+
+    export declare var build;
+
     /**
      * Do not blindly copy ng.IRequestConfig as the idea of this interface is 
      * to lessen flexibility for cleaner code. We may eventually need to add 
@@ -49,9 +52,8 @@ module powerbi {
         post<TContract>(url: string, data: any, additionalRequestConfig: IRequestOptions): HttpPromise<TContract>;
         put<TContract>(url: string, data: any, additionalRequestConfig: IRequestOptions): HttpPromise<TContract>;
         delete<TContract>(url: string, additionalRequestConfig: IRequestOptions): HttpPromise<TContract>;
-        powerbiRequestOptions(activity?: ITelemetryEvent, telemetryDescription?: string): IRequestOptions;
+        powerbiRequestOptions(): IRequestOptions;
         defaultRetryRequestOptions(): IRequestOptions;
-        setTelemetryHeaders(options: IRequestOptions, activity?: ITelemetryEvent): void;
 
         // TODO: Change this to an event bridge event once event bridge is moved to common code.
         registerResponseCallback(callback: (success: boolean) => void): void;

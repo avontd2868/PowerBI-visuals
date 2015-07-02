@@ -114,8 +114,7 @@ module powerbi.data {
         public rewriteCacheEntries(providerType: string, rewriter: data.DataProviderCacheRewriter): void {
             var provider = this.getProvider(providerType);
             provider.rewriteCacheEntries(rewriter);
-                
-    }
+        }
     }
 
     class SingleExecutionDataProxy implements ISingleExecutionDataProxy {
@@ -212,7 +211,7 @@ module powerbi.data {
                 // (1)
                 var providerExecution = provider.execute(options);
 
-                dataViewDeferred.promise.catch(() => providerExecution.reject(new UnknownClientError()));
+                dataViewDeferred.promise.catch(() => providerExecution.reject(new InvalidDataResponseClientError()));
 
                 providerExecution.then(
                     data => {
@@ -226,7 +225,7 @@ module powerbi.data {
                             dataViewDeferred.resolve({ dataProviderResult: transformed, dataViewSource: { data: data } });
                         }
                         else {
-                            dataViewDeferred.reject(new UnknownClientError());
+                            dataViewDeferred.reject(new InvalidDataFormatClientError());
                         }
                     },
                     error => {
@@ -235,7 +234,7 @@ module powerbi.data {
 
                 var promise = RejectablePromise2<DataProxyQueryExecutionResult, IClientError>(dataViewDeferred);
                 // if promise is rejected, reject the provider execution
-                promise.catch(error => providerExecution.reject(error || new UnknownClientError()));
+                promise.catch(error => providerExecution.reject(error || new InvalidDataResponseClientError()));
                 return promise;
             }
             else {

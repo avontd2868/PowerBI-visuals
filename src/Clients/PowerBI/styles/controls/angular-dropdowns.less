@@ -47,20 +47,20 @@
         > a {
             color: @neutralPrimaryColor;
             cursor: pointer;
-        }
 
-        &:hover {
-            background: @themeLightColor;
+            &:hover {
+                background: @themeLightColor;
+            }
         }
 
         > span {
             color: @neutralTertiaryColor;
             cursor: default;
             font-size: 11px;
-           
-            &:hover {
-                background: @whiteColor;
-            }
+        }
+
+        &:hover {
+            background: @whiteColor;
         }
 
         i {
@@ -71,6 +71,11 @@
         .dropdown-separator {
             padding: 0px;
             border-bottom: 1px solid @secondaryChromeColor;
+            border-style: inset;
+            border-width: 1px;
+            display: block;
+            margin-left: 20px;
+            margin-right: 20px;
         }
     }
 

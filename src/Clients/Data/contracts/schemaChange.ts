@@ -10,7 +10,7 @@ module powerbi.data {
         Describes a change to a schema.
 
         The contents of this file are mapped to C# objects representing schema changes in
-        the Power BI designer.  Any changes to this file require a corresponding update to
+        Power BI Desktop.  Any changes to this file require a corresponding update to
         the serialization code in
         <dataexplorer>\Private\Product\Client\PowerBIClientWindows\Modeling\SchemaChange.cs
     */

@@ -1,0 +1,98 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="Microsoft.InfoNav.Build.Tasks.TsLint" AssemblyFile="$(INFONAV_TOOLS)\BuildTasks\Microsoft.InfoNav.Build.Tasks.dll"/>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
+  <PropertyGroup Condition="!$(VisualsStandaloneBuild)">
+	<NodeJsPath>$(INFONAV_TOOLS)\NodeJs\node</NodeJsPath>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$(VisualsStandaloneBuild)">
+	<NodeJsPath>node</NodeJsPath>
+  </PropertyGroup>
+  
+  <PropertyGroup>	
+    <TsLintPath>$(INFONAV_TOOLS)\TsLint</TsLintPath>
+    <TsLinter>$(NodeJsPath) $(TsLintPath)\bin\tslint-cli.js</TsLinter>
+    <TsLintRulesJson>$(TsLintPath)\tslint.json</TsLintRulesJson>    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!$(VisualsStandaloneBuild)">
+    <GruntJs>$(NodeJsPath) $(INFONAV_TOOLS)\Grunt\node_modules\grunt-cli\bin\grunt</GruntJs>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$(VisualsStandaloneBuild)">
+    <GruntJs>grunt</GruntJs>
+  </PropertyGroup>
+
+  <!-- Override these targets to stop CSC from being invoked both inside and outside Scopas -->
+  <!-- <Target Name="CoreCompile" />
+  <Target Name="IncrementalClean" /> -->
+
+  <!-- Build sequence -->
+  <PropertyGroup>
+    <CompileDependsOn>
+      PreCompile;
+      $(CompileDependsOn);
+    </CompileDependsOn>
+    <CleanDependsOn>
+      CleanClientObj;
+      $(CleanDependsOn);
+    </CleanDependsOn>
+    <BuiltProjectOutputGroupDependsOn>
+      PreCompile;
+      $(BuiltProjectOutputGroupDependsOn);
+    </BuiltProjectOutputGroupDependsOn>
+  </PropertyGroup>
+
+  <Target Name="CleanClientObj" BeforeTargets="Rebuild">
+    <RemoveDir Directories="$(OutputPath)"/>
+  </Target>
+
+  <!-- Bond compile -->
+  <Import Condition="!$(VisualsStandaloneBuild)" Project="InfoNav.Bond.targets" />
+
+  <!-- Clean output directory -->
+  <Target Name="PreCompile">
+    <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+  </Target>
+
+  <!-- TS Lint -->
+  <Target Name="TypeScriptLint" AfterTargets="Build" Inputs="@(TypeScriptCompile)" Outputs="@(TypeScriptCompileTargetOutputs)" Condition="'$(TypeScriptLintingEnabled)' == 'true'">
+    <TsLint TsSourceFiles="@(TypeScriptCompile)" TsLintRulesJson="$(TsLintRulesJson)" />
+  </Target>
+
+  <!-- TypeScript compile -->
+  <Import Project="PowerBI.Client.Build.TypeScript.targets" />
+
+  <!-- AngularPrefetch -->
+  <Import Project="InfoNav.Angular.targets" Condition="!$(VisualsStandaloneBuild)"/>
+
+  <ItemGroup>
+    <JsFiles Include="$(TypeScriptDebugOutputFile)" />
+    <JsMinFiles Include="$(TypeScriptMinifiedOutputFile)" />
+    <JsNonMinFiles Include="$(TypeScriptNonMinifiedRetailOutputFile)" />
+    <JsSourceMapFiles Include="$(TypeScriptSourceMapFile);$(TypeScriptMinifiedSourceMapFile)" />
+    <LessFiles Include="$(CssOutputPath)\**\*.less" />
+  </ItemGroup>
+
+  <!-- Grunt compile -->
+  <Target Name="GruntCompile" AfterTargets="TypeScriptCompile" Inputs="@(JsFiles);@(LessFiles)" Outputs="@(JsMinFiles);@(CssOutputPath)" Condition="Exists('$(OutputPath)$(AssemblyName).d.ts')">
+    <Exec Command="$(GruntJs) --no-color --outputDir=$(OutputPath) --name=$(AssemblyName) --cssDir=$(CssOutputPath) --projectDir=$(MSBuildProjectDirectory) --configuration=$(Configuration)" />
+  </Target>
+
+  <!-- Copy final output to target directory -->
+  <Target Name="CopyClientFilesToOutputDirectory" AfterTargets="GruntCompile">
+    <Message Text="Copying output for $(MSBuildProjectFile)..." Importance="High" />
+    <ItemGroup>
+      <CssFiles Include="$(CssOutputPath)\*.css" />
+      <FontFiles Include="$(MSBuildProjectDirectory)\fonts\*.*" />
+      <ImagesFiles Include="$(MSBuildProjectDirectory)\images\**\*.*" Exclude="$(MSBuildProjectDirectory)\images\sprite-src\*.*" />
+    </ItemGroup>
+    <Copy Condition=" '$(CssDropPath)' != '' " SourceFiles="@(CssFiles)" DestinationFiles="@(CssFiles->'$(CssDropPath)\%(Filename)%(Extension)')" />
+    <Copy Condition=" '$(FontDropPath)' != '' " SourceFiles="@(FontFiles)" DestinationFiles="@(FontFiles->'$(FontDropPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy Condition=" '$(ImageDropPath)' != '' " SourceFiles="@(ImagesFiles)" DestinationFiles="@(ImagesFiles->'$(ImageDropPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy Condition="Exists('$(OutputPath)$(AssemblyName).d.ts')" SourceFiles="@(JsFiles);@(JsMinFiles)" DestinationFiles="@(JsFiles->'$(TypeScriptBinaryDropPath)\%(Filename)%(Extension)');@(JsMinFiles->'$(TypeScriptBinaryDropPath)\%(Filename)%(Extension)')" />
+    <Copy Condition="Exists('$(OutputPath)$(AssemblyName).d.ts') And Exists('$(TypeScriptNonMinifiedRetailOutputFile)')" SourceFiles="@(JsNonMinFiles)" DestinationFiles="@(JsNonMinFiles->'$(TypeScriptBinaryDropPath)\%(Filename)%(Extension)');" />
+    <Copy Condition="Exists('$(OutputPath)$(AssemblyName).d.ts') And '$(CopyJsSourceMapFiles)'=='true'" SourceFiles="@(JsSourceMapFiles)" DestinationFiles="@(JsSourceMapFiles->'$(TypeScriptBinaryDropPath)\%(Filename)%(Extension)')" />
+  </Target>
+</Project>

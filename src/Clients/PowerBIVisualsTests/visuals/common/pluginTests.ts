@@ -23,11 +23,11 @@ module powerbitests {
         var dataViewMetadataTwoColumn: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'col2',
+                    displayName: 'col2',
                     isMeasure: true,
                     type: DataShapeUtility.describeDataType(SemanticType.Number)
                 }
@@ -42,7 +42,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()

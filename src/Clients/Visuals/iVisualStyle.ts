@@ -44,6 +44,8 @@ module powerbi {
         * and gauges until the conditional formatting feature is implemented.
         */
         getSentimentColors(): IColorInfo[];
+
+        getBasePickerColors(): IColorInfo[];
     }
 
     export interface IColorInfo extends IStyleInfo {

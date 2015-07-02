@@ -14,10 +14,6 @@ describe("legendChart DOM validation", () => {
     var element: JQuery;
     var viewport: powerbi.IViewport;
     var legend: ILegend;
-    var colorStyle = 'background-color: {0};';
-    var defaultLegendHeight = 31;
-    var scrollMargin = 15;
-    var defaultLegendWidth = 300 * 0.3;
     var interactivityService: IInteractivityService;
     var hostServices: IVisualHostServices;
 
@@ -278,23 +274,6 @@ describe("legendChart DOM validation", () => {
             expect($(labels.get(i)).text()).toBe(expectedDatum.label);
             expect($(icons.get(i)).css('fill')).toBe(expectedDatum.color);
         }
-    }
-
-    function getLegendData(): powerbi.visuals.LegendDataPoint[]{
-        var legendData: powerbi.visuals.LegendDataPoint[] = [
-            { label: 'California', color: 'red', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Washington', color: 'green', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Idaho', color: 'brown', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Alaska', color: 'white', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Montana', color: 'black', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Nevada', color: 'blue', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'New York', color: 'pink', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Texas', color: 'purple', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Louisiana', color: 'yellow', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false },
-            { label: 'Florida', color: 'orange', icon: LegendIcon.Line, identity: powerbi.visuals.SelectionId.createNull(), selected: false }
-        ];
-
-        return legendData;
     }
 
     function getLotsOfLegendData(): powerbi.visuals.LegendDataPoint[]{

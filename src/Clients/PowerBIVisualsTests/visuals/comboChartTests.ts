@@ -43,10 +43,10 @@ module powerbitests {
         function metadata(properties?: ComboChartDataViewObjects): powerbi.DataViewMetadata {
             return {
                 columns: [
-                    { name: 'col1', type: DataShapeUtility.describeDataType(SemanticType.String) },
-                    { name: 'col2', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col3', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col4', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col1', queryName: 'col1', type: DataShapeUtility.describeDataType(SemanticType.String) },
+                    { displayName: 'col2', queryName: 'col2', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col3', queryName: 'col3', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col4', queryName: 'col4', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
                 ],
                 properties: properties,
             };
@@ -55,10 +55,10 @@ module powerbitests {
         function numericMetadata(objects?: ComboChartDataViewObjects): powerbi.DataViewMetadata {
             return {
                 columns: [
-                    { name: 'col1', type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col2', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col3', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                    { name: 'col4', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col1', queryName: 'col1', type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col2', queryName: 'col2', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col3', queryName: 'col3', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                    { displayName: 'col4', queryName: 'col4', isMeasure: true, type: DataShapeUtility.describeDataType(SemanticType.Number) },
                 ],
                 objects: objects,
             };
@@ -278,7 +278,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -312,7 +312,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -352,7 +352,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -409,7 +409,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -443,7 +443,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -480,7 +480,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -519,7 +519,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -556,7 +556,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -595,7 +595,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -633,7 +633,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -666,7 +666,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -719,7 +719,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -761,7 +761,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -791,7 +791,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -821,7 +821,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -862,7 +862,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -905,7 +905,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -934,6 +934,82 @@ module powerbitests {
                 //Verify begin&end labels
                 expect(labels[0].textContent).toBe('0.00');
                 expect(labels[labels.length - 1].textContent).toBe('1,000.00');
+
+                done();
+            }, DefaultWaitForRender);
+        });
+
+        it('Verify force to zero works for a positive domain range',(done) => {
+            v.init({
+                element: element,
+                host: mocks.createVisualHostServices(),
+                style: powerbi.visuals.visualStyles.create(),
+                viewport: {
+                    height: element.height(),
+                    width: element.width()
+                }
+            });
+            var dataViewMetadata = metadata();
+            var dataView =
+                {
+                    metadata: dataViewMetadata,
+                    categorical: {
+                        categories: [{
+                            source: dataViewMetadata.columns[0],
+                            values: ['John Domo', 'Delta Force', 'Jean Tablau']
+                        }],
+                        values: DataViewTransform.createValueColumns([
+                            {
+                                source: dataViewMetadata.columns[1],
+                                values: [4000, 6000, 7000],
+                                subtotal: 17000
+                            }])
+                    }
+                };
+            v.onDataChanged({ dataViews: [dataViewInAnotherDomain(), dataView] });
+            setTimeout(() => {
+                var axisLabels = $('.axisGraphicsContext .y.axis').last().find('.tick');
+                //Verify begin&end labels
+                expect(axisLabels[0].textContent).toBe('0K');
+                expect(axisLabels[axisLabels.length - 1].textContent).toBe('7K');
+
+                done();
+            }, DefaultWaitForRender);
+        });
+
+        it('Verify force to zero is not set for a negative domain range',(done) => {
+            v.init({
+                element: element,
+                host: mocks.createVisualHostServices(),
+                style: powerbi.visuals.visualStyles.create(),
+                viewport: {
+                    height: element.height(),
+                    width: element.width()
+                }
+            });
+            var dataViewMetadata = metadata();
+            var dataView =
+                {
+                    metadata: dataViewMetadata,
+                    categorical: {
+                        categories: [{
+                            source: dataViewMetadata.columns[0],
+                            values: ['John Domo', 'Delta Force', 'Jean Tablau']
+                        }],
+                        values: DataViewTransform.createValueColumns([
+                            {
+                                source: dataViewMetadata.columns[1],
+                                values: [-4000, -6000, -7000],
+                                subtotal: -17000
+                            }])
+                    }
+                };
+            v.onDataChanged({ dataViews: [dataViewInAnotherDomain(), dataView] });
+            setTimeout(() => {
+                var axisLabels = $('.axisGraphicsContext .y.axis').last().find('.tick');
+                //Verify begin&end axis labels
+                expect(axisLabels[0].textContent).toBe('-7,000.00');
+                expect(axisLabels[axisLabels.length - 1].textContent).toBe('-4,000.00');
 
                 done();
             }, DefaultWaitForRender);

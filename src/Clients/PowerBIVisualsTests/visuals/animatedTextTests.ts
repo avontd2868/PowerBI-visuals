@@ -15,14 +15,14 @@ module powerbitests {
 
         it('AnimatedText_getSeedFontHeight does not exceed style maximum',() => {
             var animatedText = new AnimatedText('animatedText');
-            animatedText.style = powerbi.common.services.visualStyles.create();
+            animatedText.style = powerbi.visuals.visualStyles.create();
 
             expect(animatedText.getSeedFontHeight(100, 90)).toBeLessThan(100);
         });
 
         it('AnimatedText_getSeedFontHeight returns a smaller number than the height',() => {
             var animatedText = new AnimatedText('animatedText');
-            animatedText.style = powerbi.common.services.visualStyles.create();
+            animatedText.style = powerbi.visuals.visualStyles.create();
 
             expect(animatedText.getSeedFontHeight(100, 90)).toBeLessThan(100);
         });
@@ -99,7 +99,7 @@ module powerbitests {
             v.hostServices = powerbitests.mocks.createVisualHostServices();
             v.svg = d3.select(element.get(0)).append('svg');
             v.graphicsContext = v.svg.append('g');
-            v.style = powerbi.common.services.visualStyles.create();
+            v.style = powerbi.visuals.visualStyles.create();
             done();
         });
 

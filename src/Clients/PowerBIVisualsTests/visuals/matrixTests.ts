@@ -27,21 +27,21 @@ module powerbitests {
     var dataTypeBoolean = DataShapeUtility.describeDataType(SemanticType.Boolean);
     var dataTypeWebUrl = DataShapeUtility.describeDataType(SemanticType.String, 'WebUrl');
 
-    var rowGroupSource1: DataViewMetadataColumn = { name: 'RowGroup1', type: dataTypeString, index: 0 };
-    var rowGroupSource2: DataViewMetadataColumn = { name: 'RowGroup2', type: dataTypeString, index: 1 };
-    var rowGroupSource3: DataViewMetadataColumn = { name: 'RowGroup3', type: dataTypeString, index: 2 };
-    var rowGroupSource3formatted: DataViewMetadataColumn = { name: 'RowGroup3', type: dataTypeString, index: 2, objects: { general: { formatString: '0.0' } } };
-    var rowGroupSource4: DataViewMetadataColumn = { name: 'RowGroup4', type: dataTypeBoolean, index: 9 };
-    var rowGroupSourceWebUrl: DataViewMetadataColumn = { name: 'RowGroupWebUrl', type: dataTypeWebUrl, index: 0 };
-    var columnGroupSource1: DataViewMetadataColumn = { name: 'ColGroup1', type: dataTypeString, index: 3 };
-    var columnGroupSource2: DataViewMetadataColumn = { name: 'ColGroup2', type: dataTypeString, index: 4 };
-    var columnGroupSource3: DataViewMetadataColumn = { name: 'ColGroup3', type: dataTypeString, index: 5 };
-    var columnGroupSource3formatted: DataViewMetadataColumn = { name: 'ColGroup3', type: dataTypeString, index: 5, objects: { general: { formatString: '0.00' } } };
-    var columnGroupSource4: DataViewMetadataColumn = { name: 'ColGroup4', type: dataTypeBoolean, index: 10 };
-    var columnGroupSourceWebUrl: DataViewMetadataColumn = { name: 'ColGroupWebUrl', type: dataTypeWebUrl, index: 0 };
-    var measureSource1: DataViewMetadataColumn = { name: 'Measure1', type: dataTypeNumber, isMeasure: true, index: 6 };
-    var measureSource2: DataViewMetadataColumn = { name: 'Measure2', type: dataTypeNumber, isMeasure: true, index: 7 };
-    var measureSource3: DataViewMetadataColumn = { name: 'Measure3', type: dataTypeNumber, isMeasure: true, index: 8 };
+    var rowGroupSource1: DataViewMetadataColumn = { displayName: 'RowGroup1', queryName: 'RowGroup1', type: dataTypeString, index: 0 };
+    var rowGroupSource2: DataViewMetadataColumn = { displayName: 'RowGroup2', queryName: 'RowGroup2', type: dataTypeString, index: 1 };
+    var rowGroupSource3: DataViewMetadataColumn = { displayName: 'RowGroup3', queryName: 'RowGroup3', type: dataTypeString, index: 2 };
+    var rowGroupSource3formatted: DataViewMetadataColumn = { displayName: 'RowGroup3', queryName: 'RowGroup3', type: dataTypeString, index: 2, objects: { general: { formatString: '0.0' } } };
+    var rowGroupSource4: DataViewMetadataColumn = { displayName: 'RowGroup4', queryName: 'RowGroup4', type: dataTypeBoolean, index: 9 };
+    var rowGroupSourceWebUrl: DataViewMetadataColumn = { displayName: 'RowGroupWebUrl', queryName: 'RowGroupWebUrl', type: dataTypeWebUrl, index: 0 };
+    var columnGroupSource1: DataViewMetadataColumn = { displayName: 'ColGroup1', queryName: 'ColGroup1', type: dataTypeString, index: 3 };
+    var columnGroupSource2: DataViewMetadataColumn = { displayName: 'ColGroup2', queryName: 'ColGroup2', type: dataTypeString, index: 4 };
+    var columnGroupSource3: DataViewMetadataColumn = { displayName: 'ColGroup3', queryName: 'ColGroup3', type: dataTypeString, index: 5 };
+    var columnGroupSource3formatted: DataViewMetadataColumn = { displayName: 'ColGroup3', queryName: 'ColGroup3', type: dataTypeString, index: 5, objects: { general: { formatString: '0.00' } } };
+    var columnGroupSource4: DataViewMetadataColumn = { displayName: 'ColGroup4', queryName: 'ColGroup4', type: dataTypeBoolean, index: 10 };
+    var columnGroupSourceWebUrl: DataViewMetadataColumn = { displayName: 'ColGroupWebUrl', queryName: 'ColGroupWebUrl', type: dataTypeWebUrl, index: 0 };
+    var measureSource1: DataViewMetadataColumn = { displayName: 'Measure1', queryName: 'Measure1', type: dataTypeNumber, isMeasure: true, index: 6 };
+    var measureSource2: DataViewMetadataColumn = { displayName: 'Measure2', queryName: 'Measure2', type: dataTypeNumber, isMeasure: true, index: 7 };
+    var measureSource3: DataViewMetadataColumn = { displayName: 'Measure3', queryName: 'Measure3', type: dataTypeNumber, isMeasure: true, index: 8 };
 
     // ------------
     // | Measure1 |
@@ -3337,21 +3337,21 @@ module powerbitests {
                 var matrix = matrixThreeRowGroupsThreeColumnGroups;
                 var navigator = powerbi.visuals.createMatrixHierarchyNavigator(matrix, valueFormatter.formatRaw);
 
-                expect(navigator.getCorner(0, 2).metadata.name).toBe('RowGroup1');
+                expect(navigator.getCorner(0, 2).metadata.displayName).toBe('RowGroup1');
                 expect(navigator.getCorner(0, 2).isColumnHeaderLeaf).toBeTruthy();
             });
             it('returns column header for the upper right cell of a 3x3 corner', () => {
                 var matrix = matrixThreeRowGroupsThreeColumnGroups;
                 var navigator = powerbi.visuals.createMatrixHierarchyNavigator(matrix, valueFormatter.formatRaw);
 
-                expect(navigator.getCorner(2, 0).metadata.name).toBe('ColGroup1');
+                expect(navigator.getCorner(2, 0).metadata.displayName).toBe('ColGroup1');
                 expect(navigator.getCorner(2, 0).isColumnHeaderLeaf).toBeFalsy();
             });
             it('returns row header for the lower right cell of a 3x3 corner', () => {
                 var matrix = matrixThreeRowGroupsThreeColumnGroups;
                 var navigator = powerbi.visuals.createMatrixHierarchyNavigator(matrix, valueFormatter.formatRaw);
 
-                expect(navigator.getCorner(2, 2).metadata.name).toBe('RowGroup3');
+                expect(navigator.getCorner(2, 2).metadata.displayName).toBe('RowGroup3');
                 expect(navigator.getCorner(2, 2).isColumnHeaderLeaf).toBeTruthy();
             });
         });
@@ -3385,7 +3385,7 @@ module powerbitests {
             v.init({
                 element: powerbitests.helpers.testDom('500', '500'),
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: 500,
                     width: 500
@@ -3499,7 +3499,7 @@ module powerbitests {
             var binderOptions = { onBindRowHeader: (item: MatrixVisualNode) => { callBackCalled = true; } };
 
             var binder = new powerbi.visuals.MatrixBinder(null, binderOptions);
-            binder.bindRowHeader({ name: null }, {
+            binder.bindRowHeader({ displayName: null }, {
                 type: null, item: null, colSpan: 0, rowSpan: 0, textAlign: '',
                 extension: { contentHost: { textContent: null }, setContainerStyle: (className: string) => { } }
             });
@@ -3512,7 +3512,7 @@ module powerbitests {
             var hierarchyNavigator = powerbi.visuals.createMatrixHierarchyNavigator(matrixTwoRowGroupsTwoColumnGroupsTwoMeasures, powerbi.visuals.valueFormatter.formatRaw);
             var binder = new powerbi.visuals.MatrixBinder(hierarchyNavigator, binderOptions);
             var unregisterCalled: boolean = false;
-            binder.unbindColumnHeader({ name: null, isSubtotal: true }, {
+            binder.unbindColumnHeader({ displayName: null, isSubtotal: true }, {
                 type: null, item: null, colSpan: 0, rowSpan: 0, textAlign: '',
                 extension: {
                     contentHost: { textContent: null },
@@ -3672,7 +3672,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -3740,7 +3740,7 @@ module powerbitests {
 
                 var cellValue: string = formatter(matrix.rows.root.children[0].values[0].value, measureSource1);
                 var expectedCells: string[][] = [
-                    ['', measureSource1.name, ''],
+                    ['', measureSource1.displayName, ''],
                     [EmptyHeaderCell, cellValue]
                 ];
 
@@ -3757,8 +3757,12 @@ module powerbitests {
             }, DefaultWaitForRender);
         });
 
-        it('1x2 matrix (value and column header value)', (done) => {
+        it('1x2 matrix (value and column header value) update', (done) => {
+            v.onDataChanged({
+                dataViews: [matrixOneMeasureDataView]
+            });
 
+             // Call onDataChanged again to trigger an update on the hierarchy navigator
             var matrix = matrixOneMeasureOneColumnGroupOneGroupInstance;
             v.onDataChanged({
                 dataViews: [matrixOneMeasureOneColumnGroupOneGroupInstanceDataView]
@@ -3786,7 +3790,7 @@ module powerbitests {
                 done();
             }, DefaultWaitForRender);
         });
-
+       
         it('3x2 matrix (values and static column headers)', (done) => {
 
             var matrix = matrixThreeMeasures;
@@ -3804,7 +3808,7 @@ module powerbitests {
                 var cellValue3: string = formatter(matrix.rows.root.children[0].values[2].value, measureSource3);
 
                 var expectedCells: string[][] = [
-                    ['', measureSource1.name, measureSource2.name, measureSource3.name, ''],
+                    ['', measureSource1.displayName, measureSource2.displayName, measureSource3.displayName, ''],
                     [EmptyHeaderCell, cellValue1, cellValue2, cellValue3]
                 ];
 
@@ -3841,7 +3845,7 @@ module powerbitests {
 
                 var expectedCells: string[][] = [
                     ['', headerValue, ''],
-                    ['', measureSource1.name, measureSource2.name, measureSource3.name],
+                    ['', measureSource1.displayName, measureSource2.displayName, measureSource3.displayName],
                     [EmptyHeaderCell, cellValue1, cellValue2, cellValue3]
                 ];
 
@@ -3908,7 +3912,7 @@ module powerbitests {
                 var cellValue24 = formatter(header_2_2_2.values[2].value, measureSource3);
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource1.name, rowGroupSource2.name, rowGroupSource3.name, measureSource1.name, measureSource2.name, measureSource3.name, ''],
+                    [rowGroupSource1.displayName, rowGroupSource2.displayName, rowGroupSource3.displayName, measureSource1.displayName, measureSource2.displayName, measureSource3.displayName, ''],
                     [header_1.value, header_1_1.value, header_1_1_1.value, cellValue1, cellValue2, cellValue3],
                     [header_1_1_2.value, cellValue4, cellValue5, cellValue6],
                     [header_1_2.value, header_1_2_1.value, cellValue7, cellValue8, cellValue9],
@@ -3955,7 +3959,7 @@ module powerbitests {
                 var cellValue: string = formatter(header.values[0].value, measureSource1);
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource1.name, measureSource1.name, ''],
+                    [rowGroupSource1.displayName, measureSource1.displayName, ''],
                     [header.value, cellValue]
                 ];
 
@@ -3985,7 +3989,7 @@ module powerbitests {
                 var rowHeader = matrix.rows.root.children[0];
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource1.name, columnHeader.value.toString(), ''],
+                    [rowGroupSource1.displayName, columnHeader.value.toString(), ''],
                     [rowHeader.value.toString(), '']
                 ];
 
@@ -4009,7 +4013,7 @@ module powerbitests {
                 var rowHeader_1_1_1 = rowHeader_1_1.children[0];
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource1.name, rowGroupSource2.name, rowGroupSource3.name, ''],
+                    [rowGroupSource1.displayName, rowGroupSource2.displayName, rowGroupSource3.displayName, ''],
                     [rowHeader_1.value, rowHeader_1_1.value, rowHeader_1_1_1.value.toString()]
                 ];
 
@@ -4050,7 +4054,7 @@ module powerbitests {
                 var header_2_1 = header_2.children[0];
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource1.name, rowGroupSource2.name, ''],
+                    [rowGroupSource1.displayName, rowGroupSource2.displayName, ''],
                     [header_1.value, EmptyHeaderCell],
                     [header_1_2.value],
                     [header_2.value, header_2_1.value],
@@ -4151,7 +4155,7 @@ module powerbitests {
                 var header_2_2_2 = header_2_2.children[1];
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource1.name, rowGroupSource2.name, rowGroupSource3.name, ''],
+                    [rowGroupSource1.displayName, rowGroupSource2.displayName, rowGroupSource3.displayName, ''],
                     [header_1.value, header_1_1.value, header_1_1_1.value.toString()],
                     [header_1_1_2.value.toString()],
                     [header_1_2.value, header_1_2_1.value.toString()],
@@ -4239,7 +4243,7 @@ module powerbitests {
             var header2 = matrix.rows.root.children[1];
 
             var expectedCells: string[][] = [
-                [rowGroupSource1.name, ''],
+                [rowGroupSource1.displayName, ''],
                 [header1.value],
                 [header2.value]
             ];
@@ -4319,9 +4323,9 @@ module powerbitests {
                 var colHeaderValue_1_2_1 = formatter(colHeader_1_2.children[0].value, columnGroupSource3formatted);
 
                 var expectedCells: string[][] = [
-                    ['', '', columnGroupSource1.name, colHeader_1.value, ''],
-                    ['', '', columnGroupSource2.name, colHeader_1_1.value, colHeader_1_2.value],
-                    [rowGroupSource1.name, rowGroupSource2.name, rowGroupSource3.name, colHeaderValue_1_1_1, colHeaderValue_1_1_2, colHeaderValue_1_2_1],
+                    ['', '', columnGroupSource1.displayName, colHeader_1.value, ''],
+                    ['', '', columnGroupSource2.displayName, colHeader_1_1.value, colHeader_1_2.value],
+                    [rowGroupSource1.displayName, rowGroupSource2.displayName, rowGroupSource3.displayName, colHeaderValue_1_1_1, colHeaderValue_1_1_2, colHeaderValue_1_2_1],
                     [rowHeader_1.value, rowHeader_1_1.value, rowHeaderValue_1_1_1, '', '', ''],
                     [rowHeaderValue_1_1_2, '', '', ''],
                     [rowHeader_1_2.value, rowHeaderValue_1_2_1, '', '', '']
@@ -4358,7 +4362,7 @@ module powerbitests {
                 var rowHeader3 = matrix.rows.root.children[2];
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource4.name, colHeader1.value.toString(), colHeader2.value.toString(), ''],
+                    [rowGroupSource4.displayName, colHeader1.value.toString(), colHeader2.value.toString(), ''],
                     [rowHeader1.value.toString(), formatter(rowHeader1.values[0].value, measureSource1), formatter(rowHeader1.values[1].value, measureSource1)],
                     [rowHeader2.value.toString(), formatter(rowHeader2.values[0].value, measureSource1), formatter(rowHeader2.values[1].value, measureSource1)],
                     [EmptyHeaderCell, formatter(rowHeader3.values[0].value, measureSource1), formatter(rowHeader3.values[1].value, measureSource1)]
@@ -4402,7 +4406,7 @@ module powerbitests {
                 var rowHeader4 = matrix.rows.root.children[3];
 
                 var expectedCells: string[][] = [
-                    [rowGroupSource4.name, colHeader1.value.toString(), colHeader2.value.toString(), TableTotalLabel, ''],
+                    [rowGroupSource4.displayName, colHeader1.value.toString(), colHeader2.value.toString(), TableTotalLabel, ''],
                     [rowHeader1.value.toString(), formatter(rowHeader1.values[0].value, measureSource1), formatter(rowHeader1.values[1].value, measureSource1), formatter(rowHeader1.values[2].value, measureSource1)],
                     [rowHeader2.value.toString(), formatter(rowHeader2.values[0].value, measureSource1), formatter(rowHeader2.values[1].value, measureSource1), formatter(rowHeader2.values[2].value, measureSource1)],
                     [EmptyHeaderCell, formatter(rowHeader3.values[0].value, measureSource1), formatter(rowHeader3.values[1].value, measureSource1), formatter(rowHeader3.values[2].value, measureSource1)],
@@ -4476,8 +4480,8 @@ module powerbitests {
                 var rowHeader4_t = matrix.rows.root.children[3].children[1];
 
                 var expectedCells: string[][] = [
-                    ['', columnGroupSource1.name, colHeader1.value.toString(), colHeader2.value.toString(), TableTotalLabel, ''],
-                    [rowGroupSource1.name, rowGroupSource2.name, colHeader1_1.value.toString(), colHeader1_2.value.toString(), TableTotalLabel, colHeader2_1.value.toString(), colHeader2_2.value.toString(), TableTotalLabel],
+                    ['', columnGroupSource1.displayName, colHeader1.value.toString(), colHeader2.value.toString(), TableTotalLabel, ''],
+                    [rowGroupSource1.displayName, rowGroupSource2.displayName, colHeader1_1.value.toString(), colHeader1_2.value.toString(), TableTotalLabel, colHeader2_1.value.toString(), colHeader2_2.value.toString(), TableTotalLabel],
                     [rowHeader1.value.toString(), rowHeader1_1.value.toString(), formatter(rowHeader1_1.values[0].value, measureSource1), formatter(rowHeader1_1.values[1].value, measureSource1), formatter(rowHeader1_1.values[2].value, measureSource1), formatter(rowHeader1_1.values[3].value, measureSource1), formatter(rowHeader1_1.values[4].value, measureSource1), formatter(rowHeader1_1.values[5].value, measureSource1), formatter(rowHeader1_1.values[6].value, measureSource1)],
                     [rowHeader1_2.value.toString(), formatter(rowHeader1_2.values[0].value, measureSource1), formatter(rowHeader1_2.values[1].value, measureSource1), formatter(rowHeader1_2.values[2].value, measureSource1), formatter(rowHeader1_2.values[3].value, measureSource1), formatter(rowHeader1_2.values[4].value, measureSource1), formatter(rowHeader1_2.values[5].value, measureSource1), formatter(rowHeader1_2.values[6].value, measureSource1)],
                     [TableTotalLabel, formatter(rowHeader1_t.values[0].value, measureSource1), formatter(rowHeader1_t.values[1].value, measureSource1), formatter(rowHeader1_t.values[2].value, measureSource1), formatter(rowHeader1_t.values[3].value, measureSource1), formatter(rowHeader1_t.values[4].value, measureSource1), formatter(rowHeader1_t.values[5].value, measureSource1), formatter(rowHeader1_t.values[6].value, measureSource1)],
@@ -4567,9 +4571,9 @@ module powerbitests {
                 var rowHeader4_t = matrix.rows.root.children[3].children[1];
 
                 var expectedCells: string[][] = [
-                    ['', columnGroupSource1.name, colHeader1.value.toString(), colHeader2.value.toString(), TableTotalLabel, ''],
-                    ['', columnGroupSource2.name, colHeader1_1.value.toString(), colHeader1_2.value.toString(), TableTotalLabel, colHeader2_1.value.toString(), colHeader2_2.value.toString(), TableTotalLabel],
-                    [rowGroupSource1.name, rowGroupSource2.name, measureSource1.name, measureSource2.name, measureSource1.name, measureSource2.name, measureSource1.name, measureSource2.name, measureSource1.name, measureSource2.name, measureSource1.name, measureSource2.name, measureSource1.name, measureSource2.name, measureSource1.name, measureSource2.name],
+                    ['', columnGroupSource1.displayName, colHeader1.value.toString(), colHeader2.value.toString(), TableTotalLabel, ''],
+                    ['', columnGroupSource2.displayName, colHeader1_1.value.toString(), colHeader1_2.value.toString(), TableTotalLabel, colHeader2_1.value.toString(), colHeader2_2.value.toString(), TableTotalLabel],
+                    [rowGroupSource1.displayName, rowGroupSource2.displayName, measureSource1.displayName, measureSource2.displayName, measureSource1.displayName, measureSource2.displayName, measureSource1.displayName, measureSource2.displayName, measureSource1.displayName, measureSource2.displayName, measureSource1.displayName, measureSource2.displayName, measureSource1.displayName, measureSource2.displayName, measureSource1.displayName, measureSource2.displayName],
                     [rowHeader1.value.toString(), rowHeader1_1.value.toString(), formatter(rowHeader1_1.values[0].value, measureSource1), formatter(rowHeader1_1.values[1].value, measureSource1), formatter(rowHeader1_1.values[2].value, measureSource1), formatter(rowHeader1_1.values[3].value, measureSource1), formatter(rowHeader1_1.values[4].value, measureSource1), formatter(rowHeader1_1.values[5].value, measureSource1), formatter(rowHeader1_1.values[6].value, measureSource1), formatter(rowHeader1_1.values[7].value, measureSource1), formatter(rowHeader1_1.values[8].value, measureSource1), formatter(rowHeader1_1.values[9].value, measureSource1), formatter(rowHeader1_1.values[10].value, measureSource1), formatter(rowHeader1_1.values[11].value, measureSource1), formatter(rowHeader1_1.values[12].value, measureSource1), formatter(rowHeader1_1.values[13].value, measureSource1)],
                     [rowHeader1_2.value.toString(), formatter(rowHeader1_2.values[0].value, measureSource1), formatter(rowHeader1_2.values[1].value, measureSource1), formatter(rowHeader1_2.values[2].value, measureSource1), formatter(rowHeader1_2.values[3].value, measureSource1), formatter(rowHeader1_2.values[4].value, measureSource1), formatter(rowHeader1_2.values[5].value, measureSource1), formatter(rowHeader1_2.values[6].value, measureSource1), formatter(rowHeader1_2.values[7].value, measureSource1), formatter(rowHeader1_2.values[8].value, measureSource1), formatter(rowHeader1_2.values[9].value, measureSource1), formatter(rowHeader1_2.values[10].value, measureSource1), formatter(rowHeader1_2.values[11].value, measureSource1), formatter(rowHeader1_2.values[12].value, measureSource1), formatter(rowHeader1_2.values[13].value, measureSource1)],
                     [TableTotalLabel, formatter(rowHeader1_t.values[0].value, measureSource1), formatter(rowHeader1_t.values[1].value, measureSource1), formatter(rowHeader1_t.values[2].value, measureSource1), formatter(rowHeader1_t.values[3].value, measureSource1), formatter(rowHeader1_t.values[4].value, measureSource1), formatter(rowHeader1_t.values[5].value, measureSource1), formatter(rowHeader1_t.values[6].value, measureSource1), formatter(rowHeader1_t.values[7].value, measureSource1), formatter(rowHeader1_t.values[8].value, measureSource1), formatter(rowHeader1_t.values[9].value, measureSource1), formatter(rowHeader1_t.values[10].value, measureSource1), formatter(rowHeader1_t.values[11].value, measureSource1), formatter(rowHeader1_t.values[12].value, measureSource1), formatter(rowHeader1_t.values[13].value, measureSource1)],
@@ -4614,7 +4618,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()

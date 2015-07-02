@@ -24,14 +24,24 @@ module powerbi.visuals {
         public getColorForSeriesValue(objects: DataViewObjects, fieldIds: powerbi.data.SQExpr[], value: string): string {
             return (this.fillProp && DataViewObjects.getFillColor(objects, this.fillProp))
                 || this.defaultDataPointColor
-                || this.colors.getColorByScale(SQExprShortSerializer.serializeArray(fieldIds), value).value;
+                || this.colors.getColorByScale(SQExprShortSerializer.serializeArray(fieldIds || []), value).value;
         }
 
         /** Gets the color for the given measure. */
-        public getColorForMeasure(objects: DataViewObjects, seriesIndex: number): string {
+        public getColorForMeasure(objects: DataViewObjects, queryName: string): string {
             return (this.fillProp && DataViewObjects.getFillColor(objects, this.fillProp))
                 || this.defaultDataPointColor
-                || this.colors.getColor(seriesIndex).value;
+                || this.colors.getColor(queryName).value;
+        }
+
+        public static normalizeSelector(selector: data.Selector, isSingleSeries?: boolean): data.Selector {
+            debug.assertValue(selector, 'selector');
+
+            // For dynamic series charts, colors are set per category.  So, exclude any measure (metadata repetition) from the selector.
+            if (isSingleSeries || selector.data)
+                return { data: selector.data };
+
+            return selector;
         }
     }
 }

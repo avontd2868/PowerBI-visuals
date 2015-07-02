@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------
 
 module powerbitests.mocks {
-    import InJsUtility = jsCommon.Utility;
     import SQExprBuilder = powerbi.data.SQExprBuilder;
 
     var BeautifiedFormat: { [x: string]: string } = {
@@ -19,66 +18,6 @@ module powerbitests.mocks {
             TelemetryCallbackMock.callbackCalls++;
         }
     };
-
-    export class MockIdleCallbackTimer implements powerbi.IIdleCallbackTimer {
-        public callbacks: any[] = [];
-
-        public addCallback(fn: () => void) {
-            this.removeCallback(fn);
-            this.callbacks.push(fn);
-        }
-
-        public removeCallback(fn: () => void) {
-            for (var i = this.callbacks.length - 1; i >= 0; i--) {
-                if (this.callbacks[i] === fn) {
-                    this.callbacks.splice(i, 1);
-                }
-            }
-        }
-
-        public callback(times: number) {
-            for (var i = 0; i < times; i++) {
-                for (var j = 0; j < this.callbacks.length; j++) {
-                    this.callbacks[j]();
-                }
-            }
-        }
-    }
-
-    export class LocalyticsMock implements powerbi.ILocalytics {
-
-        public static localyticsCalls: number = 0;
-
-        public load(appId: string): void {
-            LocalyticsMock.localyticsCalls++;
-        }
-
-        public static tagEventCalls: any[] = [];
-
-        public tagEvent(event: string, properties: any): void {
-            LocalyticsMock.localyticsCalls++;
-            LocalyticsMock.tagEventCalls.push({
-                event: event,
-                properties: properties
-            });
-        }
-
-        public tagScreen(screenName: string): void {
-            LocalyticsMock.localyticsCalls++;
-        }
-
-        public setCustomDimension(id: number, name: string): void {
-            LocalyticsMock.localyticsCalls++;
-        }
-
-        public setCustomerId(customerId: string): void {
-            LocalyticsMock.localyticsCalls++;
-        }
-
-        public open(): void {
-            LocalyticsMock.localyticsCalls++;
-        }
-    }
 
     export class AppInsightsV2Mock {
         public trackPageViewTimes: number = 0;
@@ -109,75 +48,6 @@ module powerbitests.mocks {
     }
 
     export var DefaultLoggerMockType: number = 1;
-
-    export class LoggerMock implements powerbi.ILoggerService {
-        public hostData: powerbi.TelemetryHostData;
-        private loggerType: number;
-
-        constructor(loggerType?: number) {
-            if (typeof loggerType === undefined)
-                this.loggerType = DefaultLoggerMockType;
-            else
-                this.loggerType = loggerType;
-        }
-
-        public getType(): number {
-            return this.loggerType;
-        }
-
-        public initialize(hostData: powerbi.TelemetryHostData): void {
-            this.hostData = hostData;
-        }
-
-        public logCalls: any[] = [];
-        public logEvent(eventData: powerbi.ITelemetryEvent): void {
-            this.logCalls.push({
-                eventData: eventData
-            });
-        }
-
-        public startTimedEventCalls: any[] = [];
-        public startTimedEvent(eventData: powerbi.ITelemetryEvent): void {
-            this.startTimedEventCalls.push({
-                eventData: eventData
-            });
-        }
-
-        public endTimedEventCalls: any[] = [];
-        public endTimedEvent(eventData: powerbi.ITelemetryEvent): void {
-            this.endTimedEventCalls.push({
-                eventData: eventData
-            });
-        }
-    }
-
-    export class NoWaitTimer implements powerbi.ITimer {
-        public setTimeout(callback: any, period: number, arg: any): any {
-            callback(arg);
-            return 0;
-        }
-
-        public setInterval(callback: any, period: number, arg: any): any {
-            callback(arg);
-            return 0;
-        }
-
-        public clearTimeout(id: any): void { }
-        public clearInterval(id: any): void { }
-    }
-
-    export class WaitForeverTimer implements powerbi.ITimer {
-        public setTimeout(callback: any, period: number, arg: any): any {
-            return 0;
-        }
-
-        public setInterval(callback: any, period: number, arg: any): any {
-            return 0;
-        }
-
-        public clearTimeout(id: any): void { }
-        public clearInterval(id: any): void { }
-    }
 
     export class MockTimerPromiseFactory implements jsCommon.ITimerPromiseFactory {
         public deferred: JQueryDeferred<void>;
@@ -218,46 +88,6 @@ module powerbitests.mocks {
             return !!this.deferred;
         }
     }
-
-    export class MockTelemetryHostService implements powerbi.ITelemetryHostService {
-        public logger: LoggerMock;
-
-        constructor() {
-            this.logger = new LoggerMock();
-        }
-
-        public getLoggerServices(): powerbi.ILoggerService[] {
-            return [this.logger];
-        }
-
-        public getHostData(): powerbi.TelemetryHostData {
-            return {
-                sessionId: 'SessionID',
-                client: 'clientName',
-                build: 'build',
-                cluster: 'clusterUri',
-                userId: 'userId',
-                isInternalUser: true
-            };
-        }
-    }
-
-    export var MockTelemetryEvent = function (eventName: string, parentId: string, category?: powerbi.TelemetryCategory, optionalAttributes?: any) {
-        return {
-            name: eventName,
-            category: category,
-            time: Date.now(),
-            id: jsCommon.Utility.generateGuid(),
-            getFormattedInfoObject: function (): any {
-                return $.extend({}, {
-                    parentId: parentId
-                }, optionalAttributes);
-            },
-            info: $.extend({}, {
-                parentId: parentId
-            }, optionalAttributes)
-        };
-    };
 
     export function createVisualHostServices(): powerbi.IVisualHostServices {
         return {

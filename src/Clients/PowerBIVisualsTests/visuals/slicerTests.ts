@@ -46,8 +46,8 @@ module powerbitests {
         var v: Slicer, element: JQuery;
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
-                { name: 'Price', isMeasure: true }],
+                { displayName: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
+                { displayName: 'Price', isMeasure: true }],
         };
 
         var dataViewCategorical = {
@@ -85,7 +85,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -246,8 +246,8 @@ module powerbitests {
         var hostServices: powerbi.IVisualHostServices;
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
-                { name: 'Price', isMeasure: true }],
+                { displayName: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
+                { displayName: 'Price', isMeasure: true }],
         };
 
         var dataViewCategorical = {
@@ -284,7 +284,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -511,8 +511,8 @@ module powerbitests {
         it('slicer loadMoreData', () => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
-                    { name: 'Price', isMeasure: true }],
+                    { displayName: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
+                    { displayName: 'Price', isMeasure: true }],
                 segment: {},
             };
 
@@ -530,8 +530,8 @@ module powerbitests {
         it('slicer loadMoreData already called', () => {
             var metadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
-                    { name: 'Price', isMeasure: true }],
+                    { displayName: 'Fruit', properties: { "Category": true }, type: ValueType.fromDescriptor({ text: true }) },
+                    { displayName: 'Price', isMeasure: true }],
                 segment: {},
             };
 

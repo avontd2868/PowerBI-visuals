@@ -162,7 +162,7 @@ module powerbi.visuals {
                         });
                     }
                     slicerData = {
-                        categorySourceName: categories.source.name,
+                        categorySourceName: categories.source.displayName,
                         formatString: valueFormatter.getFormatString(categories.source, slicerProps.formatString),
                         slicerDataPoints: slicerDataPoints
                     };

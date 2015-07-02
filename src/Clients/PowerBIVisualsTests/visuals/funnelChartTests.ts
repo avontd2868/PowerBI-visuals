@@ -41,13 +41,13 @@ module powerbitests {
 
         beforeEach(() => {
             powerbitests.mocks.setLocale(powerbi.common.createLocalizationService());
-            colors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            colors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
         });
 
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
+                { displayName: 'col1', queryName: 'col1' },
+                { displayName: 'col2', queryName: 'col2', isMeasure: true },
             ]
         };
         var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'p' });
@@ -148,7 +148,7 @@ module powerbitests {
                 SelectionId.createWithIdAndMeasure(categoryIdentities[0], 'col2'),
                 SelectionId.createWithIdAndMeasure(categoryIdentities[1], 'col2'),
                 SelectionId.createWithIdAndMeasure(categoryIdentities[2], 'col2')];
-            var sliceColor = colors.getColor(0).value;
+            var sliceColor = colors.getColor('').value;
 
             var expectedData: powerbi.visuals.FunnelData = {
                 slices: [
@@ -162,7 +162,6 @@ module powerbitests {
                         tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col2", value: "100" }],
                         color: sliceColor,
                         labelFill: sliceColor,
-                        showLabel: true
                     }, {
                         value: 200,
                         label: 'b',
@@ -173,7 +172,6 @@ module powerbitests {
                         tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col2", value: "200" }],
                         color: sliceColor,
                         labelFill: sliceColor,
-                        showLabel: true
                     }, {
                         value: 700,
                         label: 'c',
@@ -184,10 +182,9 @@ module powerbitests {
                         tooltipInfo: [{ displayName: "col1", value: "c" }, { displayName: "col2", value: "700" }],
                         color: sliceColor,
                         labelFill: sliceColor,
-                        showLabel: true
                     }],
 
-                valuesMetadata: [{ name: 'col2', isMeasure: true }],
+                valuesMetadata: [dataViewMetadata.columns[1]],
                 hasHighlights: false,
                 highlightsOverflow: false,
                 dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(),
@@ -243,9 +240,9 @@ module powerbitests {
             ];
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true }
+                    { displayName: 'col1', queryName: 'col1' },
+                    { displayName: 'col2', queryName: 'col2', isMeasure: true },
+                    { displayName: 'col3', queryName: 'col3', isMeasure: true }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -275,7 +272,7 @@ module powerbitests {
                 SelectionId.createWithIdAndMeasure(categoryIdentities[0], 'col2'),
                 SelectionId.createWithIdAndMeasure(categoryIdentities[1], 'col2'),
             ];
-            var sliceColor = colors.getColor(0).value;
+            var sliceColor = colors.getColor('').value;
 
             var expectedData: powerbi.visuals.FunnelData = {
                 slices: [
@@ -289,7 +286,6 @@ module powerbitests {
                         tooltipInfo: [{ displayName: "col1", value: "a" }, { displayName: "col2", value: "400" }],
                         color: sliceColor,
                         labelFill: sliceColor,
-                        showLabel: true
                     }, {
                         value: 700,
                         label: 'b',
@@ -300,9 +296,8 @@ module powerbitests {
                         tooltipInfo: [{ displayName: "col1", value: "b" }, { displayName: "col2", value: "700" }],
                         color: sliceColor,
                         labelFill: sliceColor,
-                        showLabel: true
                     }],
-                valuesMetadata: [{ name: 'col2', isMeasure: true }, { name: 'col3', isMeasure: true }],
+                valuesMetadata: [dataViewMetadata.columns[1], dataViewMetadata.columns[2]],
                 hasHighlights: false,
                 highlightsOverflow: false,
                 dataLabelsSettings: powerbi.visuals.dataLabelUtils.getDefaultFunnelLabelSettings(),
@@ -314,9 +309,9 @@ module powerbitests {
         it('Check converter with no category and multi-measures',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true }
+                    { displayName: 'col1', queryName: 'col1' },
+                    { displayName: 'col2', queryName: 'col2', isMeasure: true },
+                    { displayName: 'col3', queryName: 'col3', isMeasure: true }
                 ]
             };
             var dataView: powerbi.DataView = {
@@ -340,7 +335,7 @@ module powerbitests {
             var selectionIds: SelectionId[] = [
                 SelectionId.createWithMeasure("col2"),
                 SelectionId.createWithMeasure("col3")];
-            var sliceColor = colors.getColor(0).value;
+            var sliceColor = colors.getColor('').value;
 
             var expectedData: powerbi.visuals.FunnelData = {
                 slices: [
@@ -354,7 +349,6 @@ module powerbitests {
                         tooltipInfo: [{ displayName: "col2", value: "600" }],
                         color: sliceColor,
                         labelFill: sliceColor,
-                        showLabel: true,
                     }, {
                         value: 600,
                         label: 'col3',
@@ -365,7 +359,6 @@ module powerbitests {
                         tooltipInfo: [{ displayName: "col2", value: "600" }],
                         color: sliceColor,
                         labelFill: sliceColor,
-                        showLabel: true,
                     }],
                 valuesMetadata: [dataViewMetadata.columns[1], dataViewMetadata.columns[2]],
                 hasHighlights: false,
@@ -378,9 +371,9 @@ module powerbitests {
         it('non-categorical multi-measure tooltip values test',() => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'a', isMeasure: true },
-                    { name: 'b', isMeasure: true },
-                    { name: 'c', isMeasure: true }
+                    { displayName: 'a', isMeasure: true },
+                    { displayName: 'b', isMeasure: true },
+                    { displayName: 'c', isMeasure: true }
                 ]
             };
 
@@ -417,11 +410,11 @@ module powerbitests {
         var hostServices: powerbi.IVisualHostServices;
         var dataViewMetadataCategorySeriesColumns: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'Squad', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
-                { name: 'Period', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: null, groupName: '201501', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: null, groupName: '201502', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
-                { name: null, groupName: '201503', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
+                { displayName: 'Squad', properties: { "Category": true }, type: DataShapeUtility.describeDataType(SemanticType.String) },
+                { displayName: 'Period', properties: { "Series": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: null, groupName: '201501', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: null, groupName: '201502', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) },
+                { displayName: null, groupName: '201503', isMeasure: true, properties: { "Values": true }, type: DataShapeUtility.describeDataType(SemanticType.Number) }
             ]
         };
         var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'Squad' });
@@ -466,7 +459,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: hostServices,
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -617,8 +610,8 @@ module powerbitests {
         var translate = 62;
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true, objects: { general: { formatString: '$0' } } },
+                { displayName: 'col1' },
+                { displayName: 'col2', isMeasure: true, objects: { general: { formatString: '$0' } } },
             ]
         };
         var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
@@ -638,7 +631,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -1257,9 +1250,9 @@ module powerbitests {
         var v: powerbi.IVisual, element: JQuery;
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2' },
-                { name: 'col3' }
+                { displayName: 'col1' },
+                { displayName: 'col2' },
+                { displayName: 'col3' }
             ]
         };
         var categoryColumnRef = powerbi.data.SQExprBuilder.fieldDef({ schema: 's', entity: 'e', column: 'col1' });
@@ -1277,7 +1270,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -1363,16 +1356,16 @@ module powerbitests {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
                 {
-                    name: 'col1',
+                    displayName: 'col1',
                     type: DataShapeUtility.describeDataType(SemanticType.String)
                 },
                 {
-                    name: 'col2',
+                    displayName: 'col2',
                     type: DataShapeUtility.describeDataType(SemanticType.Number),
                     isMeasure: true
                 },
                 {
-                    name: 'col3',
+                    displayName: 'col3',
                     type: DataShapeUtility.describeDataType(SemanticType.Number),
                     isMeasure: true
                 }
@@ -1391,7 +1384,7 @@ module powerbitests {
             visual.init({
                 element: element,
                 host: powerbitests.mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -1432,13 +1425,13 @@ module powerbitests {
         });
 
         it('enumerateObjectInstances - Gradient color', () => {
-            var dataColors = powerbi.common.services.visualStyles.create().colorPalette.dataColors;
+            var dataColors = powerbi.visuals.visualStyles.create().colorPalette.dataColors;
 
             var dataViewGradientMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'col1' },
-                    { name: 'col2', isMeasure: true },
-                    { name: 'col3', isMeasure: true, roles: { 'Gradient': true } }
+                    { displayName: 'col1' },
+                    { displayName: 'col2', isMeasure: true },
+                    { displayName: 'col3', isMeasure: true, roles: { 'Gradient': true } }
                 ]
             };
 
@@ -1466,10 +1459,6 @@ module powerbitests {
                             values: [200, 400, 600, 800, 1000]
                         }])
                 }
-            };
-
-            var dataChangedOptions = {
-                dataViews: [dataView]
             };
 
             var defaultDataPointColor = "#00FF00";

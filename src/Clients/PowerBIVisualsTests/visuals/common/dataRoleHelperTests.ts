@@ -11,10 +11,10 @@ var DataRoleHelper = powerbi.visuals.DataRoleHelper;
         it('getMeasureIndexOfRole with roles validation',() => {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true, roles: { "Size": true } },
-                { name: 'col3', isMeasure: true, roles: { "X": true } },
-                { name: 'col4', isMeasure: true, roles: { "Y": true } }
+                { displayName: 'col1' },
+                { displayName: 'col2', isMeasure: true, roles: { "Size": true } },
+                { displayName: 'col3', isMeasure: true, roles: { "X": true } },
+                { displayName: 'col4', isMeasure: true, roles: { "Y": true } }
             ]
         };
         var dataView: powerbi.DataView = {
@@ -57,10 +57,10 @@ var DataRoleHelper = powerbi.visuals.DataRoleHelper;
     it('getMeasureIndexOfRole without roles validation', () => {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
-                { name: 'col3', isMeasure: true },
-                { name: 'col4', isMeasure: true }
+                { displayName: 'col1' },
+                { displayName: 'col2', isMeasure: true },
+                { displayName: 'col3', isMeasure: true },
+                { displayName: 'col4', isMeasure: true }
             ]
         };
         var dataView: powerbi.DataView = {
@@ -103,10 +103,10 @@ var DataRoleHelper = powerbi.visuals.DataRoleHelper;
     it('getMeasureIndexOfRole without roles validation with default', () => {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
-                { name: 'col3', isMeasure: true },
-                { name: 'col4', isMeasure: true }
+                { displayName: 'col1' },
+                { displayName: 'col2', isMeasure: true },
+                { displayName: 'col3', isMeasure: true },
+                { displayName: 'col4', isMeasure: true }
             ]
         };
         var dataView: powerbi.DataView = {
@@ -140,8 +140,8 @@ var DataRoleHelper = powerbi.visuals.DataRoleHelper;
     it('getMeasureIndexOfRole without roles validation with default too few measures', () => {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true },
+                { displayName: 'col1' },
+                { displayName: 'col2', isMeasure: true },
             ]
         };
         var dataView: powerbi.DataView = {

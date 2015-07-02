@@ -14,7 +14,7 @@ module powerbitests {
             height: 500,
             width: 500,
         };
-        var style = powerbi.common.services.visualStyles.create();
+        var style = powerbi.visuals.visualStyles.create();
 
         describe('capabilities',() => {
             it('should suppress title',() => {
@@ -171,7 +171,6 @@ module powerbitests {
                         var $urlRun = $paragraph2Spans.eq(0);
                         expect(getUrl($urlRun)).toEqual('http://www.powerbi.com');
                     });
-
 
                     describe('theme font',() => {
                         it('"Heading" should render correctly',() => {

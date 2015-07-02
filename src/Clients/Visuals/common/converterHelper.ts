@@ -60,7 +60,7 @@ module powerbi.visuals {
 
             return (source.groupName !== undefined)
                 ? source.groupName
-                : source.name;
+                : source.displayName;
         }
 
         export function getFormattedLegendLabel(source: DataViewMetadataColumn, values: DataViewValueColumns, formatStringProp: DataViewObjectPropertyIdentifier): string {
@@ -68,7 +68,7 @@ module powerbi.visuals {
             debug.assertValue(values, 'values');
 
             var sourceForFormat = source;
-            var nameForFormat = source.name;
+            var nameForFormat = source.displayName;
             if (source.groupName !== undefined) {
                 sourceForFormat = values.source;
                 nameForFormat = source.groupName;
@@ -84,67 +84,27 @@ module powerbi.visuals {
             };
         }
 
-        export function createColumnChartAxesLabels(categoryAxisProperties: DataViewObject,
+        export function createAxesLabels(categoryAxisProperties: DataViewObject,
             valueAxisProperties: DataViewObject,
-            categoryMetadata: DataViewMetadataColumn,
-            valuesMetadata: DataViewMetadataColumn[],
-            isColumnChart: boolean) {
-            var xAxisLabel: string = null;
-            if (categoryAxisProperties && categoryAxisProperties["showAxisTitle"] && categoryAxisProperties["showAxisTitle"] === true) {
-                // When the chart is bar the labels should replace between the x and y
-                if (isColumnChart) {
-                    xAxisLabel = categoryMetadata ? categoryMetadata.name : null;
-                }
-                else {
-                    yAxisLabel = categoryMetadata ? categoryMetadata.name : null;
-                }
-            }
-
-            var yAxisLabel: string = null;
-
-            if (valueAxisProperties && valueAxisProperties["showAxisTitle"] && valueAxisProperties["showAxisTitle"] === true) {
-                var valuesNames: string[] = [];
-                if (valuesMetadata) {
-
-                    // Take the name from the values, and make it unique because there are sometimes duplications
-                    valuesNames = valuesMetadata.map(v => v ? v.name : '').filter((value, index, self) => value !== '' && self.indexOf(value) === index);
-                }
-
-                if (isColumnChart) {
-                    yAxisLabel = valueFormatter.formatListAnd(valuesNames);
-                }
-                else {
-                    xAxisLabel = valueFormatter.formatListAnd(valuesNames);
-                }
-            }
-
-            return {
-                xAxisLabel: xAxisLabel,
-                yAxisLabel: yAxisLabel
-            };
-        }
-
-        export function createLineChartAxesLabels(categoryAxisProperties: DataViewObject,
-            valueAxisProperties: DataViewObject,
-            category: DataViewCategoryColumn,
-            values: DataViewValueColumns) {
+            category: DataViewMetadataColumn,
+            values: DataViewMetadataColumn[]) {
             var xAxisLabel = null;
             var yAxisLabel = null;
 
-            if (categoryAxisProperties && categoryAxisProperties["showAxisTitle"] && categoryAxisProperties["showAxisTitle"] === true) {
+            if (categoryAxisProperties && categoryAxisProperties["showAxisTitle"]) {
 
                 // Take the value only if it's there
-                if (category && category.source && category.source.name) {
-                    xAxisLabel = category.source.name;
+                if (category && category.displayName) {
+                    xAxisLabel = category.displayName;
                 }
             }
 
-            if (valueAxisProperties && valueAxisProperties["showAxisTitle"] && valueAxisProperties["showAxisTitle"] === true) {
+            if (valueAxisProperties && valueAxisProperties["showAxisTitle"]) {
                 var valuesNames: string[] = [];
 
                 if (values) {
                     // Take the name from the values, and make it unique because there are sometimes duplications
-                    valuesNames = values.map(v => v ? v.source.name : '').filter((value, index, self) => value !== '' && self.indexOf(value) === index);
+                    valuesNames = values.map(v => v ? v.displayName : '').filter((value, index, self) => value !== '' && self.indexOf(value) === index);
                     yAxisLabel = valueFormatter.formatListAnd(valuesNames);
                 }
             }

@@ -40,8 +40,8 @@ module powerbitests {
     it('cardChart preferred capabilities requires at most 1 row', () => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'col1' },
-                { name: 'col2', isMeasure: true }]
+                { displayName: 'col1' },
+                { displayName: 'col2', isMeasure: true }]
         };
 
         var dataViewWithTwoRows: powerbi.DataView = {
@@ -67,7 +67,7 @@ module powerbitests {
     it('cardChart preferred capabilities requires 1 row', () => {
         var dataViewMetadata: powerbi.DataViewMetadata = {
             columns: [
-                { name: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
+                { displayName: 'numeric', type: ValueType.fromDescriptor({ numeric: true }) }
             ],
         };
 
@@ -84,7 +84,7 @@ module powerbitests {
         var v: Card, element: JQuery;
         var defaultTimeout: number = 30;
         var dataViewMetadata: powerbi.DataViewMetadata = {
-            columns: [{ name: 'col1', isMeasure: true, objects: { 'general': { formatString: '#0' } } }],
+            columns: [{ displayName: 'col1', isMeasure: true, objects: { 'general': { formatString: '#0' } } }],
             groups: [],
             measures: [0],
         };
@@ -108,7 +108,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -268,13 +268,13 @@ module powerbitests {
             var dateValue = new Date(2015, 5, 20);
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'date', type: powerbi.ValueType.fromDescriptor({ dateTime: true }), isMeasure: true }
+                    { displayName: 'date', type: powerbi.ValueType.fromDescriptor({ dateTime: true }), isMeasure: true }
                 ],
             };
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -300,7 +300,7 @@ module powerbitests {
         var v: Card, element: JQuery;
         var defaultTimeout: number = 30;
         var dataViewMetadata: powerbi.DataViewMetadata = {
-            columns: [{ name: 'col1', isMeasure: true, format: '#0' }],
+            columns: [{ displayName: 'col1', isMeasure: true, format: '#0' }],
             groups: [],
             measures: [0],
         };
@@ -330,7 +330,7 @@ module powerbitests {
             v.init({
                 element: element,
                 host: mocks.createVisualHostServices(),
-                style: powerbi.common.services.visualStyles.create(),
+                style: powerbi.visuals.visualStyles.create(),
                 viewport: {
                     height: element.height(),
                     width: element.width()
@@ -387,7 +387,7 @@ module powerbitests {
             var dateValue = new Date(2015, 5, 20);
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'date', type: powerbi.ValueType.fromDescriptor({ dateTime: true }), isMeasure: true }
+                    { displayName: 'date', type: powerbi.ValueType.fromDescriptor({ dateTime: true }), isMeasure: true }
                 ],
             };
             v.onDataChanged({
@@ -409,7 +409,7 @@ module powerbitests {
         it('Card with zero currency value',(done) => {
             var dataViewMetadata: powerbi.DataViewMetadata = {
                 columns: [
-                    { name: 'price', type: powerbi.ValueType.fromDescriptor({ numeric: true }), isMeasure: true, objects: { 'general': { formatString: '$0' } } }
+                    { displayName: 'price', type: powerbi.ValueType.fromDescriptor({ numeric: true }), isMeasure: true, objects: { 'general': { formatString: '$0' } } }
                 ],
             };
             v.onDataChanged({

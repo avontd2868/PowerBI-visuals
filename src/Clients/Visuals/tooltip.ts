@@ -471,7 +471,7 @@ module powerbi.visuals {
 
             if (categoryValue) {
                 var categoryFormattedValue: string = getFormattedValue(categoryValue.metadata, formatStringProp, categoryValue.value);
-                items.push({ displayName: categoryValue.metadata.name, value: categoryFormattedValue });
+                items.push({ displayName: categoryValue.metadata.displayName, value: categoryFormattedValue });
             }
 
             if (valuesSource) {
@@ -481,7 +481,7 @@ module powerbi.visuals {
                     var dynamicValueMetadata: DataViewMetadataColumn = seriesValues[0].metadata.source;
                     dynamicValue = getFormattedValue(dynamicValueMetadata, formatStringProp, dynamicValueMetadata.groupName);
                 }
-                items.push({ displayName: valuesSource.name, value: dynamicValue });
+                items.push({ displayName: valuesSource.displayName, value: dynamicValue });
             }
 
             for (var i = 0; i < seriesValues.length; i++) {
@@ -494,7 +494,7 @@ module powerbi.visuals {
 
                     if (value || value === 0) {
                         var formattedValue: string = getFormattedValue(seriesMetadataColumn, formatStringProp, value);
-                        items.push({ displayName: seriesMetadataColumn.name, value: formattedValue });
+                        items.push({ displayName: seriesMetadataColumn.displayName, value: formattedValue });
                     }
 
                     if (highlightedValue || highlightedValue === 0) {
