@@ -14,6 +14,7 @@ We would love to see both bugfixes and new visuals.
 
 There are also the following ways to help us:
 * [Submit bugs](https://github.com/Microsoft/PowerBI-Visuals/issues) and help us verify fixes as they are checked in.
+* [Share your ideas](https://github.com/Microsoft/PowerBI-Visuals/issues) to help us tune project roadmap.
 * Engage with other users and developers on [StackOverflow](http://stackoverflow.com/questions/tagged/powerbi?sort=newest). 
 
 ## Documentation
