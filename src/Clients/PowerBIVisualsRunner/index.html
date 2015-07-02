@@ -16,7 +16,7 @@
     </div>  
     
     <div id="container">
-        <div id="itemContainer" class="chartSize3x3" style="position: relative; top: 20px; left: 0; border: 1px solid grey;"></div>
+        <div id="itemContainer" class="chartSize3x3" style="position: relative; top: 20px; left: 0;"></div>
     </div>
 
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
@@ -39,8 +39,10 @@
     <script type="text/javascript" src="app.js"></script>
 
     <script type="text/javascript">
-        var runner = new powerbi.visuals.runner.VisualsRunner();
-        runner.startup();
+        $(document).ready(function () {
+
+            $('#itemContainer').visuals();
+        });
     </script>
 </body>
 </html>

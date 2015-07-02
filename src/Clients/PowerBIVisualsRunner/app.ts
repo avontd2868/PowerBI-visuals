@@ -5,6 +5,12 @@
 //-----------------------------------------------------------------------
 
 /* tslint:disable:no-unused-variable */
+
+interface JQuery {
+    plugin(): JQuery;
+    plugin(settings: Object): JQuery;
+}
+
 var visual: powerbi.IVisual;
 
 module powerbi.visuals.runner {
@@ -35,8 +41,7 @@ module powerbi.visuals.runner {
 
         private width: number;
         private height: number;
-
-        private rootSelector: string = '#itemContainer';
+       
         private rootElement: JQuery;
 
         private pluginService: IVisualPluginService;
@@ -53,15 +58,31 @@ module powerbi.visuals.runner {
             var dataViewMetadata = {
                 columns: [
                     {
+                        displayName: 'col1',
                         name: 'col1',
                         type: ValueType.fromDescriptor({text: true})
                     },
                     {
+                        displayName: 'col2',
                         name: 'col2',
                         isMeasure: true,
                         type: ValueType.fromDescriptor({numeric: true})
                     }],
             };
+
+
+            var columns: DataViewValueColumn[] = [];
+            var column: DataViewValueColumn = {
+                source: dataViewMetadata.columns[1],
+                min: 100000,
+                max: 200000,
+                subtotal: 300000,
+                values: [100000, 200000, 150000],
+            };
+
+            columns.push(column);
+
+            var values: DataViewValueColumns = DataViewTransform.createValueColumns(columns);
 
             this.dataView = {
                 metadata: dataViewMetadata,
@@ -71,23 +92,17 @@ module powerbi.visuals.runner {
                         values: ['abc', 'def', 'ghi'],
                         identity: [null, null, null],
                     }],
-                    values: powerbi.data.DataViewTransform.createValueColumns([{
-                        source: dataViewMetadata.columns[1],
-                        min: 100000,
-                        max: 200000,
-                        subtotal: 300000,
-                        values: [100000, 200000, 150000],
-                    }])
+                    values: values
                 }
             };
 
         }
         
-        public startup(): void {
+        public startup(element, options): void {
             this.pluginService = powerbi.visuals.visualPluginFactory.create();
             this.colorAllocatorFactory = powerbi.visuals.createColorAllocatorFactory();
 
-            this.rootElement = $(this.rootSelector);
+            this.rootElement = $(element);
 
             this.width = this.rootElement.width() - 40;
             this.height = Math.floor(this.width * 3 / 4);
@@ -100,7 +115,6 @@ module powerbi.visuals.runner {
         private populateVisualTypeSelect(): void {
 
             var typeSelect = $('#visualTypes');
-
             typeSelect.append('<option value="">(none)</option>');
 
             var visuals = this.pluginService.getVisuals();
@@ -114,9 +128,7 @@ module powerbi.visuals.runner {
 
         private onVisualTypeSelection(value: string): void {
                     
-            var plugin = this.pluginService.getPlugin(value);        
-
-
+            var plugin = this.pluginService.getPlugin(value);
             this.render(plugin);        
         }
 
@@ -125,17 +137,17 @@ module powerbi.visuals.runner {
         }
 
         private createViz(): JQuery {
-            var c = $('<div/>');
-            c.height(this.height);
-            c.width(this.width);
-            c.addClass('visual');
-            c.css({
+            var element = $('<div/>');
+            element.height(this.height);
+            element.width(this.width);
+            element.addClass('visual');
+            element.css({
                 'background-color': 'white',
                 'padding': '10px',
                 'margin': '5px'
             });
-            this.rootElement.append(c);
-            return c;
+            this.rootElement.append(element);
+            return element;
         }
 
         public getElement(): JQuery {
@@ -145,8 +157,10 @@ module powerbi.visuals.runner {
 
         public render(plugin): void {
           
-            var v = plugin.create();
-            v.init({
+            //var hostServices: powerbi.VisualHostServices;
+
+            var element = plugin.create();
+            element.init({
                 element: this.getElement(),
                 host: null,
                 style: visualStyle,
@@ -159,7 +173,29 @@ module powerbi.visuals.runner {
                 animation: { transitionImmediate: true }
             });
 
-            v.onDataChanged({ dataViews: [this.dataView] });
+            element.onDataChanged({ dataViews: [this.dataView] });
         }
     }
 }
+
+
+(function ($) {
+
+    $.fn.visuals = function (settings) {
+        
+        var options = {
+            settingA: "Example",
+            settingB: 5
+        };
+
+        if (settings) {
+            $.extend(options, settings);
+        }
+
+        return this.each(function (index, element) {
+            var runner = new powerbi.visuals.runner.VisualsRunner();
+            runner.startup(element, options);
+        });
+    };
+
+})(jQuery);

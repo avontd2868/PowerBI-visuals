@@ -19,7 +19,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
-    <Content Include="Data.js" />
     <Content Include="index.html" />
     <Content Include="moment.js" />
     <Content Include="pako.js" />
@@ -34,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.js.map" />
-    <Content Include="Data.js.map" />
     <Content Include="Utility.js.map" />
     <Content Include="visuals.js.map" />
     <None Include="web.Debug.config">
@@ -94,4 +92,21 @@
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+
+  <Target Name="PrepareCopyPowerBIStaticFiles" AfterTargets="Build" BeforeTargets="CopyPowerBIStaticFiles">
+    <ItemGroup>
+      <PowerBIStaticFiles Include="..\Data\obj\Data.js" />
+      <PowerBIStaticFiles Include="..\data\obj\data.min.js" />
+      <PowerBIStaticFiles Include="..\jscommon\obj\utility.js" />
+      <PowerBIStaticFiles Include="..\jscommon\obj\utility.min.js" />
+      <PowerBIStaticFiles Include="..\Visuals\obj\visuals.js" />
+      <PowerBIStaticFiles Include="..\Visuals\obj\visuals.min.js" />
+    </ItemGroup>
+  </Target>
+  <!-- Copy files for running tests within VS -->
+  <Target Name="CopyPowerBIStaticFiles" Inputs="@(PowerBIStaticFiles)" Outputs="@(PowerBIStaticFiles->'$(ProjectDir)%(RecursiveDir)%(Filename)%(Extension)')" AfterTargets="PrepareCopyPowerBIStaticFiles" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <Copy SourceFiles="@(PowerBIStaticFiles)" DestinationFiles="@(PowerBIStaticFiles->'$(ProjectDir)%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(PowerBIClientSrcFiles)" DestinationFiles="@(PowerBIClientSrcFiles->'$(ProjectDir)ts\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
 </Project>
