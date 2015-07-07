@@ -1,0 +1,666 @@
+﻿<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TouchEventInterpreter | PowerBI-Visuals</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">PowerBI-Visuals</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.html">powerbi</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.html">visuals</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.controls.html">controls</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.controls.touchutils.html">TouchUtils</a>
+				</li>
+				<li>
+					<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html">TouchEventInterpreter</a>
+				</li>
+			</ul>
+			<h1>Class TouchEventInterpreter</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>  This class is responsible for establishing connections to handle touch events
+						and to interpret those events so they&#39;re compatible with the touch abstractions.</p>
+					</div>
+					<p>  Touch events with platform specific handles should be done here.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">TouchEventInterpreter</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_allowmousedrag" class="tsd-kind-icon">_allow<wbr>Mouse<wbr>Drag</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_documentmousemovewrapper" class="tsd-kind-icon">_document<wbr>Mouse<wbr>Move<wbr>Wrapper</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_documentmouseupwrapper" class="tsd-kind-icon">_document<wbr>Mouse<wbr>UpWrapper</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_manager" class="tsd-kind-icon">_manager</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_rect" class="tsd-kind-icon">_rect</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_scale" class="tsd-kind-icon">_scale</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_touchpanel" class="tsd-kind-icon">_touch<wbr>Panel</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_touchreferencepoint" class="tsd-kind-icon">_touch<wbr>Reference<wbr>Point</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#getxybyclient" class="tsd-kind-icon">getXYBy<wbr>Client</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#inittouch" class="tsd-kind-icon">init<wbr>Touch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchend" class="tsd-kind-icon">on<wbr>Touch<wbr>End</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmousedown" class="tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Down</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmousemove" class="tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Move</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmouseup" class="tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Up</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmove" class="tsd-kind-icon">on<wbr>Touch<wbr>Move</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchstart" class="tsd-kind-icon">on<wbr>Touch<wbr>Start</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Touch<wbr>Event<wbr>Interpreter<span class="tsd-signature-symbol">(</span>manager<span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.controls.touchutils.touchmanager.html" class="tsd-signature-type">TouchManager</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html" class="tsd-signature-type">TouchEventInterpreter</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3098</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>manager: <a href="powerbi.visuals.controls.touchutils.touchmanager.html" class="tsd-signature-type">TouchManager</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html" class="tsd-signature-type">TouchEventInterpreter</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_allowmousedrag" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _allow<wbr>Mouse<wbr>Drag</h3>
+					<div class="tsd-signature tsd-kind-icon">_allow<wbr>Mouse<wbr>Drag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3088</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>_allowMouseDrag: boolean enabling mouse drag.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_documentmousemovewrapper" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _document<wbr>Mouse<wbr>Move<wbr>Wrapper</h3>
+					<div class="tsd-signature tsd-kind-icon">_document<wbr>Mouse<wbr>Move<wbr>Wrapper<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3097</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_documentmouseupwrapper" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _document<wbr>Mouse<wbr>UpWrapper</h3>
+					<div class="tsd-signature tsd-kind-icon">_document<wbr>Mouse<wbr>UpWrapper<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3098</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_manager" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _manager</h3>
+					<div class="tsd-signature tsd-kind-icon">_manager<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3090</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>_manager: touch events are interpreted and passed on this manager.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_rect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _rect</h3>
+					<div class="tsd-signature tsd-kind-icon">_rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3096</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Rectangle containing the targeted Div</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_scale" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _scale</h3>
+					<div class="tsd-signature tsd-kind-icon">_scale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3092</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>_scale: see TablixLayoutManager</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_touchpanel" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _touch<wbr>Panel</h3>
+					<div class="tsd-signature tsd-kind-icon">_touch<wbr>Panel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3086</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>_touchPanel: HTML element that touch events are drawn from.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_touchreferencepoint" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _touch<wbr>Reference<wbr>Point</h3>
+					<div class="tsd-signature tsd-kind-icon">_touch<wbr>Reference<wbr>Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3094</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>_touchReferencePoint: used for mouse location when a secondary div is used along side the primary with this one being the primary.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getxybyclient" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> getXYBy<wbr>Client</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">getXYBy<wbr>Client<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3101</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="inittouch" class="tsd-anchor"></a>
+					<h3>init<wbr>Touch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Touch<span class="tsd-signature-symbol">(</span>panel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, touchReferencePoint<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span>, allowMouseDrag<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3100</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>panel: <span class="tsd-signature-type">HTMLElement</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> touchReferencePoint: <span class="tsd-signature-type">HTMLElement</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> allowMouseDrag: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ontouchend" class="tsd-anchor"></a>
+					<h3>on<wbr>Touch<wbr>End</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Touch<wbr>End<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3104</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ontouchmousedown" class="tsd-anchor"></a>
+					<h3>on<wbr>Touch<wbr>Mouse<wbr>Down</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Down<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3105</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <span class="tsd-signature-type">MouseEvent</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ontouchmousemove" class="tsd-anchor"></a>
+					<h3>on<wbr>Touch<wbr>Mouse<wbr>Move</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Move<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3106</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <span class="tsd-signature-type">MouseEvent</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ontouchmouseup" class="tsd-anchor"></a>
+					<h3>on<wbr>Touch<wbr>Mouse<wbr>Up</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Up<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span>, bubble<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3107</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <span class="tsd-signature-type">MouseEvent</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> bubble: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ontouchmove" class="tsd-anchor"></a>
+					<h3>on<wbr>Touch<wbr>Move</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Touch<wbr>Move<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3103</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ontouchstart" class="tsd-anchor"></a>
+					<h3>on<wbr>Touch<wbr>Start</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Touch<wbr>Start<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3102</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module tsd-is-external tsd-is-not-exported">
+						<a href="../modules/powerbi.html">powerbi</a>
+						<ul>
+							<li class="current tsd-kind-module tsd-parent-kind-module">
+								<a href="../modules/powerbi.visuals.html">visuals</a>
+								<ul>
+									<li class="current tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.controls.html">controls</a>
+										<ul>
+											<li class=" tsd-kind-module tsd-parent-kind-module">
+												<a href="../modules/powerbi.visuals.controls.htmlelementutils.html">HTMLElement<wbr>Utils</a>
+											</li>
+											<li class="current tsd-kind-module tsd-parent-kind-module">
+												<a href="../modules/powerbi.visuals.controls.touchutils.html">Touch<wbr>Utils</a>
+											</li>
+											<li class=" tsd-kind-module tsd-parent-kind-module">
+												<a href="../modules/powerbi.visuals.controls.internal.html">internal</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/powerbi.visuals.controls.touchutils.mousebutton.html" class="tsd-kind-icon">Mouse<wbr>Button</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/powerbi.visuals.controls.touchutils.swipedirection.html" class="tsd-kind-icon">Swipe<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.touchutils.point.html" class="tsd-kind-icon">Point</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.touchutils.rectangle.html" class="tsd-kind-icon">Rectangle</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.touchutils.touchevent.html" class="tsd-kind-icon">Touch<wbr>Event</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html" class="tsd-kind-icon">Touch<wbr>Event<wbr>Interpreter</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_allowmousedrag" class="tsd-kind-icon">_allow<wbr>Mouse<wbr>Drag</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_documentmousemovewrapper" class="tsd-kind-icon">_document<wbr>Mouse<wbr>Move<wbr>Wrapper</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_documentmouseupwrapper" class="tsd-kind-icon">_document<wbr>Mouse<wbr>UpWrapper</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_manager" class="tsd-kind-icon">_manager</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_rect" class="tsd-kind-icon">_rect</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_scale" class="tsd-kind-icon">_scale</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_touchpanel" class="tsd-kind-icon">_touch<wbr>Panel</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#_touchreferencepoint" class="tsd-kind-icon">_touch<wbr>Reference<wbr>Point</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#getxybyclient" class="tsd-kind-icon">getXYBy<wbr>Client</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#inittouch" class="tsd-kind-icon">init<wbr>Touch</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchend" class="tsd-kind-icon">on<wbr>Touch<wbr>End</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmousedown" class="tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Down</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmousemove" class="tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Move</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmouseup" class="tsd-kind-icon">on<wbr>Touch<wbr>Mouse<wbr>Up</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchmove" class="tsd-kind-icon">on<wbr>Touch<wbr>Move</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.touchutils.toucheventinterpreter.html#ontouchstart" class="tsd-kind-icon">on<wbr>Touch<wbr>Start</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.touchutils.touchmanager.html" class="tsd-kind-icon">Touch<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/powerbi.visuals.controls.touchutils.ipixeltoitem.html" class="tsd-kind-icon">IPixel<wbr>ToItem</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/powerbi.visuals.controls.touchutils.itouchhandler.html" class="tsd-kind-icon">ITouch<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/powerbi.visuals.controls.touchutils.itouchhandlerset.html" class="tsd-kind-icon">ITouch<wbr>Handler<wbr>Set</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

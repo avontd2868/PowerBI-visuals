@@ -1,0 +1,1521 @@
+﻿<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ColumnChart | PowerBI-Visuals</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">PowerBI-Visuals</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.html">powerbi</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.html">visuals</a>
+				</li>
+				<li>
+					<a href="powerbi.visuals.columnchart.html">ColumnChart</a>
+				</li>
+			</ul>
+			<h1>Class ColumnChart</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Renders a stacked and clustered column chart</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ColumnChart</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/powerbi.visuals.icartesianvisual.html" class="tsd-signature-type">ICartesianVisual</a></li>
+					<li><a href="../interfaces/powerbi.visuals.iinteractivevisual.html" class="tsd-signature-type">IInteractiveVisual</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#animator" class="tsd-kind-icon">animator</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#cartesianvisualhost" class="tsd-kind-icon">cartesian<wbr>Visual<wbr>Host</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#categoryaxistype" class="tsd-kind-icon">category<wbr>Axis<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#charttype" class="tsd-kind-icon">chart<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#clearcatcher" class="tsd-kind-icon">clear<wbr>Catcher</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#colors" class="tsd-kind-icon">colors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#columnchart" class="tsd-kind-icon">column<wbr>Chart</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#currentviewport" class="tsd-kind-icon">current<wbr>Viewport</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#dataviewcat" class="tsd-kind-icon">data<wbr>View<wbr>Cat</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#element" class="tsd-kind-icon">element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#hostservice" class="tsd-kind-icon">host<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#interactivity" class="tsd-kind-icon">interactivity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#interactivityservice" class="tsd-kind-icon">interactivity<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#isscrollable" class="tsd-kind-icon">is<wbr>Scrollable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#lastinteractiveselectedcolumnindex" class="tsd-kind-icon">last<wbr>Interactive<wbr>Selected<wbr>Column<wbr>Index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#maingraphicscontext" class="tsd-kind-icon">main<wbr>Graphics<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#margin" class="tsd-kind-icon">margin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#options" class="tsd-kind-icon">options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#style" class="tsd-kind-icon">style</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#supportsoverflow" class="tsd-kind-icon">supports<wbr>Overflow</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#svg" class="tsd-kind-icon">svg</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#xaxisproperties" class="tsd-kind-icon">x<wbr>Axis<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#yaxisproperties" class="tsd-kind-icon">y<wbr>Axis<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.columnchart.html#columnchartclassname" class="tsd-kind-icon">Column<wbr>Chart<wbr>Class<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.columnchart.html#seriesclasses" class="tsd-kind-icon">Series<wbr>Classes</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#applyinteractivity" class="tsd-kind-icon">Apply<wbr>Interactivity</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#accept" class="tsd-kind-icon">accept</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#calculateaxesproperties" class="tsd-kind-icon">calculate<wbr>Axes<wbr>Properties</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#calculatelegend" class="tsd-kind-icon">calculate<wbr>Legend</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#createinteractivelegenddatapoints" class="tsd-kind-icon">create<wbr>Interactive<wbr>Legend<wbr>Data<wbr>Points</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#enumeratedatapoints" class="tsd-kind-icon">enumerate<wbr>Data<wbr>Points</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#enumerateobjectinstances" class="tsd-kind-icon">enumerate<wbr>Object<wbr>Instances</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#getcategorylayout" class="tsd-kind-icon">get<wbr>Category<wbr>Layout</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#getpreferredplotarea" class="tsd-kind-icon">get<wbr>Preferred<wbr>Plot<wbr>Area</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#getsupportedcategoryaxistype" class="tsd-kind-icon">get<wbr>Supported<wbr>Category<wbr>Axis<wbr>Type</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#getvisualcategoryaxisisscalar" class="tsd-kind-icon">get<wbr>Visual<wbr>Category<wbr>Axis<wbr>IsScalar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#haslegend" class="tsd-kind-icon">has<wbr>Legend</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#init" class="tsd-kind-icon">init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#onclearselection" class="tsd-kind-icon">on<wbr>Clear<wbr>Selection</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#overridexscale" class="tsd-kind-icon">overrideXScale</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#render" class="tsd-kind-icon">render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.columnchart.html#selectcolumn" class="tsd-kind-icon">select<wbr>Column</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#setdata" class="tsd-kind-icon">set<wbr>Data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#setfiltereddata" class="tsd-kind-icon">set<wbr>Filtered<wbr>Data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.columnchart.html#updatevisualmetadata" class="tsd-kind-icon">update<wbr>Visual<wbr>Metadata</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.columnchart.html#converter" class="tsd-kind-icon">converter</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.columnchart.html#createdatapoints" class="tsd-kind-icon">create<wbr>Data<wbr>Points</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.columnchart.html#customizequery" class="tsd-kind-icon">customize<wbr>Query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.columnchart.html#getdatapointcolor" class="tsd-kind-icon">get<wbr>Data<wbr>Point<wbr>Color</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.columnchart.html#getforcedtickvalues" class="tsd-kind-icon">get<wbr>Forced<wbr>Tick<wbr>Values</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.columnchart.html#getsortableroles" class="tsd-kind-icon">get<wbr>Sortable<wbr>Roles</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.columnchart.html#gettickinterval" class="tsd-kind-icon">get<wbr>Tick<wbr>Interval</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.columnchart.html#sliceseries" class="tsd-kind-icon">slice<wbr>Series</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Column<wbr>Chart<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.columnchartconstructoroptions.html" class="tsd-signature-type">ColumnChartConstructorOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.columnchart.html" class="tsd-signature-type">ColumnChart</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3544</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visuals.columnchartconstructoroptions.html" class="tsd-signature-type">ColumnChartConstructorOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="powerbi.visuals.columnchart.html" class="tsd-signature-type">ColumnChart</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="animator" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> animator</h3>
+					<div class="tsd-signature tsd-kind-icon">animator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3542</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="cartesianvisualhost" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> cartesian<wbr>Visual<wbr>Host</h3>
+					<div class="tsd-signature tsd-kind-icon">cartesian<wbr>Visual<wbr>Host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3533</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="categoryaxistype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> category<wbr>Axis<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">category<wbr>Axis<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3541</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="charttype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> chart<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">chart<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3530</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="clearcatcher" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> clear<wbr>Catcher</h3>
+					<div class="tsd-signature tsd-kind-icon">clear<wbr>Catcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3522</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="colors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> colors</h3>
+					<div class="tsd-signature tsd-kind-icon">colors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3529</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="columnchart" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> column<wbr>Chart</h3>
+					<div class="tsd-signature tsd-kind-icon">column<wbr>Chart<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3531</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="currentviewport" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> current<wbr>Viewport</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Viewport<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3526</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="data" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3527</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="dataviewcat" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> data<wbr>View<wbr>Cat</h3>
+					<div class="tsd-signature tsd-kind-icon">data<wbr>View<wbr>Cat<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3540</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="element" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> element</h3>
+					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3544</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="hostservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> host<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">host<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3532</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="interactivity" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> interactivity</h3>
+					<div class="tsd-signature tsd-kind-icon">interactivity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3534</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="interactivityservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> interactivity<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">interactivity<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3539</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="isscrollable" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> is<wbr>Scrollable</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Scrollable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3543</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="lastinteractiveselectedcolumnindex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> last<wbr>Interactive<wbr>Selected<wbr>Column<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">last<wbr>Interactive<wbr>Selected<wbr>Column<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3537</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="maingraphicscontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> main<wbr>Graphics<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">main<wbr>Graphics<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3523</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="margin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> margin</h3>
+					<div class="tsd-signature tsd-kind-icon">margin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3535</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="options" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> options</h3>
+					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3536</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="style" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> style</h3>
+					<div class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3528</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="supportsoverflow" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> supports<wbr>Overflow</h3>
+					<div class="tsd-signature tsd-kind-icon">supports<wbr>Overflow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3538</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="svg" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> svg</h3>
+					<div class="tsd-signature tsd-kind-icon">svg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3521</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="xaxisproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> x<wbr>Axis<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">x<wbr>Axis<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3524</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="yaxisproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> y<wbr>Axis<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">y<wbr>Axis<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3525</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="columnchartclassname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Column<wbr>Chart<wbr>Class<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">Column<wbr>Chart<wbr>Class<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3519</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="seriesclasses" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Series<wbr>Classes</h3>
+					<div class="tsd-signature tsd-kind-icon">Series<wbr>Classes<span class="tsd-signature-symbol">:</span> <a href="../interfaces/powerbi.visuals.classandselector.html" class="tsd-signature-type">ClassAndSelector</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3520</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="applyinteractivity" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> Apply<wbr>Interactivity</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">Apply<wbr>Interactivity<span class="tsd-signature-symbol">(</span>chartContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3564</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>chartContext: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="accept" class="tsd-anchor"></a>
+					<h3>accept</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">accept<span class="tsd-signature-symbol">(</span>visitor<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.interactivityvisitor.html" class="tsd-signature-type">InteractivityVisitor</a>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3570</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>visitor: <a href="../interfaces/powerbi.visuals.interactivityvisitor.html" class="tsd-signature-type">InteractivityVisitor</a></h5>
+								</li>
+								<li>
+									<h5>options: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="calculateaxesproperties" class="tsd-anchor"></a>
+					<h3>calculate<wbr>Axes<wbr>Properties</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">calculate<wbr>Axes<wbr>Properties<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.calculatescaleanddomainoptions.html" class="tsd-signature-type">CalculateScaleAndDomainOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3562</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visuals.calculatescaleanddomainoptions.html" class="tsd-signature-type">CalculateScaleAndDomainOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="calculatelegend" class="tsd-anchor"></a>
+					<h3>calculate<wbr>Legend</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">calculate<wbr>Legend<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/powerbi.visuals.legenddata.html" class="tsd-signature-type">LegendData</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3558</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/powerbi.visuals.legenddata.html" class="tsd-signature-type">LegendData</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="createinteractivelegenddatapoints" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> create<wbr>Interactive<wbr>Legend<wbr>Data<wbr>Points</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Interactive<wbr>Legend<wbr>Data<wbr>Points<span class="tsd-signature-symbol">(</span>columnIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3566</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>columnIndex: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="enumeratedatapoints" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> enumerate<wbr>Data<wbr>Points</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">enumerate<wbr>Data<wbr>Points<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3561</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="enumerateobjectinstances" class="tsd-anchor"></a>
+					<h3>enumerate<wbr>Object<wbr>Instances</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">enumerate<wbr>Object<wbr>Instances<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.enumeratevisualobjectinstancesoptions.html" class="tsd-signature-type">EnumerateVisualObjectInstancesOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visualobjectinstance.html" class="tsd-signature-type">VisualObjectInstance</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3560</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.enumeratevisualobjectinstancesoptions.html" class="tsd-signature-type">EnumerateVisualObjectInstancesOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visualobjectinstance.html" class="tsd-signature-type">VisualObjectInstance</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getcategorylayout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Category<wbr>Layout</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Category<wbr>Layout<span class="tsd-signature-symbol">(</span>numCategoryValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3550</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>numCategoryValues: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>options: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getpreferredplotarea" class="tsd-anchor"></a>
+					<h3>get<wbr>Preferred<wbr>Plot<wbr>Area</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Preferred<wbr>Plot<wbr>Area<span class="tsd-signature-symbol">(</span>isScalar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, categoryCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryThickness<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3563</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>isScalar: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>categoryCount: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>categoryThickness: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsupportedcategoryaxistype" class="tsd-anchor"></a>
+					<h3>get<wbr>Supported<wbr>Category<wbr>Axis<wbr>Type</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Supported<wbr>Category<wbr>Axis<wbr>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3572</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getvisualcategoryaxisisscalar" class="tsd-anchor"></a>
+					<h3>get<wbr>Visual<wbr>Category<wbr>Axis<wbr>IsScalar</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Visual<wbr>Category<wbr>Axis<wbr>IsScalar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3571</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="haslegend" class="tsd-anchor"></a>
+					<h3>has<wbr>Legend</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Legend<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3559</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="init" class="tsd-anchor"></a>
+					<h3>init</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.cartesianvisualinitoptions.html" class="tsd-signature-type">CartesianVisualInitOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3549</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visuals.cartesianvisualinitoptions.html" class="tsd-signature-type">CartesianVisualInitOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="onclearselection" class="tsd-anchor"></a>
+					<h3>on<wbr>Clear<wbr>Selection</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Clear<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3569</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="overridexscale" class="tsd-anchor"></a>
+					<h3>overrideXScale</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">overrideXScale<span class="tsd-signature-symbol">(</span>xProperties<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3567</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>xProperties: <a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="render" class="tsd-anchor"></a>
+					<h3>render</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">render<span class="tsd-signature-symbol">(</span>duration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3568</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>duration: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="selectcolumn" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> select<wbr>Column</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">select<wbr>Column<span class="tsd-signature-symbol">(</span>indexOfColumnSelected<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, force<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3565</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>indexOfColumnSelected: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> force: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setdata" class="tsd-anchor"></a>
+					<h3>set<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Data<span class="tsd-signature-symbol">(</span>dataViews<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.dataview.html" class="tsd-signature-type">DataView</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3557</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataViews: <a href="../interfaces/powerbi.dataview.html" class="tsd-signature-type">DataView</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setfiltereddata" class="tsd-anchor"></a>
+					<h3>set<wbr>Filtered<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Filtered<wbr>Data<span class="tsd-signature-symbol">(</span>startIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, endIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.cartesiandata.html" class="tsd-signature-type">CartesianData</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3573</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>startIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>endIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visuals.cartesiandata.html" class="tsd-signature-type">CartesianData</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updatevisualmetadata" class="tsd-anchor"></a>
+					<h3>update<wbr>Visual<wbr>Metadata</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Visual<wbr>Metadata<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a>, y<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a>, margin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3548</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a></h5>
+								</li>
+								<li>
+									<h5>y: <a href="../interfaces/powerbi.visuals.iaxisproperties.html" class="tsd-signature-type">IAxisProperties</a></h5>
+								</li>
+								<li>
+									<h5>margin: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="converter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> converter</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">converter<span class="tsd-signature-symbol">(</span>dataView<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.dataviewcategorical.html" class="tsd-signature-type">DataViewCategorical</a>, colors<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.idatacolorpalette.html" class="tsd-signature-type">IDataColorPalette</a>, is100PercentStacked<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, isScalar<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, supportsOverflow<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, dataViewMetadata<span class="tsd-signature-symbol">?: </span><a href="../interfaces/powerbi.dataviewmetadata.html" class="tsd-signature-type">DataViewMetadata</a>, chartType<span class="tsd-signature-symbol">?: </span><a href="../enums/powerbi.visuals.columncharttype.html" class="tsd-signature-type">ColumnChartType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.columnchartdata.html" class="tsd-signature-type">ColumnChartData</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3551</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataView: <a href="../interfaces/powerbi.dataviewcategorical.html" class="tsd-signature-type">DataViewCategorical</a></h5>
+								</li>
+								<li>
+									<h5>colors: <a href="../interfaces/powerbi.idatacolorpalette.html" class="tsd-signature-type">IDataColorPalette</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> is100PercentStacked: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> isScalar: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> supportsOverflow: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> dataViewMetadata: <a href="../interfaces/powerbi.dataviewmetadata.html" class="tsd-signature-type">DataViewMetadata</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> chartType: <a href="../enums/powerbi.visuals.columncharttype.html" class="tsd-signature-type">ColumnChartType</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visuals.columnchartdata.html" class="tsd-signature-type">ColumnChartData</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="createdatapoints" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> create<wbr>Data<wbr>Points</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Data<wbr>Points<span class="tsd-signature-symbol">(</span>dataViewCat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, categories<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, categoryIdentities<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, legend<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, seriesObjectsList<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, converterStrategy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, labelSettings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, is100PercentStacked<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, isScalar<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, supportsOverflow<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, isCategoryAlsoSeries<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, categoryObjectsList<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, defaultDataPointColor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3552</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataViewCat: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>categories: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>categoryIdentities: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>legend: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>seriesObjectsList: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>converterStrategy: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>labelSettings: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> is100PercentStacked: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> isScalar: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> supportsOverflow: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> isCategoryAlsoSeries: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> categoryObjectsList: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> defaultDataPointColor: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="customizequery" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> customize<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">customize<wbr>Query<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.customizequeryoptions.html" class="tsd-signature-type">CustomizeQueryOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3546</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.customizequeryoptions.html" class="tsd-signature-type">CustomizeQueryOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="getdatapointcolor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Data<wbr>Point<wbr>Color</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Data<wbr>Point<wbr>Color<span class="tsd-signature-symbol">(</span>legendItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, categoryIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, dataPointObjects<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3553</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>legendItem: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>categoryIndex: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> dataPointObjects: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getforcedtickvalues" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Forced<wbr>Tick<wbr>Values</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Forced<wbr>Tick<wbr>Values<span class="tsd-signature-symbol">(</span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, forcedTickCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3555</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>min: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>max: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>forcedTickCount: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getsortableroles" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Sortable<wbr>Roles</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Sortable<wbr>Roles<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visualsortableoptions.html" class="tsd-signature-type">VisualSortableOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3547</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visualsortableoptions.html" class="tsd-signature-type">VisualSortableOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="gettickinterval" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Tick<wbr>Interval</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Tick<wbr>Interval<span class="tsd-signature-symbol">(</span>tickValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3556</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tickValues: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="sliceseries" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> slice<wbr>Series</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">slice<wbr>Series<span class="tsd-signature-symbol">(</span>series<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.columnchartseries.html" class="tsd-signature-type">ColumnChartSeries</a><span class="tsd-signature-symbol">[]</span>, endIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, startIndex<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.columnchartseries.html" class="tsd-signature-type">ColumnChartSeries</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3554</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>series: <a href="../interfaces/powerbi.visuals.columnchartseries.html" class="tsd-signature-type">ColumnChartSeries</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>endIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> startIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visuals.columnchartseries.html" class="tsd-signature-type">ColumnChartSeries</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module tsd-is-external tsd-is-not-exported">
+						<a href="../modules/powerbi.html">powerbi</a>
+						<ul>
+							<li class="current tsd-kind-module tsd-parent-kind-module">
+								<a href="../modules/powerbi.visuals.html">visuals</a>
+								<ul>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.animatorcommon.html">Animator<wbr>Common</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.axishelper.html">Axis<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.bi.html">BI</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.cartesianhelper.html">Cartesian<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.clusteredutil.html">Clustered<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.columnutil.html">Column<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.combochart.html">Combo<wbr>Chart</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.datarolehelper.html">Data<wbr>Role<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.gradientutils.html">Gradient<wbr>Utils</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.legenddata.html">Legend<wbr>Data</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.listviewfactory.html">List<wbr>View<wbr>Factory</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.richtext.html">Rich<wbr>Text</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.svgutil.html">SVGUtil</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.stackedutil.html">Stacked<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.textutil.html">Text<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.tooltipbuilder.html">Tooltip<wbr>Builder</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.tooltipmanager.html">Tooltip<wbr>Manager</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.urlhelper.html">Url<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualinteractivityfactory.html">Visual<wbr>Interactivity<wbr>Factory</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.controls.html">controls</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.converterhelper.html">converter<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.datalabelutils.html">data<wbr>Label<wbr>Utils</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.plugins.html">plugins</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.shapes.html">shapes</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.valueformatter.html">value<wbr>Formatter</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualbackgroundhelper.html">visual<wbr>Background<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualpluginfactory.html">visual<wbr>Plugin<wbr>Factory</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualstyles.html">visual<wbr>Styles</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.columnchart.html" class="tsd-kind-icon">Column<wbr>Chart</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#animator" class="tsd-kind-icon">animator</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#cartesianvisualhost" class="tsd-kind-icon">cartesian<wbr>Visual<wbr>Host</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#categoryaxistype" class="tsd-kind-icon">category<wbr>Axis<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#charttype" class="tsd-kind-icon">chart<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#clearcatcher" class="tsd-kind-icon">clear<wbr>Catcher</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#colors" class="tsd-kind-icon">colors</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#columnchart" class="tsd-kind-icon">column<wbr>Chart</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#currentviewport" class="tsd-kind-icon">current<wbr>Viewport</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#dataviewcat" class="tsd-kind-icon">data<wbr>View<wbr>Cat</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#element" class="tsd-kind-icon">element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#hostservice" class="tsd-kind-icon">host<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#interactivity" class="tsd-kind-icon">interactivity</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#interactivityservice" class="tsd-kind-icon">interactivity<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#isscrollable" class="tsd-kind-icon">is<wbr>Scrollable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#lastinteractiveselectedcolumnindex" class="tsd-kind-icon">last<wbr>Interactive<wbr>Selected<wbr>Column<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#maingraphicscontext" class="tsd-kind-icon">main<wbr>Graphics<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#margin" class="tsd-kind-icon">margin</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#options" class="tsd-kind-icon">options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#style" class="tsd-kind-icon">style</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#supportsoverflow" class="tsd-kind-icon">supports<wbr>Overflow</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#svg" class="tsd-kind-icon">svg</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#xaxisproperties" class="tsd-kind-icon">x<wbr>Axis<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#yaxisproperties" class="tsd-kind-icon">y<wbr>Axis<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#columnchartclassname" class="tsd-kind-icon">Column<wbr>Chart<wbr>Class<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#seriesclasses" class="tsd-kind-icon">Series<wbr>Classes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#applyinteractivity" class="tsd-kind-icon">Apply<wbr>Interactivity</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#accept" class="tsd-kind-icon">accept</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#calculateaxesproperties" class="tsd-kind-icon">calculate<wbr>Axes<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#calculatelegend" class="tsd-kind-icon">calculate<wbr>Legend</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#createinteractivelegenddatapoints" class="tsd-kind-icon">create<wbr>Interactive<wbr>Legend<wbr>Data<wbr>Points</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#enumeratedatapoints" class="tsd-kind-icon">enumerate<wbr>Data<wbr>Points</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#enumerateobjectinstances" class="tsd-kind-icon">enumerate<wbr>Object<wbr>Instances</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#getcategorylayout" class="tsd-kind-icon">get<wbr>Category<wbr>Layout</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#getpreferredplotarea" class="tsd-kind-icon">get<wbr>Preferred<wbr>Plot<wbr>Area</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#getsupportedcategoryaxistype" class="tsd-kind-icon">get<wbr>Supported<wbr>Category<wbr>Axis<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#getvisualcategoryaxisisscalar" class="tsd-kind-icon">get<wbr>Visual<wbr>Category<wbr>Axis<wbr>IsScalar</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#haslegend" class="tsd-kind-icon">has<wbr>Legend</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#init" class="tsd-kind-icon">init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#onclearselection" class="tsd-kind-icon">on<wbr>Clear<wbr>Selection</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#overridexscale" class="tsd-kind-icon">overrideXScale</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#render" class="tsd-kind-icon">render</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.columnchart.html#selectcolumn" class="tsd-kind-icon">select<wbr>Column</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#setdata" class="tsd-kind-icon">set<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#setfiltereddata" class="tsd-kind-icon">set<wbr>Filtered<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.columnchart.html#updatevisualmetadata" class="tsd-kind-icon">update<wbr>Visual<wbr>Metadata</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#converter" class="tsd-kind-icon">converter</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#createdatapoints" class="tsd-kind-icon">create<wbr>Data<wbr>Points</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#customizequery" class="tsd-kind-icon">customize<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#getdatapointcolor" class="tsd-kind-icon">get<wbr>Data<wbr>Point<wbr>Color</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#getforcedtickvalues" class="tsd-kind-icon">get<wbr>Forced<wbr>Tick<wbr>Values</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#getsortableroles" class="tsd-kind-icon">get<wbr>Sortable<wbr>Roles</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#gettickinterval" class="tsd-kind-icon">get<wbr>Tick<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.columnchart.html#sliceseries" class="tsd-kind-icon">slice<wbr>Series</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

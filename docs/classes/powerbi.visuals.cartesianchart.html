@@ -1,0 +1,2327 @@
+﻿<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CartesianChart | PowerBI-Visuals</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">PowerBI-Visuals</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.html">powerbi</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.html">visuals</a>
+				</li>
+				<li>
+					<a href="powerbi.visuals.cartesianchart.html">CartesianChart</a>
+				</li>
+			</ul>
+			<h1>Class CartesianChart</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Renders a data series as a cartestian visual.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">CartesianChart</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/powerbi.ivisual.html" class="tsd-signature-type">IVisual</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#animator" class="tsd-kind-icon">animator</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#axisgraphicscontext" class="tsd-kind-icon">axis<wbr>Graphics<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#axisgraphicscontextscrollable" class="tsd-kind-icon">axis<wbr>Graphics<wbr>Context<wbr>Scrollable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#bottommarginlimit" class="tsd-kind-icon">bottom<wbr>Margin<wbr>Limit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#brush" class="tsd-kind-icon">brush</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#brushcontext" class="tsd-kind-icon">brush<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#brushgraphicscontext" class="tsd-kind-icon">brush<wbr>Graphics<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#brushminextent" class="tsd-kind-icon">brush<wbr>Min<wbr>Extent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#cartesiansmallviewportproperties" class="tsd-kind-icon">cartesian<wbr>Small<wbr>View<wbr>Port<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#categoryaxishasunittype" class="tsd-kind-icon">category<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#categoryaxisproperties" class="tsd-kind-icon">category<wbr>Axis<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#clearcatcher" class="tsd-kind-icon">clear<wbr>Catcher</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#currentviewport" class="tsd-kind-icon">current<wbr>Viewport</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#dataviews" class="tsd-kind-icon">data<wbr>Views</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#duration" class="tsd-kind-icon">duration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#element" class="tsd-kind-icon">element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#hassetdata" class="tsd-kind-icon">has<wbr>Set<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#hostservices" class="tsd-kind-icon">host<wbr>Services</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#interactivityservice" class="tsd-kind-icon">interactivity<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#isscrollable" class="tsd-kind-icon">is<wbr>Scrollable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#isxscrollbarvisible" class="tsd-kind-icon">isXScroll<wbr>Bar<wbr>Visible</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#isyscrollbarvisible" class="tsd-kind-icon">isYScroll<wbr>Bar<wbr>Visible</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#layerlegenddata" class="tsd-kind-icon">layer<wbr>Legend<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#layers" class="tsd-kind-icon">layers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#leftmarginlimit" class="tsd-kind-icon">left<wbr>Margin<wbr>Limit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#legend" class="tsd-kind-icon">legend</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#legendmargins" class="tsd-kind-icon">legend<wbr>Margins</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#legendobjectproperties" class="tsd-kind-icon">legend<wbr>Object<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#margin" class="tsd-kind-icon">margin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#needrotate" class="tsd-kind-icon">need<wbr>Rotate</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#scrollx" class="tsd-kind-icon">scrollX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#scrolly" class="tsd-kind-icon">scrollY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#svg" class="tsd-kind-icon">svg</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#svgscrollable" class="tsd-kind-icon">svg<wbr>Scrollable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#valueaxishasunittype" class="tsd-kind-icon">value<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#valueaxisproperties" class="tsd-kind-icon">value<wbr>Axis<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#visualinitoptions" class="tsd-kind-icon">visual<wbr>Init<wbr>Options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#xaxisgraphicscontext" class="tsd-kind-icon">x<wbr>Axis<wbr>Graphics<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#y1axisgraphicscontext" class="tsd-kind-icon">y1<wbr>Axis<wbr>Graphics<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#y2axesrendered" class="tsd-kind-icon">y2<wbr>Axes<wbr>Rendered</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#y2axisgraphicscontext" class="tsd-kind-icon">y2<wbr>Axis<wbr>Graphics<wbr>Context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#yaxisorientation" class="tsd-kind-icon">y<wbr>Axis<wbr>Orientation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#axisgraphicscontextclassname" class="tsd-kind-icon">Axis<wbr>Graphics<wbr>Context<wbr>Class<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#bottompadding" class="tsd-kind-icon">Bottom<wbr>Padding</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#classname" class="tsd-kind-icon">Class<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#fontsize" class="tsd-kind-icon">Font<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#fontsizestring" class="tsd-kind-icon">Font<wbr>Size<wbr>String</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#innerpaddingratio" class="tsd-kind-icon">Inner<wbr>Padding<wbr>Ratio</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#leftpadding" class="tsd-kind-icon">Left<wbr>Padding</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#maxmarginfactor" class="tsd-kind-icon">Max<wbr>Margin<wbr>Factor</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#minbottommargin" class="tsd-kind-icon">Min<wbr>Bottom<wbr>Margin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#minordinalrectthickness" class="tsd-kind-icon">Min<wbr>Ordinal<wbr>Rect<wbr>Thickness</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#minscalarrectthickness" class="tsd-kind-icon">Min<wbr>Scalar<wbr>Rect<wbr>Thickness</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#outerpaddingratio" class="tsd-kind-icon">Outer<wbr>Padding<wbr>Ratio</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#rightpadding" class="tsd-kind-icon">Right<wbr>Padding</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#scrollbarwidth" class="tsd-kind-icon">Scroll<wbr>Bar<wbr>Width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#tickpaddingrotatedx" class="tsd-kind-icon">Tick<wbr>Padding<wbr>RotatedX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#tickpaddingy" class="tsd-kind-icon">Tick<wbr>PaddingY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#topmargin" class="tsd-kind-icon">Top<wbr>Margin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#xaxislabelpadding" class="tsd-kind-icon">XAxis<wbr>Label<wbr>Padding</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#yaxislabelpadding" class="tsd-kind-icon">YAxis<wbr>Label<wbr>Padding</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#fillopacity" class="tsd-kind-icon">fill<wbr>Opacity</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#addunittypetoaxislabel" class="tsd-kind-icon">add<wbr>Unit<wbr>Type<wbr>ToAxis<wbr>Label</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#adjustmargins" class="tsd-kind-icon">adjust<wbr>Margins</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#createandinitlayers" class="tsd-kind-icon">create<wbr>And<wbr>Init<wbr>Layers</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#enumerateobjectinstances" class="tsd-kind-icon">enumerate<wbr>Object<wbr>Instances</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#findobjectwithproperty" class="tsd-kind-icon">find<wbr>Object<wbr>With<wbr>Property</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#getcategoryaxisvalues" class="tsd-kind-icon">get<wbr>Category<wbr>Axis<wbr>Values</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#getmaxmarginfactor" class="tsd-kind-icon">get<wbr>Max<wbr>Margin<wbr>Factor</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#getminextent" class="tsd-kind-icon">get<wbr>Min<wbr>Extent</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#getvalueaxisvalues" class="tsd-kind-icon">get<wbr>Value<wbr>Axis<wbr>Values</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#hideaxislabels" class="tsd-kind-icon">hide<wbr>Axis<wbr>Labels</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#hidelegends" class="tsd-kind-icon">hide<wbr>Legends</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#init" class="tsd-kind-icon">init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#onbrushend" class="tsd-kind-icon">on<wbr>Brush<wbr>End</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#onbrushed" class="tsd-kind-icon">on<wbr>Brushed</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#onclearselection" class="tsd-kind-icon">on<wbr>Clear<wbr>Selection</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#ondatachanged" class="tsd-kind-icon">on<wbr>Data<wbr>Changed</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#onresizing" class="tsd-kind-icon">on<wbr>Resizing</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#populateobjectproperties" class="tsd-kind-icon">populate<wbr>Object<wbr>Properties</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#render" class="tsd-kind-icon">render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#renderaxeslabels" class="tsd-kind-icon">render<wbr>Axes<wbr>Labels</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#renderchart" class="tsd-kind-icon">render<wbr>Chart</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#renderchartwithscrollbar" class="tsd-kind-icon">render<wbr>Chart<wbr>With<wbr>Scroll<wbr>Bar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#renderlegend" class="tsd-kind-icon">render<wbr>Legend</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#setbrushextent" class="tsd-kind-icon">set<wbr>Brush<wbr>Extent</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#setminbrush" class="tsd-kind-icon">set<wbr>Min<wbr>Brush</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#shouldrenderaxis" class="tsd-kind-icon">should<wbr>Render<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#shouldrendersecondaryaxis" class="tsd-kind-icon">should<wbr>Render<wbr>Secondary<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.cartesianchart.html#update" class="tsd-kind-icon">update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.cartesianchart.html#updateaxis" class="tsd-kind-icon">update<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#getaxisvisibility" class="tsd-kind-icon">get<wbr>Axis<wbr>Visibility</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#getcategorythickness" class="tsd-kind-icon">get<wbr>Category<wbr>Thickness</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#getisscalar" class="tsd-kind-icon">get<wbr>IsScalar</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#getmininterval" class="tsd-kind-icon">get<wbr>Min<wbr>Interval</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#getpreferredcategoryspan" class="tsd-kind-icon">get<wbr>Preferred<wbr>Category<wbr>Span</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="powerbi.visuals.cartesianchart.html#getpreferredplotarea" class="tsd-kind-icon">get<wbr>Preferred<wbr>Plot<wbr>Area</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Cartesian<wbr>Chart<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.cartesianconstructoroptions.html" class="tsd-signature-type">CartesianConstructorOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.cartesianchart.html" class="tsd-signature-type">CartesianChart</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3327</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visuals.cartesianconstructoroptions.html" class="tsd-signature-type">CartesianConstructorOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="powerbi.visuals.cartesianchart.html" class="tsd-signature-type">CartesianChart</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="animator" class="tsd-anchor"></a>
+					<h3>animator</h3>
+					<div class="tsd-signature tsd-kind-icon">animator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3310</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="axisgraphicscontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> axis<wbr>Graphics<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">axis<wbr>Graphics<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3282</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="axisgraphicscontextscrollable" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> axis<wbr>Graphics<wbr>Context<wbr>Scrollable</h3>
+					<div class="tsd-signature tsd-kind-icon">axis<wbr>Graphics<wbr>Context<wbr>Scrollable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3317</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="bottommarginlimit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> bottom<wbr>Margin<wbr>Limit</h3>
+					<div class="tsd-signature tsd-kind-icon">bottom<wbr>Margin<wbr>Limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3307</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="brush" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> brush</h3>
+					<div class="tsd-signature tsd-kind-icon">brush<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3320</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="brushcontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> brush<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">brush<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3319</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="brushgraphicscontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> brush<wbr>Graphics<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">brush<wbr>Graphics<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3318</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="brushminextent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> brush<wbr>Min<wbr>Extent</h3>
+					<div class="tsd-signature tsd-kind-icon">brush<wbr>Min<wbr>Extent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3324</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="cartesiansmallviewportproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> cartesian<wbr>Small<wbr>View<wbr>Port<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">cartesian<wbr>Small<wbr>View<wbr>Port<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3301</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="categoryaxishasunittype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> category<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">category<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3304</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="categoryaxisproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> category<wbr>Axis<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">category<wbr>Axis<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3299</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="clearcatcher" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> clear<wbr>Catcher</h3>
+					<div class="tsd-signature tsd-kind-icon">clear<wbr>Catcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3288</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="currentviewport" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> current<wbr>Viewport</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Viewport<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3326</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="dataviews" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> data<wbr>Views</h3>
+					<div class="tsd-signature tsd-kind-icon">data<wbr>Views<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3325</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="duration" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> duration</h3>
+					<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3323</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="element" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> element</h3>
+					<div class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3286</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="hassetdata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> has<wbr>Set<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">has<wbr>Set<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3296</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="hostservices" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> host<wbr>Services</h3>
+					<div class="tsd-signature tsd-kind-icon">host<wbr>Services<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3291</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="interactivityservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> interactivity<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">interactivity<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3302</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="isscrollable" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> is<wbr>Scrollable</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Scrollable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3311</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="isxscrollbarvisible" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> isXScroll<wbr>Bar<wbr>Visible</h3>
+					<div class="tsd-signature tsd-kind-icon">isXScroll<wbr>Bar<wbr>Visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3314</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="isyscrollbarvisible" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> isYScroll<wbr>Bar<wbr>Visible</h3>
+					<div class="tsd-signature tsd-kind-icon">isYScroll<wbr>Bar<wbr>Visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3315</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="layerlegenddata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> layer<wbr>Legend<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">layer<wbr>Legend<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3295</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="layers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> layers</h3>
+					<div class="tsd-signature tsd-kind-icon">layers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3292</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="leftmarginlimit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> left<wbr>Margin<wbr>Limit</h3>
+					<div class="tsd-signature tsd-kind-icon">left<wbr>Margin<wbr>Limit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3308</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="legend" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> legend</h3>
+					<div class="tsd-signature tsd-kind-icon">legend<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3293</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="legendmargins" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> legend<wbr>Margins</h3>
+					<div class="tsd-signature tsd-kind-icon">legend<wbr>Margins<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3294</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="legendobjectproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> legend<wbr>Object<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">legend<wbr>Object<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3298</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="margin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> margin</h3>
+					<div class="tsd-signature tsd-kind-icon">margin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3289</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="needrotate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> need<wbr>Rotate</h3>
+					<div class="tsd-signature tsd-kind-icon">need<wbr>Rotate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3309</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="scrollx" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> scrollX</h3>
+					<div class="tsd-signature tsd-kind-icon">scrollX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3313</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="scrolly" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> scrollY</h3>
+					<div class="tsd-signature tsd-kind-icon">scrollY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3312</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="svg" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> svg</h3>
+					<div class="tsd-signature tsd-kind-icon">svg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3287</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="svgscrollable" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> svg<wbr>Scrollable</h3>
+					<div class="tsd-signature tsd-kind-icon">svg<wbr>Scrollable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3316</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="type" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3290</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="valueaxishasunittype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> value<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">value<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3305</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="valueaxisproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> value<wbr>Axis<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">value<wbr>Axis<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3300</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="visualinitoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> visual<wbr>Init<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">visual<wbr>Init<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3297</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="xaxisgraphicscontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> x<wbr>Axis<wbr>Graphics<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">x<wbr>Axis<wbr>Graphics<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3283</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="y1axisgraphicscontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> y1<wbr>Axis<wbr>Graphics<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">y1<wbr>Axis<wbr>Graphics<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3284</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="y2axesrendered" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> y2<wbr>Axes<wbr>Rendered</h3>
+					<div class="tsd-signature tsd-kind-icon">y2<wbr>Axes<wbr>Rendered<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3303</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="y2axisgraphicscontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> y2<wbr>Axis<wbr>Graphics<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">y2<wbr>Axis<wbr>Graphics<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3285</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="yaxisorientation" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> y<wbr>Axis<wbr>Orientation</h3>
+					<div class="tsd-signature tsd-kind-icon">y<wbr>Axis<wbr>Orientation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3306</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="axisgraphicscontextclassname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Axis<wbr>Graphics<wbr>Context<wbr>Class<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">Axis<wbr>Graphics<wbr>Context<wbr>Class<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3269</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="bottompadding" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Bottom<wbr>Padding</h3>
+					<div class="tsd-signature tsd-kind-icon">Bottom<wbr>Padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3275</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="classname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Class<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">Class<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3268</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="fontsize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Font<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">Font<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3280</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="fontsizestring" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Font<wbr>Size<wbr>String</h3>
+					<div class="tsd-signature tsd-kind-icon">Font<wbr>Size<wbr>String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3281</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="innerpaddingratio" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Inner<wbr>Padding<wbr>Ratio</h3>
+					<div class="tsd-signature tsd-kind-icon">Inner<wbr>Padding<wbr>Ratio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3267</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="leftpadding" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Left<wbr>Padding</h3>
+					<div class="tsd-signature tsd-kind-icon">Left<wbr>Padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3273</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="maxmarginfactor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Max<wbr>Margin<wbr>Factor</h3>
+					<div class="tsd-signature tsd-kind-icon">Max<wbr>Margin<wbr>Factor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3270</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="minbottommargin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Min<wbr>Bottom<wbr>Margin</h3>
+					<div class="tsd-signature tsd-kind-icon">Min<wbr>Bottom<wbr>Margin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3271</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="minordinalrectthickness" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Min<wbr>Ordinal<wbr>Rect<wbr>Thickness</h3>
+					<div class="tsd-signature tsd-kind-icon">Min<wbr>Ordinal<wbr>Rect<wbr>Thickness<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3264</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="minscalarrectthickness" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Min<wbr>Scalar<wbr>Rect<wbr>Thickness</h3>
+					<div class="tsd-signature tsd-kind-icon">Min<wbr>Scalar<wbr>Rect<wbr>Thickness<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3265</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="outerpaddingratio" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Outer<wbr>Padding<wbr>Ratio</h3>
+					<div class="tsd-signature tsd-kind-icon">Outer<wbr>Padding<wbr>Ratio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3266</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="rightpadding" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Right<wbr>Padding</h3>
+					<div class="tsd-signature tsd-kind-icon">Right<wbr>Padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3274</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="scrollbarwidth" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Scroll<wbr>Bar<wbr>Width</h3>
+					<div class="tsd-signature tsd-kind-icon">Scroll<wbr>Bar<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3321</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="tickpaddingrotatedx" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Tick<wbr>Padding<wbr>RotatedX</h3>
+					<div class="tsd-signature tsd-kind-icon">Tick<wbr>Padding<wbr>RotatedX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3279</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="tickpaddingy" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Tick<wbr>PaddingY</h3>
+					<div class="tsd-signature tsd-kind-icon">Tick<wbr>PaddingY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3278</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="topmargin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> Top<wbr>Margin</h3>
+					<div class="tsd-signature tsd-kind-icon">Top<wbr>Margin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3272</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="xaxislabelpadding" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> XAxis<wbr>Label<wbr>Padding</h3>
+					<div class="tsd-signature tsd-kind-icon">XAxis<wbr>Label<wbr>Padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3277</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="yaxislabelpadding" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> YAxis<wbr>Label<wbr>Padding</h3>
+					<div class="tsd-signature tsd-kind-icon">YAxis<wbr>Label<wbr>Padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3276</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="fillopacity" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> fill<wbr>Opacity</h3>
+					<div class="tsd-signature tsd-kind-icon">fill<wbr>Opacity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:3322</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="addunittypetoaxislabel" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> add<wbr>Unit<wbr>Type<wbr>ToAxis<wbr>Label</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Unit<wbr>Type<wbr>ToAxis<wbr>Label<span class="tsd-signature-symbol">(</span>axes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3346</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>axes: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="adjustmargins" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> adjust<wbr>Margins</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">adjust<wbr>Margins<span class="tsd-signature-symbol">(</span>viewport<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3331</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>viewport: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="createandinitlayers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> create<wbr>And<wbr>Init<wbr>Layers</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>And<wbr>Init<wbr>Layers<span class="tsd-signature-symbol">(</span>dataViews<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3343</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataViews: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="enumerateobjectinstances" class="tsd-anchor"></a>
+					<h3>enumerate<wbr>Object<wbr>Instances</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">enumerate<wbr>Object<wbr>Instances<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.enumeratevisualobjectinstancesoptions.html" class="tsd-signature-type">EnumerateVisualObjectInstancesOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visualobjectinstance.html" class="tsd-signature-type">VisualObjectInstance</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3338</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.enumeratevisualobjectinstancesoptions.html" class="tsd-signature-type">EnumerateVisualObjectInstancesOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visualobjectinstance.html" class="tsd-signature-type">VisualObjectInstance</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="findobjectwithproperty" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> find<wbr>Object<wbr>With<wbr>Property</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Object<wbr>With<wbr>Property<span class="tsd-signature-symbol">(</span>objectInstances<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, propertyName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3341</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>objectInstances: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>propertyName: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getcategoryaxisvalues" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Category<wbr>Axis<wbr>Values</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Category<wbr>Axis<wbr>Values<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3339</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getmaxmarginfactor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Max<wbr>Margin<wbr>Factor</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Max<wbr>Margin<wbr>Factor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3357</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getminextent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Min<wbr>Extent</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Min<wbr>Extent<span class="tsd-signature-symbol">(</span>svgLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewportLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3352</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>svgLength: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewportLength: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getvalueaxisvalues" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Value<wbr>Axis<wbr>Values</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Value<wbr>Axis<wbr>Values<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3340</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="hideaxislabels" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> hide<wbr>Axis<wbr>Labels</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">hide<wbr>Axis<wbr>Labels<span class="tsd-signature-symbol">(</span>legendMargins<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3350</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>legendMargins: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="hidelegends" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> hide<wbr>Legends</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">hide<wbr>Legends<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3345</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="init" class="tsd-anchor"></a>
+					<h3>init</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visualinitoptions.html" class="tsd-signature-type">VisualInitOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3329</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visualinitoptions.html" class="tsd-signature-type">VisualInitOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="onbrushend" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> on<wbr>Brush<wbr>End</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Brush<wbr>End<span class="tsd-signature-symbol">(</span>minExtent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3353</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>minExtent: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="onbrushed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> on<wbr>Brushed</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Brushed<span class="tsd-signature-symbol">(</span>miniAxisScale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, mainAxisScale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, axes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, margins<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, chartHasAxisLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, axisLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewport<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewportLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3354</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>miniAxisScale: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>mainAxisScale: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>axes: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>width: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>margins: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>chartHasAxisLabels: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>axisLabels: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewport: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewportLength: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="onclearselection" class="tsd-anchor"></a>
+					<h3>on<wbr>Clear<wbr>Selection</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Clear<wbr>Selection<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3342</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ondatachanged" class="tsd-anchor"></a>
+					<h3>on<wbr>Data<wbr>Changed</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Data<wbr>Changed<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visualdatachangedoptions.html" class="tsd-signature-type">VisualDataChangedOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3336</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visualdatachangedoptions.html" class="tsd-signature-type">VisualDataChangedOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="onresizing" class="tsd-anchor"></a>
+					<h3>on<wbr>Resizing</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Resizing<span class="tsd-signature-symbol">(</span>viewport<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a>, duration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3337</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>viewport: <a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a></h5>
+								</li>
+								<li>
+									<h5>duration: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="populateobjectproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> populate<wbr>Object<wbr>Properties</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">populate<wbr>Object<wbr>Properties<span class="tsd-signature-symbol">(</span>dataViews<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3334</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataViews: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="render" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<span class="tsd-signature-symbol">(</span>duration<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3349</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> duration: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderaxeslabels" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Axes<wbr>Labels</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Axes<wbr>Labels<span class="tsd-signature-symbol">(</span>axisLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, legendMargin<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewport<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, hideXAxisTitle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, hideYAxisTitle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3330</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>axisLabels: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>legendMargin: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewport: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>hideXAxisTitle: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>hideYAxisTitle: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderchart" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Chart</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Chart<span class="tsd-signature-symbol">(</span>mainAxisScale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, axes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, margins<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, chartHasAxisLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, axisLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewport<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, miniAxisScale<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, extent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, duration<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3358</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mainAxisScale: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>axes: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>width: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>margins: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>chartHasAxisLabels: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>axisLabels: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewport: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> miniAxisScale: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> extent: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> duration: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderchartwithscrollbar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Chart<wbr>With<wbr>Scroll<wbr>Bar</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Chart<wbr>With<wbr>Scroll<wbr>Bar<span class="tsd-signature-symbol">(</span>inputMainAxisScale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, brushX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, brushY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, svgLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewport<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, axes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, margins<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, chartHasAxisLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, axisLabels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3351</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>inputMainAxisScale: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>brushX: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>brushY: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>svgLength: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewport: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>axes: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>width: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>margins: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>chartHasAxisLabels: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>axisLabels: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="renderlegend" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> render<wbr>Legend</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Legend<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3344</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="setbrushextent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Brush<wbr>Extent</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Brush<wbr>Extent<span class="tsd-signature-symbol">(</span>brush<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewportWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, minExtent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3356</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>brush: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewportWidth: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>minExtent: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="setminbrush" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Min<wbr>Brush</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Min<wbr>Brush<span class="tsd-signature-symbol">(</span>viewportLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, minExtent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewportToSvgRatio<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3355</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>viewportLength: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>minExtent: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewportToSvgRatio: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="shouldrenderaxis" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> should<wbr>Render<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">should<wbr>Render<wbr>Axis<span class="tsd-signature-symbol">(</span>axisProperties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3348</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>axisProperties: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="shouldrendersecondaryaxis" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> should<wbr>Render<wbr>Secondary<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">should<wbr>Render<wbr>Secondary<wbr>Axis<span class="tsd-signature-symbol">(</span>axisProperties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3347</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>axisProperties: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="update" class="tsd-anchor"></a>
+					<h3>update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visualupdateoptions.html" class="tsd-signature-type">VisualUpdateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3335</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visualupdateoptions.html" class="tsd-signature-type">VisualUpdateOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="updateaxis" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Axis<span class="tsd-signature-symbol">(</span>duration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, viewport<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3332</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>duration: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>viewport: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="getaxisvisibility" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Axis<wbr>Visibility</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Axis<wbr>Visibility<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3327</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getcategorythickness" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Category<wbr>Thickness</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Category<wbr>Thickness<span class="tsd-signature-symbol">(</span>seriesList<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.cartesianseries.html" class="tsd-signature-type">CartesianSeries</a><span class="tsd-signature-symbol">[]</span>, numCategories<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, plotLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, domain<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span>, isScalar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3370</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the thickness for each category.
+										-For clustered charts, you still need to divide by the number of series to get column width after calling this method.
+										-For linear or time scales, category thickness accomodates for the minimum interval between consequtive points.
+									-For all types, return value has accounted for outer padding, but not inner padding</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>seriesList: <a href="../interfaces/powerbi.visuals.cartesianseries.html" class="tsd-signature-type">CartesianSeries</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>numCategories: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>plotLength: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>domain: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>isScalar: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getisscalar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>IsScalar</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>IsScalar<span class="tsd-signature-symbol">(</span>objects<span class="tsd-signature-symbol">: </span><a href="../modules/powerbi.dataviewobjects.html" class="tsd-signature-type">DataViewObjects</a>, propertyId<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.dataviewobjectpropertyidentifier.html" class="tsd-signature-type">DataViewObjectPropertyIdentifier</a>, type<span class="tsd-signature-symbol">: </span><a href="powerbi.valuetype.html" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3333</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>objects: <a href="../modules/powerbi.dataviewobjects.html" class="tsd-signature-type">DataViewObjects</a></h5>
+								</li>
+								<li>
+									<h5>propertyId: <a href="../interfaces/powerbi.dataviewobjectpropertyidentifier.html" class="tsd-signature-type">DataViewObjectPropertyIdentifier</a></h5>
+								</li>
+								<li>
+									<h5>type: <a href="powerbi.valuetype.html" class="tsd-signature-type">ValueType</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getlayout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Layout</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Layout<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.columnchartdata.html" class="tsd-signature-type">ColumnChartData</a>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.categorylayoutoptions.html" class="tsd-signature-type">CategoryLayoutOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.categorylayout.html" class="tsd-signature-type">CategoryLayout</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3364</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <a href="../interfaces/powerbi.visuals.columnchartdata.html" class="tsd-signature-type">ColumnChartData</a></h5>
+								</li>
+								<li>
+									<h5>options: <a href="../interfaces/powerbi.visuals.categorylayoutoptions.html" class="tsd-signature-type">CategoryLayoutOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visuals.categorylayout.html" class="tsd-signature-type">CategoryLayout</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="getmininterval" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Min<wbr>Interval</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Min<wbr>Interval<span class="tsd-signature-symbol">(</span>seriesList<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3371</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>seriesList: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getpreferredcategoryspan" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Preferred<wbr>Category<wbr>Span</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Preferred<wbr>Category<wbr>Span<span class="tsd-signature-symbol">(</span>categoryCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryThickness<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3363</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns preferred Category span if the visual is scrollable</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>categoryCount: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>categoryThickness: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getpreferredplotarea" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Preferred<wbr>Plot<wbr>Area</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Preferred<wbr>Plot<wbr>Area<span class="tsd-signature-symbol">(</span>categoryCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, categoryThickness<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, viewport<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a>, isScrollable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, isScalar<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:3361</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the actual viewportWidth if visual is not scrollable.
+									If visual is scrollable, returns the plot area needed to draw all the datapoints</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>categoryCount: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>categoryThickness: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>viewport: <a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a></h5>
+								</li>
+								<li>
+									<h5>isScrollable: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>isScalar: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.iviewport.html" class="tsd-signature-type">IViewport</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module tsd-is-external tsd-is-not-exported">
+						<a href="../modules/powerbi.html">powerbi</a>
+						<ul>
+							<li class="current tsd-kind-module tsd-parent-kind-module">
+								<a href="../modules/powerbi.visuals.html">visuals</a>
+								<ul>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.animatorcommon.html">Animator<wbr>Common</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.axishelper.html">Axis<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.bi.html">BI</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.cartesianhelper.html">Cartesian<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.clusteredutil.html">Clustered<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.columnutil.html">Column<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.combochart.html">Combo<wbr>Chart</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.datarolehelper.html">Data<wbr>Role<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.gradientutils.html">Gradient<wbr>Utils</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.legenddata.html">Legend<wbr>Data</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.listviewfactory.html">List<wbr>View<wbr>Factory</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.richtext.html">Rich<wbr>Text</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.svgutil.html">SVGUtil</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.stackedutil.html">Stacked<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.textutil.html">Text<wbr>Util</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.tooltipbuilder.html">Tooltip<wbr>Builder</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.tooltipmanager.html">Tooltip<wbr>Manager</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.urlhelper.html">Url<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualinteractivityfactory.html">Visual<wbr>Interactivity<wbr>Factory</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.controls.html">controls</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.converterhelper.html">converter<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.datalabelutils.html">data<wbr>Label<wbr>Utils</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.plugins.html">plugins</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.shapes.html">shapes</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.valueformatter.html">value<wbr>Formatter</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualbackgroundhelper.html">visual<wbr>Background<wbr>Helper</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualpluginfactory.html">visual<wbr>Plugin<wbr>Factory</a>
+									</li>
+									<li class=" tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.visualstyles.html">visual<wbr>Styles</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.cartesianchart.html" class="tsd-kind-icon">Cartesian<wbr>Chart</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#animator" class="tsd-kind-icon">animator</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#axisgraphicscontext" class="tsd-kind-icon">axis<wbr>Graphics<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#axisgraphicscontextscrollable" class="tsd-kind-icon">axis<wbr>Graphics<wbr>Context<wbr>Scrollable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#bottommarginlimit" class="tsd-kind-icon">bottom<wbr>Margin<wbr>Limit</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#brush" class="tsd-kind-icon">brush</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#brushcontext" class="tsd-kind-icon">brush<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#brushgraphicscontext" class="tsd-kind-icon">brush<wbr>Graphics<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#brushminextent" class="tsd-kind-icon">brush<wbr>Min<wbr>Extent</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#cartesiansmallviewportproperties" class="tsd-kind-icon">cartesian<wbr>Small<wbr>View<wbr>Port<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#categoryaxishasunittype" class="tsd-kind-icon">category<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#categoryaxisproperties" class="tsd-kind-icon">category<wbr>Axis<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#clearcatcher" class="tsd-kind-icon">clear<wbr>Catcher</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#currentviewport" class="tsd-kind-icon">current<wbr>Viewport</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#dataviews" class="tsd-kind-icon">data<wbr>Views</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#duration" class="tsd-kind-icon">duration</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#element" class="tsd-kind-icon">element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#hassetdata" class="tsd-kind-icon">has<wbr>Set<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#hostservices" class="tsd-kind-icon">host<wbr>Services</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#interactivityservice" class="tsd-kind-icon">interactivity<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#isscrollable" class="tsd-kind-icon">is<wbr>Scrollable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#isxscrollbarvisible" class="tsd-kind-icon">isXScroll<wbr>Bar<wbr>Visible</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#isyscrollbarvisible" class="tsd-kind-icon">isYScroll<wbr>Bar<wbr>Visible</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#layerlegenddata" class="tsd-kind-icon">layer<wbr>Legend<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#layers" class="tsd-kind-icon">layers</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#leftmarginlimit" class="tsd-kind-icon">left<wbr>Margin<wbr>Limit</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#legend" class="tsd-kind-icon">legend</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#legendmargins" class="tsd-kind-icon">legend<wbr>Margins</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#legendobjectproperties" class="tsd-kind-icon">legend<wbr>Object<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#margin" class="tsd-kind-icon">margin</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#needrotate" class="tsd-kind-icon">need<wbr>Rotate</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#scrollx" class="tsd-kind-icon">scrollX</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#scrolly" class="tsd-kind-icon">scrollY</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#svg" class="tsd-kind-icon">svg</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#svgscrollable" class="tsd-kind-icon">svg<wbr>Scrollable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#valueaxishasunittype" class="tsd-kind-icon">value<wbr>Axis<wbr>Has<wbr>Unit<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#valueaxisproperties" class="tsd-kind-icon">value<wbr>Axis<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#visualinitoptions" class="tsd-kind-icon">visual<wbr>Init<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#xaxisgraphicscontext" class="tsd-kind-icon">x<wbr>Axis<wbr>Graphics<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#y1axisgraphicscontext" class="tsd-kind-icon">y1<wbr>Axis<wbr>Graphics<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#y2axesrendered" class="tsd-kind-icon">y2<wbr>Axes<wbr>Rendered</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#y2axisgraphicscontext" class="tsd-kind-icon">y2<wbr>Axis<wbr>Graphics<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#yaxisorientation" class="tsd-kind-icon">y<wbr>Axis<wbr>Orientation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#axisgraphicscontextclassname" class="tsd-kind-icon">Axis<wbr>Graphics<wbr>Context<wbr>Class<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#bottompadding" class="tsd-kind-icon">Bottom<wbr>Padding</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#classname" class="tsd-kind-icon">Class<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#fontsize" class="tsd-kind-icon">Font<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#fontsizestring" class="tsd-kind-icon">Font<wbr>Size<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#innerpaddingratio" class="tsd-kind-icon">Inner<wbr>Padding<wbr>Ratio</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#leftpadding" class="tsd-kind-icon">Left<wbr>Padding</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#maxmarginfactor" class="tsd-kind-icon">Max<wbr>Margin<wbr>Factor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#minbottommargin" class="tsd-kind-icon">Min<wbr>Bottom<wbr>Margin</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#minordinalrectthickness" class="tsd-kind-icon">Min<wbr>Ordinal<wbr>Rect<wbr>Thickness</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#minscalarrectthickness" class="tsd-kind-icon">Min<wbr>Scalar<wbr>Rect<wbr>Thickness</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#outerpaddingratio" class="tsd-kind-icon">Outer<wbr>Padding<wbr>Ratio</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#rightpadding" class="tsd-kind-icon">Right<wbr>Padding</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#scrollbarwidth" class="tsd-kind-icon">Scroll<wbr>Bar<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#tickpaddingrotatedx" class="tsd-kind-icon">Tick<wbr>Padding<wbr>RotatedX</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#tickpaddingy" class="tsd-kind-icon">Tick<wbr>PaddingY</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#topmargin" class="tsd-kind-icon">Top<wbr>Margin</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#xaxislabelpadding" class="tsd-kind-icon">XAxis<wbr>Label<wbr>Padding</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#yaxislabelpadding" class="tsd-kind-icon">YAxis<wbr>Label<wbr>Padding</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#fillopacity" class="tsd-kind-icon">fill<wbr>Opacity</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#addunittypetoaxislabel" class="tsd-kind-icon">add<wbr>Unit<wbr>Type<wbr>ToAxis<wbr>Label</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#adjustmargins" class="tsd-kind-icon">adjust<wbr>Margins</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#createandinitlayers" class="tsd-kind-icon">create<wbr>And<wbr>Init<wbr>Layers</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#enumerateobjectinstances" class="tsd-kind-icon">enumerate<wbr>Object<wbr>Instances</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#findobjectwithproperty" class="tsd-kind-icon">find<wbr>Object<wbr>With<wbr>Property</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#getcategoryaxisvalues" class="tsd-kind-icon">get<wbr>Category<wbr>Axis<wbr>Values</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#getmaxmarginfactor" class="tsd-kind-icon">get<wbr>Max<wbr>Margin<wbr>Factor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#getminextent" class="tsd-kind-icon">get<wbr>Min<wbr>Extent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#getvalueaxisvalues" class="tsd-kind-icon">get<wbr>Value<wbr>Axis<wbr>Values</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#hideaxislabels" class="tsd-kind-icon">hide<wbr>Axis<wbr>Labels</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#hidelegends" class="tsd-kind-icon">hide<wbr>Legends</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#init" class="tsd-kind-icon">init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#onbrushend" class="tsd-kind-icon">on<wbr>Brush<wbr>End</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#onbrushed" class="tsd-kind-icon">on<wbr>Brushed</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#onclearselection" class="tsd-kind-icon">on<wbr>Clear<wbr>Selection</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#ondatachanged" class="tsd-kind-icon">on<wbr>Data<wbr>Changed</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#onresizing" class="tsd-kind-icon">on<wbr>Resizing</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#populateobjectproperties" class="tsd-kind-icon">populate<wbr>Object<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#render" class="tsd-kind-icon">render</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#renderaxeslabels" class="tsd-kind-icon">render<wbr>Axes<wbr>Labels</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#renderchart" class="tsd-kind-icon">render<wbr>Chart</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#renderchartwithscrollbar" class="tsd-kind-icon">render<wbr>Chart<wbr>With<wbr>Scroll<wbr>Bar</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#renderlegend" class="tsd-kind-icon">render<wbr>Legend</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#setbrushextent" class="tsd-kind-icon">set<wbr>Brush<wbr>Extent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#setminbrush" class="tsd-kind-icon">set<wbr>Min<wbr>Brush</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#shouldrenderaxis" class="tsd-kind-icon">should<wbr>Render<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#shouldrendersecondaryaxis" class="tsd-kind-icon">should<wbr>Render<wbr>Secondary<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.cartesianchart.html#update" class="tsd-kind-icon">update</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.cartesianchart.html#updateaxis" class="tsd-kind-icon">update<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#getaxisvisibility" class="tsd-kind-icon">get<wbr>Axis<wbr>Visibility</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#getcategorythickness" class="tsd-kind-icon">get<wbr>Category<wbr>Thickness</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#getisscalar" class="tsd-kind-icon">get<wbr>IsScalar</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#getmininterval" class="tsd-kind-icon">get<wbr>Min<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#getpreferredcategoryspan" class="tsd-kind-icon">get<wbr>Preferred<wbr>Category<wbr>Span</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="powerbi.visuals.cartesianchart.html#getpreferredplotarea" class="tsd-kind-icon">get<wbr>Preferred<wbr>Plot<wbr>Area</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

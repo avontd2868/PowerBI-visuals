@@ -1,0 +1,1732 @@
+﻿<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>RowLayoutManager | PowerBI-Visuals</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">PowerBI-Visuals</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.html">powerbi</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.html">visuals</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.controls.html">controls</a>
+				</li>
+				<li>
+					<a href="../modules/powerbi.visuals.controls.internal.html">internal</a>
+				</li>
+				<li>
+					<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html">RowLayoutManager</a>
+				</li>
+			</ul>
+			<h1>Class RowLayoutManager</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html" class="tsd-signature-type">DimensionLayoutManager</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">RowLayoutManager</span>
+								<ul class="tsd-hierarchy">
+									<li>
+										<a href="powerbi.visuals.controls.internal.dashboardrowlayoutmanager.html" class="tsd-signature-type">DashboardRowLayoutManager</a>
+									</li>
+									<li>
+										<a href="powerbi.visuals.controls.internal.canvasrowlayoutmanager.html" class="tsd-signature-type">CanvasRowLayoutManager</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/powerbi.visuals.controls.idimensionlayoutmanager.html" class="tsd-signature-type">IDimensionLayoutManager</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_contextualwidthtofill" class="tsd-kind-icon">_contextual<wbr>Width<wbr>ToFill</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_grid" class="tsd-kind-icon">_grid</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_gridoffset" class="tsd-kind-icon">_grid<wbr>Offset</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#aligntoend" class="tsd-kind-icon">align<wbr>ToEnd</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#allitemsrealized" class="tsd-kind-icon">all<wbr>Items<wbr>Realized</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#contextualwidthtofill" class="tsd-kind-icon">contextual<wbr>Width<wbr>ToFill</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#dimension" class="tsd-kind-icon">dimension</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#done" class="tsd-kind-icon">done</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#fixedsizeenabled" class="tsd-kind-icon">fixed<wbr>Size<wbr>Enabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#measureenabled" class="tsd-kind-icon">measure<wbr>Enabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#needstorealize" class="tsd-kind-icon">needs<wbr>ToRealize</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#otherlayoutmanager" class="tsd-kind-icon">other<wbr>Layout<wbr>Manager</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#otherscrollbarcontextualwidth" class="tsd-kind-icon">other<wbr>Scrollbar<wbr>Contextual<wbr>Width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#owner" class="tsd-kind-icon">owner</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#realizationmanager" class="tsd-kind-icon">realization<wbr>Manager</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_pixelprecision" class="tsd-kind-icon">_pixel<wbr>Precision</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_scrolloffsetprecision" class="tsd-kind-icon">_scroll<wbr>Offset<wbr>Precision</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_calculatesize" class="tsd-kind-icon">_calculate<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_getrealizeditems" class="tsd-kind-icon">_get<wbr>Realized<wbr>Items</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_isautosized" class="tsd-kind-icon">_is<wbr>Auto<wbr>Sized</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_moveelementstobottom" class="tsd-kind-icon">_move<wbr>Elements<wbr>ToBottom</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_moveelementstotop" class="tsd-kind-icon">_move<wbr>Elements<wbr>ToTop</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_requiresmeasure" class="tsd-kind-icon">_requires<wbr>Measure</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_senddimensionstocontrol" class="tsd-kind-icon">_send<wbr>Dimensions<wbr>ToControl</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#applyscrolling" class="tsd-kind-icon">apply<wbr>Scrolling</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#calculatecontextualwidths" class="tsd-kind-icon">calculate<wbr>Contextual<wbr>Widths</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#calculatesizes" class="tsd-kind-icon">calculate<wbr>Sizes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#calculatespans" class="tsd-kind-icon">calculate<wbr>Spans</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#canscroll" class="tsd-kind-icon">can<wbr>Scroll</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#endscrollingsession" class="tsd-kind-icon">end<wbr>Scrolling<wbr>Session</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#fixsizes" class="tsd-kind-icon">fix<wbr>Sizes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getactualcontextualwidth" class="tsd-kind-icon">get<wbr>Actual<wbr>Contextual<wbr>Width</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getestimatedheaderwidth" class="tsd-kind-icon">get<wbr>Estimated<wbr>Header<wbr>Width</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getfirstvisiblerow" class="tsd-kind-icon">get<wbr>First<wbr>Visible<wbr>Row</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getfootercontextualwidth" class="tsd-kind-icon">get<wbr>Footer<wbr>Contextual<wbr>Width</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getgridcontextualwidth" class="tsd-kind-icon">get<wbr>Grid<wbr>Contextual<wbr>Width</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getgridcontextualwidthfromitems" class="tsd-kind-icon">get<wbr>Grid<wbr>Contextual<wbr>Width<wbr>From<wbr>Items</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getgridscale" class="tsd-kind-icon">get<wbr>Grid<wbr>Scale</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getotherhierarchycontextualheight" class="tsd-kind-icon">get<wbr>Other<wbr>Hierarchy<wbr>Contextual<wbr>Height</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getrealizeditemscount" class="tsd-kind-icon">get<wbr>Realized<wbr>Items<wbr>Count</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getsizewithscrolling" class="tsd-kind-icon">get<wbr>Size<wbr>With<wbr>Scrolling</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getviewsize" class="tsd-kind-icon">get<wbr>View<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getvisiblesizeratio" class="tsd-kind-icon">get<wbr>Visible<wbr>Size<wbr>Ratio</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isresizing" class="tsd-kind-icon">is<wbr>Resizing</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isscrollableheader" class="tsd-kind-icon">is<wbr>Scrollable<wbr>Header</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isscrolling" class="tsd-kind-icon">is<wbr>Scrolling</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isscrollingwithinpage" class="tsd-kind-icon">is<wbr>Scrolling<wbr>Within<wbr>Page</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#oncornercellrealized" class="tsd-kind-icon">on<wbr>Corner<wbr>Cell<wbr>Realized</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onendrenderingiteration" class="tsd-kind-icon">on<wbr>End<wbr>Rendering<wbr>Iteration</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onendrenderingsession" class="tsd-kind-icon">on<wbr>End<wbr>Rendering<wbr>Session</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onheaderrealized" class="tsd-kind-icon">on<wbr>Header<wbr>Realized</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onstartrenderingiteration" class="tsd-kind-icon">on<wbr>Start<wbr>Rendering<wbr>Iteration</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onstartrenderingsession" class="tsd-kind-icon">on<wbr>Start<wbr>Rendering<wbr>Session</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#reachedend" class="tsd-kind-icon">reached<wbr>End</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#scroll" class="tsd-kind-icon">scroll</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#scrollbackwardtofill" class="tsd-kind-icon">scroll<wbr>Backward<wbr>ToFill</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#scrollcells" class="tsd-kind-icon">scroll<wbr>Cells</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#startscrollingsession" class="tsd-kind-icon">start<wbr>Scrolling<wbr>Session</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#updatenonscrollableitemsspans" class="tsd-kind-icon">update<wbr>Non<wbr>Scrollable<wbr>Items<wbr>Spans</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#updatescrollableitemsspans" class="tsd-kind-icon">update<wbr>Scrollable<wbr>Items<wbr>Spans</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Row<wbr>Layout<wbr>Manager<span class="tsd-signature-symbol">(</span>owner<span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.controls.internal.tablixlayoutmanager.html" class="tsd-signature-type">TablixLayoutManager</a>, grid<span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.controls.internal.tablixgrid.html" class="tsd-signature-type">TablixGrid</a>, realizationManager<span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.controls.internal.rowrealizationmanager.html" class="tsd-signature-type">RowRealizationManager</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="powerbi.visuals.controls.internal.rowlayoutmanager.html" class="tsd-signature-type">RowLayoutManager</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2323</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>owner: <a href="powerbi.visuals.controls.internal.tablixlayoutmanager.html" class="tsd-signature-type">TablixLayoutManager</a></h5>
+								</li>
+								<li>
+									<h5>grid: <a href="powerbi.visuals.controls.internal.tablixgrid.html" class="tsd-signature-type">TablixGrid</a></h5>
+								</li>
+								<li>
+									<h5>realizationManager: <a href="powerbi.visuals.controls.internal.rowrealizationmanager.html" class="tsd-signature-type">RowRealizationManager</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="powerbi.visuals.controls.internal.rowlayoutmanager.html" class="tsd-signature-type">RowLayoutManager</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="_contextualwidthtofill" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _contextual<wbr>Width<wbr>ToFill</h3>
+					<div class="tsd-signature tsd-kind-icon">_contextual<wbr>Width<wbr>ToFill<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_contextualwidthtofill">_contextualWidthToFill</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2194</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="_grid" class="tsd-anchor"></a>
+					<h3>_grid</h3>
+					<div class="tsd-signature tsd-kind-icon">_grid<span class="tsd-signature-symbol">:</span> <a href="powerbi.visuals.controls.internal.tablixgrid.html" class="tsd-signature-type">TablixGrid</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_grid">_grid</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2192</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="_gridoffset" class="tsd-anchor"></a>
+					<h3>_grid<wbr>Offset</h3>
+					<div class="tsd-signature tsd-kind-icon">_grid<wbr>Offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_gridoffset">_gridOffset</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2193</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="aligntoend" class="tsd-anchor"></a>
+					<h3>align<wbr>ToEnd</h3>
+					<div class="tsd-signature tsd-kind-icon">align<wbr>ToEnd<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#aligntoend">alignToEnd</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2211</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="allitemsrealized" class="tsd-anchor"></a>
+					<h3>all<wbr>Items<wbr>Realized</h3>
+					<div class="tsd-signature tsd-kind-icon">all<wbr>Items<wbr>Realized<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#allitemsrealized">allItemsRealized</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2229</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="contextualwidthtofill" class="tsd-anchor"></a>
+					<h3>contextual<wbr>Width<wbr>ToFill</h3>
+					<div class="tsd-signature tsd-kind-icon">contextual<wbr>Width<wbr>ToFill<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#contextualwidthtofill">contextualWidthToFill</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2252</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a name="dimension" class="tsd-anchor"></a>
+					<h3>dimension</h3>
+					<div class="tsd-signature tsd-kind-icon">dimension<span class="tsd-signature-symbol">:</span> <a href="powerbi.visuals.controls.tablixdimension.html" class="tsd-signature-type">TablixDimension</a></div>
+					<aside class="tsd-sources">
+						<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#dimension">dimension</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2325</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="done" class="tsd-anchor"></a>
+					<h3>done</h3>
+					<div class="tsd-signature tsd-kind-icon">done<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#done">done</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2212</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="fixedsizeenabled" class="tsd-anchor"></a>
+					<h3>fixed<wbr>Size<wbr>Enabled</h3>
+					<div class="tsd-signature tsd-kind-icon">fixed<wbr>Size<wbr>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#fixedsizeenabled">fixedSizeEnabled</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2206</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="measureenabled" class="tsd-anchor"></a>
+					<h3>measure<wbr>Enabled</h3>
+					<div class="tsd-signature tsd-kind-icon">measure<wbr>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#measureenabled">measureEnabled</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2226</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="needstorealize" class="tsd-anchor"></a>
+					<h3>needs<wbr>ToRealize</h3>
+					<div class="tsd-signature tsd-kind-icon">needs<wbr>ToRealize<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#needstorealize">needsToRealize</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2209</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="otherlayoutmanager" class="tsd-anchor"></a>
+					<h3>other<wbr>Layout<wbr>Manager</h3>
+					<div class="tsd-signature tsd-kind-icon">other<wbr>Layout<wbr>Manager<span class="tsd-signature-symbol">:</span> <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html" class="tsd-signature-type">DimensionLayoutManager</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#otherlayoutmanager">otherLayoutManager</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2251</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a name="otherscrollbarcontextualwidth" class="tsd-anchor"></a>
+					<h3>other<wbr>Scrollbar<wbr>Contextual<wbr>Width</h3>
+					<div class="tsd-signature tsd-kind-icon">other<wbr>Scrollbar<wbr>Contextual<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#otherscrollbarcontextualwidth">otherScrollbarContextualWidth</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2327</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="owner" class="tsd-anchor"></a>
+					<h3>owner</h3>
+					<div class="tsd-signature tsd-kind-icon">owner<span class="tsd-signature-symbol">:</span> <a href="powerbi.visuals.controls.internal.tablixlayoutmanager.html" class="tsd-signature-type">TablixLayoutManager</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#owner">owner</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2204</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="realizationmanager" class="tsd-anchor"></a>
+					<h3>realization<wbr>Manager</h3>
+					<div class="tsd-signature tsd-kind-icon">realization<wbr>Manager<span class="tsd-signature-symbol">:</span> <a href="powerbi.visuals.controls.internal.tablixdimensionrealizationmanager.html" class="tsd-signature-type">TablixDimensionRealizationManager</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#realizationmanager">realizationManager</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2205</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<a name="_pixelprecision" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> _pixel<wbr>Precision</h3>
+					<div class="tsd-signature tsd-kind-icon">_pixel<wbr>Precision<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_pixelprecision">_pixelPrecision</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2190</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<a name="_scrolloffsetprecision" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> _scroll<wbr>Offset<wbr>Precision</h3>
+					<div class="tsd-signature tsd-kind-icon">_scroll<wbr>Offset<wbr>Precision<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_scrolloffsetprecision">_scrollOffsetPrecision</a></p>
+						<ul>
+							<li>Defined in Visuals/obj/visuals.d.ts:2191</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="_calculatesize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _calculate<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_calculate<wbr>Size<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.controls.internal.itablixgriditem.html" class="tsd-signature-type">ITablixGridItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_calculatesize">_calculateSize</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2258</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>item: <a href="../interfaces/powerbi.visuals.controls.internal.itablixgriditem.html" class="tsd-signature-type">ITablixGridItem</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="_getrealizeditems" class="tsd-anchor"></a>
+					<h3>_get<wbr>Realized<wbr>Items</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">_get<wbr>Realized<wbr>Items<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.controls.internal.itablixgriditem.html" class="tsd-signature-type">ITablixGridItem</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_getrealizeditems">_getRealizedItems</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2329</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/powerbi.visuals.controls.internal.itablixgriditem.html" class="tsd-signature-type">ITablixGridItem</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="_isautosized" class="tsd-anchor"></a>
+					<h3>_is<wbr>Auto<wbr>Sized</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">_is<wbr>Auto<wbr>Sized<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_isautosized">_isAutoSized</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2335</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="_moveelementstobottom" class="tsd-anchor"></a>
+					<h3>_move<wbr>Elements<wbr>ToBottom</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">_move<wbr>Elements<wbr>ToBottom<span class="tsd-signature-symbol">(</span>moveFromIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_moveelementstobottom">_moveElementsToBottom</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2330</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>moveFromIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>count: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="_moveelementstotop" class="tsd-anchor"></a>
+					<h3>_move<wbr>Elements<wbr>ToTop</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">_move<wbr>Elements<wbr>ToTop<span class="tsd-signature-symbol">(</span>moveToIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_moveelementstotop">_moveElementsToTop</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2331</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>moveToIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>count: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="_requiresmeasure" class="tsd-anchor"></a>
+					<h3>_requires<wbr>Measure</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">_requires<wbr>Measure<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_requiresmeasure">_requiresMeasure</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2332</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="_senddimensionstocontrol" class="tsd-anchor"></a>
+					<h3>_send<wbr>Dimensions<wbr>ToControl</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">_send<wbr>Dimensions<wbr>ToControl<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#_senddimensionstocontrol">_sendDimensionsToControl</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2345</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>  Sends row related data (pixel size, column count, etc) to TablixControl</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="applyscrolling" class="tsd-anchor"></a>
+					<h3>apply<wbr>Scrolling</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Scrolling<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2336</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="calculatecontextualwidths" class="tsd-anchor"></a>
+					<h3>calculate<wbr>Contextual<wbr>Widths</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">calculate<wbr>Contextual<wbr>Widths<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#calculatecontextualwidths">calculateContextualWidths</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2340</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="calculatesizes" class="tsd-anchor"></a>
+					<h3>calculate<wbr>Sizes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">calculate<wbr>Sizes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#calculatesizes">calculateSizes</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2257</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="calculatespans" class="tsd-anchor"></a>
+					<h3>calculate<wbr>Spans</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">calculate<wbr>Spans<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#calculatespans">calculateSpans</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2260</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="canscroll" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> can<wbr>Scroll</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">can<wbr>Scroll<span class="tsd-signature-symbol">(</span>gridContextualWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#canscroll">canScroll</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2256</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gridContextualWidth: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="endscrollingsession" class="tsd-anchor"></a>
+					<h3>end<wbr>Scrolling<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">end<wbr>Scrolling<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#endscrollingsession">endScrollingSession</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2215</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="fixsizes" class="tsd-anchor"></a>
+					<h3>fix<wbr>Sizes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">fix<wbr>Sizes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#fixsizes">fixSizes</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2341</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getactualcontextualwidth" class="tsd-anchor"></a>
+					<h3>get<wbr>Actual<wbr>Contextual<wbr>Width</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Actual<wbr>Contextual<wbr>Width<span class="tsd-signature-symbol">(</span>gridContextualWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getactualcontextualwidth">getActualContextualWidth</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2255</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gridContextualWidth: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getestimatedheaderwidth" class="tsd-anchor"></a>
+					<h3>get<wbr>Estimated<wbr>Header<wbr>Width</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Estimated<wbr>Header<wbr>Width<span class="tsd-signature-symbol">(</span>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, headerIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2346</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>label: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>headerIndex: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getfirstvisiblerow" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>First<wbr>Visible<wbr>Row</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>First<wbr>Visible<wbr>Row<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2334</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="getfootercontextualwidth" class="tsd-anchor"></a>
+					<h3>get<wbr>Footer<wbr>Contextual<wbr>Width</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Footer<wbr>Contextual<wbr>Width<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getfootercontextualwidth">getFooterContextualWidth</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2339</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="getgridcontextualwidth" class="tsd-anchor"></a>
+					<h3>get<wbr>Grid<wbr>Contextual<wbr>Width</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Grid<wbr>Contextual<wbr>Width<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getgridcontextualwidth">getGridContextualWidth</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2333</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getgridcontextualwidthfromitems" class="tsd-anchor"></a>
+					<h3>get<wbr>Grid<wbr>Contextual<wbr>Width<wbr>From<wbr>Items</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Grid<wbr>Contextual<wbr>Width<wbr>From<wbr>Items<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getgridcontextualwidthfromitems">getGridContextualWidthFromItems</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2247</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="getgridscale" class="tsd-anchor"></a>
+					<h3>get<wbr>Grid<wbr>Scale</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Grid<wbr>Scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getgridscale">getGridScale</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2326</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getotherhierarchycontextualheight" class="tsd-anchor"></a>
+					<h3>get<wbr>Other<wbr>Hierarchy<wbr>Contextual<wbr>Height</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Other<wbr>Hierarchy<wbr>Contextual<wbr>Height<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getotherhierarchycontextualheight">getOtherHierarchyContextualHeight</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2218</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getrealizeditemscount" class="tsd-anchor"></a>
+					<h3>get<wbr>Realized<wbr>Items<wbr>Count</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Realized<wbr>Items<wbr>Count<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getrealizeditemscount">getRealizedItemsCount</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2234</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getsizewithscrolling" class="tsd-anchor"></a>
+					<h3>get<wbr>Size<wbr>With<wbr>Scrolling</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Size<wbr>With<wbr>Scrolling<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getsizewithscrolling">getSizeWithScrolling</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2246</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>size: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getviewsize" class="tsd-anchor"></a>
+					<h3>get<wbr>View<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>View<wbr>Size<span class="tsd-signature-symbol">(</span>gridContextualWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getviewsize">getViewSize</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2240</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gridContextualWidth: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getvisiblesizeratio" class="tsd-anchor"></a>
+					<h3>get<wbr>Visible<wbr>Size<wbr>Ratio</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Visible<wbr>Size<wbr>Ratio<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#getvisiblesizeratio">getVisibleSizeRatio</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2210</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="isresizing" class="tsd-anchor"></a>
+					<h3>is<wbr>Resizing</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Resizing<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#isresizing">isResizing</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2217</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="isscrollableheader" class="tsd-anchor"></a>
+					<h3>is<wbr>Scrollable<wbr>Header</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Scrollable<wbr>Header<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#isscrollableheader">isScrollableHeader</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2241</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>item: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>items: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="isscrolling" class="tsd-anchor"></a>
+					<h3>is<wbr>Scrolling</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Scrolling<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#isscrolling">isScrolling</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2216</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="isscrollingwithinpage" class="tsd-anchor"></a>
+					<h3>is<wbr>Scrolling<wbr>Within<wbr>Page</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Scrolling<wbr>Within<wbr>Page<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#isscrollingwithinpage">isScrollingWithinPage</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2237</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="oncornercellrealized" class="tsd-anchor"></a>
+					<h3>on<wbr>Corner<wbr>Cell<wbr>Realized</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Corner<wbr>Cell<wbr>Realized<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, cell<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.controls.itablixcell.html" class="tsd-signature-type">ITablixCell</a>, leaf<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#oncornercellrealized">onCornerCellRealized</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2207</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>item: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>cell: <a href="../interfaces/powerbi.visuals.controls.itablixcell.html" class="tsd-signature-type">ITablixCell</a></h5>
+								</li>
+								<li>
+									<h5>leaf: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="onendrenderingiteration" class="tsd-anchor"></a>
+					<h3>on<wbr>End<wbr>Rendering<wbr>Iteration</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>End<wbr>Rendering<wbr>Iteration<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#onendrenderingiteration">onEndRenderingIteration</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2230</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="onendrenderingsession" class="tsd-anchor"></a>
+					<h3>on<wbr>End<wbr>Rendering<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>End<wbr>Rendering<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#onendrenderingsession">onEndRenderingSession</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2221</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="onheaderrealized" class="tsd-anchor"></a>
+					<h3>on<wbr>Header<wbr>Realized</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Header<wbr>Realized<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, cell<span class="tsd-signature-symbol">: </span><a href="../interfaces/powerbi.visuals.controls.itablixcell.html" class="tsd-signature-type">ITablixCell</a>, leaf<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#onheaderrealized">onHeaderRealized</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2208</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>item: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>cell: <a href="../interfaces/powerbi.visuals.controls.itablixcell.html" class="tsd-signature-type">ITablixCell</a></h5>
+								</li>
+								<li>
+									<h5>leaf: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="onstartrenderingiteration" class="tsd-anchor"></a>
+					<h3>on<wbr>Start<wbr>Rendering<wbr>Iteration</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Start<wbr>Rendering<wbr>Iteration<span class="tsd-signature-symbol">(</span>clear<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, contextualWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#onstartrenderingiteration">onStartRenderingIteration</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2228</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>clear: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>contextualWidth: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="onstartrenderingsession" class="tsd-anchor"></a>
+					<h3>on<wbr>Start<wbr>Rendering<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Start<wbr>Rendering<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#onstartrenderingsession">onStartRenderingSession</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2220</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="reachedend" class="tsd-anchor"></a>
+					<h3>reached<wbr>End</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">reached<wbr>End<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#reachedend">reachedEnd</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2242</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="scroll" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> scroll</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">scroll<span class="tsd-signature-symbol">(</span>firstVisibleRow<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, offset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2337</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>firstVisibleRow: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>height: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>offset: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="scrollbackwardtofill" class="tsd-anchor"></a>
+					<h3>scroll<wbr>Backward<wbr>ToFill</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">scroll<wbr>Backward<wbr>ToFill<span class="tsd-signature-symbol">(</span>gridContextualWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#scrollbackwardtofill">scrollBackwardToFill</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2243</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gridContextualWidth: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="scrollcells" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> scroll<wbr>Cells</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">scroll<wbr>Cells<span class="tsd-signature-symbol">(</span>cells<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, offset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2338</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cells: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>height: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>offset: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="startscrollingsession" class="tsd-anchor"></a>
+					<h3>start<wbr>Scrolling<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Scrolling<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overwrites <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#startscrollingsession">startScrollingSession</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2328</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="updatenonscrollableitemsspans" class="tsd-anchor"></a>
+					<h3>update<wbr>Non<wbr>Scrollable<wbr>Items<wbr>Spans</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Non<wbr>Scrollable<wbr>Items<wbr>Spans<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#updatenonscrollableitemsspans">updateNonScrollableItemsSpans</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2261</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="updatescrollableitemsspans" class="tsd-anchor"></a>
+					<h3>update<wbr>Scrollable<wbr>Items<wbr>Spans</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Scrollable<wbr>Items<wbr>Spans<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html">DimensionLayoutManager</a>.<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html#updatescrollableitemsspans">updateScrollableItemsSpans</a></p>
+								<ul>
+									<li>Defined in Visuals/obj/visuals.d.ts:2262</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module tsd-is-external tsd-is-not-exported">
+						<a href="../modules/powerbi.html">powerbi</a>
+						<ul>
+							<li class="current tsd-kind-module tsd-parent-kind-module">
+								<a href="../modules/powerbi.visuals.html">visuals</a>
+								<ul>
+									<li class="current tsd-kind-module tsd-parent-kind-module">
+										<a href="../modules/powerbi.visuals.controls.html">controls</a>
+										<ul>
+											<li class=" tsd-kind-module tsd-parent-kind-module">
+												<a href="../modules/powerbi.visuals.controls.htmlelementutils.html">HTMLElement<wbr>Utils</a>
+											</li>
+											<li class=" tsd-kind-module tsd-parent-kind-module">
+												<a href="../modules/powerbi.visuals.controls.touchutils.html">Touch<wbr>Utils</a>
+											</li>
+											<li class="current tsd-kind-module tsd-parent-kind-module">
+												<a href="../modules/powerbi.visuals.controls.internal.html">internal</a>
+												<ul>
+													<li class=" tsd-kind-module tsd-parent-kind-module">
+														<a href="../modules/powerbi.visuals.controls.internal.tablixutils.html">Tablix<wbr>Utils</a>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.canvascolumnlayoutmanager.html" class="tsd-kind-icon">Canvas<wbr>Column<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.canvascolumnpresenter.html" class="tsd-kind-icon">Canvas<wbr>Column<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.canvasrowlayoutmanager.html" class="tsd-kind-icon">Canvas<wbr>Row<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.canvasrowpresenter.html" class="tsd-kind-icon">Canvas<wbr>Row<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.canvastablixgridpresenter.html" class="tsd-kind-icon">Canvas<wbr>Tablix<wbr>Grid<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.canvastablixlayoutmanager.html" class="tsd-kind-icon">Canvas<wbr>Tablix<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.columnlayoutmanager.html" class="tsd-kind-icon">Column<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.columnrealizationmanager.html" class="tsd-kind-icon">Column<wbr>Realization<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.dashboardcolumnlayoutmanager.html" class="tsd-kind-icon">Dashboard<wbr>Column<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.dashboardcolumnpresenter.html" class="tsd-kind-icon">Dashboard<wbr>Column<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.dashboardrowlayoutmanager.html" class="tsd-kind-icon">Dashboard<wbr>Row<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.dashboardrowpresenter.html" class="tsd-kind-icon">Dashboard<wbr>Row<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.dashboardtablixgridpresenter.html" class="tsd-kind-icon">Dashboard<wbr>Tablix<wbr>Grid<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.dashboardtablixlayoutmanager.html" class="tsd-kind-icon">Dashboard<wbr>Tablix<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.dimensionlayoutmanager.html" class="tsd-kind-icon">Dimension<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.resizestate.html" class="tsd-kind-icon">Resize<wbr>State</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html" class="tsd-kind-icon">Row<wbr>Layout<wbr>Manager</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_contextualwidthtofill" class="tsd-kind-icon">_contextual<wbr>Width<wbr>ToFill</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_grid" class="tsd-kind-icon">_grid</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_gridoffset" class="tsd-kind-icon">_grid<wbr>Offset</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#aligntoend" class="tsd-kind-icon">align<wbr>ToEnd</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#allitemsrealized" class="tsd-kind-icon">all<wbr>Items<wbr>Realized</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#contextualwidthtofill" class="tsd-kind-icon">contextual<wbr>Width<wbr>ToFill</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#dimension" class="tsd-kind-icon">dimension</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#done" class="tsd-kind-icon">done</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#fixedsizeenabled" class="tsd-kind-icon">fixed<wbr>Size<wbr>Enabled</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#measureenabled" class="tsd-kind-icon">measure<wbr>Enabled</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#needstorealize" class="tsd-kind-icon">needs<wbr>ToRealize</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#otherlayoutmanager" class="tsd-kind-icon">other<wbr>Layout<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#otherscrollbarcontextualwidth" class="tsd-kind-icon">other<wbr>Scrollbar<wbr>Contextual<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#owner" class="tsd-kind-icon">owner</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#realizationmanager" class="tsd-kind-icon">realization<wbr>Manager</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_pixelprecision" class="tsd-kind-icon">_pixel<wbr>Precision</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_scrolloffsetprecision" class="tsd-kind-icon">_scroll<wbr>Offset<wbr>Precision</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_calculatesize" class="tsd-kind-icon">_calculate<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_getrealizeditems" class="tsd-kind-icon">_get<wbr>Realized<wbr>Items</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_isautosized" class="tsd-kind-icon">_is<wbr>Auto<wbr>Sized</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_moveelementstobottom" class="tsd-kind-icon">_move<wbr>Elements<wbr>ToBottom</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_moveelementstotop" class="tsd-kind-icon">_move<wbr>Elements<wbr>ToTop</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_requiresmeasure" class="tsd-kind-icon">_requires<wbr>Measure</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#_senddimensionstocontrol" class="tsd-kind-icon">_send<wbr>Dimensions<wbr>ToControl</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#applyscrolling" class="tsd-kind-icon">apply<wbr>Scrolling</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#calculatecontextualwidths" class="tsd-kind-icon">calculate<wbr>Contextual<wbr>Widths</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#calculatesizes" class="tsd-kind-icon">calculate<wbr>Sizes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#calculatespans" class="tsd-kind-icon">calculate<wbr>Spans</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#canscroll" class="tsd-kind-icon">can<wbr>Scroll</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#endscrollingsession" class="tsd-kind-icon">end<wbr>Scrolling<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#fixsizes" class="tsd-kind-icon">fix<wbr>Sizes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getactualcontextualwidth" class="tsd-kind-icon">get<wbr>Actual<wbr>Contextual<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getestimatedheaderwidth" class="tsd-kind-icon">get<wbr>Estimated<wbr>Header<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getfirstvisiblerow" class="tsd-kind-icon">get<wbr>First<wbr>Visible<wbr>Row</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getfootercontextualwidth" class="tsd-kind-icon">get<wbr>Footer<wbr>Contextual<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getgridcontextualwidth" class="tsd-kind-icon">get<wbr>Grid<wbr>Contextual<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getgridcontextualwidthfromitems" class="tsd-kind-icon">get<wbr>Grid<wbr>Contextual<wbr>Width<wbr>From<wbr>Items</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getgridscale" class="tsd-kind-icon">get<wbr>Grid<wbr>Scale</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getotherhierarchycontextualheight" class="tsd-kind-icon">get<wbr>Other<wbr>Hierarchy<wbr>Contextual<wbr>Height</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getrealizeditemscount" class="tsd-kind-icon">get<wbr>Realized<wbr>Items<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getsizewithscrolling" class="tsd-kind-icon">get<wbr>Size<wbr>With<wbr>Scrolling</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getviewsize" class="tsd-kind-icon">get<wbr>View<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#getvisiblesizeratio" class="tsd-kind-icon">get<wbr>Visible<wbr>Size<wbr>Ratio</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isresizing" class="tsd-kind-icon">is<wbr>Resizing</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isscrollableheader" class="tsd-kind-icon">is<wbr>Scrollable<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isscrolling" class="tsd-kind-icon">is<wbr>Scrolling</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#isscrollingwithinpage" class="tsd-kind-icon">is<wbr>Scrolling<wbr>Within<wbr>Page</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#oncornercellrealized" class="tsd-kind-icon">on<wbr>Corner<wbr>Cell<wbr>Realized</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onendrenderingiteration" class="tsd-kind-icon">on<wbr>End<wbr>Rendering<wbr>Iteration</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onendrenderingsession" class="tsd-kind-icon">on<wbr>End<wbr>Rendering<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onheaderrealized" class="tsd-kind-icon">on<wbr>Header<wbr>Realized</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onstartrenderingiteration" class="tsd-kind-icon">on<wbr>Start<wbr>Rendering<wbr>Iteration</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#onstartrenderingsession" class="tsd-kind-icon">on<wbr>Start<wbr>Rendering<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#reachedend" class="tsd-kind-icon">reached<wbr>End</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#scroll" class="tsd-kind-icon">scroll</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#scrollbackwardtofill" class="tsd-kind-icon">scroll<wbr>Backward<wbr>ToFill</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#scrollcells" class="tsd-kind-icon">scroll<wbr>Cells</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#startscrollingsession" class="tsd-kind-icon">start<wbr>Scrolling<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#updatenonscrollableitemsspans" class="tsd-kind-icon">update<wbr>Non<wbr>Scrollable<wbr>Items<wbr>Spans</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="powerbi.visuals.controls.internal.rowlayoutmanager.html#updatescrollableitemsspans" class="tsd-kind-icon">update<wbr>Scrollable<wbr>Items<wbr>Spans</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.rowrealizationmanager.html" class="tsd-kind-icon">Row<wbr>Realization<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.rowwidth.html" class="tsd-kind-icon">Row<wbr>Width</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.rowwidths.html" class="tsd-kind-icon">Row<wbr>Widths</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.sizecomputationmanager.html" class="tsd-kind-icon">Size<wbr>Computation<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixcell.html" class="tsd-kind-icon">Tablix<wbr>Cell</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixcellpresenter.html" class="tsd-kind-icon">Tablix<wbr>Cell<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixcolumn.html" class="tsd-kind-icon">Tablix<wbr>Column</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixcolumnpresenter.html" class="tsd-kind-icon">Tablix<wbr>Column<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixdimensionrealizationmanager.html" class="tsd-kind-icon">Tablix<wbr>Dimension<wbr>Realization<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixdomresizer.html" class="tsd-kind-icon">Tablix<wbr>Dom<wbr>Resizer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixgrid.html" class="tsd-kind-icon">Tablix<wbr>Grid</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixgridpresenter.html" class="tsd-kind-icon">Tablix<wbr>Grid<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixlayoutmanager.html" class="tsd-kind-icon">Tablix<wbr>Layout<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixresizer.html" class="tsd-kind-icon">Tablix<wbr>Resizer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixrow.html" class="tsd-kind-icon">Tablix<wbr>Row</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="powerbi.visuals.controls.internal.tablixrowpresenter.html" class="tsd-kind-icon">Tablix<wbr>Row<wbr>Presenter</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/powerbi.visuals.controls.internal.itablixgriditem.html" class="tsd-kind-icon">ITablix<wbr>Grid<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/powerbi.visuals.controls.internal.itablixresizehandler.html" class="tsd-kind-icon">ITablix<wbr>Resize<wbr>Handler</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
